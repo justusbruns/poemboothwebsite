@@ -195,11 +195,19 @@ export default function PoemBoothScreen({
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-black/30" />
 
-          {/* Poem text overlay - extra padding to avoid booth pole and curved edges */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-12 pb-28 md:px-8 md:pt-14 md:pb-32">
-            <div className="text-white text-center">
+          {/* Poem text overlay - safe zone that doesn't touch edges */}
+          <div
+            className="absolute flex flex-col items-center justify-center overflow-hidden"
+            style={{
+              top: "15%",
+              left: "10%",
+              right: "10%",
+              bottom: "25%",
+            }}
+          >
+            <div className="text-white text-center max-h-full overflow-hidden">
               {/* Poem text with typewriter effect - auto-sized based on length */}
-              <p className={`${fontSize} leading-relaxed whitespace-pre-line font-serif`}>
+              <p className={`${fontSize} leading-snug whitespace-pre-line font-serif`}>
                 {displayedText}
                 {isTyping && (
                   <span className="inline-block w-0.5 h-4 bg-white ml-0.5 animate-pulse" />
@@ -208,7 +216,7 @@ export default function PoemBoothScreen({
 
               {/* Attribution */}
               {!isTyping && displayedText && activePoem?.attribution && (
-                <p className="mt-3 text-[10px] md:text-xs text-white/80 italic">
+                <p className="mt-2 text-[10px] md:text-xs text-white/80 italic">
                   {activePoem.attribution}
                 </p>
               )}
