@@ -108,6 +108,17 @@ export const editionsQuery = groq`
       },
       hotspot
     },
+    afterImages[] {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          lqip,
+          dimensions
+        }
+      },
+      hotspot
+    },
     beforeLabel,
     afterLabel
   }
@@ -258,6 +269,17 @@ export const pageDataQuery = groq`
       hotspot
     },
     afterImage {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          lqip,
+          dimensions
+        }
+      },
+      hotspot
+    },
+    afterImages[] {
       asset-> {
         _id,
         url,

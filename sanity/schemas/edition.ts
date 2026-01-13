@@ -63,10 +63,18 @@ export default defineType({
     }),
     defineField({
       name: "afterImage",
-      title: "After Image",
+      title: "After Image (Legacy)",
       type: "image",
       options: { hotspot: true },
-      description: "Generated output example image",
+      description: "Single output example (use After Images array instead)",
+      hidden: true,
+    }),
+    defineField({
+      name: "afterImages",
+      title: "After Images (Slideshow)",
+      type: "array",
+      of: [{ type: "image", options: { hotspot: true } }],
+      description: "Multiple output examples that cycle on the screen (3-4 sec each)",
     }),
     defineField({
       name: "beforeLabel",
