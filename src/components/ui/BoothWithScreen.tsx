@@ -58,11 +58,11 @@ export default function BoothWithScreen({
         <div
           className="absolute overflow-hidden"
           style={{
-            top: "7%",
-            left: "14%",
-            width: "72%",
-            height: "76%",
-            borderRadius: "38% 38% 38% 38% / 22% 22% 22% 22%",
+            top: "5.5%",
+            left: "13%",
+            width: "74%",
+            height: "70%",
+            borderRadius: "35% 35% 35% 35% / 18% 18% 22% 22%",
           }}
         >
           {/* Current image */}
