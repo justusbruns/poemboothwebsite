@@ -48,7 +48,7 @@ export default async function LandingPage({ params }: PageProps) {
     getHubByRegion(region),
   ]);
 
-  const regionConfig = REGION_CONFIGS[region as Region] || REGION_CONFIGS.eu;
+  const regionConfig = REGION_CONFIGS[region as Region] || REGION_CONFIGS.nl;
 
   // Format pricing data for BookingRates component
   const hubPricing = hubData

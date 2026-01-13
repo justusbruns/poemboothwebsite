@@ -6,13 +6,15 @@ import { useState, useRef, useEffect } from "react";
 import { regions, type Region } from "@/i18n/routing";
 
 const regionLabels: Record<Region, string> = {
+  nl: "The Netherlands",
   us: "United States",
-  eu: "Europe",
+  row: "Rest of the World",
 };
 
 const regionFlags: Record<Region, string> = {
+  nl: "🇳🇱",
   us: "🇺🇸",
-  eu: "🇪🇺",
+  row: "🌍",
 };
 
 export default function RegionSwitcher() {

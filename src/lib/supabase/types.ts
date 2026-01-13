@@ -39,7 +39,7 @@ export interface HubData {
   };
 }
 
-export type Region = "us" | "eu";
+export type Region = "nl" | "us" | "row";
 
 export interface RegionConfig {
   code: Region;
@@ -53,6 +53,16 @@ export interface RegionConfig {
 }
 
 export const REGION_CONFIGS: Record<Region, RegionConfig> = {
+  nl: {
+    code: "nl",
+    label: "The Netherlands",
+    currency: "EUR",
+    currencySymbol: "€",
+    distanceUnit: "km",
+    locale: "nl-NL",
+    hubCity: "Amsterdam",
+    voltage: "230V",
+  },
   us: {
     code: "us",
     label: "United States",
@@ -63,9 +73,9 @@ export const REGION_CONFIGS: Record<Region, RegionConfig> = {
     hubCity: "New York",
     voltage: "110V",
   },
-  eu: {
-    code: "eu",
-    label: "Europe",
+  row: {
+    code: "row",
+    label: "Rest of the World",
     currency: "EUR",
     currencySymbol: "€",
     distanceUnit: "km",

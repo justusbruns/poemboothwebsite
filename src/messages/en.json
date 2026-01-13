@@ -8,8 +8,9 @@
   },
   "header": {
     "region": {
+      "nl": "The Netherlands",
       "us": "United States",
-      "eu": "Europe"
+      "row": "Rest of the World"
     },
     "language": {
       "en": "English",

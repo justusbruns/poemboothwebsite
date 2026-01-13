@@ -46,10 +46,10 @@ export async function getHubByRegion(regionCode: string): Promise<{
   const supabase = createServerClient();
 
   // Map URL region codes to database region codes
-  // URL uses "eu" but database uses country codes like "nl"
   const regionMap: Record<string, string> = {
-    eu: "nl", // Amsterdam hub
+    nl: "nl", // Amsterdam hub
     us: "us", // New York hub
+    row: "nl", // Rest of World uses Amsterdam hub pricing
   };
   const dbRegionCode = regionMap[regionCode.toLowerCase()] || regionCode.toLowerCase();
 

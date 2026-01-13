@@ -6,10 +6,10 @@ export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
 // Region configuration
-export const regions = ["us", "eu"] as const;
+export const regions = ["nl", "us", "row"] as const;
 export type Region = (typeof regions)[number];
 
-export const defaultRegion: Region = "eu";
+export const defaultRegion: Region = "nl";
 
 export const routing = defineRouting({
   locales,
@@ -36,10 +36,11 @@ export const countryToLocale: Record<string, Locale> = {
 // Country to region mapping
 export const countryToRegion: Record<string, Region> = {
   US: "us",
-  // All other countries default to EU
+  NL: "nl",
+  // All other countries default to Rest of World
 };
 
-// EU country codes
+// EU country codes (for reference)
 export const euCountries = [
   "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR",
   "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL",
@@ -52,5 +53,6 @@ export function getLocaleFromCountry(country: string): Locale {
 
 export function getRegionFromCountry(country: string): Region {
   if (country === "US") return "us";
-  return "eu";
+  if (country === "NL") return "nl";
+  return "row";
 }
