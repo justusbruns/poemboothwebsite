@@ -1,0 +1,158 @@
+{
+  "common": {
+    "bookNow": "Réserver",
+    "contactUs": "Contactez-nous",
+    "learnMore": "En savoir plus",
+    "getQuote": "Demander un devis",
+    "email": "Ou envoyez un e-mail à {email}"
+  },
+  "header": {
+    "region": {
+      "us": "États-Unis",
+      "eu": "Europe"
+    },
+    "language": {
+      "en": "English",
+      "nl": "Nederlands",
+      "de": "Deutsch",
+      "fr": "Français",
+      "it": "Italiano"
+    }
+  },
+  "hero": {
+    "headline": "Du Moment au Chef-d'œuvre",
+    "subheadline": "Le Poem Booth transforme votre photo en poèmes et œuvres d'art créés par des écrivains et artistes",
+    "ctaButton": "Réserver",
+    "ctaEmail": "Ou envoyez un e-mail à"
+  },
+  "howItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Trois étapes simples pour créer votre œuvre unique",
+    "step1": {
+      "title": "Appuyez & Posez",
+      "description": "Appuyez sur le bouton, regardez le compte à rebours et posez pour votre meilleure photo"
+    },
+    "step2": {
+      "title": "Recevez votre Art",
+      "description": "Votre photo est transformée en portrait ou poème par nos modèles IA sélectionnés"
+    },
+    "step3": {
+      "title": "Partagez",
+      "description": "Partagez votre portrait ou poème généré avec le monde"
+    }
+  },
+  "editions": {
+    "title": "Nos Éditions",
+    "subtitle": "Choisissez entre deux expériences uniques",
+    "newBadge": "Nouveau",
+    "duration": "{seconds} secondes",
+    "portrait": {
+      "title": "L'Édition Portrait",
+      "subtitle": "Prenez une photo et recevez votre chef-d'œuvre personnel 30 secondes plus tard",
+      "beforeLabel": "Prenez une photo",
+      "afterLabel": "Recevez un portrait"
+    },
+    "original": {
+      "title": "L'Édition Originale",
+      "subtitle": "Prenez une photo et recevez votre poème personnel 10 secondes plus tard",
+      "beforeLabel": "Prenez une photo",
+      "afterLabel": "Recevez un poème"
+    }
+  },
+  "gallery": {
+    "title": "Galerie",
+    "subtitle": "Découvrez le Poem Booth en action lors d'événements dans le monde entier"
+  },
+  "practicalities": {
+    "title": "Informations Pratiques",
+    "subtitle": "Tout ce que vous devez savoir sur l'installation du Poem Booth",
+    "footprint": {
+      "title": "Dimensions",
+      "valueUS": "5ft x 5ft",
+      "valueEU": "1,5m x 1,5m"
+    },
+    "setup": {
+      "title": "Installation & Démontage",
+      "valueUS": "1 heure",
+      "valueEU": "1 heure",
+      "bullet1": "1x alimentation {voltage}",
+      "bullet2": "Wi-Fi/Ethernet stable"
+    },
+    "outdoor": {
+      "title": "Extérieur",
+      "valueUS": "Possible",
+      "valueEU": "Possible",
+      "bullet1": "nécessite un ombrage"
+    },
+    "speed": {
+      "title": "Vitesse",
+      "valueUS": "",
+      "valueEU": "",
+      "bullet1": "10-20 sec pour les Poèmes",
+      "bullet2": "30-40 sec pour les Portraits"
+    }
+  },
+  "booking": {
+    "title": "Réservation & Tarifs",
+    "subtitle": "Tarifs depuis notre hub de {hub}",
+    "ctaButton": "Demander un devis",
+    "footnote": "Prix hors taxes applicables. Forfaits personnalisés disponibles.",
+    "transport": {
+      "title": "Frais de transport",
+      "note": "(aller-retour pour événement 1 jour, 4 trajets pour plusieurs jours)"
+    },
+    "rental": {
+      "title": "Tarif de location de base",
+      "day1Label": "Premier jour",
+      "day2Label": "Deuxième jour",
+      "day3Label": "Troisième jour (et suivants)"
+    },
+    "printer": {
+      "title": "Imprimante",
+      "perDay": "par jour"
+    },
+    "branding": {
+      "title": "Branding",
+      "description": "Ajoutez votre logo / produit dans les œuvres sauvegardées / imprimées",
+      "flatFee": "forfait"
+    },
+    "customization": {
+      "title": "Personnalisation",
+      "description": "Personnalisez le style du poème ou portrait selon le style ou l'entrée",
+      "flatFee": "forfait"
+    }
+  },
+  "otherRegions": {
+    "title": "En dehors des USA/UE ?",
+    "description": "Nous nous développons à l'international. Contactez-nous pour la disponibilité dans votre région.",
+    "ctaButton": "Contactez-nous pour la disponibilité mondiale",
+    "emailSubject": "Demande Poem Booth - Disponibilité Mondiale",
+    "emailBody": "Bonjour,\n\nJe suis intéressé(e) par la réservation du Poem Booth pour un événement en dehors des USA/UE.\n\nMerci de me faire savoir la disponibilité dans ma région.\n\nCordialement"
+  },
+  "footer": {
+    "tagline": "Un produit de VOUW B.V.",
+    "vouwDescription": "VOUW est un studio de design d'Amsterdam, Pays-Bas, qui travaille à la croisée du design et de la technologie.",
+    "addresses": "Adresses",
+    "adminAddress": "Adresse administrative :",
+    "adminCompany": "VOUW B.V.",
+    "adminStreet": "Krugerplein 4-1",
+    "adminCity": "1091KX Amsterdam",
+    "adminCountry": "Pays-Bas",
+    "studioAddress": "Studio / Adresse de visite :",
+    "studioStreet": "Generaal Vetterstraat 57",
+    "studioCity": "1059 BT Amsterdam",
+    "studioCountry": "Pays-Bas",
+    "contact": "Contact",
+    "legalInfo": "Informations Légales",
+    "vatLabel": "N° TVA",
+    "chamberLabel": "N° Chambre de Commerce",
+    "termsLink": "Conditions Générales",
+    "userAgreement": "Accord d'utilisation Poem Booth",
+    "distributorTitle": "Intéressé par la distribution de Poem Booth dans votre pays ou région en tant qu'entreprise agréée ?",
+    "distributorCta": "Contactez-nous",
+    "copyright": "© {year} VOUW B.V. Tous droits réservés.",
+    "trademark": "Poem Booth® est une marque déposée et protégée.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
+  }
+}

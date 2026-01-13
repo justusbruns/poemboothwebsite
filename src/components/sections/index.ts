@@ -1,0 +1,8 @@
+export { default as Hero } from "./Hero";
+export { default as ClientLogos } from "./ClientLogos";
+export { default as HowItWorks } from "./HowItWorks";
+export { default as EditionShowcase } from "./EditionShowcase";
+export { default as PhotoGallery } from "./PhotoGallery";
+export { default as Practicalities } from "./Practicalities";
+export { default as BookingRates } from "./BookingRates";
+export { default as OtherRegionsContact } from "./OtherRegionsContact";

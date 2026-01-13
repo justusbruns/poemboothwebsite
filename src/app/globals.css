@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* Century Old Style Font */
+@font-face {
+  font-family: "Century Old Style";
+  src: url("../fonts/century-old-style/CenturyOldStyle-Regular.woff2") format("woff2"),
+       url("../fonts/century-old-style/CenturyOldStyle-Regular.woff") format("woff"),
+       url("../fonts/century-old-style/CenturyOldStyle-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Typography */
+  --font-display: "Century Old Style", Georgia, "Times New Roman", serif;
+  --font-body: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Colors - Poem Booth Brand */
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #F7F7F4;
+  --color-bg-accent: #F1F4F6;
+
+  --color-border: #E5E5E5;
+  --color-border-light: #F0F0F0;
+
+  /* Button Colors */
+  --color-button-primary: #333333;
+  --color-button-primary-hover: #1a1a1a;
+  --color-button-text: #ffffff;
+
+  /* Spacing */
+  --spacing-section: 6rem;
+  --spacing-section-mobile: 4rem;
+
+  /* Container */
+  --container-max: 1280px;
+  --container-padding: 1.5rem;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: normal;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: normal;
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  /* Ticker tape animation for client logos */
+  .animate-ticker {
+    animation: ticker 40s linear infinite;
+  }
+
+  .animate-ticker:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-padding {
+    padding-top: var(--spacing-section-mobile);
+    padding-bottom: var(--spacing-section-mobile);
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-top: var(--spacing-section);
+      padding-bottom: var(--spacing-section);
+    }
+  }
+}

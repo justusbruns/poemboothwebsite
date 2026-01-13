@@ -1,0 +1,158 @@
+{
+  "common": {
+    "bookNow": "Boek nu",
+    "contactUs": "Neem contact op",
+    "learnMore": "Meer info",
+    "getQuote": "Vraag een offerte aan",
+    "email": "Of mail naar {email}"
+  },
+  "header": {
+    "region": {
+      "us": "Verenigde Staten",
+      "eu": "Europa"
+    },
+    "language": {
+      "en": "English",
+      "nl": "Nederlands",
+      "de": "Deutsch",
+      "fr": "Français",
+      "it": "Italiano"
+    }
+  },
+  "hero": {
+    "headline": "Van Moment naar Meesterwerk",
+    "subheadline": "De Poem Booth transformeert je foto in gedichten en kunstwerken gestyled door schrijvers en kunstenaars",
+    "ctaButton": "Boek nu",
+    "ctaEmail": "Of mail naar"
+  },
+  "howItWorks": {
+    "title": "Hoe het werkt",
+    "subtitle": "Drie simpele stappen naar jouw unieke kunstwerk",
+    "step1": {
+      "title": "Druk & Poseer",
+      "description": "Druk op de knop, kijk naar de countdown en poseer voor je beste shot"
+    },
+    "step2": {
+      "title": "Ontvang je Kunst",
+      "description": "Je foto wordt veilig omgezet in een portret of gedicht door onze geselecteerde AI modellen"
+    },
+    "step3": {
+      "title": "Deel",
+      "description": "Deel je gegenereerde portret of gedicht met de wereld"
+    }
+  },
+  "editions": {
+    "title": "Onze Edities",
+    "subtitle": "Kies tussen twee unieke ervaringen",
+    "newBadge": "Nieuw",
+    "duration": "{seconds} seconden",
+    "portrait": {
+      "title": "De Portret Editie",
+      "subtitle": "Maak een foto en 30 seconden later krijg je jouw persoonlijke meesterwerk",
+      "beforeLabel": "Maak een foto",
+      "afterLabel": "Krijg een portret"
+    },
+    "original": {
+      "title": "De Originele Editie",
+      "subtitle": "Maak een foto en 10 seconden later krijg je jouw persoonlijke gedicht",
+      "beforeLabel": "Maak een foto",
+      "afterLabel": "Krijg een gedicht"
+    }
+  },
+  "gallery": {
+    "title": "Galerij",
+    "subtitle": "Zie de Poem Booth in actie op evenementen over de hele wereld"
+  },
+  "practicalities": {
+    "title": "Praktisch",
+    "subtitle": "Alles wat je moet weten over het opzetten van de Poem Booth",
+    "footprint": {
+      "title": "Afmeting",
+      "valueUS": "5ft x 5ft",
+      "valueEU": "1,5m x 1,5m"
+    },
+    "setup": {
+      "title": "Opbouw & Afbouw",
+      "valueUS": "1 uur",
+      "valueEU": "1 uur",
+      "bullet1": "1x {voltage} stroom",
+      "bullet2": "stabiel Wi-Fi/Ethernet"
+    },
+    "outdoor": {
+      "title": "Buiten",
+      "valueUS": "Mogelijk",
+      "valueEU": "Mogelijk",
+      "bullet1": "vereist schaduw"
+    },
+    "speed": {
+      "title": "Snelheid",
+      "valueUS": "",
+      "valueEU": "",
+      "bullet1": "10-20 sec voor Gedichten",
+      "bullet2": "30-40 sec voor Portretten"
+    }
+  },
+  "booking": {
+    "title": "Boekingen & Tarieven",
+    "subtitle": "Prijzen vanuit onze {hub} hub",
+    "ctaButton": "Vraag een offerte aan",
+    "footnote": "Prijzen zijn exclusief BTW. Maatwerkpakketten beschikbaar.",
+    "transport": {
+      "title": "Transportkosten",
+      "note": "(retour voor 1-daags event, 4x voor meerdere dagen)"
+    },
+    "rental": {
+      "title": "Basis huurtarief",
+      "day1Label": "Eerste dag",
+      "day2Label": "Tweede dag",
+      "day3Label": "Derde dag (en volgende)"
+    },
+    "printer": {
+      "title": "Printer",
+      "perDay": "per dag"
+    },
+    "branding": {
+      "title": "Branding",
+      "description": "Voeg je logo / product toe aan opgeslagen / geprinte kunstwerken",
+      "flatFee": "vast bedrag"
+    },
+    "customization": {
+      "title": "Aanpassing",
+      "description": "Pas de stijl van gedicht of portret aan op basis van stijl of input",
+      "flatFee": "vast bedrag"
+    }
+  },
+  "otherRegions": {
+    "title": "Buiten VS/EU?",
+    "description": "We breiden wereldwijd uit. Neem contact op voor beschikbaarheid in jouw regio.",
+    "ctaButton": "Neem contact op voor wereldwijde beschikbaarheid",
+    "emailSubject": "Poem Booth Aanvraag - Wereldwijde Beschikbaarheid",
+    "emailBody": "Hallo,\n\nIk ben geïnteresseerd in het boeken van de Poem Booth voor een evenement buiten de VS/EU.\n\nLaat me alstublieft weten over beschikbaarheid in mijn regio.\n\nAlvast bedankt!"
+  },
+  "footer": {
+    "tagline": "Een product van VOUW B.V.",
+    "vouwDescription": "VOUW is een designstudio uit Amsterdam, Nederland die werkt op het snijvlak van design en technologie.",
+    "addresses": "Adressen",
+    "adminAddress": "Administratieadres:",
+    "adminCompany": "VOUW B.V.",
+    "adminStreet": "Krugerplein 4-1",
+    "adminCity": "1091KX Amsterdam",
+    "adminCountry": "Nederland",
+    "studioAddress": "Studio / Bezoekadres:",
+    "studioStreet": "Generaal Vetterstraat 57",
+    "studioCity": "1059 BT Amsterdam",
+    "studioCountry": "Nederland",
+    "contact": "Contact",
+    "legalInfo": "Juridische Informatie",
+    "vatLabel": "BTW Nr",
+    "chamberLabel": "KvK Nr",
+    "termsLink": "Algemene Voorwaarden",
+    "userAgreement": "Poem Booth Gebruikersovereenkomst",
+    "distributorTitle": "Geïnteresseerd in het distribueren van Poem Booth in jouw land of regio als gelicentieerd bedrijf?",
+    "distributorCta": "Neem contact op",
+    "copyright": "© {year} VOUW B.V. Alle rechten voorbehouden.",
+    "trademark": "Poem Booth® is een geregistreerd handelsmerk en beschermd merk.",
+    "privacy": "Privacybeleid",
+    "terms": "Algemene Voorwaarden"
+  }
+}
