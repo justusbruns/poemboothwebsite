@@ -22,9 +22,10 @@ interface FooterData {
 
 interface FooterProps {
   footerData?: FooterData;
+  logo?: string;
 }
 
-export default function Footer({ footerData }: FooterProps) {
+export default function Footer({ footerData, logo }: FooterProps) {
   const t = useTranslations("footer");
   const currentYear = new Date().getFullYear();
 
@@ -51,13 +52,15 @@ export default function Footer({ footerData }: FooterProps) {
             {/* Column 1: Logo & Description */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <Image
-                  src="/images/logo.svg"
-                  alt="Poem Booth"
-                  width={40}
-                  height={40}
-                  className="invert"
-                />
+                {logo && (
+                  <Image
+                    src={logo}
+                    alt="Poem Booth"
+                    width={40}
+                    height={40}
+                    className="invert"
+                  />
+                )}
                 <span className="text-xl font-semibold">Poem Booth</span>
               </div>
               <p className="text-sm text-white/70">

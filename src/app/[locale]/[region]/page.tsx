@@ -132,7 +132,7 @@ export default async function LandingPage({ params }: PageProps) {
         <BookingRates hubPricing={hubPricing} />
         <OtherRegionsContact />
       </main>
-      <Footer footerData={footerData} />
+      <Footer footerData={footerData} logo={headerLogo} />
     </>
   );
 }
