@@ -26,8 +26,8 @@ export default function Header({ logo }: HeaderProps) {
               <Image
                 src={logo}
                 alt="Poem Booth"
-                width={100}
-                height={40}
+                width={70}
+                height={28}
                 className="object-contain"
               />
             ) : (
