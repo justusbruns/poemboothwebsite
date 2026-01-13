@@ -61,8 +61,8 @@ export default function BoothWithScreen({
             top: "7%",
             left: "14%",
             width: "72%",
-            height: "58%",
-            borderRadius: "42% 42% 42% 42% / 28% 28% 28% 28%",
+            height: "76%",
+            borderRadius: "38% 38% 38% 38% / 22% 22% 22% 22%",
           }}
         >
           {/* Current image */}
