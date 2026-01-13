@@ -119,6 +119,27 @@ export const editionsQuery = groq`
       },
       hotspot
     },
+    poemStyles[]-> {
+      _id,
+      styleName,
+      styleDescription,
+      order,
+      poems[] {
+        backgroundImage {
+          asset-> {
+            _id,
+            url,
+            metadata {
+              lqip,
+              dimensions
+            }
+          },
+          hotspot
+        },
+        poemText,
+        attribution
+      }
+    } | order(order asc),
     beforeLabel,
     afterLabel
   }
@@ -290,6 +311,27 @@ export const pageDataQuery = groq`
       },
       hotspot
     },
+    poemStyles[]-> {
+      _id,
+      styleName,
+      styleDescription,
+      order,
+      poems[] {
+        backgroundImage {
+          asset-> {
+            _id,
+            url,
+            metadata {
+              lqip,
+              dimensions
+            }
+          },
+          hotspot
+        },
+        poemText,
+        attribution
+      }
+    } | order(order asc),
     beforeLabel,
     afterLabel
   },

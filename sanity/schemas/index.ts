@@ -5,6 +5,7 @@ import hero from "./hero";
 import clientLogo from "./clientLogo";
 import howItWorksStep from "./howItWorksStep";
 import edition from "./edition";
+import poemStyle from "./poemStyle";
 import galleryImage from "./galleryImage";
 import practicality from "./practicality";
 import pricingItem from "./pricingItem";
@@ -21,6 +22,7 @@ export const schemaTypes = [
   clientLogo,
   howItWorksStep,
   edition,
+  poemStyle,
   galleryImage,
   practicality,
   pricingItem,

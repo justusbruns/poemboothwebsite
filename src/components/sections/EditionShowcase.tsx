@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
 import BoothWithScreen from "@/components/ui/BoothWithScreen";
+import PoemBoothScreen from "@/components/ui/PoemBoothScreen";
 import { urlFor } from "../../../sanity/lib/image";
 
 interface SanityImage {
@@ -11,6 +12,27 @@ interface SanityImage {
     _ref: string;
     _type: "reference";
   };
+}
+
+interface PoemExample {
+  backgroundImage?: {
+    asset?: {
+      url: string;
+      metadata?: {
+        lqip?: string;
+      };
+    };
+  };
+  poemText: string;
+  attribution?: string;
+}
+
+interface PoemStyle {
+  _id: string;
+  styleName: string;
+  styleDescription?: string;
+  order?: number;
+  poems: PoemExample[];
 }
 
 interface Edition {
@@ -23,6 +45,7 @@ interface Edition {
   beforeImage?: SanityImage | string;
   afterImage?: SanityImage | string;
   afterImages?: (SanityImage | string)[];
+  poemStyles?: PoemStyle[];
   beforeLabel: string;
   afterLabel: string;
 }
@@ -152,14 +175,24 @@ export default function EditionShowcase({ editions }: EditionShowcaseProps) {
                     </svg>
                   </div>
 
-                  {/* After Booth (with slideshow) */}
-                  <BoothWithScreen
-                    images={afterUrls}
-                    slideshow={afterUrls.length > 1}
-                    fadeDuration={3500}
-                    label={edition.afterLabel}
-                    alt={`${edition.title} - ${edition.afterLabel}`}
-                  />
+                  {/* After Booth - Portrait slideshow or Poem display */}
+                  {edition.outputType === "poem" &&
+                  edition.poemStyles &&
+                  edition.poemStyles.length > 0 ? (
+                    <PoemBoothScreen
+                      styles={edition.poemStyles}
+                      label={edition.afterLabel}
+                      fallbackImage={beforeUrl}
+                    />
+                  ) : (
+                    <BoothWithScreen
+                      images={afterUrls}
+                      slideshow={afterUrls.length > 1}
+                      fadeDuration={3500}
+                      label={edition.afterLabel}
+                      alt={`${edition.title} - ${edition.afterLabel}`}
+                    />
+                  )}
                 </div>
               </div>
             );

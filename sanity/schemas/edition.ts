@@ -75,6 +75,15 @@ export default defineType({
       type: "array",
       of: [{ type: "image", options: { hotspot: true } }],
       description: "Multiple output examples that cycle on the screen (3-4 sec each)",
+      hidden: ({ document }) => document?.outputType === "poem",
+    }),
+    defineField({
+      name: "poemStyles",
+      title: "Poem Styles",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "poemStyle" }] }],
+      description: "Select poem styles to display (only for Original Edition)",
+      hidden: ({ document }) => document?.outputType !== "poem",
     }),
     defineField({
       name: "beforeLabel",
