@@ -88,7 +88,7 @@ export default async function LandingPage({ params }: PageProps) {
   }));
 
   // Transform editions - extract locale-specific text
-  const editions = pageData?.editions?.map((e: { title?: LocalizedField; subtitle?: LocalizedField; beforeLabel?: LocalizedField; afterLabel?: LocalizedField; slug?: { current?: string }; isNew?: boolean; duration?: number; outputType?: string; boothImage?: unknown; beforeImage?: unknown; afterImage?: unknown }) => ({
+  const editions = pageData?.editions?.map((e: { title?: LocalizedField; subtitle?: LocalizedField; beforeLabel?: LocalizedField; afterLabel?: LocalizedField; slug?: { current?: string }; isNew?: boolean; duration?: number; outputType?: string; boothImage?: unknown; beforeImage?: unknown; afterImage?: unknown; afterImages?: unknown[]; poemStyles?: unknown[] }) => ({
     title: getLocalizedValue(e.title, locale),
     slug: e.slug?.current || "",
     isNew: e.isNew,
@@ -98,6 +98,8 @@ export default async function LandingPage({ params }: PageProps) {
     boothImage: e.boothImage,
     beforeImage: e.beforeImage,
     afterImage: e.afterImage,
+    afterImages: e.afterImages,
+    poemStyles: e.poemStyles,
     beforeLabel: getLocalizedValue(e.beforeLabel, locale),
     afterLabel: getLocalizedValue(e.afterLabel, locale),
   }));
