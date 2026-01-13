@@ -186,7 +186,7 @@ export default function PoemBoothScreen({
           <div className="absolute inset-0 bg-black/30" />
 
           {/* Poem text overlay - extra padding to avoid booth pole and curved edges */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-12 pb-16 md:px-8 md:pt-14 md:pb-20">
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-12 pb-28 md:px-8 md:pt-14 md:pb-32">
             <div className="text-white text-center">
               {/* Poem text with typewriter effect */}
               <p className="text-xs md:text-sm leading-relaxed whitespace-pre-line font-serif">
