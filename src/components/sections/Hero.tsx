@@ -16,7 +16,9 @@ export default function Hero({ heroImage, bookingUrl }: HeroProps) {
   const params = useParams();
   const locale = params.locale as string;
 
-  const baseUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  const rawUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  // Extract just the origin (protocol + host) to avoid path duplication
+  const baseUrl = rawUrl.replace(/\/+$/, "").split("/").slice(0, 3).join("/");
   const bookingHref = `${baseUrl}/${locale}/booking`;
   const contactEmail = "contact@poembooth.com";
 

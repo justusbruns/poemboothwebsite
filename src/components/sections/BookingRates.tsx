@@ -39,7 +39,9 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
   const locale = params.locale as string;
   const isUS = region === "us";
 
-  const baseUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  const rawUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  // Extract just the origin (protocol + host) to avoid path duplication
+  const baseUrl = rawUrl.replace(/\/+$/, "").split("/").slice(0, 3).join("/");
   const bookingHref = `${baseUrl}/${locale}/booking`;
 
   // Get currency symbol and default hub name based on region
