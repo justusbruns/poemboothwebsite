@@ -104,9 +104,9 @@ export default async function LandingPage({ params }: PageProps) {
     afterLabel: getLocalizedValue(e.afterLabel, locale),
   }));
 
-  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string } }; caption?: string; eventName?: string; featured?: boolean }) => ({
+  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string } }; caption?: LocalizedField; eventName?: string; featured?: boolean }) => ({
     imageUrl: g.image?.asset?.url,
-    caption: g.caption,
+    caption: getLocalizedValue(g.caption, locale),
     eventName: g.eventName,
     featured: g.featured,
   }));
