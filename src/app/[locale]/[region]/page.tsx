@@ -123,13 +123,13 @@ export default async function LandingPage({ params }: PageProps) {
     <>
       <Header logo={headerLogo} />
       <main>
-        <Hero heroImage={heroImage} />
+        <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <ClientLogos logos={clientLogos} />
         <HowItWorks steps={howItWorksSteps} />
         <EditionShowcase editions={editions} />
         <PhotoGallery images={galleryImages} />
         <Practicalities />
-        <BookingRates hubPricing={hubPricing} />
+        <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <OtherRegionsContact />
       </main>
       <Footer footerData={footerData} logo={headerLogo} />

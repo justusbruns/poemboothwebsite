@@ -24,6 +24,7 @@ interface HubPricing {
 
 interface BookingRatesProps {
   hubPricing?: HubPricing;
+  bookingUrl?: string;
 }
 
 function formatPrice(amount: number, symbol: string): string {
@@ -31,14 +32,15 @@ function formatPrice(amount: number, symbol: string): string {
   return `${symbol}${amount.toLocaleString()}`;
 }
 
-export default function BookingRates({ hubPricing }: BookingRatesProps) {
+export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesProps) {
   const t = useTranslations("booking");
   const params = useParams();
   const region = params.region as string;
   const locale = params.locale as string;
   const isUS = region === "us";
 
-  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  const baseUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  const bookingHref = `${baseUrl}/${locale}/booking`;
 
   // Get currency symbol and default hub name based on region
   const currencySymbol = hubPricing?.currencySymbol || (isUS ? "$" : "€");
@@ -173,7 +175,7 @@ export default function BookingRates({ hubPricing }: BookingRatesProps) {
           {/* CTA Button */}
           <div className="mt-8 text-center">
             <Button
-              href={`${bookingUrl}?region=${region}&locale=${locale}`}
+              href={bookingHref}
               variant="primary"
               size="lg"
             >

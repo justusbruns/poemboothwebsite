@@ -8,15 +8,16 @@ import Image from "next/image";
 
 interface HeroProps {
   heroImage?: string;
+  bookingUrl?: string;
 }
 
-export default function Hero({ heroImage }: HeroProps) {
+export default function Hero({ heroImage, bookingUrl }: HeroProps) {
   const t = useTranslations("hero");
   const params = useParams();
-  const region = params.region as string;
   const locale = params.locale as string;
 
-  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  const baseUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  const bookingHref = `${baseUrl}/${locale}/booking`;
   const contactEmail = "contact@poembooth.com";
 
   return (
@@ -33,7 +34,7 @@ export default function Hero({ heroImage }: HeroProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
-                href={`${bookingUrl}?region=${region}&locale=${locale}`}
+                href={bookingHref}
                 variant="primary"
                 size="lg"
               >
