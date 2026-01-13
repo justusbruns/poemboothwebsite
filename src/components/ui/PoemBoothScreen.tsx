@@ -3,6 +3,22 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
+// Localized text type matching Sanity schema
+type LocalizedText = {
+  en?: string;
+  nl?: string;
+  de?: string;
+  fr?: string;
+  it?: string;
+};
+
+// Helper to extract localized value
+const getLocalizedValue = (field: LocalizedText | string | undefined, locale: string): string => {
+  if (!field) return "";
+  if (typeof field === "string") return field; // Backwards compatibility
+  return field[locale as keyof LocalizedText] || field.en || "";
+};
+
 interface PoemExample {
   backgroundImage?: {
     asset?: {
@@ -12,7 +28,7 @@ interface PoemExample {
       };
     };
   };
-  poemText: string;
+  poemText: LocalizedText | string;
   attribution?: string;
 }
 
@@ -25,12 +41,14 @@ interface PoemStyle {
 
 interface PoemBoothScreenProps {
   styles: PoemStyle[];
+  locale: string;
   label?: string;
   fallbackImage?: string;
 }
 
 export default function PoemBoothScreen({
   styles,
+  locale,
   label,
   fallbackImage,
 }: PoemBoothScreenProps) {
@@ -43,7 +61,7 @@ export default function PoemBoothScreen({
 
   const activeStyle = styles[activeStyleIndex];
   const activePoem = activeStyle?.poems?.[activePoemIndex];
-  const poemText = activePoem?.poemText || "";
+  const poemText = getLocalizedValue(activePoem?.poemText, locale);
   const backgroundUrl =
     activePoem?.backgroundImage?.asset?.url || fallbackImage || "";
 

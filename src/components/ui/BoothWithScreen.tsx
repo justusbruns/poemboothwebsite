@@ -19,26 +19,19 @@ export default function BoothWithScreen({
   alt = "Booth screen",
 }: BoothWithScreenProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Handle slideshow rotation
+  // Handle slideshow rotation - simple index change, CSS handles the fade
   useEffect(() => {
     if (!slideshow || images.length <= 1) return;
 
     const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
-        setIsTransitioning(false);
-      }, 500); // Half of transition duration
+      setCurrentIndex((prev) => (prev + 1) % images.length);
     }, fadeDuration);
 
     return () => clearInterval(interval);
   }, [slideshow, images.length, fadeDuration]);
 
   const currentImage = images[currentIndex];
-  const nextIndex = (currentIndex + 1) % images.length;
-  const nextImage = images.length > 1 ? images[nextIndex] : null;
 
   return (
     <div className="flex flex-col items-center">
@@ -65,29 +58,18 @@ export default function BoothWithScreen({
             borderRadius: "35% 35% 35% 35% / 18% 18% 22% 22%",
           }}
         >
-          {/* Current image */}
-          {currentImage && (
+          {/* Render all images stacked, only current is visible */}
+          {images.map((image, index) => (
             <Image
-              src={currentImage}
+              key={image}
+              src={image}
               alt={alt}
               fill
               className={`object-cover transition-opacity duration-1000 ${
-                isTransitioning ? "opacity-0" : "opacity-100"
+                index === currentIndex ? "opacity-100" : "opacity-0"
               }`}
             />
-          )}
-
-          {/* Next image (for crossfade effect) */}
-          {slideshow && nextImage && (
-            <Image
-              src={nextImage}
-              alt={alt}
-              fill
-              className={`object-cover transition-opacity duration-1000 ${
-                isTransitioning ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          )}
+          ))}
 
           {/* Placeholder when no images */}
           {images.length === 0 && (

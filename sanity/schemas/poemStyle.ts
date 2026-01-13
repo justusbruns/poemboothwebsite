@@ -38,9 +38,8 @@ export default defineType({
             defineField({
               name: "poemText",
               title: "Poem Text",
-              type: "text",
-              description: "The poem content (preserve line breaks)",
-              validation: (Rule) => Rule.required(),
+              type: "localizedText",
+              description: "The poem content (preserve line breaks) - add translations for each language",
             }),
             defineField({
               name: "attribution",
@@ -51,7 +50,7 @@ export default defineType({
           ],
           preview: {
             select: {
-              poemText: "poemText",
+              poemText: "poemText.en",
               media: "backgroundImage",
             },
             prepare({ poemText, media }) {

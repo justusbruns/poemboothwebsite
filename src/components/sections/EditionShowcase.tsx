@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Container from "@/components/ui/Container";
 import BoothWithScreen from "@/components/ui/BoothWithScreen";
 import PoemBoothScreen from "@/components/ui/PoemBoothScreen";
@@ -14,6 +14,14 @@ interface SanityImage {
   };
 }
 
+type LocalizedText = {
+  en?: string;
+  nl?: string;
+  de?: string;
+  fr?: string;
+  it?: string;
+};
+
 interface PoemExample {
   backgroundImage?: {
     asset?: {
@@ -23,7 +31,7 @@ interface PoemExample {
       };
     };
   };
-  poemText: string;
+  poemText: LocalizedText | string;
   attribution?: string;
 }
 
@@ -69,6 +77,7 @@ function getImageUrls(images: (SanityImage | string)[] | undefined): string[] {
 
 export default function EditionShowcase({ editions }: EditionShowcaseProps) {
   const t = useTranslations("editions");
+  const locale = useLocale();
 
   // Default editions from translations
   const defaultEditions: Edition[] = [
@@ -181,6 +190,7 @@ export default function EditionShowcase({ editions }: EditionShowcaseProps) {
                   edition.poemStyles.length > 0 ? (
                     <PoemBoothScreen
                       styles={edition.poemStyles}
+                      locale={locale}
                       label={edition.afterLabel}
                       fallbackImage={beforeUrl}
                     />
