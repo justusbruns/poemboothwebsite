@@ -46,6 +46,15 @@ interface PoemBoothScreenProps {
   fallbackImage?: string;
 }
 
+// Calculate font size based on poem length
+const calculateFontSize = (text: string): string => {
+  const length = text.length;
+  if (length < 150) return "text-sm md:text-base";
+  if (length < 250) return "text-xs md:text-sm";
+  if (length < 350) return "text-[11px] md:text-xs";
+  return "text-[10px] md:text-[11px]";
+};
+
 export default function PoemBoothScreen({
   styles,
   locale,
@@ -64,6 +73,7 @@ export default function PoemBoothScreen({
   const poemText = getLocalizedValue(activePoem?.poemText, locale);
   const backgroundUrl =
     activePoem?.backgroundImage?.asset?.url || fallbackImage || "";
+  const fontSize = calculateFontSize(poemText);
 
   // Intersection Observer to trigger typewriter on scroll
   useEffect(() => {
@@ -188,8 +198,8 @@ export default function PoemBoothScreen({
           {/* Poem text overlay - extra padding to avoid booth pole and curved edges */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-12 pb-28 md:px-8 md:pt-14 md:pb-32">
             <div className="text-white text-center">
-              {/* Poem text with typewriter effect */}
-              <p className="text-xs md:text-sm leading-relaxed whitespace-pre-line font-serif">
+              {/* Poem text with typewriter effect - auto-sized based on length */}
+              <p className={`${fontSize} leading-relaxed whitespace-pre-line font-serif`}>
                 {displayedText}
                 {isTyping && (
                   <span className="inline-block w-0.5 h-4 bg-white ml-0.5 animate-pulse" />
