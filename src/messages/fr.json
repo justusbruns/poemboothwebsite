@@ -1,4 +1,10 @@
 {
+  "seo": {
+    "title": "Poem Booth | Expérience Portrait & Poésie IA",
+    "description": "Transformez chaque événement en une expérience inoubliable. Le Poem Booth crée des portraits et poèmes générés par IA en quelques secondes. Réservez pour mariages, événements d'entreprise & fêtes.",
+    "ogTitle": "Poem Booth - Du Moment au Chef-d'œuvre",
+    "keywords": "photomaton IA, générateur de portrait, booth poésie, animation événement, photomaton mariage, événement entreprise, art IA"
+  },
   "common": {
     "bookNow": "Réserver",
     "contactUs": "Contactez-nous",
@@ -10,6 +16,10 @@
     "region": {
       "nl": "Pays-Bas",
       "us": "États-Unis",
+      "de": "Allemagne",
+      "fr": "France",
+      "it": "Italie",
+      "be": "Belgique",
       "row": "Reste du Monde"
     },
     "language": {

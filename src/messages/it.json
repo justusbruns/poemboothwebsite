@@ -1,4 +1,10 @@
 {
+  "seo": {
+    "title": "Poem Booth | Esperienza Ritratto & Poesia IA",
+    "description": "Trasforma ogni evento in un'esperienza indimenticabile. Il Poem Booth crea ritratti e poesie generati dall'IA in pochi secondi. Prenota per matrimoni, eventi aziendali & feste.",
+    "ogTitle": "Poem Booth - Dal Momento al Capolavoro",
+    "keywords": "cabina foto IA, generatore ritratti, booth poesia, intrattenimento eventi, cabina foto matrimonio, evento aziendale, arte IA"
+  },
   "common": {
     "bookNow": "Prenota ora",
     "contactUs": "Contattaci",
@@ -10,6 +16,10 @@
     "region": {
       "nl": "Paesi Bassi",
       "us": "Stati Uniti",
+      "de": "Germania",
+      "fr": "Francia",
+      "it": "Italia",
+      "be": "Belgio",
       "row": "Resto del Mondo"
     },
     "language": {

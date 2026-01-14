@@ -1,4 +1,10 @@
 {
+  "seo": {
+    "title": "Poem Booth | KI-Porträt & Poesie-Erlebnis",
+    "description": "Verwandeln Sie jedes Event in ein unvergessliches Erlebnis. Die Poem Booth erstellt KI-generierte Porträts und Gedichte in Sekunden. Buchen Sie für Hochzeiten, Firmenevents & Partys.",
+    "ogTitle": "Poem Booth - Vom Moment zum Meisterwerk",
+    "keywords": "KI Fotobox, Porträt Generator, Poesie Booth, Event Unterhaltung, Hochzeit Fotobox, Firmenevent, KI Kunst"
+  },
   "common": {
     "bookNow": "Jetzt buchen",
     "contactUs": "Kontaktieren Sie uns",
@@ -10,6 +16,10 @@
     "region": {
       "nl": "Niederlande",
       "us": "Vereinigte Staaten",
+      "de": "Deutschland",
+      "fr": "Frankreich",
+      "it": "Italien",
+      "be": "Belgien",
       "row": "Rest der Welt"
     },
     "language": {

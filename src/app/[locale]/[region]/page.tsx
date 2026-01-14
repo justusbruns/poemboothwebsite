@@ -17,18 +17,101 @@ import { REGION_CONFIGS, type Region } from "@/lib/supabase/types";
 import { client } from "../../../../sanity/lib/client";
 import { pageDataQuery } from "../../../../sanity/lib/queries";
 import { urlFor } from "../../../../sanity/lib/image";
+import { locales, regions, type Locale } from "@/i18n/routing";
+import { OrganizationJsonLd } from "@/components/seo/JsonLd";
 
 interface PageProps {
   params: Promise<{ locale: string; region: string }>;
 }
 
+// Map locale to OpenGraph locale format
+const ogLocaleMap: Record<string, string> = {
+  en: "en_US",
+  nl: "nl_NL",
+  de: "de_DE",
+  fr: "fr_FR",
+  it: "it_IT",
+};
+
+// Map region to country code for hreflang
+const regionToCountry: Record<string, string> = {
+  nl: "NL",
+  us: "US",
+  de: "DE",
+  fr: "FR",
+  it: "IT",
+  be: "BE",
+  row: "001", // UN M49 code for "World"
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "hero" });
+  const { locale, region } = await params;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  const heroT = await getTranslations({ locale, namespace: "hero" });
+
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://poembooth.com";
+  const currentUrl = `${baseUrl}/${locale}/${region}`;
+
+  // Build hreflang alternates for all locale/region combinations
+  const languages: Record<string, string> = {};
+
+  for (const loc of locales) {
+    for (const reg of regions) {
+      // Create hreflang key: language-country format
+      const country = regionToCountry[reg];
+      const hreflangKey = reg === "row" ? loc : `${loc}-${country}`;
+      languages[hreflangKey] = `${baseUrl}/${loc}/${reg}`;
+    }
+  }
+
+  // Set x-default to English Netherlands
+  languages["x-default"] = `${baseUrl}/en/nl`;
+
+  const title = t("title");
+  const description = t("description");
+  const ogTitle = t("ogTitle");
 
   return {
-    title: `Poem Booth | ${t("headline")}`,
-    description: t("subheadline"),
+    title,
+    description,
+
+    // Keywords
+    keywords: t("keywords"),
+
+    // Canonical and alternate URLs
+    alternates: {
+      canonical: currentUrl,
+      languages,
+    },
+
+    // OpenGraph
+    openGraph: {
+      title: ogTitle,
+      description,
+      url: currentUrl,
+      siteName: "Poem Booth",
+      type: "website",
+      locale: ogLocaleMap[locale] || "en_US",
+      alternateLocale: Object.values(ogLocaleMap).filter(
+        (l) => l !== ogLocaleMap[locale]
+      ),
+      images: [
+        {
+          url: `${baseUrl}/images/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: heroT("headline"),
+        },
+      ],
+    },
+
+    // Twitter Card
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images: [`${baseUrl}/images/og-image.jpg`],
+    },
   };
 }
 
@@ -121,6 +204,7 @@ export default async function LandingPage({ params }: PageProps) {
 
   return (
     <>
+      <OrganizationJsonLd locale={locale} />
       <Header logo={headerLogo} />
       <main>
         <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />

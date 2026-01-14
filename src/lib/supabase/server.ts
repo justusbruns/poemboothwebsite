@@ -46,9 +46,14 @@ export async function getHubByRegion(regionCode: string): Promise<{
   const supabase = createServerClient();
 
   // Map URL region codes to database region codes
+  // All EU countries use Amsterdam hub pricing
   const regionMap: Record<string, string> = {
     nl: "nl", // Amsterdam hub
     us: "us", // New York hub
+    de: "nl", // Germany uses Amsterdam hub pricing
+    fr: "nl", // France uses Amsterdam hub pricing
+    it: "nl", // Italy uses Amsterdam hub pricing
+    be: "nl", // Belgium uses Amsterdam hub pricing
     row: "nl", // Rest of World uses Amsterdam hub pricing
   };
   const dbRegionCode = regionMap[regionCode.toLowerCase()] || regionCode.toLowerCase();

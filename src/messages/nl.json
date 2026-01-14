@@ -1,4 +1,10 @@
 {
+  "seo": {
+    "title": "Poem Booth | AI Portret & Poëzie Ervaring",
+    "description": "Maak van elk evenement een onvergetelijke ervaring. De Poem Booth creëert AI-gegenereerde portretten en poëzie in seconden. Boek voor bruiloften, bedrijfsevenementen & feesten.",
+    "ogTitle": "Poem Booth - Van Moment naar Meesterwerk",
+    "keywords": "AI fotohokje, portret generator, poëzie booth, evenement entertainment, bruiloft fotohokje, bedrijfsevenement, AI kunst"
+  },
   "common": {
     "bookNow": "Boek nu",
     "contactUs": "Neem contact op",
@@ -10,6 +16,10 @@
     "region": {
       "nl": "Nederland",
       "us": "Verenigde Staten",
+      "de": "Duitsland",
+      "fr": "Frankrijk",
+      "it": "Italië",
+      "be": "België",
       "row": "Rest van de Wereld"
     },
     "language": {

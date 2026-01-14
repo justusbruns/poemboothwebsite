@@ -39,7 +39,7 @@ export interface HubData {
   };
 }
 
-export type Region = "nl" | "us" | "row";
+export type Region = "nl" | "us" | "de" | "fr" | "it" | "be" | "row";
 
 export interface RegionConfig {
   code: Region;
@@ -72,6 +72,46 @@ export const REGION_CONFIGS: Record<Region, RegionConfig> = {
     locale: "en-US",
     hubCity: "New York",
     voltage: "110V",
+  },
+  de: {
+    code: "de",
+    label: "Germany",
+    currency: "EUR",
+    currencySymbol: "€",
+    distanceUnit: "km",
+    locale: "de-DE",
+    hubCity: "Amsterdam",
+    voltage: "230V",
+  },
+  fr: {
+    code: "fr",
+    label: "France",
+    currency: "EUR",
+    currencySymbol: "€",
+    distanceUnit: "km",
+    locale: "fr-FR",
+    hubCity: "Amsterdam",
+    voltage: "230V",
+  },
+  it: {
+    code: "it",
+    label: "Italy",
+    currency: "EUR",
+    currencySymbol: "€",
+    distanceUnit: "km",
+    locale: "it-IT",
+    hubCity: "Amsterdam",
+    voltage: "230V",
+  },
+  be: {
+    code: "be",
+    label: "Belgium",
+    currency: "EUR",
+    currencySymbol: "€",
+    distanceUnit: "km",
+    locale: "nl-BE",
+    hubCity: "Amsterdam",
+    voltage: "230V",
   },
   row: {
     code: "row",

@@ -1,4 +1,10 @@
 {
+  "seo": {
+    "title": "Poem Booth | AI Portrait & Poetry Experience",
+    "description": "Transform any event into an unforgettable experience. The Poem Booth creates AI-generated portraits and poetry in seconds. Book for weddings, corporate events & parties.",
+    "ogTitle": "Poem Booth - From Moment to Masterpiece",
+    "keywords": "AI photo booth, portrait generator, poetry booth, event entertainment, wedding photo booth, corporate event, AI art"
+  },
   "common": {
     "bookNow": "Book now",
     "contactUs": "Contact us",
@@ -8,9 +14,13 @@
   },
   "header": {
     "region": {
-      "nl": "The Netherlands",
+      "nl": "Netherlands",
       "us": "United States",
-      "row": "Rest of the World"
+      "de": "Germany",
+      "fr": "France",
+      "it": "Italy",
+      "be": "Belgium",
+      "row": "Rest of World"
     },
     "language": {
       "en": "English",

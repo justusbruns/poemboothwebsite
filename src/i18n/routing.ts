@@ -5,8 +5,8 @@ export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = "en";
 
-// Region configuration
-export const regions = ["nl", "us", "row"] as const;
+// Region configuration - country-specific for better SEO
+export const regions = ["nl", "us", "de", "fr", "it", "be", "row"] as const;
 export type Region = (typeof regions)[number];
 
 export const defaultRegion: Region = "nl";
@@ -37,6 +37,13 @@ export const countryToLocale: Record<string, Locale> = {
 export const countryToRegion: Record<string, Region> = {
   US: "us",
   NL: "nl",
+  DE: "de",
+  AT: "de", // Austria -> Germany region
+  CH: "de", // Switzerland -> Germany region (German-speaking)
+  FR: "fr",
+  IT: "it",
+  BE: "be",
+  LU: "be", // Luxembourg -> Belgium region
   // All other countries default to Rest of World
 };
 
@@ -52,7 +59,5 @@ export function getLocaleFromCountry(country: string): Locale {
 }
 
 export function getRegionFromCountry(country: string): Region {
-  if (country === "US") return "us";
-  if (country === "NL") return "nl";
-  return "row";
+  return countryToRegion[country] || "row";
 }

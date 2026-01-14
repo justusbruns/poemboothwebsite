@@ -6,14 +6,22 @@ import { useState, useRef, useEffect } from "react";
 import { regions, type Region } from "@/i18n/routing";
 
 const regionLabels: Record<Region, string> = {
-  nl: "The Netherlands",
+  nl: "Netherlands",
   us: "United States",
-  row: "Rest of the World",
+  de: "Germany",
+  fr: "France",
+  it: "Italy",
+  be: "Belgium",
+  row: "Rest of World",
 };
 
 const regionFlags: Record<Region, string> = {
   nl: "🇳🇱",
   us: "🇺🇸",
+  de: "🇩🇪",
+  fr: "🇫🇷",
+  it: "🇮🇹",
+  be: "🇧🇪",
   row: "🌍",
 };
 
