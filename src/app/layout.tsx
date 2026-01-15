@@ -24,6 +24,18 @@ export const metadata: Metadata = {
     description:
       "Transform any event into an unforgettable experience with AI-generated portraits and poetry.",
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Poem Booth - From Moment to Masterpiece",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og-image.jpg"],
   },
 };
 
