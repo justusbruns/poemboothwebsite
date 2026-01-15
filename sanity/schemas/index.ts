@@ -11,6 +11,7 @@ import practicality from "./practicality";
 import pricingItem from "./pricingItem";
 import bookingSection from "./bookingSection";
 import footer from "./footer";
+import userAgreement from "./userAgreement";
 
 export const schemaTypes = [
   // Object types
@@ -28,4 +29,5 @@ export const schemaTypes = [
   pricingItem,
   bookingSection,
   footer,
+  userAgreement,
 ];

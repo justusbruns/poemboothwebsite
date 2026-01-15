@@ -207,6 +207,21 @@ export const bookingSectionQuery = groq`
   }
 `;
 
+// User Agreement - fetches based on region (us or eu)
+export const userAgreementQuery = groq`
+  *[_type == "userAgreement" && region == $agreementRegion][0] {
+    _id,
+    region,
+    title,
+    lastUpdated,
+    content_en,
+    content_nl,
+    content_de,
+    content_fr,
+    content_it
+  }
+`;
+
 // All page data in one query
 export const pageDataQuery = groq`
 {

@@ -57,6 +57,8 @@
     "subtitle": "Choisissez entre deux expériences uniques",
     "newBadge": "Nouveau",
     "duration": "{seconds} secondes",
+    "shareArt": "Partagez votre Art",
+    "sharePoem": "Partagez votre Poème",
     "portrait": {
       "title": "L'Édition Portrait",
       "subtitle": "Prenez une photo et recevez votre chef-d'œuvre personnel 30 secondes plus tard",
@@ -139,6 +141,17 @@
     "ctaButton": "Contactez-nous pour la disponibilité mondiale",
     "emailSubject": "Demande Poem Booth - Disponibilité Mondiale",
     "emailBody": "Bonjour,\n\nJe suis intéressé(e) par la réservation du Poem Booth pour un événement en dehors des USA/UE.\n\nMerci de me faire savoir la disponibilité dans ma région.\n\nCordialement"
+  },
+  "userAgreement": {
+    "pageTitle": "Accord d'utilisation",
+    "pageDescription": "Accord d'utilisation Poem Booth - conditions d'utilisation de notre service de portrait et poésie IA"
+  },
+  "consent": {
+    "title": "Bienvenue sur Poem Booth",
+    "message": "Nous utilisons des cookies analytiques pour comprendre d'où viennent nos visiteurs. Cela nous aide à partager la magie de la poésie générée par l'IA avec plus de personnes à travers le monde.",
+    "privacyNote": "En continuant, vous acceptez notre utilisation de cookies analytiques.",
+    "privacyLink": "Politique de confidentialité",
+    "acceptButton": "Continuer vers Poem Booth"
   },
   "footer": {
     "tagline": "Un produit de VOUW B.V.",

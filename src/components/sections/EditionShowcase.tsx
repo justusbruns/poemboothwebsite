@@ -1,9 +1,7 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
-import Container from "@/components/ui/Container";
-import BoothWithScreen from "@/components/ui/BoothWithScreen";
-import PoemBoothScreen from "@/components/ui/PoemBoothScreen";
+import ScrollEdition from "@/components/ui/ScrollEdition";
 import { urlFor } from "../../../sanity/lib/image";
 
 interface SanityImage {
@@ -75,6 +73,12 @@ function getImageUrls(images: (SanityImage | string)[] | undefined): string[] {
     .filter((url): url is string => url !== undefined);
 }
 
+function getLocalizedText(text: LocalizedText | string | undefined, locale: string): string {
+  if (!text) return "";
+  if (typeof text === "string") return text;
+  return text[locale as keyof LocalizedText] || text.en || "";
+}
+
 export default function EditionShowcase({ editions }: EditionShowcaseProps) {
   const t = useTranslations("editions");
   const locale = useLocale();
@@ -106,109 +110,56 @@ export default function EditionShowcase({ editions }: EditionShowcaseProps) {
   const displayEditions = editions || defaultEditions;
 
   return (
-    <section className="py-16 md:py-24 bg-bg-accent">
-      <Container>
-        <div className="space-y-24 md:space-y-32">
-          {displayEditions.map((edition) => {
-            const beforeUrl = getImageUrl(edition.beforeImage);
-            // Use afterImages array if available, fallback to single afterImage
-            const afterUrls =
-              edition.afterImages && edition.afterImages.length > 0
-                ? getImageUrls(edition.afterImages)
-                : edition.afterImage
-                  ? [getImageUrl(edition.afterImage)].filter(
-                      (url): url is string => url !== undefined
-                    )
-                  : [];
+    <section className="bg-bg-accent">
+      {displayEditions.map((edition) => {
+        const beforeUrl = getImageUrl(edition.beforeImage);
 
-            return (
-              <div key={edition.slug} className="text-center">
-                {/* New Badge */}
-                {edition.isNew && (
-                  <div className="mb-4">
-                    <span className="inline-block px-4 py-1.5 bg-text-primary text-bg-primary text-sm font-medium rounded-full">
-                      {t("newBadge")}
-                    </span>
-                  </div>
-                )}
+        // Collect all after images as an array
+        let afterUrls: string[] = [];
+        let poemText: string | undefined;
 
-                {/* Edition Title */}
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-text-primary mb-4">
-                  {edition.title}
-                </h2>
+        if (edition.outputType === "poem" && edition.poemStyles && edition.poemStyles.length > 0) {
+          // For poem editions, get the first poem's background image and text
+          const firstStyle = edition.poemStyles[0];
+          if (firstStyle.poems && firstStyle.poems.length > 0) {
+            const firstPoem = firstStyle.poems[0];
+            if (firstPoem.backgroundImage?.asset?.url) {
+              afterUrls = [firstPoem.backgroundImage.asset.url];
+            }
+            poemText = getLocalizedText(firstPoem.poemText, locale);
+          }
+        } else if (edition.afterImages && edition.afterImages.length > 0) {
+          // For portrait editions, get all after images for slideshow
+          afterUrls = getImageUrls(edition.afterImages);
+        } else if (edition.afterImage) {
+          const url = getImageUrl(edition.afterImage);
+          if (url) afterUrls = [url];
+        }
 
-                {/* Subtitle */}
-                <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-12 md:mb-16">
-                  {edition.subtitle}
-                </p>
+        // Fallback images for demonstration
+        const fallbackBefore = "/images/before-placeholder.jpg";
+        const fallbackAfter = "/images/after-placeholder.jpg";
 
-                {/* Two Booths with Arrow */}
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-12">
-                  {/* Before Booth */}
-                  <BoothWithScreen
-                    images={beforeUrl ? [beforeUrl] : []}
-                    slideshow={false}
-                    label={edition.beforeLabel}
-                    alt={`${edition.title} - ${edition.beforeLabel}`}
-                  />
+        // Get the appropriate share text based on edition type
+        const shareText = edition.outputType === "portrait" ? t("shareArt") : t("sharePoem");
 
-                  {/* Arrow */}
-                  <div className="flex-shrink-0 text-text-muted">
-                    {/* Horizontal arrow on desktop */}
-                    <svg
-                      className="hidden md:block w-12 h-12 lg:w-16 lg:h-16"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                    {/* Vertical arrow on mobile */}
-                    <svg
-                      className="md:hidden w-10 h-10"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17 13l-5 5m0 0l-5-5m5 5V6"
-                      />
-                    </svg>
-                  </div>
-
-                  {/* After Booth - Portrait slideshow or Poem display */}
-                  {edition.outputType === "poem" &&
-                  edition.poemStyles &&
-                  edition.poemStyles.length > 0 ? (
-                    <PoemBoothScreen
-                      styles={edition.poemStyles}
-                      locale={locale}
-                      label={edition.afterLabel}
-                      fallbackImage={beforeUrl}
-                    />
-                  ) : (
-                    <BoothWithScreen
-                      images={afterUrls}
-                      slideshow={afterUrls.length > 1}
-                      fadeDuration={3500}
-                      label={edition.afterLabel}
-                      alt={`${edition.title} - ${edition.afterLabel}`}
-                    />
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </Container>
+        return (
+          <ScrollEdition
+            key={edition.slug}
+            title={edition.title}
+            subtitle={edition.subtitle}
+            isNew={edition.isNew}
+            newBadgeText={t("newBadge")}
+            beforeImage={beforeUrl || fallbackBefore}
+            afterImages={afterUrls.length > 0 ? afterUrls : [fallbackAfter]}
+            beforeLabel={edition.beforeLabel}
+            afterLabel={edition.afterLabel}
+            outputType={edition.outputType}
+            poemText={poemText}
+            shareText={shareText}
+          />
+        );
+      })}
     </section>
   );
 }

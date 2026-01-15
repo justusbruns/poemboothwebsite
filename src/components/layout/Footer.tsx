@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,7 +28,12 @@ interface FooterProps {
 
 export default function Footer({ footerData, logo }: FooterProps) {
   const t = useTranslations("footer");
+  const params = useParams();
   const currentYear = new Date().getFullYear();
+
+  // Get locale and region from URL params for internal links
+  const locale = (params?.locale as string) || "en";
+  const region = (params?.region as string) || "nl";
 
   // Use Sanity data with translation fallbacks
   const contactEmail = footerData?.contactEmail || "contact@poembooth.com";
@@ -64,7 +70,15 @@ export default function Footer({ footerData, logo }: FooterProps) {
                 <span className="text-xl font-semibold">Poem Booth</span>
               </div>
               <p className="text-sm text-white/70">
-                {t("tagline")}
+                A product by{" "}
+                <a
+                  href="https://vouw.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-white transition-colors"
+                >
+                  VOUW B.V.
+                </a>
               </p>
               <p className="text-sm text-white/60 leading-relaxed">
                 {t("vouwDescription")}
@@ -138,15 +152,9 @@ export default function Footer({ footerData, logo }: FooterProps) {
                 <p className="text-sm text-white/70">{t("vatLabel")}: {vatNumber}</p>
                 <p className="text-sm text-white/70">{t("chamberLabel")}: {chamberNumber}</p>
 
-                <div className="pt-2 space-y-1">
+                <div className="pt-2">
                   <Link
-                    href="/terms"
-                    className="block text-sm text-white/90 hover:text-white transition-colors"
-                  >
-                    {t("termsLink")}
-                  </Link>
-                  <Link
-                    href="/user-agreement"
+                    href={`/${locale}/${region}/user-agreement`}
                     className="block text-sm text-white/90 hover:text-white transition-colors"
                   >
                     {t("userAgreement")}

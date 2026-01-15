@@ -57,6 +57,8 @@
     "subtitle": "Kies tussen twee unieke ervaringen",
     "newBadge": "Nieuw",
     "duration": "{seconds} seconden",
+    "shareArt": "Deel je Kunst",
+    "sharePoem": "Deel je Gedicht",
     "portrait": {
       "title": "De Portret Editie",
       "subtitle": "Maak een foto en 30 seconden later krijg je jouw persoonlijke meesterwerk",
@@ -139,6 +141,17 @@
     "ctaButton": "Neem contact op voor wereldwijde beschikbaarheid",
     "emailSubject": "Poem Booth Aanvraag - Wereldwijde Beschikbaarheid",
     "emailBody": "Hallo,\n\nIk ben geïnteresseerd in het boeken van de Poem Booth voor een evenement buiten de VS/EU.\n\nLaat me alstublieft weten over beschikbaarheid in mijn regio.\n\nAlvast bedankt!"
+  },
+  "userAgreement": {
+    "pageTitle": "Gebruikersovereenkomst",
+    "pageDescription": "Poem Booth gebruikersovereenkomst - gebruiksvoorwaarden voor onze AI portret en poëzie service"
+  },
+  "consent": {
+    "title": "Welkom bij Poem Booth",
+    "message": "We gebruiken analytische cookies om te begrijpen waar onze bezoekers vandaan komen. Dit helpt ons de magie van AI-gedreven poëzie met meer mensen over de hele wereld te delen.",
+    "privacyNote": "Door verder te gaan, ga je akkoord met ons gebruik van analytische cookies.",
+    "privacyLink": "Privacybeleid",
+    "acceptButton": "Ga door naar Poem Booth"
   },
   "footer": {
     "tagline": "Een product van VOUW B.V.",

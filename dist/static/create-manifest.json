@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "createdAt": "2026-01-14T10:28:35.120Z",
+  "workspaces": [
+    {
+      "name": "default",
+      "title": "Poem Booth Website",
+      "basePath": "/studio",
+      "projectId": "454beuev",
+      "dataset": "production",
+      "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><rect width=\"32\" height=\"32\" rx=\"2\" fill=\"#8b2018\"></rect><text x=\"50%\" y=\"50%\" text-anchor=\"middle\" alignment-baseline=\"middle\" fill=\"hsla(4, 71%, 72%, 1)\" style=\"font-family:Inter, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Liberation Sans&quot;, Helvetica, Arial, system-ui, sans-serif;font-weight:500;font-size:13px;transform:translateY(1px)\">PB</text></svg>",
+      "mediaLibrary": {
+        "enabled": false
+      },
+      "schema": "257c40f9.create-schema.json",
+      "tools": "ba47da56.create-tools.json"
+    }
+  ],
+  "studioVersion": "5.2.0"
+}
