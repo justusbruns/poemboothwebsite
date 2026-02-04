@@ -70,32 +70,47 @@
       "subtitle": "Scatta una foto e ricevi la tua poesia personale 10 secondi dopo",
       "beforeLabel": "Scatta una foto",
       "afterLabel": "Ricevi una poesia"
-    }
+    },
+    "roast": {
+      "titlePrefix": "L'Edizione",
+      "titleSuffix": "",
+      "subtitle": "Scatta una foto e 15 secondi dopo vieni completamente ARROSTITO.",
+      "beforeLabel": "Scatta una foto",
+      "afterLabel": "Vieni arrostito",
+      "sampleText": "Ah, guarda chi c'è—il misterioso Messia hipster, che contempla il suo ultimo toast all'avocado così profondamente da dimenticare di sincronizzare il suo schema di maglia con la sua fashionista interiore."
+    },
+    "shareRoast": "Condividi il tuo Roast"
   },
   "gallery": {
     "title": "Galleria",
-    "subtitle": "Guarda il Poem Booth in azione durante eventi in tutto il mondo"
+    "subtitle": "Guarda il Poem Booth in azione in biblioteche, eventi aziendali, matrimoni e festival"
   },
   "practicalities": {
     "title": "Informazioni Pratiche",
     "subtitle": "Tutto ciò che devi sapere sull'installazione del Poem Booth",
     "footprint": {
-      "title": "Dimensioni",
+      "title": "Spazio Richiesto",
       "valueUS": "5ft x 5ft",
       "valueEU": "1,5m x 1,5m"
     },
     "setup": {
       "title": "Montaggio & Smontaggio",
-      "valueUS": "1 ora",
-      "valueEU": "1 ora",
+      "valueUS": "A cura nostra",
+      "valueEU": "A cura nostra",
+      "bullet1": "1 ora di montaggio, 45 min di smontaggio"
+    },
+    "requirements": {
+      "title": "Requisiti",
+      "valueUS": "Forniti da voi",
+      "valueEU": "Forniti da voi",
       "bullet1": "1x alimentazione {voltage}",
       "bullet2": "Wi-Fi/Ethernet stabile"
     },
     "outdoor": {
-      "title": "Esterno",
-      "valueUS": "Possibile",
-      "valueEU": "Possibile",
-      "bullet1": "richiede ombreggiatura"
+      "title": "Esterno & Interno",
+      "valueUS": "Entrambi possibili",
+      "valueEU": "Entrambi possibili",
+      "bullet1": "Ombreggiatura richiesta all'esterno per una buona visibilità"
     },
     "speed": {
       "title": "Velocità",
@@ -107,18 +122,19 @@
   },
   "booking": {
     "title": "Prenotazione & Tariffe",
-    "subtitle": "Prezzi dal nostro hub di {hub}",
+    "subtitle": "Prezzi dal nostro {hub}",
     "ctaButton": "Richiedi un preventivo",
     "footnote": "Prezzi IVA esclusa. Pacchetti personalizzati disponibili.",
     "transport": {
       "title": "Costi di trasporto",
+      "perUnit": "per {unit} percorso",
       "note": "(andata e ritorno per evento 1 giorno, 4 viaggi per più giorni)"
     },
     "rental": {
       "title": "Tariffa base di noleggio",
       "day1Label": "Primo giorno",
       "day2Label": "Secondo giorno",
-      "day3Label": "Terzo giorno (e seguenti)"
+      "day3Label": "Ogni giorno successivo"
     },
     "printer": {
       "title": "Stampante",
@@ -132,6 +148,21 @@
     "customization": {
       "title": "Personalizzazione",
       "description": "Personalizza lo stile del poema o ritratto in base allo stile o input",
+      "flatFee": "tariffa fissa"
+    },
+    "roastBooth": {
+      "title": "Roast Booth",
+      "description": "Modalità roast comico per il tuo evento",
+      "flatFee": "tariffa fissa"
+    },
+    "language": {
+      "title": "Lingua Aggiuntiva",
+      "description": "Prima lingua inclusa. Supporto linguistico aggiuntivo per poesie e interfaccia",
+      "flatFee": "per lingua aggiuntiva"
+    },
+    "outdoorInstallation": {
+      "title": "Installazione Esterna",
+      "description": "Configurazione aggiuntiva per eventi all'aperto",
       "flatFee": "tariffa fissa"
     }
   },
@@ -152,6 +183,10 @@
     "privacyNote": "Continuando, accetti il nostro utilizzo di cookie analitici.",
     "privacyLink": "Informativa sulla privacy",
     "acceptButton": "Continua su Poem Booth"
+  },
+  "vouwBanner": {
+    "heading": "Scopri altre invenzioni slowtech",
+    "button": "Visita VOUW"
   },
   "footer": {
     "tagline": "Un prodotto di VOUW B.V.",

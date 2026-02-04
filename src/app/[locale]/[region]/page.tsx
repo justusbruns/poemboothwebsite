@@ -10,8 +10,8 @@ import {
   PhotoGallery,
   Practicalities,
   BookingRates,
-  OtherRegionsContact,
 } from "@/components/sections";
+import VouwBanner from "@/components/sections/VouwBanner";
 import { getHubByRegion } from "@/lib/supabase/server";
 import { REGION_CONFIGS, type Region } from "@/lib/supabase/types";
 import { client } from "../../../../sanity/lib/client";
@@ -149,6 +149,7 @@ export default async function LandingPage({ params }: PageProps) {
           ratePerUnit: hubData.transport_rate_per_km || 0,
           unit: (hubData.distance_unit || regionConfig.distanceUnit) as "km" | "mi",
         },
+        outdoorInstallationFee: hubData.outdoor_installation_fee || 0,
       }
     : undefined;
 
@@ -214,7 +215,7 @@ export default async function LandingPage({ params }: PageProps) {
         <PhotoGallery images={galleryImages} />
         <Practicalities />
         <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
-        <OtherRegionsContact />
+        <VouwBanner />
       </main>
       <Footer footerData={footerData} logo={headerLogo} />
     </>

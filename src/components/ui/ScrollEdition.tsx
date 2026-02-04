@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 import PhoneScreen from "./PhoneScreen";
@@ -13,7 +13,7 @@ function TypewriterText({ text, progress }: { text: string; progress: MotionValu
 
   return (
     <motion.p
-      className="text-white text-center font-serif italic text-[10px] md:text-xs leading-snug whitespace-pre-wrap drop-shadow-lg"
+      className="text-white text-center font-serif italic text-[8.5px] md:text-[10px] leading-snug whitespace-pre-wrap drop-shadow-lg"
       style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}
     >
       {displayText}
@@ -23,6 +23,8 @@ function TypewriterText({ text, progress }: { text: string; progress: MotionValu
 
 interface ScrollEditionProps {
   title: string;
+  titlePrefix?: string;
+  titleSuffix?: string;
   subtitle: string;
   isNew?: boolean;
   newBadgeText?: string;
@@ -30,13 +32,15 @@ interface ScrollEditionProps {
   afterImages: string[]; // Array for slideshow effect
   beforeLabel: string;
   afterLabel: string;
-  outputType: "portrait" | "poem";
+  outputType: "portrait" | "poem" | "roast";
   poemText?: string;
   shareText: string;
 }
 
 export default function ScrollEdition({
   title,
+  titlePrefix,
+  titleSuffix,
   subtitle,
   isNew,
   newBadgeText,
@@ -49,6 +53,15 @@ export default function ScrollEdition({
   shareText,
 }: ScrollEditionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile for responsive scaling
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Track scroll progress within this section
   const { scrollYProgress } = useScroll({
@@ -95,18 +108,29 @@ export default function ScrollEdition({
     ["-140%", "-34%", "-34%", "-140%"]  // Starts 200px more off-screen (-140% = -700px for 500px width)
   );
 
-  // Printer: slides in from right at 70%, stays in position (doesn't exit)
+  // Printer: slides in from right at 70%, stays in position
+  // Positioned absolutely at left: calc(50% + 125px), so x=0 is final position (25px from booth)
   const printerX = useTransform(
     scrollYProgress,
     [0.70, 0.75],
-    ["1000px", "0px"]  // Start 1000px off-screen
+    ["600px", "0px"]  // Slide in and stay
   );
 
-  // Booth shifts left when printer appears to make room
-  const boothX = useTransform(
+  // Printer visibility: hidden until slide-in at 70%
+  const printerOpacity = useTransform(
     scrollYProgress,
-    [0.70, 0.75],
-    ["0px", "-50px"]  // Shift left to make room for printer
+    [0.69, 0.70],
+    [0, 1]
+  );
+
+  // Booth scale: normal → zoomed after flash → normal when hands enter
+  // This makes text/images clearly visible during the main content phase
+  // Mobile uses 2x scale to prevent overflow, desktop uses 4x
+  const maxScale = isMobile ? 2.0 : 4.0;
+  const boothScale = useTransform(
+    scrollYProgress,
+    [0.15, 0.22, 0.50, 0.58],
+    [1, maxScale, maxScale, 1]
   );
 
   // Labels: show "before" label initially, crossfade to "after" at 15-25%
@@ -132,9 +156,23 @@ export default function ScrollEdition({
               </span>
             </div>
           )}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-text-primary mb-4">
-            {title}
-          </h2>
+          {outputType === "roast" ? (
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-text-primary mb-4 flex items-center justify-center">
+              {titlePrefix && <span>{titlePrefix}</span>}
+              <Image
+                src="/images/roast-logo.png"
+                alt="ROAST"
+                width={200}
+                height={60}
+                className="h-[1.4em] w-auto inline-block -mx-1"
+              />
+              {titleSuffix && <span>{titleSuffix}</span>}
+            </h2>
+          ) : (
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-text-primary mb-4">
+              {title}
+            </h2>
+          )}
           <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto px-4">
             {subtitle}
           </p>
@@ -142,18 +180,22 @@ export default function ScrollEdition({
 
         {/* Main content area */}
         <div className="relative flex items-center justify-center w-full max-w-6xl px-4">
-          {/* Booth with screen - shifts left when printer appears (portrait only) */}
+          {/* Booth with screen - always centered, scales up after flash */}
           <motion.div
-            className="relative w-full max-w-[210px] md:max-w-[320px] z-10"
-            style={{ x: outputType === "portrait" ? boothX : 0 }}
+            className="relative z-10"
+            style={{
+              height: "min(55vh, 450px)",
+              width: "auto",
+              scale: boothScale,
+            }}
           >
-            {/* Booth frame */}
+            {/* Booth frame - SVG for sharp scaling */}
             <Image
-              src="/images/booth-frame.png"
+              src="/images/booth-frame.svg"
               alt="Poem Booth"
               width={400}
               height={600}
-              className="w-full h-auto relative z-10 pointer-events-none"
+              className="h-full w-auto relative z-10 pointer-events-none"
               priority
             />
 
@@ -184,8 +226,8 @@ export default function ScrollEdition({
                 style={{ opacity: whiteFlashOpacity }}
               />
 
-              {/* Content after flash - different for poem vs portrait */}
-              {outputType === "poem" ? (
+              {/* Content after flash - different for poem/roast vs portrait */}
+              {(outputType === "poem" || outputType === "roast") ? (
                 <>
                   {/* Poem: Blurred background photo */}
                   <motion.div
@@ -278,18 +320,25 @@ export default function ScrollEdition({
 
           </motion.div>
 
-          {/* Printer - slides in from right at 70%, positioned absolutely (portrait only) */}
+          {/* Printer - positioned 25px to the right of the centered booth (portrait only) */}
           {outputType === "portrait" && (
             <motion.div
-              className="absolute left-1/2 bottom-0 z-5 ml-[63px] md:ml-[118px]"
-              style={{ x: printerX }}
+              className="absolute bottom-0"
+              style={{
+                x: printerX,
+                opacity: printerOpacity,
+                height: "min(30vh, 248px)",
+                scale: boothScale,
+                left: "calc(50% + 125px)",
+                originY: 1,
+              }}
             >
               <Image
                 src="/images/printer.png"
                 alt="Printer"
                 width={150}
                 height={400}
-                className="w-auto h-[285px] md:h-[380px]"
+                className="h-full w-auto"
               />
             </motion.div>
           )}
@@ -297,7 +346,7 @@ export default function ScrollEdition({
 
       </div>
 
-      {/* Hand with phone - poem edition only */}
+      {/* Hand with phone - poem edition only (not roast) */}
       {outputType === "poem" && (
         <motion.div
           className="fixed bottom-0 right-0 z-50 pointer-events-none origin-bottom-right scale-75 md:scale-100"

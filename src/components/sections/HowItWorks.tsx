@@ -100,11 +100,6 @@ export default function HowItWorks({ steps }: HowItWorksProps) {
         <div className="mt-12 grid md:grid-cols-3 gap-8 md:gap-12">
           {displaySteps.map((step, index) => (
             <div key={step.stepNumber} className="text-center">
-              {/* Step number badge */}
-              <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-text-primary text-bg-primary text-sm font-medium mb-6">
-                {step.stepNumber}
-              </div>
-
               {/* Image or fallback icon */}
               <div className="flex justify-center mb-6">
                 {step.icon ? (
@@ -124,8 +119,11 @@ export default function HowItWorks({ steps }: HowItWorksProps) {
                 )}
               </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-display text-text-primary mb-3">
+              {/* Title with step number badge */}
+              <h3 className="text-xl font-display text-text-primary mb-3 flex items-center justify-center gap-2">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-text-primary text-bg-primary text-sm font-medium flex-shrink-0">
+                  {step.stepNumber}
+                </span>
                 {step.title}
               </h3>
 

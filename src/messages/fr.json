@@ -70,32 +70,47 @@
       "subtitle": "Prenez une photo et recevez votre poème personnel 10 secondes plus tard",
       "beforeLabel": "Prenez une photo",
       "afterLabel": "Recevez un poème"
-    }
+    },
+    "roast": {
+      "titlePrefix": "L'Édition",
+      "titleSuffix": "",
+      "subtitle": "Prenez une photo et 15 secondes plus tard, faites-vous complètement GRILLER.",
+      "beforeLabel": "Prenez une photo",
+      "afterLabel": "Faites-vous griller",
+      "sampleText": "Ah, regardez qui voilà—le mystérieux Messie hipster, contemplant son dernier toast à l'avocat si profondément qu'il a oublié de synchroniser son patron de tricot avec sa fashionista intérieure."
+    },
+    "shareRoast": "Partagez votre Roast"
   },
   "gallery": {
     "title": "Galerie",
-    "subtitle": "Découvrez le Poem Booth en action lors d'événements dans le monde entier"
+    "subtitle": "Découvrez le Poem Booth en action dans les bibliothèques, événements d'entreprise, mariages et festivals"
   },
   "practicalities": {
     "title": "Informations Pratiques",
     "subtitle": "Tout ce que vous devez savoir sur l'installation du Poem Booth",
     "footprint": {
-      "title": "Dimensions",
+      "title": "Espace Requis",
       "valueUS": "5ft x 5ft",
       "valueEU": "1,5m x 1,5m"
     },
     "setup": {
       "title": "Installation & Démontage",
-      "valueUS": "1 heure",
-      "valueEU": "1 heure",
+      "valueUS": "Pris en charge par nous",
+      "valueEU": "Pris en charge par nous",
+      "bullet1": "1 heure d'installation, 45 min de démontage"
+    },
+    "requirements": {
+      "title": "Prérequis",
+      "valueUS": "Fournis par vous",
+      "valueEU": "Fournis par vous",
       "bullet1": "1x alimentation {voltage}",
       "bullet2": "Wi-Fi/Ethernet stable"
     },
     "outdoor": {
-      "title": "Extérieur",
-      "valueUS": "Possible",
-      "valueEU": "Possible",
-      "bullet1": "nécessite un ombrage"
+      "title": "Extérieur & Intérieur",
+      "valueUS": "Les deux possibles",
+      "valueEU": "Les deux possibles",
+      "bullet1": "Ombrage requis à l'extérieur pour une bonne visibilité"
     },
     "speed": {
       "title": "Vitesse",
@@ -107,18 +122,19 @@
   },
   "booking": {
     "title": "Réservation & Tarifs",
-    "subtitle": "Tarifs depuis notre hub de {hub}",
+    "subtitle": "Tarifs depuis notre {hub}",
     "ctaButton": "Demander un devis",
     "footnote": "Prix hors taxes applicables. Forfaits personnalisés disponibles.",
     "transport": {
       "title": "Frais de transport",
+      "perUnit": "par {unit} parcouru",
       "note": "(aller-retour pour événement 1 jour, 4 trajets pour plusieurs jours)"
     },
     "rental": {
       "title": "Tarif de location de base",
       "day1Label": "Premier jour",
       "day2Label": "Deuxième jour",
-      "day3Label": "Troisième jour (et suivants)"
+      "day3Label": "Chaque jour suivant"
     },
     "printer": {
       "title": "Imprimante",
@@ -132,6 +148,21 @@
     "customization": {
       "title": "Personnalisation",
       "description": "Personnalisez le style du poème ou portrait selon le style ou l'entrée",
+      "flatFee": "forfait"
+    },
+    "roastBooth": {
+      "title": "Roast Booth",
+      "description": "Mode roast comique pour votre événement",
+      "flatFee": "forfait"
+    },
+    "language": {
+      "title": "Langue Supplémentaire",
+      "description": "Première langue incluse. Support linguistique supplémentaire pour les poèmes et l'interface",
+      "flatFee": "par langue supplémentaire"
+    },
+    "outdoorInstallation": {
+      "title": "Installation Extérieure",
+      "description": "Configuration supplémentaire pour événements extérieurs",
       "flatFee": "forfait"
     }
   },
@@ -152,6 +183,10 @@
     "privacyNote": "En continuant, vous acceptez notre utilisation de cookies analytiques.",
     "privacyLink": "Politique de confidentialité",
     "acceptButton": "Continuer vers Poem Booth"
+  },
+  "vouwBanner": {
+    "heading": "Découvrez plus d'inventions slowtech",
+    "button": "Visiter VOUW"
   },
   "footer": {
     "tagline": "Un produit de VOUW B.V.",

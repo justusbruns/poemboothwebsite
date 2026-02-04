@@ -70,32 +70,47 @@
       "subtitle": "Maak een foto en 10 seconden later krijg je jouw persoonlijke gedicht",
       "beforeLabel": "Maak een foto",
       "afterLabel": "Krijg een gedicht"
-    }
+    },
+    "roast": {
+      "titlePrefix": "De",
+      "titleSuffix": "Editie",
+      "subtitle": "Maak een foto en 15 seconden later word je compleet GEROAST.",
+      "beforeLabel": "Maak een foto",
+      "afterLabel": "Word geroast",
+      "sampleText": "Ah, kijk eens wie we daar hebben—de mysterieuze hipster Messias, zo diep aan het nadenken over zijn laatste avocado toast dat hij vergat zijn breipatroon te synchroniseren met zijn innerlijke fashionista."
+    },
+    "shareRoast": "Deel je Roast"
   },
   "gallery": {
     "title": "Galerij",
-    "subtitle": "Zie de Poem Booth in actie op evenementen over de hele wereld"
+    "subtitle": "Zie de Poem Booth in actie in bibliotheken, bedrijfsevenementen, bruiloften en festivals"
   },
   "practicalities": {
     "title": "Praktisch",
     "subtitle": "Alles wat je moet weten over het opzetten van de Poem Booth",
     "footprint": {
-      "title": "Afmeting",
+      "title": "Benodigde ruimte",
       "valueUS": "5ft x 5ft",
       "valueEU": "1,5m x 1,5m"
     },
     "setup": {
       "title": "Opbouw & Afbouw",
-      "valueUS": "1 uur",
-      "valueEU": "1 uur",
+      "valueUS": "Door ons verzorgd",
+      "valueEU": "Door ons verzorgd",
+      "bullet1": "1 uur opbouw, 45 min afbouw"
+    },
+    "requirements": {
+      "title": "Vereisten",
+      "valueUS": "Door u geleverd",
+      "valueEU": "Door u geleverd",
       "bullet1": "1x {voltage} stroom",
       "bullet2": "stabiel Wi-Fi/Ethernet"
     },
     "outdoor": {
-      "title": "Buiten",
-      "valueUS": "Mogelijk",
-      "valueEU": "Mogelijk",
-      "bullet1": "vereist schaduw"
+      "title": "Buiten & Binnen",
+      "valueUS": "Beide mogelijk",
+      "valueEU": "Beide mogelijk",
+      "bullet1": "Buiten is schaduw vereist voor goede zichtbaarheid"
     },
     "speed": {
       "title": "Snelheid",
@@ -107,18 +122,19 @@
   },
   "booking": {
     "title": "Boekingen & Tarieven",
-    "subtitle": "Prijzen vanuit onze {hub} hub",
+    "subtitle": "Prijzen vanuit onze {hub}",
     "ctaButton": "Vraag een offerte aan",
     "footnote": "Prijzen zijn exclusief BTW. Maatwerkpakketten beschikbaar.",
     "transport": {
       "title": "Transportkosten",
+      "perUnit": "per gereden {unit}",
       "note": "(retour voor 1-daags event, 4x voor meerdere dagen)"
     },
     "rental": {
       "title": "Basis huurtarief",
       "day1Label": "Eerste dag",
       "day2Label": "Tweede dag",
-      "day3Label": "Derde dag (en volgende)"
+      "day3Label": "Elke volgende dag"
     },
     "printer": {
       "title": "Printer",
@@ -132,6 +148,21 @@
     "customization": {
       "title": "Aanpassing",
       "description": "Pas de stijl van gedicht of portret aan op basis van stijl of input",
+      "flatFee": "vast bedrag"
+    },
+    "roastBooth": {
+      "title": "Roast Booth",
+      "description": "Comedy roast modus voor je evenement",
+      "flatFee": "vast bedrag"
+    },
+    "language": {
+      "title": "Extra taal",
+      "description": "Eerste taal inbegrepen. Voeg extra taalondersteuning toe voor gedichten en interface",
+      "flatFee": "per extra taal"
+    },
+    "outdoorInstallation": {
+      "title": "Buiteninstallatie",
+      "description": "Extra opzet voor buitenevenementen",
       "flatFee": "vast bedrag"
     }
   },
@@ -152,6 +183,10 @@
     "privacyNote": "Door verder te gaan, ga je akkoord met ons gebruik van analytische cookies.",
     "privacyLink": "Privacybeleid",
     "acceptButton": "Ga door naar Poem Booth"
+  },
+  "vouwBanner": {
+    "heading": "Ontdek meer slowtech uitvindingen",
+    "button": "Bezoek VOUW"
   },
   "footer": {
     "tagline": "Een product van VOUW B.V.",

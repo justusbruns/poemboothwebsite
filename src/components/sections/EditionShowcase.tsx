@@ -43,11 +43,13 @@ interface PoemStyle {
 
 interface Edition {
   title: string;
+  titlePrefix?: string;
+  titleSuffix?: string;
   slug: string;
   isNew?: boolean;
   subtitle: string;
   duration: number;
-  outputType: "portrait" | "poem";
+  outputType: "portrait" | "poem" | "roast";
   beforeImage?: SanityImage | string;
   afterImage?: SanityImage | string;
   afterImages?: (SanityImage | string)[];
@@ -105,13 +107,38 @@ export default function EditionShowcase({ editions }: EditionShowcaseProps) {
       beforeLabel: t("original.beforeLabel"),
       afterLabel: t("original.afterLabel"),
     },
+    {
+      title: "", // Will use custom title rendering
+      titlePrefix: t("roast.titlePrefix"),
+      titleSuffix: t("roast.titleSuffix"),
+      slug: "roast",
+      isNew: false,
+      subtitle: t("roast.subtitle"),
+      duration: 15,
+      outputType: "roast",
+      beforeLabel: t("roast.beforeLabel"),
+      afterLabel: t("roast.afterLabel"),
+    },
   ];
 
   const displayEditions = editions || defaultEditions;
 
+  // Apply roast-specific title handling (titlePrefix/titleSuffix from translations)
+  // since Sanity schema doesn't have these fields
+  const processedEditions = displayEditions.map((edition) => {
+    if (edition.outputType === "roast" && !edition.titlePrefix) {
+      return {
+        ...edition,
+        titlePrefix: t("roast.titlePrefix"),
+        titleSuffix: t("roast.titleSuffix"),
+      };
+    }
+    return edition;
+  });
+
   return (
     <section className="bg-bg-accent">
-      {displayEditions.map((edition) => {
+      {processedEditions.map((edition) => {
         const beforeUrl = getImageUrl(edition.beforeImage);
 
         // Collect all after images as an array
@@ -128,7 +155,12 @@ export default function EditionShowcase({ editions }: EditionShowcaseProps) {
             }
             poemText = getLocalizedText(firstPoem.poemText, locale);
           }
-        } else if (edition.afterImages && edition.afterImages.length > 0) {
+        } else if (edition.outputType === "roast") {
+          // For roast editions, use the sample text from translations
+          poemText = t("roast.sampleText");
+        }
+
+        if (edition.afterImages && edition.afterImages.length > 0) {
           // For portrait editions, get all after images for slideshow
           afterUrls = getImageUrls(edition.afterImages);
         } else if (edition.afterImage) {
@@ -141,12 +173,18 @@ export default function EditionShowcase({ editions }: EditionShowcaseProps) {
         const fallbackAfter = "/images/after-placeholder.jpg";
 
         // Get the appropriate share text based on edition type
-        const shareText = edition.outputType === "portrait" ? t("shareArt") : t("sharePoem");
+        const shareText = edition.outputType === "portrait"
+          ? t("shareArt")
+          : edition.outputType === "roast"
+            ? t("shareRoast")
+            : t("sharePoem");
 
         return (
           <ScrollEdition
             key={edition.slug}
             title={edition.title}
+            titlePrefix={edition.titlePrefix}
+            titleSuffix={edition.titleSuffix}
             subtitle={edition.subtitle}
             isNew={edition.isNew}
             newBadgeText={t("newBadge")}

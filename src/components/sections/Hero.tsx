@@ -34,7 +34,7 @@ export default function Hero({ heroImage, bookingUrl }: HeroProps) {
             <p className="text-base md:text-lg text-text-secondary mb-6 max-w-xl">
               {t("subheadline")}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col lg:flex-row gap-4">
               <Button
                 href={bookingHref}
                 variant="primary"

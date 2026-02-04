@@ -20,6 +20,7 @@ interface HubPricing {
     ratePerUnit: number;
     unit: "km" | "mi";
   };
+  outdoorInstallationFee: number;
 }
 
 interface BookingRatesProps {
@@ -55,10 +56,15 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
   const day2Rate = hubPricing?.dayRates.day2 || (isUS ? 1000 : 750);
   const day3Rate = hubPricing?.dayRates.day3Plus || (isUS ? 150 : 100);
 
+  // Rates from Supabase with fallbacks
+  const outdoorInstallationFee = hubPricing?.outdoorInstallationFee || (isUS ? 300 : 250);
+
   // Static rates (not in Supabase)
   const printerRate = isUS ? 600 : 500;
   const brandingFee = isUS ? 900 : 750;
   const customizationFee = isUS ? 900 : 750;
+  const roastBoothFee = isUS ? 425 : 350;
+  const languageFee = isUS ? 150 : 125;
 
   return (
     <section className="py-16 md:py-24 bg-bg-secondary">
@@ -71,25 +77,6 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
         <div className="mt-12 max-w-3xl mx-auto">
           {/* Pricing Table */}
           <div className="bg-bg-primary rounded-2xl border border-border-light overflow-hidden divide-y divide-border-light">
-
-            {/* Transport Rate */}
-            <div className="p-6">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-display text-text-primary">
-                    {t("transport.title")}
-                  </h3>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg text-text-primary">
-                    {formatPrice(transportRate, currencySymbol)} per driven {distanceUnit}
-                  </p>
-                  <p className="text-sm text-text-muted mt-1">
-                    {t("transport.note")}
-                  </p>
-                </div>
-              </div>
-            </div>
 
             {/* Base Rental Fee - Shows all 3 tiers */}
             <div className="p-6">
@@ -162,6 +149,82 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
                 <div className="text-right">
                   <p className="text-lg text-text-primary">
                     {formatPrice(customizationFee, currencySymbol)} {t("customization.flatFee")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Roast Booth */}
+            <div className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-display text-text-primary">
+                    {t("roastBooth.title")}
+                  </h3>
+                  <p className="text-sm text-text-secondary mt-1">
+                    {t("roastBooth.description")}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg text-text-primary">
+                    {formatPrice(roastBoothFee, currencySymbol)} {t("roastBooth.flatFee")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Additional Language */}
+            <div className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-display text-text-primary">
+                    {t("language.title")}
+                  </h3>
+                  <p className="text-sm text-text-secondary mt-1">
+                    {t("language.description")}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg text-text-primary">
+                    {formatPrice(languageFee, currencySymbol)} {t("language.flatFee")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Outdoor Installation */}
+            <div className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-display text-text-primary">
+                    {t("outdoorInstallation.title")}
+                  </h3>
+                  <p className="text-sm text-text-secondary mt-1">
+                    {t("outdoorInstallation.description")}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg text-text-primary">
+                    {formatPrice(outdoorInstallationFee, currencySymbol)} {t("outdoorInstallation.flatFee")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Transport Rate */}
+            <div className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-display text-text-primary">
+                    {t("transport.title")}
+                  </h3>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg text-text-primary">
+                    {formatPrice(transportRate, currencySymbol)} {t("transport.perUnit", { unit: distanceUnit })}
+                  </p>
+                  <p className="text-sm text-text-muted mt-1">
+                    {t("transport.note")}
                   </p>
                 </div>
               </div>

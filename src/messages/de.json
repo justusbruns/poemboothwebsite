@@ -70,32 +70,47 @@
       "subtitle": "Machen Sie ein Foto und erhalten Sie 10 Sekunden später Ihr persönliches Gedicht",
       "beforeLabel": "Foto machen",
       "afterLabel": "Gedicht erhalten"
-    }
+    },
+    "roast": {
+      "titlePrefix": "Die",
+      "titleSuffix": "Edition",
+      "subtitle": "Machen Sie ein Foto und 15 Sekunden später werden Sie komplett GERÖSTET.",
+      "beforeLabel": "Foto machen",
+      "afterLabel": "Geröstet werden",
+      "sampleText": "Ah, schau mal wer da ist—der mysteriöse Hipster-Messias, der so tief über seinen letzten Avocado-Toast nachdenkt, dass er vergessen hat, sein Strickmuster mit seiner inneren Fashionista zu synchronisieren."
+    },
+    "shareRoast": "Teile deinen Roast"
   },
   "gallery": {
     "title": "Galerie",
-    "subtitle": "Sehen Sie die Poem Booth in Aktion bei Veranstaltungen weltweit"
+    "subtitle": "Sehen Sie die Poem Booth in Aktion in Bibliotheken, Firmenveranstaltungen, Hochzeiten und Festivals"
   },
   "practicalities": {
     "title": "Praktisches",
     "subtitle": "Alles, was Sie über die Einrichtung der Poem Booth wissen müssen",
     "footprint": {
-      "title": "Grundfläche",
+      "title": "Benötigter Platz",
       "valueUS": "5ft x 5ft",
       "valueEU": "1,5m x 1,5m"
     },
     "setup": {
       "title": "Auf- & Abbau",
-      "valueUS": "1 Stunde",
-      "valueEU": "1 Stunde",
+      "valueUS": "Von uns übernommen",
+      "valueEU": "Von uns übernommen",
+      "bullet1": "1 Stunde Aufbau, 45 Min Abbau"
+    },
+    "requirements": {
+      "title": "Anforderungen",
+      "valueUS": "Von Ihnen bereitgestellt",
+      "valueEU": "Von Ihnen bereitgestellt",
       "bullet1": "1x {voltage} Strom",
       "bullet2": "stabiles Wi-Fi/Ethernet"
     },
     "outdoor": {
-      "title": "Außenbereich",
-      "valueUS": "Möglich",
-      "valueEU": "Möglich",
-      "bullet1": "erfordert Beschattung"
+      "title": "Außen- & Innenbereich",
+      "valueUS": "Beides möglich",
+      "valueEU": "Beides möglich",
+      "bullet1": "Beschattung im Freien erforderlich für gute Sichtbarkeit"
     },
     "speed": {
       "title": "Geschwindigkeit",
@@ -107,18 +122,19 @@
   },
   "booking": {
     "title": "Buchung & Preise",
-    "subtitle": "Preise ab unserem {hub} Hub",
+    "subtitle": "Preise ab unserem {hub}",
     "ctaButton": "Angebot anfordern",
     "footnote": "Preise verstehen sich zzgl. MwSt. Individuelle Pakete verfügbar.",
     "transport": {
       "title": "Transportkosten",
+      "perUnit": "pro gefahrenen {unit}",
       "note": "(Hin- und Rückfahrt für 1-Tages-Event, 4x für mehrtägige Events)"
     },
     "rental": {
       "title": "Basis-Mietpreis",
       "day1Label": "Erster Tag",
       "day2Label": "Zweiter Tag",
-      "day3Label": "Dritter Tag (und folgende)"
+      "day3Label": "Jeder weitere Tag"
     },
     "printer": {
       "title": "Drucker",
@@ -132,6 +148,21 @@
     "customization": {
       "title": "Anpassung",
       "description": "Passen Sie den Stil von Gedicht oder Porträt basierend auf Stil oder Eingabe an",
+      "flatFee": "Pauschalgebühr"
+    },
+    "roastBooth": {
+      "title": "Roast Booth",
+      "description": "Comedy-Roast-Modus für Ihr Event",
+      "flatFee": "Pauschalgebühr"
+    },
+    "language": {
+      "title": "Zusätzliche Sprache",
+      "description": "Erste Sprache inklusive. Zusätzliche Sprachunterstützung für Gedichte und Benutzeroberfläche",
+      "flatFee": "pro Zusatzsprache"
+    },
+    "outdoorInstallation": {
+      "title": "Außeninstallation",
+      "description": "Zusätzliche Einrichtung für Outdoor-Events",
       "flatFee": "Pauschalgebühr"
     }
   },
@@ -152,6 +183,10 @@
     "privacyNote": "Durch Fortfahren stimmen Sie der Verwendung von Analyse-Cookies zu.",
     "privacyLink": "Datenschutzrichtlinie",
     "acceptButton": "Weiter zu Poem Booth"
+  },
+  "vouwBanner": {
+    "heading": "Entdecke mehr Slowtech-Erfindungen",
+    "button": "VOUW besuchen"
   },
   "footer": {
     "tagline": "Ein Produkt von VOUW B.V.",

@@ -13,6 +13,7 @@ export interface Database {
           transport_rate_per_km: number | null;
           minimum_transport_fee: number | null;
           distance_unit: string | null;
+          outdoor_installation_fee: number | null;
           is_active: boolean;
           created_at: string;
           updated_at: string;

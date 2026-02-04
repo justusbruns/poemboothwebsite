@@ -38,6 +38,16 @@ const practicalityIcons = {
       />
     </svg>
   ),
+  requirements: (
+    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+  ),
   outdoor: (
     <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
@@ -80,8 +90,16 @@ export default function Practicalities({ items }: PracticalitiesProps) {
       valueUS: t("setup.valueUS"),
       valueEU: t("setup.valueEU"),
       bullets: [
-        t("setup.bullet1", { voltage }),
-        t("setup.bullet2"),
+        t("setup.bullet1"),
+      ],
+    },
+    {
+      title: t("requirements.title"),
+      valueUS: t("requirements.valueUS"),
+      valueEU: t("requirements.valueEU"),
+      bullets: [
+        t("requirements.bullet1", { voltage }),
+        t("requirements.bullet2"),
       ],
     },
     {
@@ -104,7 +122,7 @@ export default function Practicalities({ items }: PracticalitiesProps) {
   const displayItems = items || defaultItems;
 
   const getIcon = (index: number) => {
-    const iconKeys = ["footprint", "setup", "outdoor", "speed"];
+    const iconKeys = ["footprint", "setup", "requirements", "outdoor", "speed"];
     return practicalityIcons[iconKeys[index] as keyof typeof practicalityIcons];
   };
 
@@ -113,7 +131,7 @@ export default function Practicalities({ items }: PracticalitiesProps) {
       <Container>
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-5 gap-6">
           {displayItems.map((item, index) => (
             <div
               key={index}
