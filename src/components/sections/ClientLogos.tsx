@@ -29,7 +29,7 @@ export default function ClientLogos({ logos = placeholderLogos }: ClientLogosPro
     <section className="py-6 bg-bg-secondary overflow-hidden">
       <div className="relative">
         {/* Ticker tape container */}
-        <div className="flex animate-ticker">
+        <div className="flex w-max animate-ticker">
           {duplicatedLogos.map((logo, index) => (
             <div
               key={`${logo.name}-${index}`}

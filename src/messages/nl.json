@@ -1,9 +1,9 @@
 {
   "seo": {
-    "title": "Poem Booth | AI Portret & Poëzie Ervaring",
-    "description": "Maak van elk evenement een onvergetelijke ervaring. De Poem Booth creëert AI-gegenereerde portretten en poëzie in seconden. Boek voor bruiloften, bedrijfsevenementen & feesten.",
-    "ogTitle": "Poem Booth - Van Moment naar Meesterwerk",
-    "keywords": "AI fotohokje, portret generator, poëzie booth, evenement entertainment, bruiloft fotohokje, bedrijfsevenement, AI kunst"
+    "title": "Poem Booth huren | AI Photobooth voor Events | NL & BE",
+    "description": "De AI photobooth die in seconden een persoonlijk gedicht of portret maakt op je event. Open design, unieke ervaring. Te huren in Nederland en België.",
+    "ogTitle": "Poem Booth — AI gedichten & portretten op je event",
+    "keywords": "AI photobooth, poem booth, AI photobooth huren, photobooth bruiloft, photobooth bedrijfsfeest, AI gedicht, AI portret, unieke photobooth, evenement entertainment"
   },
   "common": {
     "bookNow": "Boek nu",
@@ -31,8 +31,8 @@
     }
   },
   "hero": {
-    "headline": "Van Moment naar Meesterwerk",
-    "subheadline": "De Poem Booth transformeert je foto in gedichten en kunstwerken gestyled door schrijvers en kunstenaars",
+    "headline": "De AI photobooth die gedichten & portretten maakt op je event",
+    "subheadline": "De Poem Booth is een AI photobooth die je foto omzet in een persoonlijk gedicht of kunstwerk — in seconden, op je event, geïnspireerd door echte dichters en kunstenaars.",
     "ctaButton": "Boek nu",
     "ctaEmail": "Of mail naar"
   },
@@ -45,11 +45,11 @@
     },
     "step2": {
       "title": "Ontvang je Kunst",
-      "description": "Je foto wordt veilig omgezet in een portret of gedicht door onze geselecteerde AI modellen"
+      "description": "Je foto wordt door onze AI omgezet in een persoonlijk gedicht of AI-portret — binnen 10 seconden."
     },
     "step3": {
       "title": "Deel",
-      "description": "Deel je gegenereerde portret of gedicht met de wereld"
+      "description": "Deel je AI-gedicht of portret via de QR-code direct op je telefoon."
     }
   },
   "editions": {
@@ -61,20 +61,20 @@
     "sharePoem": "Deel je Gedicht",
     "portrait": {
       "title": "De Portret Editie",
-      "subtitle": "Maak een foto en 30 seconden later krijg je jouw persoonlijke meesterwerk",
+      "subtitle": "Maak een foto en ontvang binnen 30 seconden een persoonlijk AI-portret.",
       "beforeLabel": "Maak een foto",
       "afterLabel": "Krijg een portret"
     },
     "original": {
       "title": "De Originele Editie",
-      "subtitle": "Maak een foto en 10 seconden later krijg je jouw persoonlijke gedicht",
+      "subtitle": "Maak een foto en ontvang binnen 10 seconden een persoonlijk gedicht — gegenereerd door AI, gebaseerd op echte dichters.",
       "beforeLabel": "Maak een foto",
       "afterLabel": "Krijg een gedicht"
     },
     "roast": {
       "titlePrefix": "De",
       "titleSuffix": "Editie",
-      "subtitle": "Maak een foto en 15 seconden later word je compleet GEROAST.",
+      "subtitle": "Maak een foto en word binnen 15 seconden volledig geroast door onze AI. Perfect voor bedrijfsfeesten en verjaardagen.",
       "beforeLabel": "Maak een foto",
       "afterLabel": "Word geroast",
       "sampleText": "Ah, kijk eens wie we daar hebben—de mysterieuze hipster Messias, zo diep aan het nadenken over zijn laatste avocado toast dat hij vergat zijn breipatroon te synchroniseren met zijn innerlijke fashionista."
@@ -83,11 +83,11 @@
   },
   "gallery": {
     "title": "Galerij",
-    "subtitle": "Zie de Poem Booth in actie in bibliotheken, bedrijfsevenementen, bruiloften en festivals"
+    "subtitle": "Bekijk de Poem Booth in actie: van bruiloften en bedrijfsfeesten tot festivals en culturele events."
   },
   "practicalities": {
     "title": "Praktisch",
-    "subtitle": "Alles wat je moet weten over het opzetten van de Poem Booth",
+    "subtitle": "Alles wat je moet weten over het huren en opzetten van de AI photobooth.",
     "footprint": {
       "title": "Benodigde ruimte",
       "valueUS": "5ft x 5ft",
@@ -101,8 +101,8 @@
     },
     "requirements": {
       "title": "Vereisten",
-      "valueUS": "Door u geleverd",
-      "valueEU": "Door u geleverd",
+      "valueUS": "Door jou geleverd",
+      "valueEU": "Door jou geleverd",
       "bullet1": "1x {voltage} stroom",
       "bullet2": "stabiel Wi-Fi/Ethernet"
     },
@@ -121,8 +121,8 @@
     }
   },
   "booking": {
-    "title": "Boekingen & Tarieven",
-    "subtitle": "Prijzen vanuit onze {hub}",
+    "title": "Poem Booth huren — tarieven",
+    "subtitle": "Tarieven voor het huren van de Poem Booth, vertrekkend vanuit onze {hub}.",
     "ctaButton": "Vraag een offerte aan",
     "footnote": "Prijzen zijn exclusief BTW. Maatwerkpakketten beschikbaar.",
     "transport": {
@@ -148,6 +148,11 @@
     "customization": {
       "title": "Aanpassing",
       "description": "Pas de stijl van gedicht of portret aan op basis van stijl of input",
+      "flatFee": "vast bedrag"
+    },
+    "portraitStyle": {
+      "title": "Portretstijl",
+      "description": "Voeg een aangepaste AI-portretstijl toe aan je event",
       "flatFee": "vast bedrag"
     },
     "roastBooth": {
@@ -190,7 +195,7 @@
   },
   "footer": {
     "tagline": "Een product van VOUW B.V.",
-    "vouwDescription": "VOUW is een designstudio uit Amsterdam, Nederland die werkt op het snijvlak van design en technologie.",
+    "vouwDescription": "VOUW is een designstudio uit Amsterdam die werkt op het snijvlak van design en technologie. Poem Booth is een van hun AI-ervaringen, te huren in Nederland en België.",
     "addresses": "Adressen",
     "adminAddress": "Administratieadres:",
     "adminCompany": "VOUW B.V.",
@@ -213,5 +218,99 @@
     "trademark": "Poem Booth® is een geregistreerd handelsmerk en beschermd merk.",
     "privacy": "Privacybeleid",
     "terms": "Algemene Voorwaarden"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Artikelen over AI, events en de Poem Booth",
+    "readMore": "Lees meer",
+    "backToBlog": "Terug naar blog",
+    "publishedOn": "Gepubliceerd op",
+    "noPosts": "Nog geen blogposts beschikbaar."
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "subtitle": "Alles wat je wilt weten over de Poem Booth — van huren tot techniek.",
+    "tabs": {
+      "general": "Algemeen",
+      "agencies": "Voor eventbureaus",
+      "private": "Voor particulieren",
+      "editions": "Edities"
+    },
+    "general": {
+      "q1": {
+        "q": "Wat is de Poem Booth precies?",
+        "a": "De Poem Booth is een AI photobooth die je foto omzet in een persoonlijk gedicht, AI-portret of comedy roast. Het is een open, elegant ontwerp (geen hokje) dat past bij elk event — van bruiloften tot bedrijfsfeesten."
+      },
+      "q2": {
+        "q": "Hoe werkt de Poem Booth?",
+        "a": "Je drukt op de knop, poseert voor de camera, en binnen 10-30 seconden genereert onze AI een persoonlijk gedicht, kunstportret of roast op basis van je foto. Het resultaat deel je direct via QR-code op je telefoon."
+      },
+      "q3": {
+        "q": "Is de Poem Booth geschikt voor elk type evenement?",
+        "a": "Ja. De Poem Booth is ingezet bij bruiloften, bedrijfsfeesten, festivals, beurzen, productlanceringen, bibliotheken en culturele events. Dankzij het strakke, open design past hij bij elke setting."
+      },
+      "q4": {
+        "q": "In welke talen werkt de Poem Booth?",
+        "a": "Standaard werkt de Poem Booth in het Nederlands of Engels. Extra talen (Duits, Frans, Italiaans, en meer) zijn beschikbaar als add-on."
+      },
+      "q5": {
+        "q": "Waar kan ik de Poem Booth huren?",
+        "a": "De Poem Booth is beschikbaar in Nederland en België, met uitvalsbasis in Amsterdam. We leveren ook in Duitsland en de rest van Europa op aanvraag. Neem contact op voor beschikbaarheid."
+      }
+    },
+    "agencies": {
+      "q1": {
+        "q": "Kan ik de Poem Booth branden voor mijn klant?",
+        "a": "Ja. We bieden branding-opties aan: je kunt het logo of product van je klant toevoegen aan de gegenereerde kunstwerken en prints. Dit is beschikbaar als flat-fee add-on."
+      },
+      "q2": {
+        "q": "Kan de stijl van de gedichten of portretten worden aangepast?",
+        "a": "Absoluut. We kunnen de AI-stijl aanpassen aan het thema van het event — denk aan specifieke dichters, kunststromingen of een aangepaste tone-of-voice. Dit valt onder onze customization add-on."
+      },
+      "q3": {
+        "q": "Hoe werkt de opbouw en logistiek?",
+        "a": "Wij verzorgen de volledige opbouw en afbouw. Opbouw duurt circa 1 uur, afbouw 45 minuten. Je hoeft alleen te zorgen voor een stroomaansluiting (230V) en stabiel Wi-Fi of Ethernet."
+      },
+      "q4": {
+        "q": "Kan de Poem Booth meerdere dagen worden gehuurd?",
+        "a": "Ja. We bieden dagprijzen aan met korting vanaf de tweede dag. Neem contact op voor een offerte op maat bij meerdaagse events."
+      }
+    },
+    "private": {
+      "q1": {
+        "q": "Is de Poem Booth geschikt voor een bruiloft?",
+        "a": "Absoluut — de Poem Booth is een van de meest populaire keuzes voor bruiloften. Gasten ontvangen een persoonlijk gedicht of portret als aandenken. Het is een stuk unieker dan een standaard photobooth."
+      },
+      "q2": {
+        "q": "Hoeveel ruimte heeft de Poem Booth nodig?",
+        "a": "De Poem Booth heeft een footprint van ongeveer 1,5m x 1,5m nodig. Hij kan zowel binnen als buiten worden geplaatst (buiten is schaduw vereist)."
+      },
+      "q3": {
+        "q": "Kunnen gasten hun resultaat direct delen?",
+        "a": "Ja. Na het genereren van je gedicht of portret verschijnt er een QR-code die je direct scant met je telefoon. Zo heb je het resultaat meteen op je eigen device."
+      },
+      "q4": {
+        "q": "Wat kost het om de Poem Booth te huren?",
+        "a": "De prijs hangt af van de locatie en het aantal dagen. Bekijk onze tarievensectie op deze pagina of vraag een offerte aan voor een prijs op maat."
+      }
+    },
+    "editions": {
+      "q1": {
+        "q": "Wat is het verschil tussen de Portret Editie en de Originele Editie?",
+        "a": "De Portret Editie maakt een AI-gegenereerd kunstportret van je foto (30 sec). De Originele Editie genereert een persoonlijk gedicht op basis van je foto (10 sec). Beide zijn unieke, gegenereerde kunstwerken."
+      },
+      "q2": {
+        "q": "Wat is de Roast Editie?",
+        "a": "De Roast Editie is onze comedy-modus: je maakt een foto en onze AI schrijft binnen 15 seconden een hilarische, gepersonaliseerde roast. Perfect voor bedrijfsfeesten, verjaardagen en teambuildings."
+      },
+      "q3": {
+        "q": "Kan ik meerdere edities combineren op één event?",
+        "a": "Ja, je kunt meerdere edities beschikbaar maken op één event. Gasten kiezen dan zelf welke ervaring ze willen. Neem contact op om de mogelijkheden te bespreken."
+      },
+      "q4": {
+        "q": "Op welke dichters en kunststijlen is de AI gebaseerd?",
+        "a": "De AI is getraind op en geïnspireerd door echte dichters en kunstenaars. Voor gedichten kun je kiezen uit verschillende stijlen. Voor portretten genereren we unieke kunstwerken in diverse kunststromingen."
+      }
+    }
   }
 }

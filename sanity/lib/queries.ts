@@ -222,6 +222,68 @@ export const userAgreementQuery = groq`
   }
 `;
 
+// Blog Posts - listing
+export const blogPostsQuery = groq`
+  *[_type == "blogPost" && ($region in regionVisibility || "all" in regionVisibility)] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    excerpt,
+    coverImage {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          lqip,
+          dimensions
+        }
+      },
+      hotspot
+    },
+    author,
+    publishedAt,
+    categories
+  }
+`;
+
+// Blog Post - single by slug
+export const blogPostBySlugQuery = groq`
+  *[_type == "blogPost" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    body_en,
+    body_nl,
+    body_de,
+    body_fr,
+    body_it,
+    coverImage {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          lqip,
+          dimensions
+        }
+      },
+      hotspot
+    },
+    author,
+    publishedAt,
+    categories,
+    seoTitle,
+    seoDescription
+  }
+`;
+
+// Blog Post slugs - for static generation
+export const blogPostSlugsQuery = groq`
+  *[_type == "blogPost"] {
+    "slug": slug.current
+  }
+`;
+
 // All page data in one query
 export const pageDataQuery = groq`
 {

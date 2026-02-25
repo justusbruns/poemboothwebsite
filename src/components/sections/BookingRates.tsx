@@ -21,6 +21,7 @@ interface HubPricing {
     unit: "km" | "mi";
   };
   outdoorInstallationFee: number;
+  imageStyleRate: number;
 }
 
 interface BookingRatesProps {
@@ -58,6 +59,8 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
 
   // Rates from Supabase with fallbacks
   const outdoorInstallationFee = hubPricing?.outdoorInstallationFee || (isUS ? 300 : 250);
+
+  const imageStyleRate = hubPricing?.imageStyleRate || (isUS ? 900 : 750);
 
   // Static rates (not in Supabase)
   const printerRate = isUS ? 600 : 500;
@@ -149,6 +152,25 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
                 <div className="text-right">
                   <p className="text-lg text-text-primary">
                     {formatPrice(customizationFee, currencySymbol)} {t("customization.flatFee")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Portrait Style */}
+            <div className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-xl font-display text-text-primary">
+                    {t("portraitStyle.title")}
+                  </h3>
+                  <p className="text-sm text-text-secondary mt-1">
+                    {t("portraitStyle.description")}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg text-text-primary">
+                    {formatPrice(imageStyleRate, currencySymbol)} {t("portraitStyle.flatFee")}
                   </p>
                 </div>
               </div>

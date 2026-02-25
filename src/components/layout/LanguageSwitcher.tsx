@@ -13,6 +13,14 @@ const languageLabels: Record<Locale, string> = {
   it: "Italiano",
 };
 
+const languageCodes: Record<Locale, string> = {
+  en: "EN",
+  nl: "NL",
+  de: "DE",
+  fr: "FR",
+  it: "IT",
+};
+
 export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
@@ -50,11 +58,12 @@ export default function LanguageSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-bg-secondary"
+        className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-bg-secondary"
       >
-        <span>{languageLabels[currentLocale]}</span>
+        <span className="sm:hidden">{languageCodes[currentLocale]}</span>
+        <span className="hidden sm:inline">{languageLabels[currentLocale]}</span>
         <svg
-          className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

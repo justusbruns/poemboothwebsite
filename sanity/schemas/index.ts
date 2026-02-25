@@ -12,6 +12,7 @@ import pricingItem from "./pricingItem";
 import bookingSection from "./bookingSection";
 import footer from "./footer";
 import userAgreement from "./userAgreement";
+import blogPost from "./blogPost";
 
 export const schemaTypes = [
   // Object types
@@ -30,4 +31,5 @@ export const schemaTypes = [
   bookingSection,
   footer,
   userAgreement,
+  blogPost,
 ];

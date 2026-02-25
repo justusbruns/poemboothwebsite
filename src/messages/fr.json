@@ -1,9 +1,9 @@
 {
   "seo": {
-    "title": "Poem Booth | Expérience Portrait & Poésie IA",
-    "description": "Transformez chaque événement en une expérience inoubliable. Le Poem Booth crée des portraits et poèmes générés par IA en quelques secondes. Réservez pour mariages, événements d'entreprise & fêtes.",
-    "ogTitle": "Poem Booth - Du Moment au Chef-d'œuvre",
-    "keywords": "photomaton IA, générateur de portrait, booth poésie, animation événement, photomaton mariage, événement entreprise, art IA"
+    "title": "Poem Booth | Photobooth IA pour événements | Poésie & Portraits",
+    "description": "Le photobooth IA qui crée en quelques secondes un poème ou portrait personnalisé lors de votre événement. Design ouvert, expérience unique. Disponible en Europe.",
+    "ogTitle": "Poem Booth — Poésie & portraits IA lors de votre événement",
+    "keywords": "photobooth IA, poem booth, location photobooth IA, photobooth mariage, photobooth événement entreprise, poésie IA, portrait IA, photobooth unique"
   },
   "common": {
     "bookNow": "Réserver",
@@ -31,8 +31,8 @@
     }
   },
   "hero": {
-    "headline": "Du Moment au Chef-d'œuvre",
-    "subheadline": "Le Poem Booth transforme votre photo en poèmes et œuvres d'art créés par des écrivains et artistes",
+    "headline": "Le photobooth IA qui crée poésie & portraits lors de votre événement",
+    "subheadline": "Le Poem Booth est un photobooth IA qui transforme votre photo en poème ou œuvre d'art personnalisé — en quelques secondes, lors de votre événement, inspiré par de vrais poètes et artistes.",
     "ctaButton": "Réserver",
     "ctaEmail": "Ou envoyez un e-mail à"
   },
@@ -45,11 +45,11 @@
     },
     "step2": {
       "title": "Recevez votre Art",
-      "description": "Votre photo est transformée en portrait ou poème par nos modèles IA sélectionnés"
+      "description": "Votre photo est transformée par notre IA en poème personnel ou portrait IA — en 10 secondes."
     },
     "step3": {
       "title": "Partagez",
-      "description": "Partagez votre portrait ou poème généré avec le monde"
+      "description": "Partagez votre poème ou portrait IA via QR code directement sur votre téléphone."
     }
   },
   "editions": {
@@ -61,20 +61,20 @@
     "sharePoem": "Partagez votre Poème",
     "portrait": {
       "title": "L'Édition Portrait",
-      "subtitle": "Prenez une photo et recevez votre chef-d'œuvre personnel 30 secondes plus tard",
+      "subtitle": "Prenez une photo et recevez un portrait IA personnel en 30 secondes.",
       "beforeLabel": "Prenez une photo",
       "afterLabel": "Recevez un portrait"
     },
     "original": {
       "title": "L'Édition Originale",
-      "subtitle": "Prenez une photo et recevez votre poème personnel 10 secondes plus tard",
+      "subtitle": "Prenez une photo et recevez un poème personnel en 10 secondes — généré par IA, inspiré de vrais poètes.",
       "beforeLabel": "Prenez une photo",
       "afterLabel": "Recevez un poème"
     },
     "roast": {
       "titlePrefix": "L'Édition",
       "titleSuffix": "",
-      "subtitle": "Prenez une photo et 15 secondes plus tard, faites-vous complètement GRILLER.",
+      "subtitle": "Prenez une photo et faites-vous complètement griller par notre IA en 15 secondes. Parfait pour les fêtes d'entreprise et les anniversaires.",
       "beforeLabel": "Prenez une photo",
       "afterLabel": "Faites-vous griller",
       "sampleText": "Ah, regardez qui voilà—le mystérieux Messie hipster, contemplant son dernier toast à l'avocat si profondément qu'il a oublié de synchroniser son patron de tricot avec sa fashionista intérieure."
@@ -83,11 +83,11 @@
   },
   "gallery": {
     "title": "Galerie",
-    "subtitle": "Découvrez le Poem Booth en action dans les bibliothèques, événements d'entreprise, mariages et festivals"
+    "subtitle": "Découvrez le Poem Booth en action : des mariages et événements d'entreprise aux festivals et événements culturels."
   },
   "practicalities": {
     "title": "Informations Pratiques",
-    "subtitle": "Tout ce que vous devez savoir sur l'installation du Poem Booth",
+    "subtitle": "Tout ce que vous devez savoir sur la location et l'installation du photobooth IA.",
     "footprint": {
       "title": "Espace Requis",
       "valueUS": "5ft x 5ft",
@@ -121,8 +121,8 @@
     }
   },
   "booking": {
-    "title": "Réservation & Tarifs",
-    "subtitle": "Tarifs depuis notre {hub}",
+    "title": "Louer le Poem Booth — tarifs",
+    "subtitle": "Tarifs pour la location du Poem Booth, au départ de notre {hub}.",
     "ctaButton": "Demander un devis",
     "footnote": "Prix hors taxes applicables. Forfaits personnalisés disponibles.",
     "transport": {
@@ -148,6 +148,11 @@
     "customization": {
       "title": "Personnalisation",
       "description": "Personnalisez le style du poème ou portrait selon le style ou l'entrée",
+      "flatFee": "forfait"
+    },
+    "portraitStyle": {
+      "title": "Style de portrait",
+      "description": "Ajoutez un style de portrait IA personnalisé à votre événement",
       "flatFee": "forfait"
     },
     "roastBooth": {
@@ -190,7 +195,7 @@
   },
   "footer": {
     "tagline": "Un produit de VOUW B.V.",
-    "vouwDescription": "VOUW est un studio de design d'Amsterdam, Pays-Bas, qui travaille à la croisée du design et de la technologie.",
+    "vouwDescription": "VOUW est un studio de design d'Amsterdam qui travaille à la croisée du design et de la technologie. Poem Booth est l'une de leurs expériences IA, disponible en Europe.",
     "addresses": "Adresses",
     "adminAddress": "Adresse administrative :",
     "adminCompany": "VOUW B.V.",
@@ -213,5 +218,48 @@
     "trademark": "Poem Booth® est une marque déposée et protégée.",
     "privacy": "Politique de confidentialité",
     "terms": "Conditions d'utilisation"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Articles sur l'IA, les événements et le Poem Booth",
+    "readMore": "Lire la suite",
+    "backToBlog": "Retour au blog",
+    "publishedOn": "Publié le",
+    "noPosts": "Aucun article de blog disponible pour le moment."
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "subtitle": "Tout ce que vous devez savoir sur le Poem Booth — de la location à la technologie.",
+    "tabs": {
+      "general": "Général",
+      "agencies": "Pour agences événementielles",
+      "private": "Pour particuliers",
+      "editions": "Éditions"
+    },
+    "general": {
+      "q1": { "q": "Qu'est-ce que le Poem Booth exactement ?", "a": "Le Poem Booth est un photobooth IA qui transforme votre photo en poème personnalisé, portrait IA ou roast comique. Son design ouvert et élégant s'adapte à tout événement." },
+      "q2": { "q": "Comment fonctionne le Poem Booth ?", "a": "Appuyez sur le bouton, posez devant la caméra, et en 10-30 secondes notre IA génère un poème, portrait ou roast personnalisé. Partagez le résultat via QR code." },
+      "q3": { "q": "Le Poem Booth convient-il à tout type d'événement ?", "a": "Oui. Le Poem Booth a été utilisé lors de mariages, événements d'entreprise, festivals, salons et événements culturels." },
+      "q4": { "q": "Dans quelles langues fonctionne le Poem Booth ?", "a": "Par défaut, le Poem Booth fonctionne en anglais ou néerlandais. Des langues supplémentaires sont disponibles en option." },
+      "q5": { "q": "Où puis-je louer le Poem Booth ?", "a": "Le Poem Booth est disponible aux Pays-Bas, en Belgique et dans toute l'Europe. Contactez-nous pour la disponibilité." }
+    },
+    "agencies": {
+      "q1": { "q": "Puis-je personnaliser le Poem Booth pour mon client ?", "a": "Oui. Vous pouvez ajouter le logo de votre client aux œuvres générées et aux impressions." },
+      "q2": { "q": "Le style peut-il être personnalisé ?", "a": "Absolument. Nous pouvons adapter le style IA au thème de l'événement — poètes spécifiques, courants artistiques ou ton personnalisé." },
+      "q3": { "q": "Comment fonctionne l'installation ?", "a": "Nous gérons l'installation et le démontage complets. Installation environ 1 heure, démontage 45 minutes. Vous devez fournir électricité et Wi-Fi stable." },
+      "q4": { "q": "Peut-on louer le Poem Booth plusieurs jours ?", "a": "Oui. Nous proposons des tarifs journaliers avec réduction à partir du deuxième jour." }
+    },
+    "private": {
+      "q1": { "q": "Le Poem Booth convient-il pour un mariage ?", "a": "Absolument — le Poem Booth est l'un des choix les plus populaires pour les mariages. Les invités reçoivent un poème ou portrait personnalisé en souvenir." },
+      "q2": { "q": "Combien d'espace faut-il pour le Poem Booth ?", "a": "Le Poem Booth nécessite environ 1,5m x 1,5m. Il peut être placé en intérieur comme en extérieur (ombre requise en extérieur)." },
+      "q3": { "q": "Les invités peuvent-ils partager leur résultat immédiatement ?", "a": "Oui. Après la génération, un QR code apparaît que vous scannez directement avec votre téléphone." },
+      "q4": { "q": "Combien coûte la location du Poem Booth ?", "a": "Le prix dépend de la localisation et du nombre de jours. Consultez nos tarifs sur cette page ou demandez un devis personnalisé." }
+    },
+    "editions": {
+      "q1": { "q": "Quelle est la différence entre l'Édition Portrait et l'Édition Originale ?", "a": "L'Édition Portrait crée un portrait artistique IA (30 sec). L'Édition Originale génère un poème personnalisé (10 sec)." },
+      "q2": { "q": "Qu'est-ce que l'Édition Roast ?", "a": "L'Édition Roast est notre mode comédie : prenez une photo et notre IA écrit un roast hilarant et personnalisé en 15 secondes." },
+      "q3": { "q": "Puis-je combiner plusieurs éditions lors d'un événement ?", "a": "Oui, vous pouvez rendre plusieurs éditions disponibles. Les invités choisissent leur expérience." },
+      "q4": { "q": "Sur quels poètes et styles artistiques l'IA est-elle basée ?", "a": "L'IA est inspirée par de vrais poètes et artistes. Pour les poèmes, vous pouvez choisir parmi différents styles." }
+    }
   }
 }

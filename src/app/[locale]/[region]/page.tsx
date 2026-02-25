@@ -10,6 +10,7 @@ import {
   PhotoGallery,
   Practicalities,
   BookingRates,
+  FAQ,
 } from "@/components/sections";
 import VouwBanner from "@/components/sections/VouwBanner";
 import { getHubByRegion } from "@/lib/supabase/server";
@@ -18,7 +19,7 @@ import { client } from "../../../../sanity/lib/client";
 import { pageDataQuery } from "../../../../sanity/lib/queries";
 import { urlFor } from "../../../../sanity/lib/image";
 import { locales, regions, type Locale } from "@/i18n/routing";
-import { OrganizationJsonLd } from "@/components/seo/JsonLd";
+import { OrganizationJsonLd, FAQPageJsonLd } from "@/components/seo/JsonLd";
 
 interface PageProps {
   params: Promise<{ locale: string; region: string }>;
@@ -150,6 +151,7 @@ export default async function LandingPage({ params }: PageProps) {
           unit: (hubData.distance_unit || regionConfig.distanceUnit) as "km" | "mi",
         },
         outdoorInstallationFee: hubData.outdoor_installation_fee || 0,
+        imageStyleRate: hubData.image_style_rate || 0,
       }
     : undefined;
 
@@ -203,9 +205,26 @@ export default async function LandingPage({ params }: PageProps) {
   // Extract footer data
   const footerData = pageData?.footer;
 
+  // Build FAQ items for JSON-LD from i18n
+  const faqT = await getTranslations({ locale, namespace: "faq" });
+  const faqTabs = ["general", "agencies", "private", "editions"] as const;
+  const faqKeyCounts: Record<string, string[]> = {
+    general: ["q1", "q2", "q3", "q4", "q5"],
+    agencies: ["q1", "q2", "q3", "q4"],
+    private: ["q1", "q2", "q3", "q4"],
+    editions: ["q1", "q2", "q3", "q4"],
+  };
+  const faqItems = faqTabs.flatMap((tab) =>
+    faqKeyCounts[tab].map((key) => ({
+      question: faqT(`${tab}.${key}.q`),
+      answer: faqT(`${tab}.${key}.a`),
+    }))
+  );
+
   return (
     <>
       <OrganizationJsonLd locale={locale} />
+      <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
         <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
@@ -215,6 +234,7 @@ export default async function LandingPage({ params }: PageProps) {
         <PhotoGallery images={galleryImages} />
         <Practicalities />
         <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
+        <FAQ />
         <VouwBanner />
       </main>
       <Footer footerData={footerData} logo={headerLogo} />

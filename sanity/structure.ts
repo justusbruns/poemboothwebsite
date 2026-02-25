@@ -56,6 +56,18 @@ export const structure = (S: StructureBuilder) =>
 
       S.divider(),
 
+      // Blog
+      S.listItem()
+        .title("Blog Posts")
+        .icon(DocumentIcon)
+        .child(
+          S.documentTypeList("blogPost")
+            .title("Blog Posts")
+            .defaultOrdering([{ field: "publishedAt", direction: "desc" }])
+        ),
+
+      S.divider(),
+
       // Collections
       S.listItem()
         .title("How It Works Steps")

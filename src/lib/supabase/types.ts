@@ -14,6 +14,7 @@ export interface Database {
           minimum_transport_fee: number | null;
           distance_unit: string | null;
           outdoor_installation_fee: number | null;
+          image_style_rate: number | null;
           is_active: boolean;
           created_at: string;
           updated_at: string;

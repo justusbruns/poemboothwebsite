@@ -6,3 +6,4 @@ export { default as PhotoGallery } from "./PhotoGallery";
 export { default as Practicalities } from "./Practicalities";
 export { default as BookingRates } from "./BookingRates";
 export { default as OtherRegionsContact } from "./OtherRegionsContact";
+export { default as FAQ } from "./FAQ";

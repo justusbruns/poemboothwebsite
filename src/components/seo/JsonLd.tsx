@@ -25,14 +25,14 @@ export function OrganizationJsonLd({ locale }: OrganizationJsonLdProps) {
     logo: "https://poembooth.com/images/logo.png",
     description:
       locale === "nl"
-        ? "AI-gegenereerde portretten en poëzie voor evenementen"
+        ? "De Poem Booth is een AI photobooth die persoonlijke gedichten en portretten maakt op events"
         : locale === "de"
-          ? "KI-generierte Porträts und Poesie für Veranstaltungen"
+          ? "Die Poem Booth ist eine KI-Photobooth, die personalisierte Gedichte und Porträts auf Events erstellt"
           : locale === "fr"
-            ? "Portraits et poésie générés par IA pour événements"
+            ? "Le Poem Booth est un photobooth IA qui crée des poèmes et portraits personnalisés lors d'événements"
             : locale === "it"
-              ? "Ritratti e poesie generati dall'IA per eventi"
-              : "AI-powered portrait and poetry generation for events",
+              ? "Il Poem Booth è un photobooth AI che crea poesie e ritratti personalizzati agli eventi"
+              : "The Poem Booth is an AI photo booth creating personalized poetry and portraits at events",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Generaal Vetterstraat 57",
@@ -65,4 +65,30 @@ export function WebsiteJsonLd() {
   };
 
   return <JsonLd data={websiteData} />;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQPageJsonLdProps {
+  items: FAQItem[];
+}
+
+export function FAQPageJsonLd({ items }: FAQPageJsonLdProps) {
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
+  return <JsonLd data={faqData} />;
 }
