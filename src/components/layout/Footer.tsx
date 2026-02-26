@@ -36,7 +36,8 @@ export default function Footer({ footerData, logo }: FooterProps) {
   const region = (params?.region as string) || "nl";
 
   // Use Sanity data with translation fallbacks
-  const contactEmail = footerData?.contactEmail || "contact@poembooth.com";
+  const defaultEmail = region === "us" ? "jackie@poembooth.com" : "contact@poembooth.com";
+  const contactEmail = footerData?.contactEmail || defaultEmail;
   const instagramHandle = footerData?.instagramHandle || "@poembooth.ai";
   const instagramUrl = footerData?.instagramUrl || "https://instagram.com/poembooth.ai";
   const adminCompany = footerData?.adminCompany || t("adminCompany");

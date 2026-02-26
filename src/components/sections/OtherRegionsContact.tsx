@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 
@@ -9,9 +10,12 @@ interface OtherRegionsContactProps {
 }
 
 export default function OtherRegionsContact({
-  contactEmail = "contact@poembooth.com",
+  contactEmail: contactEmailProp,
 }: OtherRegionsContactProps) {
   const t = useTranslations("otherRegions");
+  const params = useParams();
+  const region = params.region as string;
+  const contactEmail = contactEmailProp || (region === "us" ? "jackie@poembooth.com" : "contact@poembooth.com");
 
   const mailtoSubject = encodeURIComponent(t("emailSubject"));
   const mailtoBody = encodeURIComponent(t("emailBody"));

@@ -15,12 +15,13 @@ export default function Hero({ heroImage, bookingUrl }: HeroProps) {
   const t = useTranslations("hero");
   const params = useParams();
   const locale = params.locale as string;
+  const region = params.region as string;
 
   const rawUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
   // Extract just the origin (protocol + host) to avoid path duplication
   const baseUrl = rawUrl.replace(/\/+$/, "").split("/").slice(0, 3).join("/");
   const bookingHref = `${baseUrl}/${locale}/booking`;
-  const contactEmail = "contact@poembooth.com";
+  const contactEmail = region === "us" ? "jackie@poembooth.com" : "contact@poembooth.com";
 
   return (
     <section className="pb-6 md:pb-8 bg-bg-secondary">
