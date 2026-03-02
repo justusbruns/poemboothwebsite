@@ -26,8 +26,19 @@ const nextConfig: NextConfig = {
     // reactCompiler: true,
   },
 
-  // Turbopack configuration (required for Next.js 16)
-  turbopack: {},
+  // Turbopack — alias hls.js to its CJS dist because the .mjs file is absent
+  // from the published package (exports map references a non-existent hls.mjs)
+  turbopack: {
+    resolveAlias: {
+      "hls.js": "hls.js/dist/hls.js",
+    },
+  },
+
+  // Webpack alias for the same reason (used with --webpack flag or older Next)
+  webpack: (config) => {
+    config.resolve.alias["hls.js"] = require.resolve("hls.js/dist/hls.js");
+    return config;
+  },
 
   // Ensure server-side packages are bundled correctly
   serverExternalPackages: ["sanity", "@sanity/vision"],

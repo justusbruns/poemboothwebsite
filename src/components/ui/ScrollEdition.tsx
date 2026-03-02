@@ -84,7 +84,7 @@ export default function ScrollEdition({
   const [stage, setStage] = useState<Stage>("idle");
   // Shown after generate animation completes (portrait & poem only)
   const [showActionButton, setShowActionButton] = useState(false);
-  const animationControlsRef = useRef<ReturnType<typeof animate> | undefined>();
+  const animationControlsRef = useRef<ReturnType<typeof animate> | undefined>(undefined);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
