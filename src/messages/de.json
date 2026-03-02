@@ -79,7 +79,12 @@
       "afterLabel": "Geröstet werden",
       "sampleText": "Ah, schau mal wer da ist—der mysteriöse Hipster-Messias, der so tief über seinen letzten Avocado-Toast nachdenkt, dass er vergessen hat, sein Strickmuster mit seiner inneren Fashionista zu synchronisieren."
     },
-    "shareRoast": "Teile deinen Roast"
+    "shareRoast": "Teile deinen Roast",
+    "generatePoem": "Gedicht generieren",
+    "generatePortrait": "Porträt generieren",
+    "generateRoast": "Roast generieren",
+    "printPortrait": "Porträt drucken",
+    "startAgain": "Nochmal starten"
   },
   "gallery": {
     "title": "Galerie",

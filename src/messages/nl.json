@@ -79,7 +79,12 @@
       "afterLabel": "Word geroast",
       "sampleText": "Ah, kijk eens wie we daar hebben—de mysterieuze hipster Messias, zo diep aan het nadenken over zijn laatste avocado toast dat hij vergat zijn breipatroon te synchroniseren met zijn innerlijke fashionista."
     },
-    "shareRoast": "Deel je Roast"
+    "shareRoast": "Deel je Roast",
+    "generatePoem": "Genereer gedicht",
+    "generatePortrait": "Genereer portret",
+    "generateRoast": "Genereer roast",
+    "printPortrait": "Print je portret",
+    "startAgain": "Opnieuw beginnen"
   },
   "gallery": {
     "title": "Galerij",

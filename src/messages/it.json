@@ -79,7 +79,12 @@
       "afterLabel": "Vieni arrostito",
       "sampleText": "Ah, guarda chi c'è—il misterioso Messia hipster, che contempla il suo ultimo toast all'avocado così profondamente da dimenticare di sincronizzare il suo schema di maglia con la sua fashionista interiore."
     },
-    "shareRoast": "Condividi il tuo Roast"
+    "shareRoast": "Condividi il tuo Roast",
+    "generatePoem": "Genera poesia",
+    "generatePortrait": "Genera ritratto",
+    "generateRoast": "Genera roast",
+    "printPortrait": "Stampa il tuo ritratto",
+    "startAgain": "Ricomincia"
   },
   "gallery": {
     "title": "Galleria",

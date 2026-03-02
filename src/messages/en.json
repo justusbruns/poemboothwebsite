@@ -79,7 +79,12 @@
       "afterLabel": "Get roasted",
       "sampleText": "Ah, look who it is—the mysterious hipster Messiah, contemplating his last avocado toast so deeply that he forgot to sync his knitting pattern with his inner fashionista."
     },
-    "shareRoast": "Share your Roast"
+    "shareRoast": "Share your Roast",
+    "generatePoem": "Generate poem",
+    "generatePortrait": "Generate portrait",
+    "generateRoast": "Generate roast",
+    "printPortrait": "Print your portrait",
+    "startAgain": "Start again"
   },
   "gallery": {
     "title": "Gallery",

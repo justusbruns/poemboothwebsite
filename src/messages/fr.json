@@ -79,7 +79,12 @@
       "afterLabel": "Faites-vous griller",
       "sampleText": "Ah, regardez qui voilà—le mystérieux Messie hipster, contemplant son dernier toast à l'avocat si profondément qu'il a oublié de synchroniser son patron de tricot avec sa fashionista intérieure."
     },
-    "shareRoast": "Partagez votre Roast"
+    "shareRoast": "Partagez votre Roast",
+    "generatePoem": "Générer un poème",
+    "generatePortrait": "Générer un portrait",
+    "generateRoast": "Générer un roast",
+    "printPortrait": "Imprimer votre portrait",
+    "startAgain": "Recommencer"
   },
   "gallery": {
     "title": "Galerie",
