@@ -7,27 +7,20 @@ function getSupabaseConfig() {
   if (env === "staging") {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL_STAGING;
     const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY_STAGING;
-
-    if (!url || !anonKey) {
-      throw new Error("Missing Supabase staging environment variables");
-    }
-
+    if (!url || !anonKey) return null;
     return { url, anonKey };
   }
 
   // Production
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL_PROD;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY_PROD;
-
-  if (!url || !anonKey) {
-    throw new Error("Missing Supabase production environment variables");
-  }
-
+  if (!url || !anonKey) return null;
   return { url, anonKey };
 }
 
 export function createServerClient() {
   const config = getSupabaseConfig();
+  if (!config) return null;
   return createClient<Database>(config.url, config.anonKey);
 }
 
@@ -46,6 +39,7 @@ export async function getHubByRegion(regionCode: string): Promise<{
   image_style_rate: number | null;
 } | null> {
   const supabase = createServerClient();
+  if (!supabase) return null;
 
   // Map URL region codes to database region codes
   // All EU countries use Amsterdam hub pricing
