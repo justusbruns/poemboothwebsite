@@ -11,6 +11,7 @@ import {
   Practicalities,
   BookingRates,
   FAQ,
+  LatestBlogPosts,
 } from "@/components/sections";
 import VouwBanner from "@/components/sections/VouwBanner";
 import { getHubByRegion } from "@/lib/supabase/server";
@@ -19,7 +20,7 @@ import { client } from "../../../../sanity/lib/client";
 import { pageDataQuery } from "../../../../sanity/lib/queries";
 import { urlFor } from "../../../../sanity/lib/image";
 import { locales, regions, type Locale } from "@/i18n/routing";
-import { OrganizationJsonLd, FAQPageJsonLd } from "@/components/seo/JsonLd";
+import { OrganizationJsonLd, ServiceJsonLd, FAQPageJsonLd } from "@/components/seo/JsonLd";
 
 interface PageProps {
   params: Promise<{ locale: string; region: string }>;
@@ -190,12 +191,25 @@ export default async function LandingPage({ params }: PageProps) {
     afterLabel: getLocalizedValue(e.afterLabel, locale),
   }));
 
-  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string } }; caption?: LocalizedField; eventName?: string; featured?: boolean }) => ({
-    imageUrl: g.image?.asset?.url,
-    caption: getLocalizedValue(g.caption, locale),
-    eventName: g.eventName,
-    featured: g.featured,
-  }));
+  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string }; hotspot?: { x?: number; y?: number } }; caption?: LocalizedField; eventName?: string; featured?: boolean }) => {
+    const hotspot = g.image?.hotspot;
+    const objectPosition = hotspot
+      ? `${Math.round((hotspot.x ?? 0.5) * 100)}% ${Math.round((hotspot.y ?? 0.5) * 100)}%`
+      : undefined;
+    return {
+      imageUrl: g.image?.asset?.url,
+      caption: getLocalizedValue(g.caption, locale),
+      eventName: g.eventName,
+      featured: g.featured,
+      objectPosition,
+    };
+  });
+
+  // Extract edition booth image URLs for ServiceJsonLd ImageObject schema
+  const editionImages: Array<string | undefined> = (pageData?.editions ?? []).map(
+    (e: { boothImage?: unknown }) =>
+      e.boothImage ? urlFor(e.boothImage as Parameters<typeof urlFor>[0]).width(800).url() : undefined
+  );
 
   // Extract header logo from siteSettings
   const headerLogo = pageData?.siteSettings?.logo
@@ -224,6 +238,7 @@ export default async function LandingPage({ params }: PageProps) {
   return (
     <>
       <OrganizationJsonLd locale={locale} />
+      <ServiceJsonLd locale={locale} region={region} editionImages={editionImages} />
       <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
@@ -235,6 +250,7 @@ export default async function LandingPage({ params }: PageProps) {
         <Practicalities />
         <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <FAQ />
+        <LatestBlogPosts posts={pageData?.latestBlogPosts ?? []} />
         <VouwBanner />
       </main>
       <Footer footerData={footerData} logo={headerLogo} />

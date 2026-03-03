@@ -227,6 +227,8 @@
   "blog": {
     "title": "Blog",
     "description": "Articles about AI, events and the Poem Booth",
+    "fromTheBlog": "From the blog",
+    "readAll": "See all posts",
     "readMore": "Read more",
     "backToBlog": "Back to blog",
     "publishedOn": "Published on",

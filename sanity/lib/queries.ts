@@ -423,7 +423,8 @@ export const pageDataQuery = groq`
           dimensions
         }
       },
-      hotspot
+      hotspot,
+      crop
     },
     caption,
     eventName,
@@ -457,6 +458,19 @@ export const pageDataQuery = groq`
     title,
     ctaButtonText,
     footnote
+  },
+  "latestBlogPosts": *[_type == "blogPost" && ($region in regionVisibility || "all" in regionVisibility)] | order(publishedAt desc)[0...3] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    coverImage {
+      asset-> {
+        _id,
+        url
+      }
+    },
+    publishedAt
   },
   "footer": *[_type == "footer"][0] {
     contactEmail,

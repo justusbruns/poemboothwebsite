@@ -14,7 +14,7 @@ import {
 } from "../../../../../../sanity/lib/queries";
 import { urlFor } from "../../../../../../sanity/lib/image";
 import { locales, regions } from "@/i18n/routing";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, BreadcrumbListJsonLd } from "@/components/seo/JsonLd";
 
 interface PageProps {
   params: Promise<{ locale: string; region: string; slug: string }>;
@@ -266,9 +266,16 @@ export default async function BlogPostPage({ params }: PageProps) {
     url: `${baseUrl}/${locale}/${region}/blog/${slug}`,
   };
 
+  const breadcrumbs = [
+    { name: "Poem Booth", item: `${baseUrl}/${locale}/${region}` },
+    { name: t("title"), item: `${baseUrl}/${locale}/${region}/blog` },
+    { name: title, item: `${baseUrl}/${locale}/${region}/blog/${slug}` },
+  ];
+
   return (
     <>
       <JsonLd data={articleJsonLd} />
+      <BreadcrumbListJsonLd items={breadcrumbs} />
       <Header logo={headerLogo} />
       <main className="min-h-screen bg-bg-primary">
         <article className="py-16 md:py-24">

@@ -10,6 +10,7 @@ interface GalleryImage {
   caption?: string;
   eventName?: string;
   featured?: boolean;
+  objectPosition?: string;
 }
 
 interface PhotoGalleryProps {
@@ -53,6 +54,7 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
                     alt={image.caption || "Gallery image"}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
+                    style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-bg-secondary to-bg-accent">

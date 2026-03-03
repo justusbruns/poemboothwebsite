@@ -227,6 +227,8 @@
   "blog": {
     "title": "Blog",
     "description": "Artikelen over AI, events en de Poem Booth",
+    "fromTheBlog": "Van het blog",
+    "readAll": "Alle berichten",
     "readMore": "Lees meer",
     "backToBlog": "Terug naar blog",
     "publishedOn": "Gepubliceerd op",
