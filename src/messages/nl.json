@@ -226,7 +226,8 @@
   },
   "blog": {
     "title": "Blog",
-    "description": "Artikelen over AI, events en de Poem Booth",
+    "metaTitle": "Blog | AI Photobooth tips & evenement ideeën | Poem Booth",
+    "description": "Tips, inspiratie en verhalen over AI photobooths, evenementen en de Poem Booth ervaring.",
     "fromTheBlog": "Van het blog",
     "readAll": "Alle berichten",
     "readMore": "Lees meer",

@@ -226,7 +226,8 @@
   },
   "blog": {
     "title": "Blog",
-    "description": "Artikel über KI, Events und die Poem Booth",
+    "metaTitle": "Blog | KI-Photobooth Tipps & Event-Ideen | Poem Booth",
+    "description": "Tipps, Inspiration und Geschichten über KI-Photobooths, Events und das Poem Booth Erlebnis.",
     "fromTheBlog": "Aus dem Blog",
     "readAll": "Alle Beiträge",
     "readMore": "Weiterlesen",

@@ -8,7 +8,7 @@ import Container from "@/components/ui/Container";
 import { client } from "../../../../../sanity/lib/client";
 import { blogPostsQuery, pageDataQuery } from "../../../../../sanity/lib/queries";
 import { urlFor } from "../../../../../sanity/lib/image";
-import type { Locale } from "@/i18n/routing";
+import { locales, regions } from "@/i18n/routing";
 
 interface PageProps {
   params: Promise<{ locale: string; region: string }>;
@@ -20,13 +20,39 @@ const getLocalizedValue = (field: LocalizedField | undefined, loc: string): stri
   return field[loc as keyof LocalizedField] || field.en || "";
 };
 
+const regionToCountry: Record<string, string> = {
+  nl: "NL",
+  us: "US",
+  de: "DE",
+  fr: "FR",
+  it: "IT",
+  be: "BE",
+  row: "001",
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale, region } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
 
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://poembooth.com";
+
+  const languages: Record<string, string> = {};
+  for (const loc of locales) {
+    for (const reg of regions) {
+      const country = regionToCountry[reg];
+      const hreflangKey = reg === "row" ? loc : `${loc}-${country}`;
+      languages[hreflangKey] = `${baseUrl}/${loc}/${reg}/blog`;
+    }
+  }
+  languages["x-default"] = `${baseUrl}/en/nl/blog`;
+
   return {
-    title: t("title"),
+    title: t("metaTitle"),
     description: t("description"),
+    alternates: {
+      canonical: `${baseUrl}/${locale}/${region}/blog`,
+      languages,
+    },
   };
 }
 

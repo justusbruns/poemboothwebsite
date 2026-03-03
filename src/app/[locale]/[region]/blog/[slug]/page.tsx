@@ -16,6 +16,16 @@ import { urlFor } from "../../../../../../sanity/lib/image";
 import { locales, regions } from "@/i18n/routing";
 import { JsonLd, BreadcrumbListJsonLd } from "@/components/seo/JsonLd";
 
+const regionToCountry: Record<string, string> = {
+  nl: "NL",
+  us: "US",
+  de: "DE",
+  fr: "FR",
+  it: "IT",
+  be: "BE",
+  row: "001",
+};
+
 interface PageProps {
   params: Promise<{ locale: string; region: string; slug: string }>;
 }
@@ -76,9 +86,23 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://poembooth.com";
   const coverUrl = post.coverImage?.asset?.url;
 
+  const languages: Record<string, string> = {};
+  for (const loc of locales) {
+    for (const reg of regions) {
+      const country = regionToCountry[reg];
+      const hreflangKey = reg === "row" ? loc : `${loc}-${country}`;
+      languages[hreflangKey] = `${baseUrl}/${loc}/${reg}/blog/${slug}`;
+    }
+  }
+  languages["x-default"] = `${baseUrl}/en/nl/blog/${slug}`;
+
   return {
     title,
     description,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/${region}/blog/${slug}`,
+      languages,
+    },
     openGraph: {
       title,
       description,
