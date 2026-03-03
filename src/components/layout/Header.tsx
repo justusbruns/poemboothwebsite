@@ -58,7 +58,7 @@ export default function Header({ logo }: HeaderProps) {
             </a>
             <Link
               href={`/${locale}/${region}/blog`}
-              className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+              className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors ml-4"
             >
               Blog
             </Link>

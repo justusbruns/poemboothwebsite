@@ -1,9 +1,7 @@
-"use client";
-
-import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import FAQTabs from "./FAQTabs";
 
 const TABS = ["general", "agencies", "private", "editions"] as const;
 type Tab = (typeof TABS)[number];
@@ -15,61 +13,14 @@ const FAQ_KEYS: Record<Tab, string[]> = {
   editions: ["q1", "q2", "q3", "q4"],
 };
 
-function AccordionItem({
-  question,
-  answer,
-  isOpen,
-  onToggle,
-}: {
-  question: string;
-  answer: string;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <div className="border-b border-border">
-      <button
-        className="flex w-full items-center justify-between py-5 text-left"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-      >
-        <span className="text-base font-medium text-text-primary pr-4">
-          {question}
-        </span>
-        <svg
-          className={`w-5 h-5 shrink-0 text-text-secondary transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
-      <div
-        className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? "max-h-96 pb-5" : "max-h-0"
-        }`}
-      >
-        <p className="text-text-secondary leading-relaxed">{answer}</p>
-      </div>
-    </div>
-  );
-}
+export default async function FAQ() {
+  const t = await getTranslations("faq");
 
-export default function FAQ() {
-  const t = useTranslations("faq");
-  const [activeTab, setActiveTab] = useState<Tab>("general");
-  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
-
-  const toggleItem = (key: string) => {
-    setOpenItems((prev) => ({ ...prev, [key]: !prev[key] }));
+  const tabLabels: Record<Tab, string> = {
+    general: t("tabs.general"),
+    agencies: t("tabs.agencies"),
+    private: t("tabs.private"),
+    editions: t("tabs.editions"),
   };
 
   return (
@@ -77,37 +28,47 @@ export default function FAQ() {
       <Container>
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 
-        {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mt-10 mb-8">
-          {TABS.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeTab === tab
-                  ? "bg-text-primary text-bg-primary"
-                  : "bg-bg-secondary text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              {t(`tabs.${tab}`)}
-            </button>
-          ))}
-        </div>
+        {/* Tab buttons — client component for interactivity only */}
+        <FAQTabs tabLabels={tabLabels} />
 
-        {/* Accordion */}
+        {/* All tab panels rendered in HTML — crawlable without JS */}
         <div className="max-w-3xl mx-auto">
-          {FAQ_KEYS[activeTab].map((key) => {
-            const itemKey = `${activeTab}.${key}`;
-            return (
-              <AccordionItem
-                key={itemKey}
-                question={t(`${activeTab}.${key}.q`)}
-                answer={t(`${activeTab}.${key}.a`)}
-                isOpen={!!openItems[itemKey]}
-                onToggle={() => toggleItem(itemKey)}
-              />
-            );
-          })}
+          {TABS.map((tab) => (
+            <div
+              key={tab}
+              id={`faq-panel-${tab}`}
+              className={tab === "general" ? "" : "hidden"}
+            >
+              {FAQ_KEYS[tab].map((key) => (
+                <details key={key} className="group border-b border-border">
+                  <summary className="flex w-full items-center justify-between py-5 cursor-pointer [&::-webkit-details-marker]:hidden [&::marker]:hidden">
+                    <span className="text-base font-medium text-text-primary pr-4">
+                      {t(`${tab}.${key}.q`)}
+                    </span>
+                    <svg
+                      className="w-5 h-5 shrink-0 text-text-secondary transition-transform duration-200 group-open:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </summary>
+                  <div className="pb-5">
+                    <p className="text-text-secondary leading-relaxed">
+                      {t(`${tab}.${key}.a`)}
+                    </p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          ))}
         </div>
       </Container>
     </section>
