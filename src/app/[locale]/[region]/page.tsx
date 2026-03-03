@@ -249,7 +249,7 @@ export default async function LandingPage({ params }: PageProps) {
         <PhotoGallery images={galleryImages} />
         <Practicalities />
         <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
-        <FAQ />
+        <FAQ locale={locale} />
         <LatestBlogPosts posts={pageData?.latestBlogPosts ?? []} />
         <VouwBanner />
       </main>

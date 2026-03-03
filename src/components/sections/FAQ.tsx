@@ -13,8 +13,8 @@ const FAQ_KEYS: Record<Tab, string[]> = {
   editions: ["q1", "q2", "q3", "q4"],
 };
 
-export default async function FAQ() {
-  const t = await getTranslations("faq");
+export default async function FAQ({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "faq" });
 
   const tabLabels: Record<Tab, string> = {
     general: t("tabs.general"),
