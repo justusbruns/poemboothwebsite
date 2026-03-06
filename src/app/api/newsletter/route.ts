@@ -16,10 +16,8 @@ export async function POST(req: NextRequest) {
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    console.error("MailerLite error:", res.status, JSON.stringify(err));
-    console.error("API key present:", !!process.env.MAILERLITE_API_KEY, "length:", process.env.MAILERLITE_API_KEY?.length);
     return NextResponse.json(
-      { error: (err as { message?: string })?.message || "Subscription failed", status: res.status },
+      { error: (err as { message?: string })?.message || "Subscription failed" },
       { status: res.status }
     );
   }
