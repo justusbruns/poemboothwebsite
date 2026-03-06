@@ -22,6 +22,19 @@ function TypewriterText({ text, progress }: { text: string; progress: MotionValu
   );
 }
 
+function PlayIcon() {
+  return (
+    <svg
+      width="11" height="11"
+      viewBox="0 0 11 11"
+      fill="currentColor"
+      className="inline-block mr-1.5 -mt-0.5"
+    >
+      <polygon points="1,0.5 10.5,5.5 1,10.5" />
+    </svg>
+  );
+}
+
 function RestartIcon() {
   return (
     <svg
@@ -379,13 +392,23 @@ export default function ScrollEdition({
                 onClick={handleGenerate}
                 className="absolute inset-0 z-20 flex items-center justify-center cursor-pointer group"
               >
-                <span className="translate-y-[10px] px-5 py-2.5 bg-white/90 text-gray-900 rounded-full text-sm font-semibold shadow-lg group-hover:bg-white transition-colors">
+                <motion.span
+                  className="translate-y-[10px] px-5 py-2.5 bg-white/90 text-gray-900 rounded-full text-sm font-semibold shadow-lg group-hover:bg-white transition-colors"
+                  animate={{ scale: [1, 1.1, 1, 1.06, 1] }}
+                  transition={{
+                    duration: 0.7,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                    repeatDelay: 1,
+                  }}
+                >
+                  <PlayIcon />
                   {generateButtonText ?? (
                     outputType === "poem" ? t("generatePoem") :
                     outputType === "roast" ? t("generateRoast") :
                     t("generatePortrait")
                   )}
-                </span>
+                </motion.span>
               </button>
             )}
 

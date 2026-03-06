@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import { trackLeadIntent } from "@/lib/tracking";
 
 interface HubPricing {
   hubName: string;
@@ -265,6 +266,7 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
               href={bookingHref}
               variant="primary"
               size="lg"
+              onClick={() => trackLeadIntent()}
             >
               {t("ctaButton")}
             </Button>

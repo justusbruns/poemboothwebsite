@@ -7,9 +7,10 @@ interface CookieConsentProps {
   locale: string;
   region: string;
   onAccept: () => void;
+  onDecline: () => void;
 }
 
-export function CookieConsent({ locale, region, onAccept }: CookieConsentProps) {
+export function CookieConsent({ locale, region, onAccept, onDecline }: CookieConsentProps) {
   const t = useTranslations("consent");
 
   return (
@@ -24,21 +25,32 @@ export function CookieConsent({ locale, region, onAccept }: CookieConsentProps) 
         </p>
 
         <p className="font-body text-text-muted text-sm mb-6">
-          {t("privacyNote")}{" "}
-          <Link
-            href={`/${locale}/${region}/user-agreement`}
-            className="text-text-primary underline hover:no-underline"
-          >
-            {t("privacyLink")}
-          </Link>
+          {t.rich("privacyNote", {
+            link: (chunks) => (
+              <Link
+                href={`/${locale}/${region}/user-agreement`}
+                className="text-text-primary underline hover:no-underline"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
         </p>
 
-        <button
-          onClick={onAccept}
-          className="w-full rounded-md bg-button-primary py-3 px-6 font-body text-button-text transition-colors hover:bg-button-primary-hover"
-        >
-          {t("acceptButton")}
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={onDecline}
+            className="flex-1 rounded-md border border-border py-3 px-6 font-body text-text-secondary transition-colors hover:bg-bg-secondary"
+          >
+            {t("declineButton")}
+          </button>
+          <button
+            onClick={onAccept}
+            className="flex-1 rounded-md bg-button-primary py-3 px-6 font-body text-button-text transition-colors hover:bg-button-primary-hover"
+          >
+            {t("acceptButton")}
+          </button>
+        </div>
       </div>
     </div>
   );

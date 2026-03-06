@@ -8,6 +8,7 @@ import {
   HowItWorks,
   EditionShowcase,
   PhotoGallery,
+  Newsletter,
   Practicalities,
   BookingRates,
   FAQ,
@@ -247,6 +248,7 @@ export default async function LandingPage({ params }: PageProps) {
         <HowItWorks steps={howItWorksSteps} />
         <EditionShowcase editions={editions} />
         <PhotoGallery images={galleryImages} />
+        <Newsletter />
         <Practicalities />
         <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <FAQ locale={locale} />

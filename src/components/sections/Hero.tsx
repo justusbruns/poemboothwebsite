@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
+import { trackLeadIntent } from "@/lib/tracking";
 
 interface HeroProps {
   heroImage?: string;
@@ -40,6 +41,7 @@ export default function Hero({ heroImage, bookingUrl }: HeroProps) {
                 href={bookingHref}
                 variant="primary"
                 size="lg"
+                onClick={() => trackLeadIntent()}
               >
                 {t("ctaButton")}
               </Button>
