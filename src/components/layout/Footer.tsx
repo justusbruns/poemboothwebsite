@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Image from "next/image";
 import Link from "next/link";
+import FooterNewsletter from "@/components/layout/FooterNewsletter";
 
 interface FooterData {
   contactEmail?: string;
@@ -179,6 +180,19 @@ export default function Footer({ footerData, logo }: FooterProps) {
                 </a>
               </div>
             </div>
+          </div>
+        </Container>
+      </div>
+
+      {/* Newsletter */}
+      <div className="py-8 border-t border-white/10">
+        <Container>
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            <div className="shrink-0">
+              <p className="text-sm font-semibold text-white/90">{t("newsletterTitle")}</p>
+              <p className="text-sm text-white/60">{t("newsletterSubtitle")}</p>
+            </div>
+            <FooterNewsletter />
           </div>
         </Container>
       </div>

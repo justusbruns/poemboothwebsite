@@ -189,10 +189,17 @@
   },
   "consent": {
     "title": "Welkom bij Poem Booth",
-    "message": "We gebruiken analytische cookies om te begrijpen waar onze bezoekers vandaan komen. Dit helpt ons de magie van AI-gedreven poëzie met meer mensen over de hele wereld te delen.",
-    "privacyNote": "Door verder te gaan, ga je akkoord met ons gebruik van analytische cookies.",
+    "message": "We gebruiken analytische en marketingcookies om te begrijpen waar onze bezoekers vandaan komen. Dit helpt ons de magie van AI-gedreven poëzie met meer mensen over de hele wereld te delen.",
+    "privacyNote": "Door verder te gaan, ga je akkoord met ons gebruik van cookies. <link>Privacybeleid</link>",
     "privacyLink": "Privacybeleid",
-    "acceptButton": "Ga door naar Poem Booth"
+    "acceptButton": "Ga door naar Poem Booth",
+    "declineButton": "Weigeren"
+  },
+  "newsletter": {
+    "title": "Blijf op de hoogte",
+    "subtitle": "Ontvang updates over nieuwe edities, evenementen en verhalen van de Poem Booth.",
+    "placeholder": "Jouw e-mailadres",
+    "cta": "Inschrijven"
   },
   "vouwBanner": {
     "heading": "Poem Booth is een werk van VOUW. Ontdek meer van hun uitvindingen.",
@@ -205,7 +212,7 @@
     "adminAddress": "Administratieadres:",
     "adminCompany": "VOUW B.V.",
     "adminStreet": "Krugerplein 4-1",
-    "adminCity": "1091KX Amsterdam",
+    "adminCity": "1091 KX Amsterdam",
     "adminCountry": "Nederland",
     "studioAddress": "Studio / Bezoekadres:",
     "studioStreet": "Generaal Vetterstraat 57",
@@ -222,7 +229,11 @@
     "copyright": "© {year} VOUW B.V. Alle rechten voorbehouden.",
     "trademark": "Poem Booth® is een geregistreerd handelsmerk en beschermd merk.",
     "privacy": "Privacybeleid",
-    "terms": "Algemene Voorwaarden"
+    "terms": "Algemene Voorwaarden",
+    "newsletterTitle": "Blijf op de hoogte",
+    "newsletterSubtitle": "Updates over nieuwe edities en evenementen.",
+    "placeholder": "Jouw e-mailadres",
+    "cta": "Inschrijven"
   },
   "blog": {
     "title": "Blog",

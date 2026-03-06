@@ -189,10 +189,17 @@
   },
   "consent": {
     "title": "Willkommen bei Poem Booth",
-    "message": "Wir verwenden Analyse-Cookies, um zu verstehen, woher unsere Besucher kommen. Dies hilft uns, die Magie der KI-gestützten Poesie mit mehr Menschen weltweit zu teilen.",
-    "privacyNote": "Durch Fortfahren stimmen Sie der Verwendung von Analyse-Cookies zu.",
+    "message": "Wir verwenden Analyse- und Marketing-Cookies, um zu verstehen, woher unsere Besucher kommen. Das hilft uns, die Magie der KI-gestützten Poesie mit mehr Menschen weltweit zu teilen.",
+    "privacyNote": "Durch Fortfahren stimmen Sie unserer Cookie-Nutzung zu. <link>Datenschutzrichtlinie</link>",
     "privacyLink": "Datenschutzrichtlinie",
-    "acceptButton": "Weiter zu Poem Booth"
+    "acceptButton": "Weiter zu Poem Booth",
+    "declineButton": "Ablehnen"
+  },
+  "newsletter": {
+    "title": "Bleib auf dem Laufenden",
+    "subtitle": "Erhalte Updates zu neuen Editionen, Veranstaltungen und Geschichten rund um die Poem Booth.",
+    "placeholder": "Deine E-Mail-Adresse",
+    "cta": "Abonnieren"
   },
   "vouwBanner": {
     "heading": "Poem Booth ist ein Werk von VOUW. Entdecke weitere ihrer Erfindungen.",
@@ -205,7 +212,7 @@
     "adminAddress": "Verwaltungsadresse:",
     "adminCompany": "VOUW B.V.",
     "adminStreet": "Krugerplein 4-1",
-    "adminCity": "1091KX Amsterdam",
+    "adminCity": "1091 KX Amsterdam",
     "adminCountry": "Niederlande",
     "studioAddress": "Studio / Besuchsadresse:",
     "studioStreet": "Generaal Vetterstraat 57",
@@ -222,7 +229,11 @@
     "copyright": "© {year} VOUW B.V. Alle Rechte vorbehalten.",
     "trademark": "Poem Booth® ist eine eingetragene Marke und geschützte Marke.",
     "privacy": "Datenschutz",
-    "terms": "AGB"
+    "terms": "AGB",
+    "newsletterTitle": "Bleib auf dem Laufenden",
+    "newsletterSubtitle": "Updates zu neuen Editionen und Veranstaltungen.",
+    "placeholder": "Deine E-Mail-Adresse",
+    "cta": "Abonnieren"
   },
   "blog": {
     "title": "Blog",

@@ -189,10 +189,17 @@
   },
   "consent": {
     "title": "Bienvenue sur Poem Booth",
-    "message": "Nous utilisons des cookies analytiques pour comprendre d'où viennent nos visiteurs. Cela nous aide à partager la magie de la poésie générée par l'IA avec plus de personnes à travers le monde.",
-    "privacyNote": "En continuant, vous acceptez notre utilisation de cookies analytiques.",
+    "message": "Nous utilisons des cookies analytiques et marketing pour comprendre d'où viennent nos visiteurs. Cela nous aide à partager la magie de la poésie générée par l'IA avec plus de personnes à travers le monde.",
+    "privacyNote": "En continuant, vous acceptez notre utilisation des cookies. <link>Politique de confidentialité</link>",
     "privacyLink": "Politique de confidentialité",
-    "acceptButton": "Continuer vers Poem Booth"
+    "acceptButton": "Continuer vers Poem Booth",
+    "declineButton": "Refuser"
+  },
+  "newsletter": {
+    "title": "Restez informé",
+    "subtitle": "Recevez des mises à jour sur les nouvelles éditions, les événements et les histoires du Poem Booth.",
+    "placeholder": "Votre adresse e-mail",
+    "cta": "S'abonner"
   },
   "vouwBanner": {
     "heading": "Poem Booth est une création de VOUW. Découvrez plus de leurs inventions.",
@@ -205,7 +212,7 @@
     "adminAddress": "Adresse administrative :",
     "adminCompany": "VOUW B.V.",
     "adminStreet": "Krugerplein 4-1",
-    "adminCity": "1091KX Amsterdam",
+    "adminCity": "1091 KX Amsterdam",
     "adminCountry": "Pays-Bas",
     "studioAddress": "Studio / Adresse de visite :",
     "studioStreet": "Generaal Vetterstraat 57",
@@ -222,7 +229,11 @@
     "copyright": "© {year} VOUW B.V. Tous droits réservés.",
     "trademark": "Poem Booth® est une marque déposée et protégée.",
     "privacy": "Politique de confidentialité",
-    "terms": "Conditions d'utilisation"
+    "terms": "Conditions d'utilisation",
+    "newsletterTitle": "Restez informé",
+    "newsletterSubtitle": "Mises à jour sur les nouvelles éditions et événements.",
+    "placeholder": "Votre adresse e-mail",
+    "cta": "S'abonner"
   },
   "blog": {
     "title": "Blog",

@@ -189,10 +189,17 @@
   },
   "consent": {
     "title": "Benvenuto su Poem Booth",
-    "message": "Utilizziamo cookie analitici per capire da dove provengono i nostri visitatori. Questo ci aiuta a condividere la magia della poesia generata dall'IA con più persone in tutto il mondo.",
-    "privacyNote": "Continuando, accetti il nostro utilizzo di cookie analitici.",
+    "message": "Utilizziamo cookie analitici e di marketing per capire da dove provengono i nostri visitatori. Questo ci aiuta a condividere la magia della poesia generata dall'IA con più persone in tutto il mondo.",
+    "privacyNote": "Continuando, accetti il nostro utilizzo dei cookie. <link>Informativa sulla privacy</link>",
     "privacyLink": "Informativa sulla privacy",
-    "acceptButton": "Continua su Poem Booth"
+    "acceptButton": "Continua su Poem Booth",
+    "declineButton": "Rifiuta"
+  },
+  "newsletter": {
+    "title": "Rimani aggiornato",
+    "subtitle": "Ricevi aggiornamenti su nuove edizioni, eventi e storie del Poem Booth.",
+    "placeholder": "Il tuo indirizzo email",
+    "cta": "Iscriviti"
   },
   "vouwBanner": {
     "heading": "Poem Booth è un'opera di VOUW. Scopri altre loro invenzioni.",
@@ -205,7 +212,7 @@
     "adminAddress": "Indirizzo amministrativo:",
     "adminCompany": "VOUW B.V.",
     "adminStreet": "Krugerplein 4-1",
-    "adminCity": "1091KX Amsterdam",
+    "adminCity": "1091 KX Amsterdam",
     "adminCountry": "Paesi Bassi",
     "studioAddress": "Studio / Indirizzo visita:",
     "studioStreet": "Generaal Vetterstraat 57",
@@ -222,7 +229,11 @@
     "copyright": "© {year} VOUW B.V. Tutti i diritti riservati.",
     "trademark": "Poem Booth® è un marchio registrato e protetto.",
     "privacy": "Privacy Policy",
-    "terms": "Termini di Servizio"
+    "terms": "Termini di Servizio",
+    "newsletterTitle": "Rimani aggiornato",
+    "newsletterSubtitle": "Aggiornamenti su nuove edizioni ed eventi.",
+    "placeholder": "Il tuo indirizzo email",
+    "cta": "Iscriviti"
   },
   "blog": {
     "title": "Blog",
