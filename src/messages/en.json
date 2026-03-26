@@ -126,8 +126,8 @@
     }
   },
   "booking": {
-    "title": "Hire the Poem Booth — rates",
-    "subtitle": "Rates for hiring the Poem Booth, departing from our {hub}.",
+    "title": "Book your Booth",
+    "subtitle": "Rates departing from our {hub} hub. Prices exclude applicable taxes.",
     "ctaButton": "Get a Quote",
     "footnote": "Prices exclude applicable taxes. Custom packages available.",
     "transport": {
@@ -158,12 +158,19 @@
     "portraitStyle": {
       "title": "Portrait Style",
       "description": "Add a custom AI portrait style to your event",
-      "flatFee": "flat fee"
+      "flatFee": "flat fee",
+      "rentalNote": "Includes 1 base portrait style",
+      "extraBaseTitle": "Extra Portrait Style",
+      "extraBaseDescription": "Add additional base portrait styles to your event",
+      "perStyle": "per style",
+      "customTitle": "Custom Portrait Style",
+      "customDescription": "A fully custom AI portrait style designed for your event"
     },
     "roastBooth": {
       "title": "Roast Booth",
       "description": "Comedy roast mode for your event",
-      "flatFee": "flat fee"
+      "flatFee": "flat fee",
+      "rentalNote": "Includes Roast Booth activation fee"
     },
     "language": {
       "title": "Additional Language",
@@ -174,7 +181,24 @@
       "title": "Outdoor Installation",
       "description": "Additional setup for outdoor events",
       "flatFee": "flat fee"
-    }
+    },
+    "tabs": {
+      "poem": {
+        "label": "Poem Booth",
+        "description": "AI-generated poems inspired by your photo. A unique keepsake for every guest."
+      },
+      "portrait": {
+        "label": "Portrait Booth",
+        "description": "Artistic AI-generated portraits from your photo in a custom style."
+      },
+      "roast": {
+        "label": "Roast Booth",
+        "description": "Hilarious AI-generated comedy roasts based on your photo."
+      }
+    },
+    "startingFrom": "Starting from",
+    "included": "included",
+    "optionalAddons": "Optional add-ons"
   },
   "otherRegions": {
     "title": "Outside US/EU?",
@@ -331,5 +355,25 @@
         "a": "The AI is trained on and inspired by real poets and artists. For poems you can choose from various styles. For portraits we generate unique artworks in diverse art movements."
       }
     }
+  },
+  "nav": {
+    "howItWorks": "How it works",
+    "gallery": "Gallery",
+    "rates": "Rates",
+    "faq": "FAQ",
+    "styles": "Styles"
+  },
+  "styles": {
+    "metaTitle": "Styles | Poem Booth",
+    "metaDescription": "Browse all available portrait and poem styles for your Poem Booth event.",
+    "title": "Explore our styles",
+    "subtitle": "Browse portrait and poem styles available for your event",
+    "tabs": {
+      "portrait": "Portrait Booth",
+      "poem": "Poem Booth"
+    },
+    "portraitIntro": "Each portrait style transforms your photo into a unique AI-generated artwork. Toggle between before and after to see the magic.",
+    "poemIntro": "Each poem style generates a unique piece of poetry inspired by your photo. Read the examples below.",
+    "bookThisStyle": "Book with this style"
   }
 }

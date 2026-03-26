@@ -31,7 +31,7 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
   const t = useTranslations("gallery");
 
   return (
-    <section className="py-16 md:py-24 bg-bg-primary">
+    <section id="gallery" className="py-16 md:py-24 bg-bg-primary">
       <Container>
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 

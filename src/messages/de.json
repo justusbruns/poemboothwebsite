@@ -126,8 +126,8 @@
     }
   },
   "booking": {
-    "title": "Poem Booth mieten — Preise",
-    "subtitle": "Preise für die Miete der Poem Booth, ab unserem {hub}.",
+    "title": "Buchen Sie Ihre Booth",
+    "subtitle": "Preise ab unserem {hub} Hub. Preise verstehen sich zzgl. MwSt.",
     "ctaButton": "Angebot anfordern",
     "footnote": "Preise verstehen sich zzgl. MwSt. Individuelle Pakete verfügbar.",
     "transport": {
@@ -158,12 +158,19 @@
     "portraitStyle": {
       "title": "Porträtstil",
       "description": "Fügen Sie einen individuellen KI-Porträtstil zu Ihrem Event hinzu",
-      "flatFee": "Pauschalgebühr"
+      "flatFee": "Pauschalgebühr",
+      "rentalNote": "Inklusive 1 Basis-Porträtstil",
+      "extraBaseTitle": "Extra Porträtstil",
+      "extraBaseDescription": "Fügen Sie zusätzliche Basis-Porträtstile zu Ihrem Event hinzu",
+      "perStyle": "pro Stil",
+      "customTitle": "Custom Porträtstil",
+      "customDescription": "Ein vollständig individueller KI-Porträtstil für Ihr Event"
     },
     "roastBooth": {
       "title": "Roast Booth",
       "description": "Comedy-Roast-Modus für Ihr Event",
-      "flatFee": "Pauschalgebühr"
+      "flatFee": "Pauschalgebühr",
+      "rentalNote": "Inklusive Roast Booth Aktivierungsgebühr"
     },
     "language": {
       "title": "Zusätzliche Sprache",
@@ -174,7 +181,24 @@
       "title": "Außeninstallation",
       "description": "Zusätzliche Einrichtung für Outdoor-Events",
       "flatFee": "Pauschalgebühr"
-    }
+    },
+    "tabs": {
+      "poem": {
+        "label": "Poem Booth",
+        "description": "KI-generierte Gedichte inspiriert von Ihrem Foto. Ein einzigartiges Andenken für jeden Gast."
+      },
+      "portrait": {
+        "label": "Portrait Booth",
+        "description": "Künstlerische KI-Porträts von Ihrem Foto in einem individuellen Stil."
+      },
+      "roast": {
+        "label": "Roast Booth",
+        "description": "Urkomische KI-generierte Comedy-Roasts basierend auf Ihrem Foto."
+      }
+    },
+    "startingFrom": "Ab",
+    "included": "inklusive",
+    "optionalAddons": "Optionale Extras"
   },
   "otherRegions": {
     "title": "Außerhalb USA/EU?",
@@ -331,5 +355,25 @@
         "a": "Die KI ist von echten Dichtern und Künstlern inspiriert. Für Gedichte können Sie aus verschiedenen Stilen wählen."
       }
     }
+  },
+  "nav": {
+    "howItWorks": "So funktioniert es",
+    "gallery": "Galerie",
+    "rates": "Preise",
+    "faq": "FAQ",
+    "styles": "Stile"
+  },
+  "styles": {
+    "metaTitle": "Stile | Poem Booth",
+    "metaDescription": "Entdecken Sie alle verfügbaren Porträt- und Gedichtstile für Ihr Poem Booth Event.",
+    "title": "Entdecken Sie unsere Stile",
+    "subtitle": "Porträt- und Gedichtstile für Ihr Event",
+    "tabs": {
+      "portrait": "Portrait Booth",
+      "poem": "Poem Booth"
+    },
+    "portraitIntro": "Jeder Porträtstil verwandelt Ihr Foto in ein einzigartiges KI-Kunstwerk. Wechseln Sie zwischen Vorher und Nachher.",
+    "poemIntro": "Jeder Gedichtstil generiert ein einzigartiges Gedicht inspiriert von Ihrem Foto. Lesen Sie die Beispiele.",
+    "bookThisStyle": "Mit diesem Stil buchen"
   }
 }

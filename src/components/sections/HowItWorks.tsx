@@ -93,7 +93,7 @@ export default function HowItWorks({ steps }: HowItWorksProps) {
   const displaySteps = steps || defaultSteps;
 
   return (
-    <section className="py-16 md:py-24 bg-bg-primary">
+    <section id="how-it-works" className="py-16 md:py-24 bg-bg-primary">
       <Container>
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 

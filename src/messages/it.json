@@ -126,8 +126,8 @@
     }
   },
   "booking": {
-    "title": "Noleggia il Poem Booth — tariffe",
-    "subtitle": "Tariffe per il noleggio del Poem Booth, in partenza dal nostro {hub}.",
+    "title": "Prenota la tua Booth",
+    "subtitle": "Tariffe in partenza dal nostro hub di {hub}. Prezzi IVA esclusa.",
     "ctaButton": "Richiedi un preventivo",
     "footnote": "Prezzi IVA esclusa. Pacchetti personalizzati disponibili.",
     "transport": {
@@ -158,12 +158,19 @@
     "portraitStyle": {
       "title": "Stile ritratto",
       "description": "Aggiungi uno stile di ritratto IA personalizzato al tuo evento",
-      "flatFee": "tariffa fissa"
+      "flatFee": "tariffa fissa",
+      "rentalNote": "Include 1 stile ritratto base",
+      "extraBaseTitle": "Stile Ritratto Extra",
+      "extraBaseDescription": "Aggiungi stili ritratto base aggiuntivi al tuo evento",
+      "perStyle": "per stile",
+      "customTitle": "Stile Ritratto Personalizzato",
+      "customDescription": "Uno stile ritratto IA completamente personalizzato per il tuo evento"
     },
     "roastBooth": {
       "title": "Roast Booth",
       "description": "Modalità roast comico per il tuo evento",
-      "flatFee": "tariffa fissa"
+      "flatFee": "tariffa fissa",
+      "rentalNote": "Include la quota di attivazione del Roast Booth"
     },
     "language": {
       "title": "Lingua Aggiuntiva",
@@ -174,7 +181,24 @@
       "title": "Installazione Esterna",
       "description": "Configurazione aggiuntiva per eventi all'aperto",
       "flatFee": "tariffa fissa"
-    }
+    },
+    "tabs": {
+      "poem": {
+        "label": "Poem Booth",
+        "description": "Poesie generate dall’IA ispirate alla tua foto. Un ricordo unico per ogni ospite."
+      },
+      "portrait": {
+        "label": "Portrait Booth",
+        "description": "Ritratti artistici generati dall’IA dalla tua foto in uno stile personalizzato."
+      },
+      "roast": {
+        "label": "Roast Booth",
+        "description": "Esilaranti roast comici generati dall’IA basati sulla tua foto."
+      }
+    },
+    "startingFrom": "A partire da",
+    "included": "incluso",
+    "optionalAddons": "Extra opzionali"
   },
   "otherRegions": {
     "title": "Fuori USA/UE?",
@@ -331,5 +355,25 @@
         "a": "L'AI è ispirata da veri poeti e artisti. Per le poesie puoi scegliere tra vari stili."
       }
     }
+  },
+  "nav": {
+    "howItWorks": "Come funziona",
+    "gallery": "Galleria",
+    "rates": "Tariffe",
+    "faq": "FAQ",
+    "styles": "Stili"
+  },
+  "styles": {
+    "metaTitle": "Stili | Poem Booth",
+    "metaDescription": "Scopri tutti gli stili ritratto e poesia disponibili per il tuo evento Poem Booth.",
+    "title": "Scopri i nostri stili",
+    "subtitle": "Sfoglia gli stili ritratto e poesia per il tuo evento",
+    "tabs": {
+      "portrait": "Portrait Booth",
+      "poem": "Poem Booth"
+    },
+    "portraitIntro": "Ogni stile ritratto trasforma la tua foto in un’opera d’arte IA unica. Alterna tra prima e dopo.",
+    "poemIntro": "Ogni stile poetico genera una poesia unica ispirata alla tua foto. Leggi gli esempi.",
+    "bookThisStyle": "Prenota con questo stile"
   }
 }

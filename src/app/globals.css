@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Century Old Style Font */
 @font-face {
   font-family: "Century Old Style";

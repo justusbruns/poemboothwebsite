@@ -15,6 +15,7 @@ import {
   LatestBlogPosts,
 } from "@/components/sections";
 import VouwBanner from "@/components/sections/VouwBanner";
+import StylesGallery from "@/components/sections/StylesGallery";
 import { getHubByRegion } from "@/lib/supabase/server";
 import { REGION_CONFIGS, type Region } from "@/lib/supabase/types";
 import { client } from "../../../../sanity/lib/client";
@@ -128,10 +129,27 @@ const getLocalizedValue = (field: LocalizedField | undefined, loc: string): stri
 export default async function LandingPage({ params }: PageProps) {
   const { region, locale } = await params;
 
-  // Fetch CMS data from Sanity and hub pricing from Supabase in parallel
-  const [pageData, hubData] = await Promise.all([
+  // Fetch CMS data, hub pricing, and public styles in parallel
+  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
+  const bookingBase = bookingUrl.replace(/\/+$/, "").split("/").slice(0, 3).join("/");
+
+  async function fetchPublicStyles() {
+    try {
+      const res = await fetch(`${bookingBase}/api/public/styles`, {
+        cache: "no-store",
+      });
+      if (!res.ok) return [];
+      const data = await res.json();
+      return data.styles || [];
+    } catch {
+      return [];
+    }
+  }
+
+  const [pageData, hubData, publicStyles] = await Promise.all([
     client.fetch(pageDataQuery, { region }),
     getHubByRegion(region),
+    fetchPublicStyles(),
   ]);
 
   const regionConfig = REGION_CONFIGS[region as Region] || REGION_CONFIGS.nl;
@@ -154,6 +172,7 @@ export default async function LandingPage({ params }: PageProps) {
         },
         outdoorInstallationFee: hubData.outdoor_installation_fee || 0,
         imageStyleRate: hubData.image_style_rate || 0,
+        baseStyleRate: hubData.additional_language_rate || 0,
       }
     : undefined;
 
@@ -246,6 +265,14 @@ export default async function LandingPage({ params }: PageProps) {
         <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <ClientLogos logos={clientLogos} />
         <HowItWorks steps={howItWorksSteps} />
+        <section id="styles" className="py-16 md:py-24 bg-bg-primary">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <StylesGallery
+              styles={publicStyles}
+              bookingBaseUrl={`${bookingBase}/${locale}/booking`}
+            />
+          </div>
+        </section>
         <EditionShowcase editions={editions} />
         <PhotoGallery images={galleryImages} />
         <Newsletter />

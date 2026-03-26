@@ -126,8 +126,8 @@
     }
   },
   "booking": {
-    "title": "Poem Booth huren — tarieven",
-    "subtitle": "Tarieven voor het huren van de Poem Booth, vertrekkend vanuit onze {hub}.",
+    "title": "Boek je Booth",
+    "subtitle": "Tarieven vertrekkend vanuit onze {hub} hub. Prijzen zijn exclusief BTW.",
     "ctaButton": "Vraag een offerte aan",
     "footnote": "Prijzen zijn exclusief BTW. Maatwerkpakketten beschikbaar.",
     "transport": {
@@ -158,12 +158,19 @@
     "portraitStyle": {
       "title": "Portretstijl",
       "description": "Voeg een aangepaste AI-portretstijl toe aan je event",
-      "flatFee": "vast bedrag"
+      "flatFee": "vast bedrag",
+      "rentalNote": "Inclusief 1 basis portretstijl",
+      "extraBaseTitle": "Extra Portretstijl",
+      "extraBaseDescription": "Voeg extra basis portretstijlen toe aan je evenement",
+      "perStyle": "per stijl",
+      "customTitle": "Custom Portretstijl",
+      "customDescription": "Een volledig op maat gemaakte AI-portretstijl voor je evenement"
     },
     "roastBooth": {
       "title": "Roast Booth",
       "description": "Comedy roast modus voor je evenement",
-      "flatFee": "vast bedrag"
+      "flatFee": "vast bedrag",
+      "rentalNote": "Inclusief Roast Booth activatiekosten"
     },
     "language": {
       "title": "Extra taal",
@@ -174,7 +181,24 @@
       "title": "Buiteninstallatie",
       "description": "Extra opzet voor buitenevenementen",
       "flatFee": "vast bedrag"
-    }
+    },
+    "tabs": {
+      "poem": {
+        "label": "Poem Booth",
+        "description": "AI-gegenereerde gedichten geïnspireerd op je foto. Een uniek aandenken voor iedere gast."
+      },
+      "portrait": {
+        "label": "Portrait Booth",
+        "description": "Artistieke AI-portretten van je foto in een custom stijl."
+      },
+      "roast": {
+        "label": "Roast Booth",
+        "description": "Hilarische AI-gegenereerde comedy roasts op basis van je foto."
+      }
+    },
+    "startingFrom": "Vanaf",
+    "included": "inbegrepen",
+    "optionalAddons": "Optionele extra’s"
   },
   "otherRegions": {
     "title": "Buiten VS/EU?",
@@ -331,5 +355,25 @@
         "a": "De AI is getraind op en geïnspireerd door echte dichters en kunstenaars. Voor gedichten kun je kiezen uit verschillende stijlen. Voor portretten genereren we unieke kunstwerken in diverse kunststromingen."
       }
     }
+  },
+  "nav": {
+    "howItWorks": "Hoe het werkt",
+    "gallery": "Galerij",
+    "rates": "Tarieven",
+    "faq": "FAQ",
+    "styles": "Stijlen"
+  },
+  "styles": {
+    "metaTitle": "Stijlen | Poem Booth",
+    "metaDescription": "Bekijk alle beschikbare portret- en dichtstijlen voor je Poem Booth evenement.",
+    "title": "Ontdek onze stijlen",
+    "subtitle": "Bekijk portret- en dichtstijlen beschikbaar voor je evenement",
+    "tabs": {
+      "portrait": "Portrait Booth",
+      "poem": "Poem Booth"
+    },
+    "portraitIntro": "Elke portretstijl transformeert je foto in een uniek AI-kunstwerk. Wissel tussen before en after om de magie te zien.",
+    "poemIntro": "Elke dichtstijl genereert een uniek gedicht geïnspireerd op je foto. Lees de voorbeelden hieronder.",
+    "bookThisStyle": "Boek met deze stijl"
   }
 }

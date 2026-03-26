@@ -37,6 +37,7 @@ export async function getHubByRegion(regionCode: string): Promise<{
   distance_unit: string | null;
   outdoor_installation_fee: number | null;
   image_style_rate: number | null;
+  additional_language_rate: number | null;
 } | null> {
   const supabase = createServerClient();
   if (!supabase) return null;
@@ -69,7 +70,8 @@ export async function getHubByRegion(regionCode: string): Promise<{
       minimum_transport_fee,
       distance_unit,
       outdoor_installation_fee,
-      image_style_rate
+      image_style_rate,
+      additional_language_rate
     `
     )
     .eq("region_code", dbRegionCode)
