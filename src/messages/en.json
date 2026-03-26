@@ -370,10 +370,12 @@
     "subtitle": "Browse portrait and poem styles available for your event",
     "tabs": {
       "portrait": "Portrait Booth",
-      "poem": "Poem Booth"
+      "poem": "Poem Booth",
+      "roast": "Roast Booth"
     },
     "portraitIntro": "Each portrait style transforms your photo into a unique AI-generated artwork. Toggle between before and after to see the magic.",
     "poemIntro": "Each poem style generates a unique piece of poetry inspired by your photo. Read the examples below.",
-    "bookThisStyle": "Book with this style"
+    "bookThisStyle": "Book with this style",
+    "roastIntro": "Hilarious AI-generated comedy roasts based on your photo. Perfect for parties and corporate events."
   }
 }

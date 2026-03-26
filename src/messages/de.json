@@ -370,10 +370,12 @@
     "subtitle": "Porträt- und Gedichtstile für Ihr Event",
     "tabs": {
       "portrait": "Portrait Booth",
-      "poem": "Poem Booth"
+      "poem": "Poem Booth",
+      "roast": "Roast Booth"
     },
     "portraitIntro": "Jeder Porträtstil verwandelt Ihr Foto in ein einzigartiges KI-Kunstwerk. Wechseln Sie zwischen Vorher und Nachher.",
     "poemIntro": "Jeder Gedichtstil generiert ein einzigartiges Gedicht inspiriert von Ihrem Foto. Lesen Sie die Beispiele.",
-    "bookThisStyle": "Mit diesem Stil buchen"
+    "bookThisStyle": "Mit diesem Stil buchen",
+    "roastIntro": "Urkomische KI-generierte Comedy-Roasts basierend auf Ihrem Foto. Perfekt für Partys und Firmenevents."
   }
 }

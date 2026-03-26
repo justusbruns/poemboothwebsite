@@ -370,10 +370,12 @@
     "subtitle": "Bekijk portret- en dichtstijlen beschikbaar voor je evenement",
     "tabs": {
       "portrait": "Portrait Booth",
-      "poem": "Poem Booth"
+      "poem": "Poem Booth",
+      "roast": "Roast Booth"
     },
     "portraitIntro": "Elke portretstijl transformeert je foto in een uniek AI-kunstwerk. Wissel tussen before en after om de magie te zien.",
     "poemIntro": "Elke dichtstijl genereert een uniek gedicht geïnspireerd op je foto. Lees de voorbeelden hieronder.",
-    "bookThisStyle": "Boek met deze stijl"
+    "bookThisStyle": "Boek met deze stijl",
+    "roastIntro": "Hilarische AI-gegenereerde comedy roasts op basis van je foto. Perfect voor feesten en bedrijfsevenementen."
   }
 }

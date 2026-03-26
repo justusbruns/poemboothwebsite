@@ -3,7 +3,17 @@
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState, useRef, useEffect } from "react";
-import { regions, type Region } from "@/i18n/routing";
+import { regions, type Region, type Locale } from "@/i18n/routing";
+
+const regionDefaultLocale: Record<Region, Locale> = {
+  nl: "nl",
+  us: "en",
+  de: "de",
+  fr: "fr",
+  it: "it",
+  be: "nl",
+  row: "en",
+};
 
 const regionLabels: Record<Region, string> = {
   nl: "Netherlands",
@@ -52,12 +62,11 @@ export default function RegionSwitcher() {
   }, []);
 
   const handleRegionChange = (newRegion: Region) => {
-    // Replace the region in the current path
     const pathParts = pathname.split("/");
-    // Path is like /locale/region/...
+    // Switch locale to the region's default language
+    pathParts[1] = regionDefaultLocale[newRegion];
     pathParts[2] = newRegion;
     const newPath = pathParts.join("/");
-    // Use full page navigation to ensure middleware runs and cookies are set
     window.location.href = newPath;
     setIsOpen(false);
   };

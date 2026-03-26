@@ -22,7 +22,7 @@ interface StylesGalleryProps {
   bookingBaseUrl: string;
 }
 
-type Tab = "image" | "poem";
+type Tab = "image" | "poem" | "roast";
 
 function PortraitStyleCard({
   style,
@@ -33,47 +33,75 @@ function PortraitStyleCard({
   bookingBaseUrl: string;
   bookLabel: string;
 }) {
-  const [showOriginal, setShowOriginal] = useState(false);
+  const [swapped, setSwapped] = useState(false);
+  const [showLabel, setShowLabel] = useState(false);
 
   const outputUrl = style.example_output_image_url;
   const inputUrl = style.example_input_image_url;
-  const activeUrl = showOriginal && inputUrl ? inputUrl : outputUrl;
+  const thumbUrl = swapped ? outputUrl : inputUrl;
+
+  const handleSwap = () => {
+    setSwapped(!swapped);
+    setShowLabel(true);
+    setTimeout(() => setShowLabel(false), 1500);
+  };
 
   return (
     <div className="group rounded-2xl overflow-hidden bg-bg-secondary border border-border-light flex flex-col">
       {/* Image container */}
       <div className="relative aspect-square overflow-hidden">
-        {activeUrl && (
+        {/* Main image */}
+        {outputUrl && (
           <Image
-            src={activeUrl}
+            src={outputUrl}
             alt={style.name}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className={`object-cover transition-all duration-500 ease-in-out ${
+              swapped ? "opacity-0 scale-95" : "opacity-100 scale-100"
+            }`}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            unoptimized
+          />
+        )}
+        {inputUrl && (
+          <Image
+            src={inputUrl}
+            alt={`Original for ${style.name}`}
+            fill
+            className={`object-cover transition-all duration-500 ease-in-out ${
+              swapped ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            }`}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             unoptimized
           />
         )}
 
-        {/* Before/After toggle */}
+        {/* Label bottom-left */}
         {inputUrl && outputUrl && (
-          <div className="absolute bottom-3 left-3 flex rounded-lg overflow-hidden bg-black/60 backdrop-blur-sm text-xs">
-            <button
-              onClick={() => setShowOriginal(false)}
-              className={`px-3 py-1.5 transition-colors ${
-                !showOriginal ? "bg-white text-black" : "text-white/80 hover:text-white"
-              }`}
-            >
-              After
-            </button>
-            <button
-              onClick={() => setShowOriginal(true)}
-              className={`px-3 py-1.5 transition-colors ${
-                showOriginal ? "bg-white text-black" : "text-white/80 hover:text-white"
-              }`}
-            >
-              Before
-            </button>
+          <div className={`absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-sm text-xs text-white font-medium transition-opacity duration-500 ${
+            showLabel ? "opacity-100" : "opacity-0"
+          }`}>
+            {swapped ? "Original" : "Portrait"}
           </div>
+        )}
+
+        {/* Thumbnail in bottom-right corner */}
+        {inputUrl && outputUrl && (
+          <button
+            onClick={handleSwap}
+            className="absolute bottom-3 right-3 w-20 h-20 rounded-xl overflow-hidden border-2 border-white shadow-lg cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95"
+          >
+            {thumbUrl && (
+              <Image
+                src={thumbUrl}
+                alt="Toggle view"
+                fill
+                className="object-cover"
+                sizes="80px"
+                unoptimized
+              />
+            )}
+          </button>
         )}
       </div>
 
@@ -178,11 +206,13 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
   const [activeTab, setActiveTab] = useState<Tab>("image");
 
   const imageStyles = styles.filter((s: PublicStyle) => s.style_type === "image");
-  const poemStyles = styles.filter((s: PublicStyle) => s.style_type === "poem");
+  const poemStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && !s.tags.includes("roast"));
+  const roastStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && s.tags.includes("roast"));
 
   const tabs: { key: Tab; label: string; count: number }[] = [
     { key: "image", label: t("tabs.portrait"), count: imageStyles.length },
     { key: "poem", label: t("tabs.poem"), count: poemStyles.length },
+    { key: "roast", label: t("tabs.roast"), count: roastStyles.length },
   ];
 
   return (
@@ -193,7 +223,7 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
       />
 
       {/* Tabs */}
-      <div className="flex rounded-xl bg-bg-secondary border border-border-light p-1 mt-10 mb-10 max-w-md mx-auto">
+      <div className="flex rounded-xl bg-bg-secondary border border-border-light p-1 mt-10 mb-10 max-w-lg mx-auto">
         {tabs.map((tab) => (
           <button
             key={tab.key}
@@ -237,6 +267,25 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
           </p>
           <div className="grid grid-cols-1 gap-6">
             {poemStyles.map((style: PublicStyle) => (
+              <PoemStyleCard
+                key={style.id}
+                style={style}
+                bookingBaseUrl={bookingBaseUrl}
+                bookLabel={t("bookThisStyle")}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Roast Styles */}
+      {activeTab === "roast" && (
+        <>
+          <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
+            {t("roastIntro")}
+          </p>
+          <div className="grid grid-cols-1 gap-6">
+            {roastStyles.map((style: PublicStyle) => (
               <PoemStyleCard
                 key={style.id}
                 style={style}

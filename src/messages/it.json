@@ -370,10 +370,12 @@
     "subtitle": "Sfoglia gli stili ritratto e poesia per il tuo evento",
     "tabs": {
       "portrait": "Portrait Booth",
-      "poem": "Poem Booth"
+      "poem": "Poem Booth",
+      "roast": "Roast Booth"
     },
     "portraitIntro": "Ogni stile ritratto trasforma la tua foto in un’opera d’arte IA unica. Alterna tra prima e dopo.",
     "poemIntro": "Ogni stile poetico genera una poesia unica ispirata alla tua foto. Leggi gli esempi.",
-    "bookThisStyle": "Prenota con questo stile"
+    "bookThisStyle": "Prenota con questo stile",
+    "roastIntro": "Esilaranti roast comici generati dall'IA basati sulla tua foto. Perfetti per feste ed eventi aziendali."
   }
 }
