@@ -23,8 +23,8 @@ export default function Header({ logo }: HeaderProps) {
   const home = `/${locale}/${region}`;
   const navLinks = [
     { label: t("howItWorks"), href: `${home}#how-it-works` },
-    { label: t("gallery"), href: `${home}#gallery` },
     { label: t("styles"), href: `${home}#styles` },
+    { label: t("gallery"), href: `${home}#gallery` },
     { label: t("rates"), href: `${home}#rates` },
     { label: t("faq"), href: `${home}#faq` },
     { label: "Blog", href: `${home}/blog` },
