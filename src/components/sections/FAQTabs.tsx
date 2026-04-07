@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const TABS = ["general", "agencies", "private", "editions"] as const;
+const TABS = ["general", "agencies", "private", "boothTypes"] as const;
 type Tab = (typeof TABS)[number];
 
 interface FAQTabsProps {

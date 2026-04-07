@@ -45,11 +45,11 @@
     },
     "step2": {
       "title": "Ontvang je Kunst",
-      "description": "Je foto wordt door onze AI omgezet in een persoonlijk gedicht of AI-portret — binnen 10 seconden."
+      "description": "Je foto wordt door onze AI omgezet in een persoonlijk gedicht of AI-portret — binnen 15-30 seconden."
     },
     "step3": {
-      "title": "Deel",
-      "description": "Deel je AI-gedicht of portret via de QR-code direct op je telefoon."
+      "title": "Deel & Print",
+      "description": "Deel je resultaat via QR-code op je telefoon of print het direct bij de booth."
     }
   },
   "editions": {
@@ -131,9 +131,11 @@
     "ctaButton": "Vraag een offerte aan",
     "footnote": "Prijzen zijn exclusief BTW. Maatwerkpakketten beschikbaar.",
     "transport": {
-      "title": "Transportkosten",
-      "perUnit": "per gereden {unit}",
-      "note": "(retour voor 1-daags event, 4x voor meerdere dagen)"
+      "title": "Transport",
+      "perUnit": "per {unit}",
+      "note": "(retour voor 1-daags event, 4x voor meerdere dagen)",
+      "minimumNote": "Minimaal {minimum} per transport",
+      "multiDayNote": "Bij een meerdaags event berekenen wij twee keer een retourtje."
     },
     "rental": {
       "title": "Basis huurtarief",
@@ -198,7 +200,24 @@
     },
     "startingFrom": "Vanaf",
     "included": "inbegrepen",
-    "optionalAddons": "Optionele extra’s"
+    "optionalAddons": "Optionele extra’s",
+    "flatFee": "eenmalig",
+    "portrait": {
+      "rentalNote": "Inclusief 1 basis portretstijl"
+    },
+    "roast": {
+      "rentalNote": "Inclusief Roast Booth activatie"
+    },
+    "thematic": {
+      "poemDescription": "Pas de stijl en toon van gedichten aan op het thema van je event",
+      "portraitDescription": "Een volledig op maat gemaakte AI-portretstijl voor je event",
+      "roastDescription": "Pas de roast-stijl aan op je event of publiek"
+    },
+    "extraStyle": {
+      "title": "Extra Portretstijl",
+      "description": "Voeg extra portretstijlen toe waar gasten uit kunnen kiezen",
+      "perStyle": "per stijl"
+    }
   },
   "otherRegions": {
     "title": "Buiten VS/EU?",
@@ -272,43 +291,46 @@
   },
   "faq": {
     "title": "Veelgestelde vragen",
-    "subtitle": "Alles wat je wilt weten over de Poem Booth — van huren tot techniek.",
+    "subtitle": "Alles wat je wilt weten over de Poem Booth",
     "tabs": {
       "general": "Algemeen",
       "agencies": "Voor eventbureaus",
       "private": "Voor particulieren",
-      "editions": "Edities"
+      "editions": "Edities",
+      "boothTypes": "Booth types"
     },
     "general": {
       "q1": {
         "q": "Wat is de Poem Booth precies?",
-        "a": "De Poem Booth is een AI photobooth die je foto omzet in een persoonlijk gedicht, AI-portret of comedy roast. Het is een open, elegant ontwerp (geen hokje) dat past bij elk event — van bruiloften tot bedrijfsfeesten."
+        "a": "De Poem Booth is een AI-ervaring beschikbaar in drie varianten: <strong>Poem Booth</strong> (persoonlijke gedichten), <strong>Portrait Booth</strong> (AI-kunstportretten) en <strong>Roast Booth</strong> (comedy roasts). Het is een open, elegant ontwerp dat past bij elk event."
       },
       "q2": {
         "q": "Hoe werkt de Poem Booth?",
-        "a": "Je drukt op de knop, poseert voor de camera, en binnen 10-30 seconden genereert onze AI een persoonlijk gedicht, kunstportret of roast op basis van je foto. Het resultaat deel je direct via QR-code op je telefoon."
+        "a": "Je drukt op de knop, poseert voor de camera, en binnen 15-30 seconden genereert onze AI een persoonlijk gedicht, kunstportret of comedy roast op basis van je foto. Deel of print het resultaat direct."
       },
       "q3": {
         "q": "Is de Poem Booth geschikt voor elk type evenement?",
-        "a": "Ja. De Poem Booth is ingezet bij bruiloften, bedrijfsfeesten, festivals, beurzen, productlanceringen, bibliotheken en culturele events. Dankzij het strakke, open design past hij bij elke setting."
+        "a": "Ja. De Poem Booth is ingezet bij bedrijfsevenementen, feesten, bruiloften, festivals, beurzen, productlanceringen, bibliotheken en culturele events. Dankzij het strakke, open design past hij bij elke setting."
       },
       "q4": {
         "q": "In welke talen werkt de Poem Booth?",
-        "a": "Standaard werkt de Poem Booth in het Nederlands of Engels. Extra talen (Duits, Frans, Italiaans, en meer) zijn beschikbaar als add-on."
+        "a": "Standaard werkt de Poem Booth in het Nederlands of Engels. Extra talen (Duits, Frans, Italiaans en meer) zijn beschikbaar als add-on."
       },
       "q5": {
         "q": "Waar kan ik de Poem Booth huren?",
-        "a": "De Poem Booth is beschikbaar in Nederland en België, met uitvalsbasis in Amsterdam. We leveren ook in Duitsland en de rest van Europa op aanvraag. Neem contact op voor beschikbaarheid."
+        "a_eu": "De Poem Booth is wereldwijd beschikbaar, met hubs in Amsterdam en New York. Neem contact op via <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> voor beschikbaarheid en prijzen. In de regio Breda kun je de Poem Booth ook huren via onze partner <a href=\"https://lachjeleens.nl\" target=\"_blank\" rel=\"noopener noreferrer\">Lach je Lens</a> voor dezelfde tarieven.",
+        "a_us": "De Poem Booth is wereldwijd beschikbaar, met hubs in New York en Amsterdam. Neem contact op via <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> voor beschikbaarheid en prijzen.",
+        "a": "De Poem Booth is wereldwijd beschikbaar. Neem contact op via contact@poembooth.com voor beschikbaarheid en prijzen."
       }
     },
     "agencies": {
       "q1": {
-        "q": "Kan ik de Poem Booth branden voor mijn klant?",
-        "a": "Ja. We bieden branding-opties aan: je kunt het logo of product van je klant toevoegen aan de gegenereerde kunstwerken en prints. Dit is beschikbaar als flat-fee add-on."
+        "q": "Kan ik de booth branden voor mijn klant?",
+        "a": "Ja. Bij de Poem Booth en Roast Booth kun je het logo en de kleuren van je klant toevoegen aan de gegenereerde kunstwerken en prints. Bij de Portrait Booth bieden we product placement: het product van je klant wordt direct verwerkt in het AI-portret."
       },
       "q2": {
         "q": "Kan de stijl van de gedichten of portretten worden aangepast?",
-        "a": "Absoluut. We kunnen de AI-stijl aanpassen aan het thema van het event — denk aan specifieke dichters, kunststromingen of een aangepaste tone-of-voice. Dit valt onder onze customization add-on."
+        "a": "Ja. Voor gedichten kun je kiezen uit verschillende dichtstijlen of een custom tone-of-voice laten maken. Voor portretten ontwerpen we een volledig custom AI-kunststijl. Voor roasts kan de comedy-stijl worden afgestemd op je publiek. Dit valt onder onze Thematic Content add-on."
       },
       "q3": {
         "q": "Hoe werkt de opbouw en logistiek?",
@@ -321,8 +343,8 @@
     },
     "private": {
       "q1": {
-        "q": "Is de Poem Booth geschikt voor een bruiloft?",
-        "a": "Absoluut — de Poem Booth is een van de meest populaire keuzes voor bruiloften. Gasten ontvangen een persoonlijk gedicht of portret als aandenken. Het is een stuk unieker dan een standaard photobooth."
+        "q": "Is de Poem Booth geschikt voor een privéfeest?",
+        "a": "Absoluut. De Poem Booth is perfect voor privéfeesten, bruiloften en vieringen. Gasten ontvangen een persoonlijk gedicht, portret of roast als uniek aandenken."
       },
       "q2": {
         "q": "Hoeveel ruimte heeft de Poem Booth nodig?",
@@ -330,29 +352,25 @@
       },
       "q3": {
         "q": "Kunnen gasten hun resultaat direct delen?",
-        "a": "Ja. Na het genereren van je gedicht of portret verschijnt er een QR-code die je direct scant met je telefoon. Zo heb je het resultaat meteen op je eigen device."
+        "a": "Ja. Na het genereren van je gedicht of portret verschijnt er een QR-code die je direct scant met je telefoon. Je kunt resultaten ook ter plekke printen met de optionele printer add-on."
       },
       "q4": {
         "q": "Wat kost het om de Poem Booth te huren?",
-        "a": "De prijs hangt af van de locatie en het aantal dagen. Bekijk onze tarievensectie op deze pagina of vraag een offerte aan voor een prijs op maat."
+        "a": "De prijs hangt af van het booth type, de locatie en het aantal dagen. Bekijk onze tarievensectie op deze pagina of vraag een offerte op maat aan."
       }
     },
-    "editions": {
+    "boothTypes": {
       "q1": {
-        "q": "Wat is het verschil tussen de Portret Editie en de Originele Editie?",
-        "a": "De Portret Editie maakt een AI-gegenereerd kunstportret van je foto (30 sec). De Originele Editie genereert een persoonlijk gedicht op basis van je foto (10 sec). Beide zijn unieke, gegenereerde kunstwerken."
+        "q": "Welke booth types zijn er?",
+        "a": "We bieden drie booth types: <strong>Poem Booth</strong> genereert een persoonlijk gedicht op basis van je foto (~15 sec). <strong>Portrait Booth</strong> maakt een AI-kunstportret (~30 sec). <strong>Roast Booth</strong> schrijft een hilarische comedy roast (~15 sec). Elk type is aan te passen aan je event."
       },
       "q2": {
-        "q": "Wat is de Roast Editie?",
-        "a": "De Roast Editie is onze comedy-modus: je maakt een foto en onze AI schrijft binnen 15 seconden een hilarische, gepersonaliseerde roast. Perfect voor bedrijfsfeesten, verjaardagen en teambuildings."
+        "q": "Kan ik meerdere booth types combineren op één event?",
+        "a": "Ja, je kunt meerdere booth types beschikbaar maken op één event. Gasten kiezen dan zelf welke ervaring ze willen. Neem contact op om de mogelijkheden te bespreken."
       },
       "q3": {
-        "q": "Kan ik meerdere edities combineren op één event?",
-        "a": "Ja, je kunt meerdere edities beschikbaar maken op één event. Gasten kiezen dan zelf welke ervaring ze willen. Neem contact op om de mogelijkheden te bespreken."
-      },
-      "q4": {
         "q": "Op welke dichters en kunststijlen is de AI gebaseerd?",
-        "a": "De AI is getraind op en geïnspireerd door echte dichters en kunstenaars. Voor gedichten kun je kiezen uit verschillende stijlen. Voor portretten genereren we unieke kunstwerken in diverse kunststromingen."
+        "a": "De AI is geïnspireerd door echte dichters en kunstenaars. Voor gedichten kun je kiezen uit verschillende stijlen, waaronder bekende Nederlandse dichters. Voor portretten genereren we unieke kunstwerken in diverse kunststijlen. Bekijk onze stijlen op deze pagina."
       }
     }
   },
@@ -376,6 +394,7 @@
     "portraitIntro": "Elke portretstijl transformeert je foto in een uniek AI-kunstwerk. Wissel tussen before en after om de magie te zien.",
     "poemIntro": "Elke dichtstijl genereert een uniek gedicht geïnspireerd op je foto. Lees de voorbeelden hieronder.",
     "bookThisStyle": "Boek met deze stijl",
-    "roastIntro": "Hilarische AI-gegenereerde comedy roasts op basis van je foto. Perfect voor feesten en bedrijfsevenementen."
+    "roastIntro": "Hilarische AI-gegenereerde comedy roasts op basis van je foto. Perfect voor feesten en bedrijfsevenementen.",
+    "original": "Originele foto"
   }
 }

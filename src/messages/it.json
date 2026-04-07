@@ -45,11 +45,11 @@
     },
     "step2": {
       "title": "Ricevi la tua Arte",
-      "description": "La tua foto viene trasformata dalla nostra AI in una poesia personale o ritratto AI — in 10 secondi."
+      "description": "La tua foto viene trasformata dalla nostra AI in una poesia personale o ritratto AI — in 15-30 secondi."
     },
     "step3": {
-      "title": "Condividi",
-      "description": "Condividi la tua poesia o ritratto AI tramite QR code direttamente sul telefono."
+      "title": "Condividi & Stampa",
+      "description": "Condividi il tuo risultato tramite QR code sul telefono o stampalo direttamente al booth."
     }
   },
   "editions": {
@@ -131,9 +131,11 @@
     "ctaButton": "Richiedi un preventivo",
     "footnote": "Prezzi IVA esclusa. Pacchetti personalizzati disponibili.",
     "transport": {
-      "title": "Costi di trasporto",
-      "perUnit": "per {unit} percorso",
-      "note": "(andata e ritorno per evento 1 giorno, 4 viaggi per più giorni)"
+      "title": "Transport",
+      "perUnit": "per {unit}",
+      "note": "(andata e ritorno per evento 1 giorno, 4 viaggi per più giorni)",
+      "minimumNote": "Minimo {minimum} per trasporto",
+      "multiDayNote": "Per eventi di più giorni calcoliamo due viaggi di andata e ritorno."
     },
     "rental": {
       "title": "Tariffa base di noleggio",
@@ -198,7 +200,24 @@
     },
     "startingFrom": "A partire da",
     "included": "incluso",
-    "optionalAddons": "Extra opzionali"
+    "optionalAddons": "Extra opzionali",
+    "flatFee": "tariffa unica",
+    "portrait": {
+      "rentalNote": "Include 1 stile ritratto base"
+    },
+    "roast": {
+      "rentalNote": "Include attivazione Roast Booth"
+    },
+    "thematic": {
+      "poemDescription": "Personalizza lo stile e il tono delle poesie in base al tema del tuo evento",
+      "portraitDescription": "Uno stile ritratto IA completamente personalizzato per il tuo evento",
+      "roastDescription": "Personalizza lo stile del roast in base al tuo evento o pubblico"
+    },
+    "extraStyle": {
+      "title": "Stile Ritratto Extra",
+      "description": "Aggiungi stili ritratto aggiuntivi tra cui gli ospiti possono scegliere",
+      "perStyle": "per stile"
+    }
   },
   "otherRegions": {
     "title": "Fuori USA/UE?",
@@ -272,87 +291,86 @@
   },
   "faq": {
     "title": "Domande frequenti",
-    "subtitle": "Tutto quello che devi sapere sul Poem Booth — dal noleggio alla tecnologia.",
+    "subtitle": "Tutto quello che devi sapere sul Poem Booth",
     "tabs": {
       "general": "Generale",
       "agencies": "Per agenzie eventi",
       "private": "Per privati",
-      "editions": "Edizioni"
+      "editions": "Edizioni",
+      "boothTypes": "Tipi di booth"
     },
     "general": {
       "q1": {
         "q": "Cos'è esattamente il Poem Booth?",
-        "a": "Il Poem Booth è un photobooth AI che trasforma la tua foto in una poesia personalizzata, ritratto AI o roast comico. Ha un design aperto ed elegante adatto a ogni evento."
+        "a": "Il Poem Booth è un'esperienza IA disponibile in tre modalità: <strong>Poem Booth</strong> (poesia personale), <strong>Portrait Booth</strong> (ritratti artistici IA) e <strong>Roast Booth</strong> (roast comici). Ha un design aperto ed elegante che si adatta a qualsiasi evento."
       },
       "q2": {
         "q": "Come funziona il Poem Booth?",
-        "a": "Premi il pulsante, posa davanti alla fotocamera e in 10-30 secondi la nostra AI genera una poesia, ritratto o roast personalizzato. Condividi il risultato tramite QR code."
+        "a": "Premi il pulsante, mettiti in posa davanti alla fotocamera e in 15-30 secondi la nostra IA genera una poesia personale, un ritratto artistico o un roast comico basato sulla tua foto. Condividi o stampa il risultato istantaneamente."
       },
       "q3": {
         "q": "Il Poem Booth è adatto a qualsiasi tipo di evento?",
-        "a": "Sì. Il Poem Booth è stato utilizzato a matrimoni, eventi aziendali, festival, fiere e eventi culturali."
+        "a": "Sì. Il Poem Booth è stato utilizzato in eventi aziendali, feste, matrimoni, festival, fiere, lanci di prodotti, biblioteche e eventi culturali."
       },
       "q4": {
-        "q": "In quali lingue funziona il Poem Booth?",
-        "a": "Di default il Poem Booth funziona in inglese o olandese. Lingue aggiuntive sono disponibili come add-on."
+        "q": "Quali lingue supporta il Poem Booth?",
+        "a": "Di default il Poem Booth funziona in inglese o olandese. Lingue aggiuntive (tedesco, francese, italiano e altre) sono disponibili come add-on."
       },
       "q5": {
         "q": "Dove posso noleggiare il Poem Booth?",
-        "a": "Il Poem Booth è disponibile nei Paesi Bassi, in Belgio e in tutta Europa. Contattaci per la disponibilità."
+        "a_eu": "Il Poem Booth è disponibile in tutto il mondo, con hub ad Amsterdam e New York. Contattaci a <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> per disponibilità e prezzi.",
+        "a_us": "Il Poem Booth è disponibile in tutto il mondo, con hub a New York e Amsterdam. Contattaci a <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> per disponibilità e prezzi.",
+        "a": "Il Poem Booth è disponibile in tutto il mondo. Contattaci a contact@poembooth.com."
       }
     },
     "agencies": {
       "q1": {
-        "q": "Posso personalizzare il Poem Booth per il mio cliente?",
-        "a": "Sì. Puoi aggiungere il logo del tuo cliente alle opere generate e alle stampe."
+        "q": "Posso personalizzare il booth per il mio cliente?",
+        "a": "Sì. Per il Poem Booth e il Roast Booth puoi aggiungere il logo e i colori del tuo cliente alle opere generate. Per il Portrait Booth offriamo product placement: il prodotto del tuo cliente viene integrato direttamente nel ritratto IA."
       },
       "q2": {
-        "q": "Lo stile può essere personalizzato?",
-        "a": "Assolutamente. Possiamo adattare lo stile AI al tema dell'evento — poeti specifici, correnti artistiche o tono personalizzato."
+        "q": "Lo stile delle poesie o dei ritratti può essere personalizzato?",
+        "a": "Sì. Per le poesie puoi scegliere tra diversi stili o creare un tono personalizzato. Per i ritratti progettiamo uno stile artistico IA completamente personalizzato. Per i roast lo stile comico può essere adattato al tuo pubblico."
       },
       "q3": {
-        "q": "Come funziona l'installazione?",
-        "a": "Ci occupiamo dell'installazione e dello smontaggio completi. Installazione circa 1 ora, smontaggio 45 minuti. Servono solo corrente e Wi-Fi stabile."
+        "q": "Come funziona l'installazione e la logistica?",
+        "a": "Ci occupiamo dell'installazione e dello smontaggio completi. L'installazione richiede circa 1 ora, lo smontaggio 45 minuti. Serve solo una presa elettrica (230V) e Wi-Fi stabile o Ethernet."
       },
       "q4": {
-        "q": "Si può noleggiare il Poem Booth per più giorni?",
-        "a": "Sì. Offriamo tariffe giornaliere con sconto dal secondo giorno in poi."
+        "q": "Il Poem Booth può essere noleggiato per più giorni?",
+        "a": "Sì. Offriamo tariffe giornaliere con sconto dal secondo giorno. Contattaci per un preventivo personalizzato per eventi di più giorni."
       }
     },
     "private": {
       "q1": {
-        "q": "Il Poem Booth è adatto per un matrimonio?",
-        "a": "Assolutamente — il Poem Booth è una delle scelte più popolari per i matrimoni. Gli ospiti ricevono una poesia o ritratto personalizzato come ricordo."
+        "q": "Il Poem Booth è adatto per una festa privata?",
+        "a": "Assolutamente. Il Poem Booth è perfetto per feste private, matrimoni e celebrazioni. Gli ospiti ricevono una poesia, ritratto o roast personale come ricordo unico."
       },
       "q2": {
-        "q": "Quanto spazio serve per il Poem Booth?",
-        "a": "Il Poem Booth richiede circa 1,5m x 1,5m. Può essere posizionato sia all'interno che all'esterno (all'esterno è richiesta l'ombra)."
+        "q": "Di quanto spazio ha bisogno il Poem Booth?",
+        "a": "Il Poem Booth richiede uno spazio di circa 1,5m x 1,5m. Può essere posizionato sia all'interno che all'esterno (all'esterno è necessaria l'ombra)."
       },
       "q3": {
         "q": "Gli ospiti possono condividere il risultato immediatamente?",
-        "a": "Sì. Dopo la generazione appare un QR code che scansioni direttamente con il telefono."
+        "a": "Sì. Dopo la generazione appare un codice QR che scansioni direttamente con il telefono. Puoi anche stampare i risultati sul posto con l'add-on stampante opzionale."
       },
       "q4": {
         "q": "Quanto costa noleggiare il Poem Booth?",
-        "a": "Il prezzo dipende dalla posizione e dal numero di giorni. Consulta le nostre tariffe su questa pagina o richiedi un preventivo personalizzato."
+        "a": "Il prezzo dipende dal tipo di booth, dalla posizione e dal numero di giorni. Consulta la nostra sezione tariffe su questa pagina o richiedi un preventivo personalizzato."
       }
     },
-    "editions": {
+    "boothTypes": {
       "q1": {
-        "q": "Qual è la differenza tra l'Edizione Ritratto e l'Edizione Originale?",
-        "a": "L'Edizione Ritratto crea un ritratto artistico AI (30 sec). L'Edizione Originale genera una poesia personalizzata (10 sec)."
+        "q": "Quali sono i diversi tipi di booth?",
+        "a": "Offriamo tre tipi: <strong>Poem Booth</strong> genera una poesia personale (~15 sec). <strong>Portrait Booth</strong> crea un ritratto artistico IA (~30 sec). <strong>Roast Booth</strong> scrive un esilarante roast comico (~15 sec). Ogni tipo può essere personalizzato."
       },
       "q2": {
-        "q": "Cos'è l'Edizione Roast?",
-        "a": "L'Edizione Roast è la nostra modalità comedy: scatta una foto e la nostra AI scrive un roast esilarante e personalizzato in 15 secondi."
+        "q": "Posso combinare più tipi di booth in un evento?",
+        "a": "Sì, puoi rendere disponibili più tipi di booth in un singolo evento. Gli ospiti scelgono quale esperienza desiderano."
       },
       "q3": {
-        "q": "Posso combinare più edizioni in un evento?",
-        "a": "Sì, puoi rendere disponibili più edizioni. Gli ospiti scelgono la loro esperienza."
-      },
-      "q4": {
-        "q": "Su quali poeti e stili artistici si basa l'AI?",
-        "a": "L'AI è ispirata da veri poeti e artisti. Per le poesie puoi scegliere tra vari stili."
+        "q": "Su quali poeti e stili artistici si basa l'IA?",
+        "a": "L'IA è ispirata da veri poeti e artisti. Per le poesie puoi scegliere tra vari stili. Per i ritratti generiamo opere uniche in diversi stili artistici. Scopri i nostri stili su questa pagina."
       }
     }
   },
@@ -376,6 +394,7 @@
     "portraitIntro": "Ogni stile ritratto trasforma la tua foto in un’opera d’arte IA unica. Alterna tra prima e dopo.",
     "poemIntro": "Ogni stile poetico genera una poesia unica ispirata alla tua foto. Leggi gli esempi.",
     "bookThisStyle": "Prenota con questo stile",
-    "roastIntro": "Esilaranti roast comici generati dall'IA basati sulla tua foto. Perfetti per feste ed eventi aziendali."
+    "roastIntro": "Esilaranti roast comici generati dall'IA basati sulla tua foto. Perfetti per feste ed eventi aziendali.",
+    "original": "Foto originale"
   }
 }

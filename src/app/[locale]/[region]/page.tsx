@@ -146,33 +146,49 @@ export default async function LandingPage({ params }: PageProps) {
     }
   }
 
-  const [pageData, hubData, publicStyles] = await Promise.all([
+  async function fetchHubPricing(regionCode: string) {
+    try {
+      const res = await fetch(`${bookingBase}/api/public/hub-pricing?region=${regionCode}`, {
+        cache: "no-store",
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (!data.success) return null;
+      return data;
+    } catch {
+      return null;
+    }
+  }
+
+  const [pageData, hubPricingData, publicStyles] = await Promise.all([
     client.fetch(pageDataQuery, { region }),
-    getHubByRegion(region),
+    fetchHubPricing(region),
     fetchPublicStyles(),
   ]);
 
   const regionConfig = REGION_CONFIGS[region as Region] || REGION_CONFIGS.nl;
 
   // Format pricing data for BookingRates component
-  const hubPricing = hubData
+  const pricing = hubPricingData?.pricing;
+  const hubPricing = pricing
     ? {
-        hubName: hubData.name,
-        currency: hubData.currency || regionConfig.currency,
+        hubName: hubPricingData.hub?.name || regionConfig.hubCity,
+        currency: pricing.currency || regionConfig.currency,
         currencySymbol: regionConfig.currencySymbol,
         dayRates: {
-          day1: hubData.day_1_rate || 0,
-          day2: hubData.day_2_rate || 0,
-          day3Plus: hubData.day_3_plus_rate || 0,
+          day1: pricing.day_1_rate || 0,
+          day2: pricing.day_2_rate || 0,
+          day3Plus: pricing.day_3_plus_rate || 0,
         },
         transport: {
-          minimumFee: hubData.minimum_transport_fee || 0,
-          ratePerUnit: hubData.transport_rate_per_km || 0,
-          unit: (hubData.distance_unit || regionConfig.distanceUnit) as "km" | "mi",
+          minimumFee: pricing.minimum_transport_fee || 0,
+          ratePerUnit: pricing.transport_rate_per_km || 0,
+          unit: (pricing.distance_unit || regionConfig.distanceUnit) as "km" | "mi",
         },
-        outdoorInstallationFee: hubData.outdoor_installation_fee || 0,
-        imageStyleRate: hubData.image_style_rate || 0,
-        baseStyleRate: hubData.additional_language_rate || 0,
+        outdoorInstallationFee: pricing.outdoor_installation_fee || 0,
+        imageStyleRate: pricing.image_style_rate || 0,
+        additionalLanguageRate: pricing.additional_language_rate || 0,
+        extras: hubPricingData.extras || [],
       }
     : undefined;
 
@@ -241,12 +257,12 @@ export default async function LandingPage({ params }: PageProps) {
 
   // Build FAQ items for JSON-LD from i18n
   const faqT = await getTranslations({ locale, namespace: "faq" });
-  const faqTabs = ["general", "agencies", "private", "editions"] as const;
+  const faqTabs = ["general", "agencies", "private", "boothTypes"] as const;
   const faqKeyCounts: Record<string, string[]> = {
     general: ["q1", "q2", "q3", "q4", "q5"],
     agencies: ["q1", "q2", "q3", "q4"],
     private: ["q1", "q2", "q3", "q4"],
-    editions: ["q1", "q2", "q3", "q4"],
+    boothTypes: ["q1", "q2", "q3"],
   };
   const faqItems = faqTabs.flatMap((tab) =>
     faqKeyCounts[tab].map((key) => ({
@@ -273,12 +289,12 @@ export default async function LandingPage({ params }: PageProps) {
             />
           </div>
         </section>
-        <EditionShowcase editions={editions} />
+        {/* <EditionShowcase editions={editions} /> */}
         <PhotoGallery images={galleryImages} />
         <Newsletter />
         <Practicalities />
         <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
-        <FAQ locale={locale} />
+        <FAQ locale={locale} region={region} />
         <LatestBlogPosts posts={pageData?.latestBlogPosts ?? []} />
         <VouwBanner />
       </main>

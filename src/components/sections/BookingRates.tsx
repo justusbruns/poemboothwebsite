@@ -8,6 +8,26 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import { trackLeadIntent } from "@/lib/tracking";
 
+interface HubExtra {
+  extra_id: string;
+  rate: number;
+  daily_rate: boolean;
+  visible: boolean;
+  booth_types: string[] | null;
+  name: string;
+  description: string | null;
+  name_en?: string;
+  name_nl?: string;
+  name_de?: string;
+  name_fr?: string;
+  name_it?: string;
+  description_en?: string;
+  description_nl?: string;
+  description_de?: string;
+  description_fr?: string;
+  description_it?: string;
+}
+
 interface HubPricing {
   hubName: string;
   currency: string;
@@ -24,7 +44,8 @@ interface HubPricing {
   };
   outdoorInstallationFee: number;
   imageStyleRate: number;
-  baseStyleRate: number;
+  additionalLanguageRate: number;
+  extras: HubExtra[];
 }
 
 interface BookingRatesProps {
@@ -39,7 +60,51 @@ function formatPrice(amount: number, symbol: string): string {
   return `${symbol}${amount.toLocaleString()}`;
 }
 
-export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesProps) {
+function getLocalizedField(
+  extra: HubExtra,
+  field: "name" | "description",
+  locale: string
+): string {
+  const localeKey = `${field}_${locale}` as keyof HubExtra;
+  const enKey = `${field}_en` as keyof HubExtra;
+  return (
+    (extra[localeKey] as string) ||
+    (extra[enKey] as string) ||
+    (extra[field] as string) ||
+    ""
+  );
+}
+
+function PriceRow({
+  title,
+  description,
+  price,
+}: {
+  title: string;
+  description?: string;
+  price: string;
+}) {
+  return (
+    <div className="p-6">
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+        <div className="flex-1">
+          <h3 className="text-xl font-display text-text-primary">{title}</h3>
+          {description && (
+            <p className="text-sm text-text-secondary mt-1">{description}</p>
+          )}
+        </div>
+        <div className="text-right">
+          <p className="text-lg text-text-primary">{price}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function BookingRates({
+  hubPricing,
+  bookingUrl,
+}: BookingRatesProps) {
   const t = useTranslations("booking");
   const params = useParams();
   const region = params.region as string;
@@ -47,30 +112,62 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
   const isUS = region === "us";
   const [activeTab, setActiveTab] = useState<BoothType>("poem");
 
-  const rawUrl = bookingUrl || process.env.NEXT_PUBLIC_BOOKING_URL || "https://book.poembooth.com";
-  const baseUrl = rawUrl.replace(/\/+$/, "").split("/").slice(0, 3).join("/");
+  const rawUrl =
+    bookingUrl ||
+    process.env.NEXT_PUBLIC_BOOKING_URL ||
+    "https://book.poembooth.com";
+  const baseUrl = rawUrl
+    .replace(/\/+$/, "")
+    .split("/")
+    .slice(0, 3)
+    .join("/");
   const bookingHref = `${baseUrl}/${locale}/booking`;
 
   const currencySymbol = hubPricing?.currencySymbol || (isUS ? "$" : "€");
   const hubName = hubPricing?.hubName || (isUS ? "New York" : "Amsterdam");
   const distanceUnit = hubPricing?.transport.unit || (isUS ? "mi" : "km");
 
-  const transportRate = hubPricing?.transport.ratePerUnit || (isUS ? 1.5 : 1);
+  const transportRate =
+    hubPricing?.transport.ratePerUnit || (isUS ? 1.5 : 1);
+  const transportMin = hubPricing?.transport.minimumFee || (isUS ? 75 : 50);
   const day1Rate = hubPricing?.dayRates.day1 || (isUS ? 1200 : 950);
   const day2Rate = hubPricing?.dayRates.day2 || (isUS ? 1000 : 750);
   const day3Rate = hubPricing?.dayRates.day3Plus || (isUS ? 150 : 100);
+  const outdoorFee =
+    hubPricing?.outdoorInstallationFee || (isUS ? 300 : 100);
+  const imageStyleRate =
+    hubPricing?.imageStyleRate || (isUS ? 150 : 125);
+  const languageRate =
+    hubPricing?.additionalLanguageRate || (isUS ? 150 : 125);
 
-  const outdoorInstallationFee = hubPricing?.outdoorInstallationFee || (isUS ? 300 : 250);
-  const imageStyleRate = hubPricing?.imageStyleRate || (isUS ? 900 : 750);
+  // Get extras from hub pricing
+  const extras = hubPricing?.extras || [];
 
-  const printerRate = isUS ? 600 : 500;
-  const brandingFee = isUS ? 900 : 750;
-  const customizationFee = isUS ? 900 : 750;
-  const roastBoothFee = isUS ? 425 : 350;
-  const baseStyleRate = hubPricing?.baseStyleRate || (isUS ? 150 : 125);
-  const languageFee = hubPricing?.baseStyleRate || (isUS ? 150 : 125);
+  // Helper to find an extra and check if it applies to a booth type
+  function getExtra(extraId: string, boothType: BoothType): HubExtra | null {
+    const extra = extras.find((e) => e.extra_id === extraId && e.visible);
+    if (!extra) return null;
+    if (
+      extra.booth_types &&
+      extra.booth_types.length > 0 &&
+      !extra.booth_types.includes(boothType) &&
+      !extra.booth_types.includes("all")
+    ) {
+      return null;
+    }
+    return extra;
+  }
 
-  const tabs: { key: BoothType; label: string; description: string; startingFrom: number }[] = [
+  // Roast fee from extras
+  const roastExtra = extras.find((e) => e.extra_id === "roast_booth");
+  const roastFee = roastExtra?.rate || (isUS ? 425 : 350);
+
+  const tabs: {
+    key: BoothType;
+    label: string;
+    description: string;
+    startingFrom: number;
+  }[] = [
     {
       key: "poem",
       label: t("tabs.poem.label"),
@@ -81,17 +178,24 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
       key: "portrait",
       label: t("tabs.portrait.label"),
       description: t("tabs.portrait.description"),
-      startingFrom: day1Rate + baseStyleRate,
+      startingFrom: day1Rate + imageStyleRate,
     },
     {
       key: "roast",
       label: t("tabs.roast.label"),
       description: t("tabs.roast.description"),
-      startingFrom: day1Rate + roastBoothFee,
+      startingFrom: day1Rate + roastFee,
     },
   ];
 
   const activeTabData = tabs.find((tab) => tab.key === activeTab)!;
+
+  // Build add-ons list per booth type
+  const brandingExtra = getExtra("custom_branding", activeTab);
+  const productPlacementExtra = getExtra("product_placement", activeTab);
+  const themeExtra = getExtra("custom_theme", activeTab);
+  const digitalExtra = getExtra("digital_package", activeTab);
+  const printingExtra = getExtra("poetry_printing", activeTab);
 
   return (
     <section id="rates" className="py-16 md:py-24 bg-bg-secondary">
@@ -134,7 +238,6 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
 
           {/* Pricing Table */}
           <div className="bg-bg-primary rounded-2xl border border-border-light overflow-hidden divide-y divide-border-light">
-
             {/* Base Rental Fee */}
             <div className="p-6">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
@@ -142,57 +245,37 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
                   <h3 className="text-xl font-display text-text-primary">
                     {t("rental.title")}
                   </h3>
-                </div>
-                <div className="text-right space-y-2">
-                  {activeTab === "roast" ? (
-                    <>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day1Label")} {formatPrice(day1Rate + roastBoothFee, currencySymbol)}
-                      </p>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day2Label")} {formatPrice(day2Rate, currencySymbol)}
-                      </p>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day3Label")} {formatPrice(day3Rate, currencySymbol)}
-                      </p>
-                    </>
-                  ) : activeTab === "portrait" ? (
-                    <>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day1Label")} {formatPrice(day1Rate + baseStyleRate, currencySymbol)}
-                      </p>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day2Label")} {formatPrice(day2Rate, currencySymbol)}
-                      </p>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day3Label")} {formatPrice(day3Rate, currencySymbol)}
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day1Label")} {formatPrice(day1Rate, currencySymbol)}
-                      </p>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day2Label")} {formatPrice(day2Rate, currencySymbol)}
-                      </p>
-                      <p className="text-lg text-text-primary">
-                        {t("rental.day3Label")} {formatPrice(day3Rate, currencySymbol)}
-                      </p>
-                    </>
+                  {activeTab === "portrait" && (
+                    <p className="text-sm text-text-secondary mt-1">
+                      {t("portrait.rentalNote")}
+                    </p>
+                  )}
+                  {activeTab === "roast" && (
+                    <p className="text-sm text-text-secondary mt-1">
+                      {t("roast.rentalNote")}
+                    </p>
                   )}
                 </div>
+                <div className="text-right space-y-2">
+                  <p className="text-lg text-text-primary">
+                    {t("rental.day1Label")}{" "}
+                    {formatPrice(
+                      activeTab === "roast"
+                        ? day1Rate + roastFee
+                        : activeTab === "portrait"
+                          ? day1Rate + imageStyleRate
+                          : day1Rate,
+                      currencySymbol
+                    )}
+                  </p>
+                  <p className="text-lg text-text-primary">
+                    {t("rental.day2Label")} {formatPrice(day2Rate, currencySymbol)}
+                  </p>
+                  <p className="text-lg text-text-primary">
+                    {t("rental.day3Label")} {formatPrice(day3Rate, currencySymbol)}
+                  </p>
+                </div>
               </div>
-              {activeTab === "roast" && (
-                <p className="text-sm text-text-secondary mt-2">
-                  {t("roastBooth.rentalNote")}
-                </p>
-              )}
-              {activeTab === "portrait" && (
-                <p className="text-sm text-text-secondary mt-2">
-                  {t("portraitStyle.rentalNote")}
-                </p>
-              )}
             </div>
 
             {/* Optional Add-ons Header */}
@@ -203,140 +286,80 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
             </div>
 
             {/* Printer */}
-            <div className="p-6">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-display text-text-primary">
-                    {t("printer.title")}
-                  </h3>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg text-text-primary">
-                    {formatPrice(printerRate, currencySymbol)} {t("printer.perDay")}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Branding */}
-            <div className="p-6">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-display text-text-primary">
-                    {t("branding.title")}
-                  </h3>
-                  <p className="text-sm text-text-secondary mt-1">
-                    {t("branding.description")}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg text-text-primary">
-                    {formatPrice(brandingFee, currencySymbol)} {t("branding.flatFee")}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Customization */}
-            <div className="p-6">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-display text-text-primary">
-                    {t("customization.title")}
-                  </h3>
-                  <p className="text-sm text-text-secondary mt-1">
-                    {t("customization.description")}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg text-text-primary">
-                    {formatPrice(customizationFee, currencySymbol)} {t("customization.flatFee")}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Extra Base Portrait Style - only for portrait tab */}
-            {activeTab === "portrait" && (
-              <div className="p-6">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-display text-text-primary">
-                      {t("portraitStyle.extraBaseTitle")}
-                    </h3>
-                    <p className="text-sm text-text-secondary mt-1">
-                      {t("portraitStyle.extraBaseDescription")}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-lg text-text-primary">
-                      {formatPrice(baseStyleRate, currencySymbol)} {t("portraitStyle.perStyle")}
-                    </p>
-                  </div>
-                </div>
-              </div>
+            {printingExtra && (
+              <PriceRow
+                title={getLocalizedField(printingExtra, "name", locale)}
+                description={getLocalizedField(printingExtra, "description", locale)}
+                price={`${formatPrice(printingExtra.rate, currencySymbol)} ${t("printer.perDay")}`}
+              />
             )}
 
-            {/* Custom Portrait Style - only for portrait tab */}
-            {activeTab === "portrait" && (
-              <div className="p-6">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-display text-text-primary">
-                      {t("portraitStyle.customTitle")}
-                    </h3>
-                    <p className="text-sm text-text-secondary mt-1">
-                      {t("portraitStyle.customDescription")}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-lg text-text-primary">
-                      {formatPrice(imageStyleRate, currencySymbol)} {t("portraitStyle.flatFee")}
-                    </p>
-                  </div>
-                </div>
-              </div>
+            {/* Branding - for poem and roast */}
+            {brandingExtra && (
+              <PriceRow
+                title={getLocalizedField(brandingExtra, "name", locale)}
+                description={getLocalizedField(brandingExtra, "description", locale)}
+                price={`${formatPrice(brandingExtra.rate, currencySymbol)} ${t("flatFee")}`}
+              />
             )}
 
-            {/* Additional Language - only for poem and roast */}
+            {/* Product Placement - for portrait */}
+            {productPlacementExtra && (
+              <PriceRow
+                title={getLocalizedField(productPlacementExtra, "name", locale)}
+                description={getLocalizedField(productPlacementExtra, "description", locale)}
+                price={`${formatPrice(productPlacementExtra.rate, currencySymbol)} ${t("flatFee")}`}
+              />
+            )}
+
+            {/* Thematic Content */}
+            {themeExtra && (
+              <PriceRow
+                title={getLocalizedField(themeExtra, "name", locale)}
+                description={
+                  activeTab === "portrait"
+                    ? t("thematic.portraitDescription")
+                    : activeTab === "roast"
+                      ? t("thematic.roastDescription")
+                      : t("thematic.poemDescription")
+                }
+                price={`${formatPrice(themeExtra.rate, currencySymbol)} ${t("flatFee")}`}
+              />
+            )}
+
+            {/* Extra Portrait Style - portrait only */}
+            {activeTab === "portrait" && (
+              <PriceRow
+                title={t("extraStyle.title")}
+                description={t("extraStyle.description")}
+                price={`${formatPrice(imageStyleRate, currencySymbol)} ${t("extraStyle.perStyle")}`}
+              />
+            )}
+
+            {/* Additional Language - poem and roast only */}
             {activeTab !== "portrait" && (
-              <div className="p-6">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-display text-text-primary">
-                      {t("language.title")}
-                    </h3>
-                    <p className="text-sm text-text-secondary mt-1">
-                      {t("language.description")}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-lg text-text-primary">
-                      {formatPrice(languageFee, currencySymbol)} {t("language.flatFee")}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <PriceRow
+                title={t("language.title")}
+                description={t("language.description")}
+                price={`${formatPrice(languageRate, currencySymbol)} ${t("language.flatFee")}`}
+              />
+            )}
+
+            {/* Digital Package */}
+            {digitalExtra && (
+              <PriceRow
+                title={getLocalizedField(digitalExtra, "name", locale)}
+                description={getLocalizedField(digitalExtra, "description", locale)}
+                price={`${formatPrice(digitalExtra.rate, currencySymbol)} ${t("flatFee")}`}
+              />
             )}
 
             {/* Outdoor Installation */}
-            <div className="p-6">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-display text-text-primary">
-                    {t("outdoorInstallation.title")}
-                  </h3>
-                  <p className="text-sm text-text-secondary mt-1">
-                    {t("outdoorInstallation.description")}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg text-text-primary">
-                    {formatPrice(outdoorInstallationFee, currencySymbol)} {t("outdoorInstallation.flatFee")}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <PriceRow
+              title={t("outdoorInstallation.title")}
+              description={t("outdoorInstallation.description")}
+              price={`${formatPrice(outdoorFee, currencySymbol)} ${t("flatFee")}`}
+            />
 
             {/* Transport Rate */}
             <div className="p-6">
@@ -345,18 +368,23 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
                   <h3 className="text-xl font-display text-text-primary">
                     {t("transport.title")}
                   </h3>
+                  <p className="text-sm text-text-secondary mt-1">
+                    {t("transport.minimumNote", {
+                      minimum: formatPrice(transportMin, currencySymbol),
+                    })}
+                  </p>
+                  <p className="text-sm text-text-secondary mt-1">
+                    {t("transport.multiDayNote")}
+                  </p>
                 </div>
                 <div className="text-right">
                   <p className="text-lg text-text-primary">
-                    {formatPrice(transportRate, currencySymbol)} {t("transport.perUnit", { unit: distanceUnit })}
-                  </p>
-                  <p className="text-sm text-text-muted mt-1">
-                    {t("transport.note")}
+                    {formatPrice(transportRate, currencySymbol)}{" "}
+                    {t("transport.perUnit", { unit: distanceUnit })}
                   </p>
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* Footnote */}
@@ -367,7 +395,7 @@ export default function BookingRates({ hubPricing, bookingUrl }: BookingRatesPro
           {/* CTA Button */}
           <div className="mt-8 text-center">
             <Button
-              href={bookingHref}
+              href={`${bookingHref}?boothType=${activeTab}`}
               variant="primary"
               size="lg"
               onClick={() => trackLeadIntent()}

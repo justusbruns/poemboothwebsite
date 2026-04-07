@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Button from "@/components/ui/Button";
@@ -24,101 +24,132 @@ interface StylesGalleryProps {
 
 type Tab = "image" | "poem" | "roast";
 
+// Deterministic rotation per card based on index
+const ROTATIONS = [-3, 2, -1.5, 3, -2, 1.5, -2.5, 3.5, -1, 2.5];
+
 function PortraitStyleCard({
   style,
   bookingBaseUrl,
   bookLabel,
+  index,
 }: {
   style: PublicStyle;
   bookingBaseUrl: string;
   bookLabel: string;
+  index: number;
 }) {
-  const [swapped, setSwapped] = useState(false);
-  const [showLabel, setShowLabel] = useState(false);
+  const [flipped, setFlipped] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const flipTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const t = useTranslations("styles");
 
   const outputUrl = style.example_output_image_url;
   const inputUrl = style.example_input_image_url;
-  const thumbUrl = swapped ? outputUrl : inputUrl;
+  const rotation = ROTATIONS[index % ROTATIONS.length];
 
-  const handleSwap = () => {
-    setSwapped(!swapped);
-    setShowLabel(true);
-    setTimeout(() => setShowLabel(false), 1500);
+  const handleFlip = () => {
+    if (flipTimerRef.current) clearTimeout(flipTimerRef.current);
+    if (!flipped) {
+      setFlipped(true);
+      flipTimerRef.current = setTimeout(() => setFlipped(false), 5000);
+    } else {
+      setFlipped(false);
+    }
   };
 
   return (
-    <div className="group rounded-2xl overflow-hidden bg-bg-secondary border border-border-light flex flex-col">
-      {/* Image container */}
-      <div className="relative aspect-square overflow-hidden">
-        {/* Main image */}
-        {outputUrl && (
-          <Image
-            src={outputUrl}
-            alt={style.name}
-            fill
-            className={`object-cover transition-all duration-500 ease-in-out ${
-              swapped ? "opacity-0 scale-95" : "opacity-100 scale-100"
-            }`}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            unoptimized
-          />
-        )}
-        {inputUrl && (
-          <Image
-            src={inputUrl}
-            alt={`Original for ${style.name}`}
-            fill
-            className={`object-cover transition-all duration-500 ease-in-out ${
-              swapped ? "opacity-100 scale-100" : "opacity-0 scale-95"
-            }`}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            unoptimized
-          />
-        )}
+    <div className="group flex flex-col">
+      {/* 3D flip container - fixed height for alignment */}
+      <div
+        className="relative flex items-center justify-center px-6 cursor-pointer"
+        style={{ height: 380, perspective: "1000px" }}
+        onClick={() => inputUrl && outputUrl && handleFlip()}
+      >
+        <div
+          className="relative transition-transform duration-700 ease-in-out"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: `rotate(${rotation}deg) rotateY(${flipped ? 180 : 0}deg)`,
+            maxWidth: "85%",
+            maxHeight: "100%",
+          }}
+        >
+          {/* Front - portrait output */}
+          <div
+            className="relative shadow-xl rounded-lg overflow-hidden"
+            style={{ backfaceVisibility: "hidden" }}
+          >
+            {outputUrl && (
+              <Image
+                src={outputUrl}
+                alt={style.name}
+                width={400}
+                height={500}
+                className={`block max-h-[360px] w-auto h-auto transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+                sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
+                unoptimized
+                priority={index < 3}
+                onLoad={() => setLoaded(true)}
+              />
+            )}
+            {/* Loading placeholder */}
+            {!loaded && (
+              <div className="bg-bg-secondary rounded-lg animate-pulse" style={{ width: 280, height: 350 }} />
+            )}
+          </div>
 
-        {/* Label bottom-left */}
-        {inputUrl && outputUrl && (
-          <div className={`absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-sm text-xs text-white font-medium transition-opacity duration-500 ${
-            showLabel ? "opacity-100" : "opacity-0"
-          }`}>
-            {swapped ? "Original" : "Portrait"}
+          {/* Back - original input (fill to match front) */}
+          {inputUrl && (
+            <div
+              className="absolute inset-0 shadow-xl rounded-lg overflow-hidden"
+              style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+            >
+              <Image
+                src={inputUrl}
+                alt={`Original for ${style.name}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
+                unoptimized
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Input thumbnail on front side */}
+        {inputUrl && outputUrl && !flipped && (
+          <div
+            className="absolute bottom-12 right-10 w-16 h-16 rounded-lg overflow-hidden border-2 border-white shadow-lg cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 z-10"
+            onClick={(e) => { e.stopPropagation(); handleFlip(); }}
+          >
+            <Image
+              src={inputUrl}
+              alt="See original"
+              fill
+              className="object-cover"
+              sizes="64px"
+              unoptimized
+            />
           </div>
         )}
 
-        {/* Thumbnail in bottom-right corner */}
-        {inputUrl && outputUrl && (
-          <button
-            onClick={handleSwap}
-            className="absolute bottom-3 right-3 w-20 h-20 rounded-xl overflow-hidden border-2 border-white shadow-lg cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95"
-          >
-            {thumbUrl && (
-              <Image
-                src={thumbUrl}
-                alt="Toggle view"
-                fill
-                className="object-cover"
-                sizes="80px"
-                unoptimized
-              />
-            )}
-          </button>
+        {/* Back side hint */}
+        {inputUrl && outputUrl && flipped && (
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-xs text-white pointer-events-none z-10">
+            {t("original")}
+          </div>
         )}
       </div>
 
+      {/* Preload input image */}
+      {inputUrl && (
+        <link rel="preload" as="image" href={inputUrl} />
+      )}
+
       {/* Info */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className="px-5 pb-5 flex flex-col flex-1 text-center">
         <h3 className="text-lg font-display text-text-primary">{style.name}</h3>
-        <div className="flex flex-wrap gap-1.5 mt-2 min-h-[24px]">
-          {style.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2 py-0.5 rounded-full bg-bg-primary text-text-secondary border border-border-light"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <div className="mt-auto pt-4">
+        <div className="mt-3">
           <Button
             href={`${bookingBaseUrl}?boothType=portrait&style=${style.id}`}
             variant="primary"
@@ -247,10 +278,11 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
             {t("portraitIntro")}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {imageStyles.map((style: PublicStyle) => (
+            {imageStyles.map((style: PublicStyle, i: number) => (
               <PortraitStyleCard
                 key={style.id}
                 style={style}
+                index={i}
                 bookingBaseUrl={bookingBaseUrl}
                 bookLabel={t("bookThisStyle")}
               />
