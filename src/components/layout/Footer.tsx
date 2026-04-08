@@ -52,7 +52,7 @@ export default function Footer({ footerData, logo }: FooterProps) {
   const chamberNumber = footerData?.chamberNumber || "80932932";
 
   return (
-    <footer className="bg-text-primary text-white">
+    <footer className="bg-text-primary text-white pb-20 md:pb-0">
       {/* Main Footer Content */}
       <div className="py-12 md:py-16">
         <Container>

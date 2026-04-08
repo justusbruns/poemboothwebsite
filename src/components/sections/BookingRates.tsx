@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
@@ -51,6 +52,7 @@ interface HubPricing {
 interface BookingRatesProps {
   hubPricing?: HubPricing;
   bookingUrl?: string;
+  portraitStyleImages?: string[];
 }
 
 type BoothType = "poem" | "portrait" | "roast";
@@ -101,9 +103,82 @@ function PriceRow({
   );
 }
 
+function VisualAddonCard({
+  title,
+  description,
+  price,
+  imageSrc,
+  rotation,
+}: {
+  title: string;
+  description?: string;
+  price: string;
+  imageSrc: string;
+  rotation?: number;
+}) {
+  return (
+    <div className="p-6">
+      <div className="flex flex-col md:flex-row gap-6 items-center">
+        <div
+          className="relative flex-shrink-0 rounded-xl overflow-hidden shadow-lg"
+          style={{ transform: `rotate(${rotation || -2}deg)`, width: 220, height: 220 }}
+        >
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className="object-cover"
+            sizes="220px"
+          />
+        </div>
+        <div className="flex-1 text-center md:text-left">
+          <h3 className="text-xl font-display text-text-primary">{title}</h3>
+          {description && (
+            <p className="text-sm text-text-secondary mt-2 leading-relaxed">{description}</p>
+          )}
+          <p className="text-lg font-display text-text-primary mt-3">{price}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StyleFan({ images }: { images: string[] }) {
+  const angles = [-12, -6, 0, 6, 12];
+  const shown = images.slice(0, 5);
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
+      {shown.map((url, i) => (
+        <div
+          key={i}
+          className="absolute rounded-lg overflow-hidden shadow-md border-2 border-white"
+          style={{
+            width: 90,
+            height: 120,
+            transform: `rotate(${angles[i]}deg) translateY(${Math.abs(angles[i]) * 0.8}px)`,
+            zIndex: i,
+            left: `${50 + (i - Math.floor(shown.length / 2)) * 22}px`,
+            top: 40,
+          }}
+        >
+          <Image
+            src={url}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="90px"
+            unoptimized
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function BookingRates({
   hubPricing,
   bookingUrl,
+  portraitStyleImages,
 }: BookingRatesProps) {
   const t = useTranslations("booking");
   const params = useParams();
@@ -279,60 +354,104 @@ export default function BookingRates({
             </div>
 
             {/* Optional Add-ons Header */}
-            <div className="px-6 py-3 bg-bg-secondary">
-              <p className="text-xs font-display text-text-secondary uppercase tracking-wide">
+            <div className="px-6 py-4 bg-bg-secondary">
+              <p className="text-sm font-display text-text-primary uppercase tracking-wide">
                 {t("optionalAddons")}
               </p>
             </div>
 
-            {/* Printer */}
-            {printingExtra && (
-              <PriceRow
-                title={getLocalizedField(printingExtra, "name", locale)}
-                description={getLocalizedField(printingExtra, "description", locale)}
-                price={`${formatPrice(printingExtra.rate, currencySymbol)} ${t("printer.perDay")}`}
-              />
-            )}
+            {/* === Visual add-ons (with images) === */}
 
             {/* Branding - for poem and roast */}
             {brandingExtra && (
-              <PriceRow
+              <VisualAddonCard
                 title={getLocalizedField(brandingExtra, "name", locale)}
                 description={getLocalizedField(brandingExtra, "description", locale)}
-                price={`${formatPrice(brandingExtra.rate, currencySymbol)} ${t("flatFee")}`}
+                price={`${formatPrice(brandingExtra.rate, currencySymbol)}`}
+                imageSrc="/images/addons/branding-poem.png"
+                rotation={-2}
               />
             )}
 
             {/* Product Placement - for portrait */}
             {productPlacementExtra && (
-              <PriceRow
+              <VisualAddonCard
                 title={getLocalizedField(productPlacementExtra, "name", locale)}
                 description={getLocalizedField(productPlacementExtra, "description", locale)}
-                price={`${formatPrice(productPlacementExtra.rate, currencySymbol)} ${t("flatFee")}`}
+                price={`${formatPrice(productPlacementExtra.rate, currencySymbol)}`}
+                imageSrc="/images/addons/product-placement.png"
+                rotation={2}
               />
             )}
 
-            {/* Thematic Content */}
-            {themeExtra && (
+            {/* Thematic Content - visual for portrait */}
+            {themeExtra && activeTab === "portrait" && (
+              <VisualAddonCard
+                title={getLocalizedField(themeExtra, "name", locale)}
+                description={t("thematic.portraitDescription")}
+                price={`${formatPrice(themeExtra.rate, currencySymbol)}`}
+                imageSrc="/images/addons/custom-style-portrait.png"
+                rotation={-1}
+              />
+            )}
+
+            {/* Extra Portrait Style - fan of cards */}
+            {activeTab === "portrait" && portraitStyleImages && portraitStyleImages.length > 0 && (
+              <div className="p-6">
+                <div className="flex flex-col md:flex-row gap-6 items-center">
+                  <div className="flex-shrink-0">
+                    <StyleFan images={portraitStyleImages} />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h3 className="text-xl font-display text-text-primary">{t("extraStyle.title")}</h3>
+                    <p className="text-sm text-text-secondary mt-2 leading-relaxed">{t("extraStyle.description")}</p>
+                    <p className="text-lg font-display text-text-primary mt-3">{formatPrice(imageStyleRate, currencySymbol)} / {t("extraStyle.perStyle")}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Printer */}
+            {printingExtra && (
+              <VisualAddonCard
+                title={getLocalizedField(printingExtra, "name", locale)}
+                description={getLocalizedField(printingExtra, "description", locale)}
+                price={`${formatPrice(printingExtra.rate, currencySymbol)} / ${t("printer.perDay")}`}
+                imageSrc="/images/addons/printing.png"
+                rotation={-1.5}
+              />
+            )}
+
+            {/* Outdoor Installation */}
+            <VisualAddonCard
+              title={t("outdoorInstallation.title")}
+              description={t("outdoorInstallation.description")}
+              price={`${formatPrice(outdoorFee, currencySymbol)}`}
+              imageSrc="/images/addons/outdoor.jpg"
+              rotation={1.5}
+            />
+
+            {/* === Text-only add-ons === */}
+
+            {/* Thematic Content - text for poem/roast */}
+            {themeExtra && activeTab !== "portrait" && (
               <PriceRow
                 title={getLocalizedField(themeExtra, "name", locale)}
                 description={
-                  activeTab === "portrait"
-                    ? t("thematic.portraitDescription")
-                    : activeTab === "roast"
-                      ? t("thematic.roastDescription")
-                      : t("thematic.poemDescription")
+                  activeTab === "roast"
+                    ? t("thematic.roastDescription")
+                    : t("thematic.poemDescription")
                 }
-                price={`${formatPrice(themeExtra.rate, currencySymbol)} ${t("flatFee")}`}
+                price={`${formatPrice(themeExtra.rate, currencySymbol)}`}
               />
             )}
 
-            {/* Extra Portrait Style - portrait only */}
-            {activeTab === "portrait" && (
+            {/* Extra Portrait Style fallback */}
+            {activeTab === "portrait" && (!portraitStyleImages || portraitStyleImages.length === 0) && (
               <PriceRow
                 title={t("extraStyle.title")}
                 description={t("extraStyle.description")}
-                price={`${formatPrice(imageStyleRate, currencySymbol)} ${t("extraStyle.perStyle")}`}
+                price={`${formatPrice(imageStyleRate, currencySymbol)} / ${t("extraStyle.perStyle")}`}
               />
             )}
 
@@ -341,7 +460,7 @@ export default function BookingRates({
               <PriceRow
                 title={t("language.title")}
                 description={t("language.description")}
-                price={`${formatPrice(languageRate, currencySymbol)} ${t("language.flatFee")}`}
+                price={`${formatPrice(languageRate, currencySymbol)} / ${t("language.flatFee")}`}
               />
             )}
 
@@ -350,16 +469,9 @@ export default function BookingRates({
               <PriceRow
                 title={getLocalizedField(digitalExtra, "name", locale)}
                 description={getLocalizedField(digitalExtra, "description", locale)}
-                price={`${formatPrice(digitalExtra.rate, currencySymbol)} ${t("flatFee")}`}
+                price={`${formatPrice(digitalExtra.rate, currencySymbol)}`}
               />
             )}
-
-            {/* Outdoor Installation */}
-            <PriceRow
-              title={t("outdoorInstallation.title")}
-              description={t("outdoorInstallation.description")}
-              price={`${formatPrice(outdoorFee, currencySymbol)} ${t("flatFee")}`}
-            />
 
             {/* Transport Rate */}
             <div className="p-6">
@@ -402,6 +514,15 @@ export default function BookingRates({
             >
               {t("ctaButton")}
             </Button>
+            <p className="mt-4 text-sm text-text-secondary">
+              {t("orMailUs")}{" "}
+              <a
+                href="mailto:contact@poembooth.com"
+                className="text-text-primary underline hover:no-underline"
+              >
+                contact@poembooth.com
+              </a>
+            </p>
           </div>
         </div>
       </Container>

@@ -24,6 +24,50 @@ interface StylesGalleryProps {
 
 type Tab = "image" | "poem" | "roast";
 
+function CustomStyleCard({ label, description, ctaLabel, ctaHref }: { label: string; description: string; ctaLabel: string; ctaHref: string }) {
+  return (
+    <div className="group flex flex-col">
+      <div
+        className="relative flex items-center justify-center px-6 cursor-pointer"
+        style={{ height: 380, perspective: "1000px" }}
+      >
+        <div
+          className="relative w-full max-w-[85%] rounded-lg overflow-hidden shadow-xl"
+          style={{ transform: "rotate(-1.5deg)" }}
+        >
+          <div className="relative aspect-[4/5] bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 p-[2px] rounded-lg">
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-400/30 via-fuchsia-300/20 to-amber-300/30 animate-pulse rounded-lg" />
+            <div className="relative h-full w-full rounded-[6px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col items-center justify-center text-center px-6 gap-4 overflow-hidden">
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
+              {/* Sparkle dots */}
+              <div className="absolute top-6 left-8 w-1.5 h-1.5 bg-violet-400/60 rounded-full animate-pulse" />
+              <div className="absolute top-12 right-10 w-1 h-1 bg-amber-400/60 rounded-full animate-pulse delay-300" />
+              <div className="absolute bottom-16 left-12 w-1 h-1 bg-fuchsia-400/60 rounded-full animate-pulse delay-500" />
+              <div className="absolute bottom-8 right-8 w-1.5 h-1.5 bg-violet-300/60 rounded-full animate-pulse delay-700" />
+
+              <svg className="w-12 h-12 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+              </svg>
+              <p className="text-xl font-display text-white">{label}</p>
+              <p className="text-sm text-white/60 leading-relaxed">{description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-5 pb-5 flex flex-col flex-1 text-center">
+        <h3 className="text-lg font-display text-text-primary">&nbsp;</h3>
+        <div className="mt-3">
+          <Button href={ctaHref} variant="primary" size="sm">
+            {ctaLabel}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Deterministic rotation per card based on index
 const ROTATIONS = [-3, 2, -1.5, 3, -2, 1.5, -2.5, 3.5, -1, 2.5];
 
@@ -277,16 +321,25 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
             {t("portraitIntro")}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {imageStyles.map((style: PublicStyle, i: number) => (
-              <PortraitStyleCard
-                key={style.id}
-                style={style}
-                index={i}
-                bookingBaseUrl={bookingBaseUrl}
-                bookLabel={t("bookThisStyle")}
-              />
+              <div key={style.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                <PortraitStyleCard
+                  style={style}
+                  index={i}
+                  bookingBaseUrl={bookingBaseUrl}
+                  bookLabel={t("bookThisStyle")}
+                />
+              </div>
             ))}
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+              <CustomStyleCard
+                label={t("customCard.title")}
+                description={t("customCard.description")}
+                ctaLabel={t("customCard.cta")}
+                ctaHref={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("customCard.emailSubject"))}&body=${encodeURIComponent(t("customCard.emailBody"))}`}
+              />
+            </div>
           </div>
         </>
       )}
@@ -306,6 +359,13 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
                 bookLabel={t("bookThisStyle")}
               />
             ))}
+            <div className="rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center">
+              <p className="text-xl font-display text-text-primary">{t("customCardPoem.title")}</p>
+              <p className="text-sm text-text-secondary mt-2">{t("customCardPoem.description")}</p>
+              <div className="mt-4">
+                <Button href={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("customCardPoem.emailSubject"))}&body=${encodeURIComponent(t("customCardPoem.emailBody"))}`} variant="primary" size="sm">{t("customCardPoem.cta")}</Button>
+              </div>
+            </div>
           </div>
         </>
       )}
@@ -325,6 +385,13 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
                 bookLabel={t("bookThisStyle")}
               />
             ))}
+            <div className="rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center">
+              <p className="text-xl font-display text-text-primary">{t("customCardRoast.title")}</p>
+              <p className="text-sm text-text-secondary mt-2">{t("customCardRoast.description")}</p>
+              <div className="mt-4">
+                <Button href={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("customCardRoast.emailSubject"))}&body=${encodeURIComponent(t("customCardRoast.emailBody"))}`} variant="primary" size="sm">{t("customCardRoast.cta")}</Button>
+              </div>
+            </div>
           </div>
         </>
       )}

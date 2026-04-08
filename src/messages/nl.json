@@ -217,7 +217,8 @@
       "title": "Extra Portretstijl",
       "description": "Voeg extra portretstijlen toe waar gasten uit kunnen kiezen",
       "perStyle": "per stijl"
-    }
+    },
+    "orMailUs": "Of mail ons via"
   },
   "otherRegions": {
     "title": "Buiten VS/EU?",
@@ -379,13 +380,14 @@
     "gallery": "Galerij",
     "rates": "Tarieven",
     "faq": "FAQ",
-    "styles": "Stijlen"
+    "styles": "Stijlen",
+    "bookNow": "Boek nu"
   },
   "styles": {
     "metaTitle": "Stijlen | Poem Booth",
     "metaDescription": "Bekijk alle beschikbare portret- en dichtstijlen voor je Poem Booth evenement.",
     "title": "Ontdek onze stijlen",
-    "subtitle": "Bekijk portret- en dichtstijlen beschikbaar voor je evenement",
+    "subtitle": "Bekijk onze beschikbare stijlen of laat ons een unieke custom stijl maken voor je event.",
     "tabs": {
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
@@ -395,6 +397,27 @@
     "poemIntro": "Elke dichtstijl genereert een uniek gedicht geïnspireerd op je foto. Lees de voorbeelden hieronder.",
     "bookThisStyle": "Boek met deze stijl",
     "roastIntro": "Hilarische AI-gegenereerde comedy roasts op basis van je foto. Perfect voor feesten en bedrijfsevenementen.",
-    "original": "Originele foto"
+    "original": "Originele foto",
+    "customCard": {
+      "title": "Je eigen custom stijl",
+      "description": "Iets unieks nodig? Wij ontwerpen een volledig custom stijl op maat van je event, merk of thema.",
+      "cta": "Neem contact op",
+      "emailSubject": "Custom portretstijl voor mijn event",
+      "emailBody": "Hoi Poem Booth team,\n\nIk ben geïnteresseerd in een custom portretstijl voor mijn event.\n\nType event: \nVerwachte datum: \nIdee / thema: \n\nGraag hoor ik van jullie!"
+    },
+    "customCardPoem": {
+      "title": "Je eigen dichtstijl",
+      "description": "Een unieke stem nodig? Wij creëren een custom dichtstijl passend bij je event, merk of gelegenheid.",
+      "cta": "Neem contact op",
+      "emailSubject": "Custom dichtstijl voor mijn event",
+      "emailBody": "Hoi Poem Booth team,\n\nIk ben geïnteresseerd in een custom dichtstijl voor mijn event.\n\nType event: \nVerwachte datum: \nIdee / tone of voice: \n\nGraag hoor ik van jullie!"
+    },
+    "customCardRoast": {
+      "title": "Je eigen roast stijl",
+      "description": "Een roast op maat? Wij creëren een custom comedy-stijl afgestemd op je publiek en event.",
+      "cta": "Neem contact op",
+      "emailSubject": "Custom roast stijl voor mijn event",
+      "emailBody": "Hoi Poem Booth team,\n\nIk ben geïnteresseerd in een custom roast stijl voor mijn event.\n\nType event: \nVerwachte datum: \nPubliek / sfeer: \n\nGraag hoor ik van jullie!"
+    }
   }
 }

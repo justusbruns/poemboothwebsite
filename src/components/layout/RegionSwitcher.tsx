@@ -16,13 +16,13 @@ const regionDefaultLocale: Record<Region, Locale> = {
 };
 
 const regionLabels: Record<Region, string> = {
-  nl: "Netherlands",
+  nl: "Nederland",
   us: "United States",
-  de: "Germany",
+  de: "Deutschland",
   fr: "France",
-  it: "Italy",
-  be: "Belgium",
-  row: "Rest of World",
+  it: "Italia",
+  be: "België / Belgique",
+  row: "Worldwide",
 };
 
 const regionFlags: Record<Region, string> = {

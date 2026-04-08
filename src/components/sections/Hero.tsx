@@ -25,7 +25,7 @@ export default function Hero({ heroImage, bookingUrl }: HeroProps) {
   const contactEmail = region === "us" ? "jackie@poembooth.com" : "contact@poembooth.com";
 
   return (
-    <section className="pb-6 md:pb-8 bg-bg-secondary">
+    <section className="pb-6 md:pb-8 bg-bg-secondary md:-mt-20 md:pt-20">
       <Container>
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
           {/* Text Content */}

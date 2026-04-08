@@ -264,11 +264,21 @@ export default async function LandingPage({ params }: PageProps) {
     private: ["q1", "q2", "q3", "q4"],
     boothTypes: ["q1", "q2", "q3"],
   };
+  const stripHtml = (s: string) => s.replace(/<[^>]*>/g, "");
+  const isUS = region === "us";
   const faqItems = faqTabs.flatMap((tab) =>
-    faqKeyCounts[tab].map((key) => ({
-      question: faqT(`${tab}.${key}.q`),
-      answer: faqT(`${tab}.${key}.a`),
-    }))
+    faqKeyCounts[tab].map((key) => {
+      const qKey = `${tab}.${key}.q`;
+      let aKey = `${tab}.${key}.a`;
+      // Region-specific answer for "Where can I hire?"
+      if (tab === "general" && key === "q5") {
+        aKey = isUS ? `${tab}.${key}.a_us` : `${tab}.${key}.a_eu`;
+      }
+      return {
+        question: faqT(qKey),
+        answer: stripHtml(faqT.raw(aKey) as string),
+      };
+    })
   );
 
   return (
@@ -280,7 +290,6 @@ export default async function LandingPage({ params }: PageProps) {
       <main>
         <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <ClientLogos logos={clientLogos} />
-        <HowItWorks steps={howItWorksSteps} />
         <section id="styles" className="py-16 md:py-24 bg-bg-primary">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <StylesGallery
@@ -289,11 +298,19 @@ export default async function LandingPage({ params }: PageProps) {
             />
           </div>
         </section>
+        <HowItWorks steps={howItWorksSteps} />
         {/* <EditionShowcase editions={editions} /> */}
         <PhotoGallery images={galleryImages} />
         <Newsletter />
         <Practicalities />
-        <BookingRates hubPricing={hubPricing} bookingUrl={pageData?.siteSettings?.bookingUrl} />
+        <BookingRates
+          hubPricing={hubPricing}
+          bookingUrl={pageData?.siteSettings?.bookingUrl}
+          portraitStyleImages={publicStyles
+            .filter((s: { style_type: string; example_output_image_url: string | null }) => s.style_type === "image" && s.example_output_image_url)
+            .slice(0, 5)
+            .map((s: { example_output_image_url: string }) => s.example_output_image_url)}
+        />
         <FAQ locale={locale} region={region} />
         <LatestBlogPosts posts={pageData?.latestBlogPosts ?? []} />
         <VouwBanner />

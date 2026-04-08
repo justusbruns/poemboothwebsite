@@ -4,6 +4,32 @@ html {
   scroll-behavior: smooth;
 }
 
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@keyframes border-rotate {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.animate-border-rotate {
+  animation: border-rotate 6s linear infinite;
+}
+
+@keyframes shimmer {
+  0%, 90% { transform: translateX(-200%) skewX(-12deg); }
+  100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+.animate-shimmer {
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.header-fade {
+  background: linear-gradient(to bottom, var(--color-bg-secondary) 0%, var(--color-bg-secondary) 40%, transparent 100%);
+}
+
 /* Century Old Style Font */
 @font-face {
   font-family: "Century Old Style";

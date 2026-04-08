@@ -27,8 +27,8 @@ export default async function FAQ({ locale, region }: { locale: string; region: 
 
   // Region-specific answer for "Where can I hire?"
   const hireAnswer = isUS
-    ? t("general.q5.a_us")
-    : t("general.q5.a_eu");
+    ? t.raw("general.q5.a_us") as string
+    : t.raw("general.q5.a_eu") as string;
 
   return (
     <section id="faq" className="section-padding bg-bg-primary">
@@ -48,7 +48,7 @@ export default async function FAQ({ locale, region }: { locale: string; region: 
                 const answer =
                   tab === "general" && key === "q5"
                     ? hireAnswer
-                    : t(`${tab}.${key}.a`);
+                    : t.raw(`${tab}.${key}.a`) as string;
 
                 return (
                   <details key={key} className="group border-b border-border">

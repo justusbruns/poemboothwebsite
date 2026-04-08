@@ -217,7 +217,8 @@
       "title": "Stile Ritratto Extra",
       "description": "Aggiungi stili ritratto aggiuntivi tra cui gli ospiti possono scegliere",
       "perStyle": "per stile"
-    }
+    },
+    "orMailUs": "O scrivici a"
   },
   "otherRegions": {
     "title": "Fuori USA/UE?",
@@ -379,13 +380,14 @@
     "gallery": "Galleria",
     "rates": "Tariffe",
     "faq": "FAQ",
-    "styles": "Stili"
+    "styles": "Stili",
+    "bookNow": "Prenota ora"
   },
   "styles": {
     "metaTitle": "Stili | Poem Booth",
     "metaDescription": "Scopri tutti gli stili ritratto e poesia disponibili per il tuo evento Poem Booth.",
     "title": "Scopri i nostri stili",
-    "subtitle": "Sfoglia gli stili ritratto e poesia per il tuo evento",
+    "subtitle": "Sfoglia i nostri stili disponibili o lascia che creiamo uno stile unico per il tuo evento.",
     "tabs": {
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
@@ -395,6 +397,27 @@
     "poemIntro": "Ogni stile poetico genera una poesia unica ispirata alla tua foto. Leggi gli esempi.",
     "bookThisStyle": "Prenota con questo stile",
     "roastIntro": "Esilaranti roast comici generati dall'IA basati sulla tua foto. Perfetti per feste ed eventi aziendali.",
-    "original": "Foto originale"
+    "original": "Foto originale",
+    "customCard": {
+      "title": "Il tuo stile personalizzato",
+      "description": "Vuoi qualcosa di unico? Progettiamo uno stile completamente personalizzato per il tuo evento.",
+      "cta": "Contattaci",
+      "emailSubject": "Stile ritratto personalizzato per il mio evento",
+      "emailBody": "Ciao team Poem Booth,\n\nSono interessato/a a uno stile ritratto personalizzato per il mio evento.\n\nTipo di evento: \nData prevista: \nIdea / tema: \n\nA presto!"
+    },
+    "customCardPoem": {
+      "title": "Il tuo stile poetico",
+      "description": "Vuoi una voce unica? Creiamo uno stile poetico personalizzato adatto al tuo evento.",
+      "cta": "Contattaci",
+      "emailSubject": "Stile poetico personalizzato per il mio evento",
+      "emailBody": "Ciao team Poem Booth,\n\nSono interessato/a a uno stile poetico personalizzato per il mio evento.\n\nTipo di evento: \nData prevista: \nIdea / tono: \n\nA presto!"
+    },
+    "customCardRoast": {
+      "title": "Il tuo stile roast",
+      "description": "Un roast su misura? Creiamo uno stile comico adattato al tuo pubblico e al tuo evento.",
+      "cta": "Contattaci",
+      "emailSubject": "Stile roast personalizzato per il mio evento",
+      "emailBody": "Ciao team Poem Booth,\n\nSono interessato/a a uno stile roast personalizzato per il mio evento.\n\nTipo di evento: \nData prevista: \nPubblico / atmosfera: \n\nA presto!"
+    }
   }
 }

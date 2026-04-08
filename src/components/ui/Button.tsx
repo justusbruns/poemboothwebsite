@@ -21,6 +21,19 @@ type ButtonAsLink = ButtonBaseProps &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
+function ShimmerWrap({ children, variant }: { children: React.ReactNode; variant: string }) {
+  if (variant !== "primary") return <>{children}</>;
+  return (
+    <span className="relative inline-flex items-center justify-center rounded-lg group">
+      <span className="absolute -inset-[1.5px] rounded-lg bg-gradient-to-r from-violet-500 via-fuchsia-500 to-amber-400 opacity-50 group-hover:opacity-100 transition-opacity duration-300 animate-border-rotate" />
+      <span className="relative inline-flex items-center justify-center w-full rounded-[7px] overflow-hidden">
+        {children}
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 animate-shimmer pointer-events-none" />
+      </span>
+    </span>
+  );
+}
+
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
     const baseStyles =
@@ -49,38 +62,44 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
       if (isExternal) {
         return (
-          <a
+          <ShimmerWrap variant={variant}>
+            <a
+              href={href}
+              className={combinedClassName}
+              ref={ref as React.Ref<HTMLAnchorElement>}
+              {...linkProps}
+            >
+              {children}
+            </a>
+          </ShimmerWrap>
+        );
+      }
+
+      return (
+        <ShimmerWrap variant={variant}>
+          <Link
             href={href}
             className={combinedClassName}
             ref={ref as React.Ref<HTMLAnchorElement>}
             {...linkProps}
           >
             {children}
-          </a>
-        );
-      }
-
-      return (
-        <Link
-          href={href}
-          className={combinedClassName}
-          ref={ref as React.Ref<HTMLAnchorElement>}
-          {...linkProps}
-        >
-          {children}
-        </Link>
+          </Link>
+        </ShimmerWrap>
       );
     }
 
     const buttonProps = props as ButtonAsButton;
     return (
-      <button
-        className={combinedClassName}
-        ref={ref as React.Ref<HTMLButtonElement>}
-        {...buttonProps}
-      >
-        {children}
-      </button>
+      <ShimmerWrap variant={variant}>
+        <button
+          className={combinedClassName}
+          ref={ref as React.Ref<HTMLButtonElement>}
+          {...buttonProps}
+        >
+          {children}
+        </button>
+      </ShimmerWrap>
     );
   }
 );
