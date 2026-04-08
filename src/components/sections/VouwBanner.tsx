@@ -35,6 +35,7 @@ export default function VouwBanner() {
           href="https://vouw.com"
           variant="primary"
           size="lg"
+          shimmer={false}
           target="_blank"
           rel="noopener noreferrer"
         >

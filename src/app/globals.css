@@ -8,15 +8,6 @@ html {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-@keyframes border-rotate {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-
-.animate-border-rotate {
-  animation: border-rotate 6s linear infinite;
-}
-
 @keyframes shimmer {
   0%, 90% { transform: translateX(-200%) skewX(-12deg); }
   100% { transform: translateX(200%) skewX(-12deg); }
@@ -24,6 +15,24 @@ html {
 
 .animate-shimmer {
   animation: shimmer 4s ease-in-out infinite;
+}
+
+.shimmer-button {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 1.5px rgba(139, 92, 246, 0.4);
+  animation: shimmer-border-glow 6s linear infinite;
+}
+
+@keyframes shimmer-border-glow {
+  0% { box-shadow: 0 0 0 1.5px rgba(139, 92, 246, 0.4); }
+  33% { box-shadow: 0 0 0 1.5px rgba(217, 70, 239, 0.4); }
+  66% { box-shadow: 0 0 0 1.5px rgba(245, 158, 11, 0.4); }
+  100% { box-shadow: 0 0 0 1.5px rgba(139, 92, 246, 0.4); }
+}
+
+.shimmer-button:hover {
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.7);
 }
 
 .header-fade {

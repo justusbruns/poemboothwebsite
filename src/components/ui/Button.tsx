@@ -5,6 +5,7 @@ import { forwardRef } from "react";
 interface ButtonBaseProps {
   variant?: "primary" | "secondary" | "outline";
   size?: "sm" | "md" | "lg";
+  shimmer?: boolean;
   className?: string;
   children?: React.ReactNode;
 }
@@ -21,21 +22,10 @@ type ButtonAsLink = ButtonBaseProps &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
-function ShimmerWrap({ children, variant }: { children: React.ReactNode; variant: string }) {
-  if (variant !== "primary") return <>{children}</>;
-  return (
-    <span className="relative inline-flex items-center justify-center rounded-lg group">
-      <span className="absolute -inset-[1.5px] rounded-lg bg-gradient-to-r from-violet-500 via-fuchsia-500 to-amber-400 opacity-50 group-hover:opacity-100 transition-opacity duration-300 animate-border-rotate" />
-      <span className="relative inline-flex items-center justify-center w-full rounded-[7px] overflow-hidden">
-        {children}
-        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 animate-shimmer pointer-events-none" />
-      </span>
-    </span>
-  );
-}
-
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", shimmer, children, ...props }, ref) => {
+    const showShimmer = shimmer !== undefined ? shimmer : variant === "primary";
+
     const baseStyles =
       "inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
@@ -54,7 +44,24 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       lg: "px-8 py-4 text-lg",
     };
 
-    const combinedClassName = cn(baseStyles, variants[variant], sizes[size], className);
+    const combinedClassName = cn(
+      baseStyles,
+      variants[variant],
+      sizes[size],
+      showShimmer && "shimmer-button",
+      className
+    );
+
+    const inner = showShimmer ? (
+      <>
+        <span className="relative z-10">{children}</span>
+        <span className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
+          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 animate-shimmer" />
+        </span>
+      </>
+    ) : (
+      children
+    );
 
     if ("href" in props && props.href !== undefined) {
       const { href, ...linkProps } = props as ButtonAsLink;
@@ -62,44 +69,38 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
       if (isExternal) {
         return (
-          <ShimmerWrap variant={variant}>
-            <a
-              href={href}
-              className={combinedClassName}
-              ref={ref as React.Ref<HTMLAnchorElement>}
-              {...linkProps}
-            >
-              {children}
-            </a>
-          </ShimmerWrap>
-        );
-      }
-
-      return (
-        <ShimmerWrap variant={variant}>
-          <Link
+          <a
             href={href}
             className={combinedClassName}
             ref={ref as React.Ref<HTMLAnchorElement>}
             {...linkProps}
           >
-            {children}
-          </Link>
-        </ShimmerWrap>
+            {inner}
+          </a>
+        );
+      }
+
+      return (
+        <Link
+          href={href}
+          className={combinedClassName}
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          {...linkProps}
+        >
+          {inner}
+        </Link>
       );
     }
 
     const buttonProps = props as ButtonAsButton;
     return (
-      <ShimmerWrap variant={variant}>
-        <button
-          className={combinedClassName}
-          ref={ref as React.Ref<HTMLButtonElement>}
-          {...buttonProps}
-        >
-          {children}
-        </button>
-      </ShimmerWrap>
+      <button
+        className={combinedClassName}
+        ref={ref as React.Ref<HTMLButtonElement>}
+        {...buttonProps}
+      >
+        {inner}
+      </button>
     );
   }
 );
