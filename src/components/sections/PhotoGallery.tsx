@@ -35,7 +35,8 @@ const ARROW_INSET = 40 + 24;
 
 export default function PhotoGallery({ images = placeholderImages }: PhotoGalleryProps) {
   const t = useTranslations("gallery");
-  const total = images.length;
+  const effectiveImages = images.length > 0 ? images : placeholderImages;
+  const total = effectiveImages.length;
   const [current, setCurrent] = useState(0);
   const [offset, setOffset] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -76,14 +77,14 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
 
   // Render 5 slots: -2, -1, 0, +1, +2 relative to current
   const slots = [-2, -1, 0, 1, 2].map((d) => ({
-    image: images[(current + d + total) % total],
+    image: effectiveImages[(current + d + total) % total],
     rotation: ROTATIONS[(current + d + total) % total],
   }));
 
   // During animation: incoming slot (2 + animDir) is the new center — scale starts immediately
   const centerSlot = animating ? 2 + animDir : 2;
 
-  const activeImage = images[current];
+  const activeImage = effectiveImages[current];
 
   return (
     <section id="gallery" className="py-16 md:py-24 bg-bg-primary">
