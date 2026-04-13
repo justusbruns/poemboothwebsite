@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify({ email, groups: ["184639981417923947"] }),
   });
 
   if (!res.ok) {
