@@ -35,7 +35,10 @@ const ARROW_INSET = 40 + 24;
 
 export default function PhotoGallery({ images = placeholderImages }: PhotoGalleryProps) {
   const t = useTranslations("gallery");
-  const effectiveImages = images.length > 0 ? images : placeholderImages;
+  const base = images.length > 0 ? images : placeholderImages;
+  const effectiveImages = base.length >= 5
+    ? base
+    : Array.from({ length: 5 }, (_, i) => base[i % base.length]);
   const total = effectiveImages.length;
   const [current, setCurrent] = useState(0);
   const [offset, setOffset] = useState(0);
