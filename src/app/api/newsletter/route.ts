@@ -16,8 +16,9 @@ export async function POST(req: NextRequest) {
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
+    console.error("MailerLite error:", JSON.stringify(err));
     return NextResponse.json(
-      { error: (err as { message?: string })?.message || "Subscription failed" },
+      { error: (err as { message?: string })?.message || "Subscription failed", details: err },
       { status: res.status }
     );
   }
