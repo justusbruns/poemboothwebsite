@@ -147,7 +147,7 @@ export const editionsQuery = groq`
 
 // Gallery Images
 export const galleryImagesQuery = groq`
-  *[_type == "galleryImage" && ($region in regionVisibility || "all" in regionVisibility)] | order(order asc)[0...6] {
+  *[_type == "galleryImage" && defined(order) && ($region in regionVisibility || "all" in regionVisibility)] | order(order asc)[0...6] {
     _id,
     image {
       asset-> {
@@ -412,7 +412,7 @@ export const pageDataQuery = groq`
     beforeLabel,
     afterLabel
   },
-  "gallery": *[_type == "galleryImage" && ($region in regionVisibility || "all" in regionVisibility)] | order(order asc)[0...6] {
+  "gallery": *[_type == "galleryImage" && defined(order) && ($region in regionVisibility || "all" in regionVisibility)] | order(order asc)[0...6] {
     _id,
     image {
       asset-> {
