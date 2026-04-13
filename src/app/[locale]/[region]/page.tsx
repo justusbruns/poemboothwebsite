@@ -227,7 +227,7 @@ export default async function LandingPage({ params }: PageProps) {
     afterLabel: getLocalizedValue(e.afterLabel, locale),
   }));
 
-  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string }; hotspot?: { x?: number; y?: number } }; caption?: LocalizedField; eventName?: string; featured?: boolean }) => {
+  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string }; hotspot?: { x?: number; y?: number } }; caption?: LocalizedField; eventName?: string; contextText?: string }) => {
     const hotspot = g.image?.hotspot;
     const objectPosition = hotspot
       ? `${Math.round((hotspot.x ?? 0.5) * 100)}% ${Math.round((hotspot.y ?? 0.5) * 100)}%`
@@ -236,7 +236,7 @@ export default async function LandingPage({ params }: PageProps) {
       imageUrl: g.image?.asset?.url,
       caption: getLocalizedValue(g.caption, locale),
       eventName: g.eventName,
-      featured: g.featured,
+      contextText: g.contextText,
       objectPosition,
     };
   });

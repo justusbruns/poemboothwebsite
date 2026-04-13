@@ -147,7 +147,7 @@ export const editionsQuery = groq`
 
 // Gallery Images
 export const galleryImagesQuery = groq`
-  *[_type == "galleryImage" && ($region in regionVisibility || "all" in regionVisibility)] | order(_createdAt desc)[0...20] {
+  *[_type == "galleryImage" && ($region in regionVisibility || "all" in regionVisibility)] | order(order asc)[0...6] {
     _id,
     image {
       asset-> {
@@ -162,8 +162,8 @@ export const galleryImagesQuery = groq`
     },
     caption,
     eventName,
-    editionType,
-    featured
+    contextText,
+    order
   }
 `;
 
@@ -412,7 +412,7 @@ export const pageDataQuery = groq`
     beforeLabel,
     afterLabel
   },
-  "gallery": *[_type == "galleryImage" && ($region in regionVisibility || "all" in regionVisibility)] | order(_createdAt desc)[0...20] {
+  "gallery": *[_type == "galleryImage" && ($region in regionVisibility || "all" in regionVisibility)] | order(order asc)[0...6] {
     _id,
     image {
       asset-> {
@@ -428,8 +428,8 @@ export const pageDataQuery = groq`
     },
     caption,
     eventName,
-    editionType,
-    featured
+    contextText,
+    order
   },
   "practicalities": *[_type == "practicality"] | order(order asc) {
     _id,
