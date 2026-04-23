@@ -284,10 +284,10 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
   const poemStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && !s.tags.includes("roast"));
   const roastStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && s.tags.includes("roast"));
 
-  const tabs: { key: Tab; label: string; count: number }[] = [
-    { key: "image", label: t("tabs.portrait"), count: imageStyles.length },
-    { key: "poem", label: t("tabs.poem"), count: poemStyles.length },
-    { key: "roast", label: t("tabs.roast"), count: roastStyles.length },
+  const tabs: { key: Tab; label: string; shortLabel: string; count: number }[] = [
+    { key: "image", label: t("tabs.portrait"), shortLabel: t("tabs.portraitShort"), count: imageStyles.length },
+    { key: "poem", label: t("tabs.poem"), shortLabel: t("tabs.poemShort"), count: poemStyles.length },
+    { key: "roast", label: t("tabs.roast"), shortLabel: t("tabs.roastShort"), count: roastStyles.length },
   ];
 
   return (
@@ -309,7 +309,8 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
-            {tab.label}
+            <span className="hidden md:inline">{tab.label}</span>
+            <span className="md:hidden">{tab.shortLabel}</span>
             <span className="ml-1.5 text-xs opacity-60">({tab.count})</span>
           </button>
         ))}

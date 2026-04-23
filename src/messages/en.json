@@ -391,7 +391,10 @@
     "tabs": {
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
-      "roast": "Roast Booth"
+      "roast": "Roast Booth",
+      "portraitShort": "Portrait",
+      "poemShort": "Poem",
+      "roastShort": "Roast"
     },
     "portraitIntro": "Each portrait style transforms your photo into a unique AI-generated artwork. Toggle between before and after to see the magic.",
     "poemIntro": "Each poem style generates a unique piece of poetry inspired by your photo. Read the examples below.",

@@ -391,7 +391,10 @@
     "tabs": {
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
-      "roast": "Roast Booth"
+      "roast": "Roast Booth",
+      "portraitShort": "Portrait",
+      "poemShort": "Poem",
+      "roastShort": "Roast"
     },
     "portraitIntro": "Chaque style de portrait transforme votre photo en une œuvre d’art IA unique. Basculez entre avant et après.",
     "poemIntro": "Chaque style poétique génère un poème unique inspiré de votre photo. Lisez les exemples.",

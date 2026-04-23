@@ -391,7 +391,10 @@
     "tabs": {
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
-      "roast": "Roast Booth"
+      "roast": "Roast Booth",
+      "portraitShort": "Portrait",
+      "poemShort": "Poem",
+      "roastShort": "Roast"
     },
     "portraitIntro": "Elke portretstijl transformeert je foto in een uniek AI-kunstwerk. Wissel tussen before en after om de magie te zien.",
     "poemIntro": "Elke dichtstijl genereert een uniek gedicht geïnspireerd op je foto. Lees de voorbeelden hieronder.",

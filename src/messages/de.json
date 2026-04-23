@@ -391,7 +391,10 @@
     "tabs": {
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
-      "roast": "Roast Booth"
+      "roast": "Roast Booth",
+      "portraitShort": "Portrait",
+      "poemShort": "Poem",
+      "roastShort": "Roast"
     },
     "portraitIntro": "Jeder Porträtstil verwandelt Ihr Foto in ein einzigartiges KI-Kunstwerk. Wechseln Sie zwischen Vorher und Nachher.",
     "poemIntro": "Jeder Gedichtstil generiert ein einzigartiges Gedicht inspiriert von Ihrem Foto. Lesen Sie die Beispiele.",
