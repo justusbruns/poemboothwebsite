@@ -31,6 +31,7 @@
     }
   },
   "hero": {
+    "originBadge": "Die originale Poem Booth · Amsterdam, 2023",
     "headline": "Die KI-Photobooth, die Gedichte & Porträts auf Ihrem Event erstellt",
     "subheadline": "Die Poem Booth verwandelt Ihr Foto in Sekunden in ein persönliches Gedicht oder künstlerisches Porträt. Inspiriert von echten Dichtern und Künstlern. Ideal für Firmenveranstaltungen, Feste und kulturelle Einrichtungen.",
     "ctaButton": "Jetzt buchen",
@@ -392,12 +393,15 @@
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
       "roast": "Roast Booth",
+      "poemAndRoast": "Poem & Roast Booth",
       "portraitShort": "Portrait",
       "poemShort": "Poem",
-      "roastShort": "Roast"
+      "roastShort": "Roast",
+      "poemAndRoastShort": "Gedichte & Roasts"
     },
     "portraitIntro": "Jeder Porträtstil verwandelt Ihr Foto in ein einzigartiges KI-Kunstwerk. Wechseln Sie zwischen Vorher und Nachher.",
     "poemIntro": "Jeder Gedichtstil generiert ein einzigartiges Gedicht inspiriert von Ihrem Foto. Lesen Sie die Beispiele.",
+    "poemAndRoastIntro": "Jeder Stil erzeugt ein einzigartiges Stück Text, inspiriert von Ihrem Foto — Gedichte lyrisch, Roasts komisch.",
     "bookThisStyle": "Mit diesem Stil buchen",
     "roastIntro": "Urkomische KI-generierte Comedy-Roasts basierend auf Ihrem Foto. Perfekt für Partys und Firmenevents.",
     "original": "Originalfoto",

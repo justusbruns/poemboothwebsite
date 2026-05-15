@@ -30,6 +30,9 @@ export default function Hero({ heroImage, bookingUrl }: HeroProps) {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
           {/* Text Content */}
           <div className="order-2 md:order-1">
+            <p className="text-xs md:text-sm font-medium tracking-[0.18em] uppercase text-text-muted mb-3">
+              {t("originBadge")}
+            </p>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-display text-text-primary mb-4 leading-tight">
               {t("headline")}
             </h1>

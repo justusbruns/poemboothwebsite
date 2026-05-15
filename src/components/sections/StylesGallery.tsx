@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { cn } from "@/lib/utils/cn";
 
 interface PublicStyle {
   id: string;
@@ -20,9 +21,10 @@ interface PublicStyle {
 interface StylesGalleryProps {
   styles: PublicStyle[];
   bookingBaseUrl: string;
+  watermarkLogoUrl?: string;
 }
 
-type Tab = "image" | "poem" | "roast";
+type Tab = "image" | "poem";
 
 function CustomStyleCard({ label, description, ctaLabel, ctaHref }: { label: string; description: string; ctaLabel: string; ctaHref: string }) {
   return (
@@ -207,88 +209,164 @@ function PortraitStyleCard({
   );
 }
 
+// Color palettes for poem cards — varied bg + text combinations.
+// Watermark logo is tinted to `text` color via CSS mask-image, then faded by `watermarkOpacity`.
+const POEM_PALETTES = [
+  { bg: "#FBC02D", text: "#D62E2B", watermarkOpacity: 0.28 },
+  { bg: "#1B2E4B", text: "#F5E6C8", watermarkOpacity: 0.18 },
+  { bg: "#F4B5C5", text: "#4A1B2E", watermarkOpacity: 0.25 },
+  { bg: "#2D5F4F", text: "#F5E6C8", watermarkOpacity: 0.2 },
+  { bg: "#F2E4C7", text: "#8B3A1D", watermarkOpacity: 0.28 },
+  { bg: "#D86A45", text: "#FFF3D6", watermarkOpacity: 0.22 },
+  { bg: "#3A2E5C", text: "#F2C94C", watermarkOpacity: 0.2 },
+  { bg: "#E8D5C4", text: "#264653", watermarkOpacity: 0.28 },
+];
+
+const POEM_PHOTO_ROTATIONS = [-2.5, 2, -1.5, 3, -2, 2.5, -3, 1.5];
+
 function PoemStyleCard({
   style,
   bookingBaseUrl,
   bookLabel,
+  index,
+  watermarkLogoUrl,
 }: {
   style: PublicStyle;
   bookingBaseUrl: string;
   bookLabel: string;
+  index: number;
+  watermarkLogoUrl?: string;
 }) {
   const isRoast = style.tags.includes("roast");
+  // Roast cards: uniform dark grey card with the brand ROAST BOOTH logo as watermark.
+  const palette = isRoast
+    ? { bg: "#292929", text: "#F5E6C8", watermarkOpacity: 1 }
+    : POEM_PALETTES[index % POEM_PALETTES.length];
+  const effectiveWatermarkUrl = isRoast ? "/images/roast-booth-logo.png" : watermarkLogoUrl;
+  const rotation = POEM_PHOTO_ROTATIONS[index % POEM_PHOTO_ROTATIONS.length];
+  const poemBody = style.example_poem_text?.replace(/^#\s+.+\n\n?/, "");
 
   return (
-    <div className="rounded-2xl overflow-hidden bg-bg-secondary border border-border-light">
-      <div className="flex flex-col md:flex-row">
-        {/* Input photo */}
-        {style.example_input_image_url && (
-          <div className="relative w-full md:w-64 aspect-square md:aspect-auto flex-shrink-0">
-            <Image
-              src={style.example_input_image_url}
-              alt={`Example for ${style.name}`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 256px"
-              unoptimized
-            />
-          </div>
-        )}
-
-        {/* Content */}
-        <div className="flex-1 p-6 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-xl font-display text-text-primary">{style.name}</h3>
-              {isRoast && (
-                <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200">
-                  Roast
-                </span>
-              )}
-            </div>
-
-            {style.example_poem_text && (
-              <blockquote className="mt-4 text-text-secondary font-body text-sm leading-relaxed italic border-l-2 border-border-light pl-4 whitespace-pre-line">
-                {style.example_poem_text.replace(/^#\s+.+\n\n?/, "")}
-              </blockquote>
-            )}
-
-            {/* Poem title if exists */}
-            {style.example_poem_text?.startsWith("# ") && (
-              <p className="mt-2 text-xs text-text-muted">
-                {style.example_poem_text.split("\n")[0].replace("# ", "")}
-              </p>
-            )}
-          </div>
-
-          <div className="mt-5">
-            <Button
-              href={`${bookingBaseUrl}?boothType=${isRoast ? "roast" : "poem"}&style=${style.id}`}
-              variant="primary"
-              size="sm"
+    <div className="group flex flex-col">
+      {/* Fixed-height stage so all cards align (matches PortraitStyleCard) */}
+      <div
+        className="relative flex items-center justify-center px-4"
+        style={{ height: 380 }}
+      >
+        <div
+          className="relative w-full max-w-[88%] aspect-square rounded-2xl overflow-hidden shadow-xl"
+          style={{
+            backgroundColor: palette.bg,
+            color: palette.text,
+            transform: `rotate(${rotation}deg)`,
+          }}
+        >
+          {/* Watermark logo — roast: full-color PNG flush in corner. Poem: mask-image tinted to palette.text. */}
+          {effectiveWatermarkUrl && isRoast && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute select-none"
+              style={{ bottom: 0, right: 0, width: "45%" }}
             >
-              {bookLabel}
-            </Button>
+              <Image
+                src={effectiveWatermarkUrl}
+                alt=""
+                width={500}
+                height={500}
+                className="w-full h-auto"
+                unoptimized
+              />
+            </div>
+          )}
+          {effectiveWatermarkUrl && !isRoast && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute select-none"
+              style={{
+                bottom: "-14%",
+                right: "-10%",
+                width: "55%",
+                aspectRatio: "1 / 1",
+                backgroundColor: palette.text,
+                opacity: palette.watermarkOpacity,
+                WebkitMaskImage: `url("${effectiveWatermarkUrl}")`,
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskSize: "contain",
+                WebkitMaskPosition: "bottom right",
+                maskImage: `url("${effectiveWatermarkUrl}")`,
+                maskRepeat: "no-repeat",
+                maskSize: "contain",
+                maskPosition: "bottom right",
+              }}
+            />
+          )}
+
+          {/* Photo left + poem right */}
+          <div className="relative z-10 flex h-full p-3 gap-3">
+            {style.example_input_image_url && (
+              <div className="relative flex-shrink-0 h-full" style={{ width: "42%" }}>
+                <Image
+                  src={style.example_input_image_url}
+                  alt={`Example for ${style.name}`}
+                  fill
+                  className="object-cover rounded-md"
+                  sizes="(max-width: 640px) 40vw, 160px"
+                  unoptimized
+                />
+              </div>
+            )}
+
+            {poemBody && (
+              <div className="flex-1 min-w-0 flex items-start pt-1 pr-1">
+                <blockquote
+                  className="font-body text-[13px] leading-snug whitespace-pre-line"
+                  style={{ color: palette.text }}
+                >
+                  {poemBody}
+                </blockquote>
+              </div>
+            )}
           </div>
+        </div>
+      </div>
+
+      {/* Name + book button below (mirrors PortraitStyleCard) */}
+      <div className="px-5 pb-5 flex flex-col flex-1 text-center">
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <h3 className="text-lg font-display text-text-primary">{style.name}</h3>
+          {isRoast && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200">
+              Roast
+            </span>
+          )}
+        </div>
+        <div className="mt-3">
+          <Button
+            href={`${bookingBaseUrl}?boothType=${isRoast ? "roast" : "poem"}&style=${style.id}`}
+            variant="primary"
+            size="sm"
+          >
+            {bookLabel}
+          </Button>
         </div>
       </div>
     </div>
   );
 }
 
-export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryProps) {
+export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl }: StylesGalleryProps) {
   const t = useTranslations("styles");
   const [activeTab, setActiveTab] = useState<Tab>("image");
 
   const imageStyles = styles.filter((s: PublicStyle) => s.style_type === "image");
-  const poemStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && !s.tags.includes("roast"));
+  const poemOnlyStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && !s.tags.includes("roast"));
   const roastStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && s.tags.includes("roast"));
+  // Merged list: poems first, then roasts.
+  const poemAndRoastStyles = [...poemOnlyStyles, ...roastStyles];
 
-  const tabs: { key: Tab; label: string; shortLabel: string; count: number }[] = [
-    { key: "image", label: t("tabs.portrait"), shortLabel: t("tabs.portraitShort"), count: imageStyles.length },
-    { key: "poem", label: t("tabs.poem"), shortLabel: t("tabs.poemShort"), count: poemStyles.length },
-    { key: "roast", label: t("tabs.roast"), shortLabel: t("tabs.roastShort"), count: roastStyles.length },
-  ];
+  // Preview images for the two visual tiles.
+  const portraitPreviewUrl = imageStyles.find((s) => s.example_output_image_url)?.example_output_image_url;
+  const poemPreviewUrl = poemAndRoastStyles.find((s) => s.example_input_image_url)?.example_input_image_url;
 
   return (
     <div>
@@ -297,23 +375,111 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
         subtitle={t("subtitle")}
       />
 
-      {/* Tabs */}
-      <div className="flex rounded-xl bg-bg-secondary border border-border-light p-1 mt-10 mb-10 max-w-lg mx-auto">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 py-3 px-4 rounded-lg text-sm md:text-base font-display transition-all duration-200 ${
-              activeTab === tab.key
-                ? "bg-text-primary text-bg-primary shadow-sm"
-                : "text-text-secondary hover:text-text-primary"
-            }`}
+      {/* Visual tile selector */}
+      <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mt-10 mb-10">
+        <button
+          type="button"
+          onClick={() => setActiveTab("image")}
+          className="group flex flex-col items-center text-left"
+          aria-pressed={activeTab === "image"}
+        >
+          <div
+            className={cn(
+              "relative aspect-square w-full overflow-hidden rounded-2xl bg-bg-secondary transition-all duration-300",
+              activeTab === "image"
+                ? "shadow-xl"
+                : "opacity-55 grayscale group-hover:opacity-85 group-hover:grayscale-0"
+            )}
           >
-            <span className="hidden md:inline">{tab.label}</span>
-            <span className="md:hidden">{tab.shortLabel}</span>
-            <span className="ml-1.5 text-xs opacity-60">({tab.count})</span>
-          </button>
-        ))}
+            {portraitPreviewUrl && (
+              <Image
+                src={portraitPreviewUrl}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 380px"
+                unoptimized
+              />
+            )}
+          </div>
+          <p
+            className={cn(
+              "mt-3 text-base md:text-lg font-display transition-colors w-full text-center",
+              activeTab === "image" ? "text-text-primary" : "text-text-secondary"
+            )}
+          >
+            {t("tabs.portrait")}
+          </p>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("poem")}
+          className="group flex flex-col items-center text-left"
+          aria-pressed={activeTab === "poem"}
+        >
+          <div
+            className={cn(
+              "relative aspect-square w-full overflow-hidden rounded-2xl transition-all duration-300",
+              activeTab === "poem"
+                ? "shadow-xl"
+                : "opacity-55 grayscale group-hover:opacity-85 group-hover:grayscale-0"
+            )}
+            style={{ backgroundColor: "#FBC02D" }}
+          >
+            {/* Mini poem-card preview: photo left, text-line skeleton right, PB watermark */}
+            <div className="absolute inset-0 flex p-3 gap-3">
+              {poemPreviewUrl && (
+                <div className="relative flex-shrink-0 h-full" style={{ width: "42%" }}>
+                  <Image
+                    src={poemPreviewUrl}
+                    alt=""
+                    fill
+                    className="object-cover rounded-md"
+                    sizes="(max-width: 768px) 22vw, 160px"
+                    unoptimized
+                  />
+                </div>
+              )}
+              <div className="flex-1 flex flex-col justify-center gap-2 pr-1">
+                <div className="h-2 rounded w-full" style={{ backgroundColor: "#D62E2B", opacity: 0.85 }} />
+                <div className="h-2 rounded w-5/6" style={{ backgroundColor: "#D62E2B", opacity: 0.85 }} />
+                <div className="h-2 rounded w-3/4" style={{ backgroundColor: "#D62E2B", opacity: 0.85 }} />
+                <div className="h-2 rounded w-2/3" style={{ backgroundColor: "#D62E2B", opacity: 0.85 }} />
+              </div>
+            </div>
+            {watermarkLogoUrl && (
+              <div
+                aria-hidden
+                className="pointer-events-none absolute select-none"
+                style={{
+                  bottom: "-14%",
+                  right: "-10%",
+                  width: "55%",
+                  aspectRatio: "1 / 1",
+                  backgroundColor: "#D62E2B",
+                  opacity: 0.25,
+                  WebkitMaskImage: `url("${watermarkLogoUrl}")`,
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskSize: "contain",
+                  WebkitMaskPosition: "bottom right",
+                  maskImage: `url("${watermarkLogoUrl}")`,
+                  maskRepeat: "no-repeat",
+                  maskSize: "contain",
+                  maskPosition: "bottom right",
+                }}
+              />
+            )}
+          </div>
+          <p
+            className={cn(
+              "mt-3 text-base md:text-lg font-display transition-colors w-full text-center",
+              activeTab === "poem" ? "text-text-primary" : "text-text-secondary"
+            )}
+          >
+            {t("tabs.poemAndRoastShort")}
+          </p>
+        </button>
       </div>
 
       {/* Portrait Styles Grid */}
@@ -345,48 +511,32 @@ export default function StylesGallery({ styles, bookingBaseUrl }: StylesGalleryP
         </>
       )}
 
-      {/* Poem Styles */}
+      {/* Poems & Roasts Grid (combined) */}
       {activeTab === "poem" && (
         <>
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
-            {t("poemIntro")}
+            {t("poemAndRoastIntro")}
           </p>
-          <div className="grid grid-cols-1 gap-6">
-            {poemStyles.map((style: PublicStyle) => (
-              <PoemStyleCard
-                key={style.id}
-                style={style}
-                bookingBaseUrl={bookingBaseUrl}
-                bookLabel={t("bookThisStyle")}
-              />
+          <div className="flex flex-wrap justify-center gap-6">
+            {poemAndRoastStyles.map((style: PublicStyle, i: number) => (
+              <div key={style.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                <PoemStyleCard
+                  style={style}
+                  index={i}
+                  watermarkLogoUrl={watermarkLogoUrl}
+                  bookingBaseUrl={bookingBaseUrl}
+                  bookLabel={t("bookThisStyle")}
+                />
+              </div>
             ))}
-            <div className="rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center">
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center flex flex-col justify-center">
               <p className="text-xl font-display text-text-primary">{t("customCardPoem.title")}</p>
               <p className="text-sm text-text-secondary mt-2">{t("customCardPoem.description")}</p>
               <div className="mt-4">
                 <Button href={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("customCardPoem.emailSubject"))}&body=${encodeURIComponent(t("customCardPoem.emailBody"))}`} variant="primary" size="sm">{t("customCardPoem.cta")}</Button>
               </div>
             </div>
-          </div>
-        </>
-      )}
-
-      {/* Roast Styles */}
-      {activeTab === "roast" && (
-        <>
-          <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
-            {t("roastIntro")}
-          </p>
-          <div className="grid grid-cols-1 gap-6">
-            {roastStyles.map((style: PublicStyle) => (
-              <PoemStyleCard
-                key={style.id}
-                style={style}
-                bookingBaseUrl={bookingBaseUrl}
-                bookLabel={t("bookThisStyle")}
-              />
-            ))}
-            <div className="rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center">
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center flex flex-col justify-center">
               <p className="text-xl font-display text-text-primary">{t("customCardRoast.title")}</p>
               <p className="text-sm text-text-secondary mt-2">{t("customCardRoast.description")}</p>
               <div className="mt-4">

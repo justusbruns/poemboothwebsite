@@ -295,6 +295,7 @@ export default async function LandingPage({ params }: PageProps) {
             <StylesGallery
               styles={publicStyles}
               bookingBaseUrl={`${bookingBase}/${locale}/booking`}
+              watermarkLogoUrl={headerLogo}
             />
           </div>
         </section>

@@ -31,6 +31,7 @@
     }
   },
   "hero": {
+    "originBadge": "De originele poem booth · Amsterdam, 2023",
     "headline": "De AI photobooth die gedichten & portretten maakt op je event",
     "subheadline": "De Poem Booth transformeert jouw foto in enkele seconden tot een persoonlijk gedicht of artistiek portret. Gebaseerd op het werk van echte dichters en kunstenaars. Ideaal voor bedrijfsevenementen, feesten en culturele instellingen.",
     "ctaButton": "Boek nu",
@@ -392,12 +393,15 @@
       "portrait": "Portrait Booth",
       "poem": "Poem Booth",
       "roast": "Roast Booth",
+      "poemAndRoast": "Poem & Roast Booth",
       "portraitShort": "Portrait",
       "poemShort": "Poem",
-      "roastShort": "Roast"
+      "roastShort": "Roast",
+      "poemAndRoastShort": "Gedichten & Roasts"
     },
     "portraitIntro": "Elke portretstijl transformeert je foto in een uniek AI-kunstwerk. Wissel tussen before en after om de magie te zien.",
     "poemIntro": "Elke dichtstijl genereert een uniek gedicht geïnspireerd op je foto. Lees de voorbeelden hieronder.",
+    "poemAndRoastIntro": "Elke stijl genereert een uniek stukje tekst geïnspireerd op je foto — gedichten zijn lyrisch, roasts juist komisch.",
     "bookThisStyle": "Boek met deze stijl",
     "roastIntro": "Hilarische AI-gegenereerde comedy roasts op basis van je foto. Perfect voor feesten en bedrijfsevenementen.",
     "original": "Originele foto",
