@@ -408,7 +408,7 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
               activeTab === "image" ? "text-text-primary" : "text-text-secondary"
             )}
           >
-            {t("tabs.portrait")}
+            {t("tabs.portraitShort")}
           </p>
         </button>
 
