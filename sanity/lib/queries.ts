@@ -253,11 +253,11 @@ export const blogPostBySlugQuery = groq`
     title,
     slug,
     excerpt,
-    body_en,
-    body_nl,
-    body_de,
-    body_fr,
-    body_it,
+    body_en[]{ ..., _type == "image" => { ..., asset->{ _id, url, metadata { lqip, dimensions } } }, _type == "videoFile" => { ..., asset->{ _id, url } } },
+    body_nl[]{ ..., _type == "image" => { ..., asset->{ _id, url, metadata { lqip, dimensions } } }, _type == "videoFile" => { ..., asset->{ _id, url } } },
+    body_de[]{ ..., _type == "image" => { ..., asset->{ _id, url, metadata { lqip, dimensions } } }, _type == "videoFile" => { ..., asset->{ _id, url } } },
+    body_fr[]{ ..., _type == "image" => { ..., asset->{ _id, url, metadata { lqip, dimensions } } }, _type == "videoFile" => { ..., asset->{ _id, url } } },
+    body_it[]{ ..., _type == "image" => { ..., asset->{ _id, url, metadata { lqip, dimensions } } }, _type == "videoFile" => { ..., asset->{ _id, url } } },
     coverImage {
       asset-> {
         _id,

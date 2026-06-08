@@ -32,6 +32,13 @@ export default defineType({
         { type: "block" },
         { type: "image", options: { hotspot: true } },
         {
+          type: "file",
+          name: "videoFile",
+          title: "Video file",
+          options: { accept: "video/*" },
+          fields: [{ name: "caption", type: "string", title: "Caption" }],
+        },
+        {
           type: "object",
           name: "youtube",
           title: "YouTube Video",
@@ -55,6 +62,13 @@ export default defineType({
         { type: "block" },
         { type: "image", options: { hotspot: true } },
         {
+          type: "file",
+          name: "videoFile",
+          title: "Video file",
+          options: { accept: "video/*" },
+          fields: [{ name: "caption", type: "string", title: "Caption" }],
+        },
+        {
           type: "object",
           name: "youtube",
           title: "YouTube Video",
@@ -71,6 +85,13 @@ export default defineType({
       of: [
         { type: "block" },
         { type: "image", options: { hotspot: true } },
+        {
+          type: "file",
+          name: "videoFile",
+          title: "Video file",
+          options: { accept: "video/*" },
+          fields: [{ name: "caption", type: "string", title: "Caption" }],
+        },
         {
           type: "object",
           name: "youtube",
@@ -89,6 +110,13 @@ export default defineType({
         { type: "block" },
         { type: "image", options: { hotspot: true } },
         {
+          type: "file",
+          name: "videoFile",
+          title: "Video file",
+          options: { accept: "video/*" },
+          fields: [{ name: "caption", type: "string", title: "Caption" }],
+        },
+        {
           type: "object",
           name: "youtube",
           title: "YouTube Video",
@@ -105,6 +133,13 @@ export default defineType({
       of: [
         { type: "block" },
         { type: "image", options: { hotspot: true } },
+        {
+          type: "file",
+          name: "videoFile",
+          title: "Video file",
+          options: { accept: "video/*" },
+          fields: [{ name: "caption", type: "string", title: "Caption" }],
+        },
         {
           type: "object",
           name: "youtube",

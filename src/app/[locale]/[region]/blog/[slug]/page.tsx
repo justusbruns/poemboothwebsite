@@ -209,6 +209,29 @@ const portableTextComponents = {
         </div>
       );
     },
+    videoFile: ({
+      value,
+    }: {
+      value?: { asset?: { url?: string }; caption?: string };
+    }) => {
+      if (!value?.asset?.url) return null;
+      return (
+        <figure className="my-8">
+          <video
+            src={value.asset.url}
+            controls
+            playsInline
+            preload="metadata"
+            className="rounded-lg w-full"
+          />
+          {value.caption && (
+            <figcaption className="mt-2 text-sm text-text-secondary text-center">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
     youtube: ({ value }: { value?: { url?: string } }) => {
       if (!value?.url) return null;
       const id = value.url.match(
