@@ -341,6 +341,10 @@
       "q4": {
         "q": "Il Poem Booth può essere noleggiato per più giorni?",
         "a": "Sì. Offriamo tariffe giornaliere con sconto dal secondo giorno. Contattaci per un preventivo personalizzato per eventi di più giorni."
+      },
+      "q5": {
+        "q": "Posso raccogliere gli indirizzi e-mail degli ospiti che usano il booth?",
+        "a": "Sì. Con il nostro componente aggiuntivo Consegna via e-mail, gli ospiti lasciano il loro indirizzo e-mail per ricevere automaticamente la loro poesia o il loro ritratto. Dopo l'evento puoi accedere a questi indirizzi e-mail opt-in — un ottimo modo per generare contatti e far crescere il tuo pubblico. Aggiungilo semplicemente durante la prenotazione."
       }
     },
     "private": {

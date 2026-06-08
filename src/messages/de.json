@@ -341,6 +341,10 @@
       "q4": {
         "q": "Kann die Poem Booth für mehrere Tage gemietet werden?",
         "a": "Ja. Wir bieten Tagespreise mit Rabatt ab dem zweiten Tag. Kontaktieren Sie uns für ein individuelles Angebot bei mehrtägigen Events."
+      },
+      "q5": {
+        "q": "Kann ich die E-Mail-Adressen der Gäste sammeln, die die Booth nutzen?",
+        "a": "Ja. Mit unserem E-Mail-Zustellung-Add-on hinterlassen Gäste ihre E-Mail-Adresse, um ihr Gedicht oder Porträt automatisch zu erhalten. Nach dem Event erhalten Sie Zugriff auf diese Opt-in-E-Mail-Adressen — eine großartige Möglichkeit, Leads zu gewinnen und Ihr Publikum zu vergrößern. Fügen Sie es einfach bei der Buchung hinzu."
       }
     },
     "private": {

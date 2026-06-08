@@ -270,6 +270,7 @@ export default function BookingRates({
   const productPlacementExtra = getExtra("product_placement", activeTab);
   const themeExtra = getExtra("custom_theme", activeTab);
   const digitalExtra = getExtra("digital_package", activeTab);
+  const emailDeliveryExtra = getExtra("email_delivery", activeTab);
   const printingExtra = getExtra("poetry_printing", activeTab);
 
   return (
@@ -470,6 +471,15 @@ export default function BookingRates({
                 title={getLocalizedField(digitalExtra, "name", locale)}
                 description={getLocalizedField(digitalExtra, "description", locale)}
                 price={`${formatPrice(digitalExtra.rate, currencySymbol)}`}
+              />
+            )}
+
+            {/* Email Delivery / Lead Capture */}
+            {emailDeliveryExtra && (
+              <PriceRow
+                title={getLocalizedField(emailDeliveryExtra, "name", locale)}
+                description={getLocalizedField(emailDeliveryExtra, "description", locale)}
+                price={`${formatPrice(emailDeliveryExtra.rate, currencySymbol)}`}
               />
             )}
 

@@ -260,7 +260,7 @@ export default async function LandingPage({ params }: PageProps) {
   const faqTabs = ["general", "agencies", "private", "boothTypes"] as const;
   const faqKeyCounts: Record<string, string[]> = {
     general: ["q1", "q2", "q3", "q4", "q5"],
-    agencies: ["q1", "q2", "q3", "q4"],
+    agencies: ["q1", "q2", "q3", "q4", "q5"],
     private: ["q1", "q2", "q3", "q4"],
     boothTypes: ["q1", "q2", "q3"],
   };

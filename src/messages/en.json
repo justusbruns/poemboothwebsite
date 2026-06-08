@@ -341,6 +341,10 @@
       "q4": {
         "q": "Can the Poem Booth be hired for multiple days?",
         "a": "Yes. We offer day rates with discounts from the second day onwards. Contact us for a custom quote for multi-day events."
+      },
+      "q5": {
+        "q": "Can I collect the email addresses of guests who use the booth?",
+        "a": "Yes. With our Email delivery add-on, guests leave their email address to receive their poem or portrait automatically. After the event you get access to these opt-in email addresses — a great way to capture leads and grow your audience. Just add it when you book."
       }
     },
     "private": {
