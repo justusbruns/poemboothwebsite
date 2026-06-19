@@ -232,6 +232,11 @@
     "pageTitle": "Accord d'utilisation",
     "pageDescription": "Accord d'utilisation Poem Booth - conditions d'utilisation de notre service de portrait et poésie IA"
   },
+  "terms": {
+    "pageTitle": "Conditions générales",
+    "pageDescription": "Conditions générales de Poem Booth",
+    "notAvailable": "Les conditions ne sont pas disponibles pour le moment. Veuillez réessayer plus tard."
+  },
   "consent": {
     "title": "Bienvenue sur Poem Booth",
     "message": "Nous utilisons des cookies analytiques et marketing pour comprendre d'où viennent nos visiteurs. Cela nous aide à partager la magie de la poésie générée par l'IA avec plus de personnes à travers le monde.",

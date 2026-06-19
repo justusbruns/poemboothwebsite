@@ -232,6 +232,11 @@
     "pageTitle": "Gebruikersovereenkomst",
     "pageDescription": "Poem Booth gebruikersovereenkomst - gebruiksvoorwaarden voor onze AI portret en poëzie service"
   },
+  "terms": {
+    "pageTitle": "Algemene voorwaarden",
+    "pageDescription": "Poem Booth algemene voorwaarden",
+    "notAvailable": "De voorwaarden zijn momenteel niet beschikbaar. Probeer het later opnieuw."
+  },
   "consent": {
     "title": "Welkom bij Poem Booth",
     "message": "We gebruiken analytische en marketingcookies om te begrijpen waar onze bezoekers vandaan komen. Dit helpt ons de magie van AI-gedreven poëzie met meer mensen over de hele wereld te delen.",

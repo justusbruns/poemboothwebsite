@@ -232,6 +232,11 @@
     "pageTitle": "Nutzungsvereinbarung",
     "pageDescription": "Poem Booth Nutzungsvereinbarung - Nutzungsbedingungen für unseren KI-Porträt- und Poesie-Service"
   },
+  "terms": {
+    "pageTitle": "Allgemeine Geschäftsbedingungen",
+    "pageDescription": "Poem Booth Allgemeine Geschäftsbedingungen",
+    "notAvailable": "Die Bedingungen sind derzeit nicht verfügbar. Bitte versuchen Sie es später erneut."
+  },
   "consent": {
     "title": "Willkommen bei Poem Booth",
     "message": "Wir verwenden Analyse- und Marketing-Cookies, um zu verstehen, woher unsere Besucher kommen. Das hilft uns, die Magie der KI-gestützten Poesie mit mehr Menschen weltweit zu teilen.",

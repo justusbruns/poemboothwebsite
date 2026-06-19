@@ -232,6 +232,11 @@
     "pageTitle": "User Agreement",
     "pageDescription": "Poem Booth user agreement - terms of use for our AI portrait and poetry service"
   },
+  "terms": {
+    "pageTitle": "Terms & Conditions",
+    "pageDescription": "Poem Booth terms and conditions",
+    "notAvailable": "Terms are not available at the moment. Please check back later."
+  },
   "consent": {
     "title": "Welcome to Poem Booth",
     "message": "We use analytics and marketing cookies to understand where our visitors come from. This helps us share the magic of AI-powered poetry with more people around the world.",

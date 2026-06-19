@@ -28,6 +28,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // Terms & conditions pages
+  for (const locale of locales) {
+    for (const region of regions) {
+      pages.push({
+        url: `${baseUrl}/${locale}/${region}/terms`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.5,
+      });
+    }
+  }
+
   // Blog listing pages
   for (const locale of locales) {
     for (const region of regions) {
