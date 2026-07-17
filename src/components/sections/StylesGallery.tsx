@@ -69,8 +69,6 @@ function CustomStyleCard({ label, description }: { label: string; description: s
 
 const CAROUSEL_CARD_W = 380;
 const CAROUSEL_GAP = 28;
-// Arrow w-10 (40px) + gap-6 (24px)
-const CAROUSEL_ARROW_INSET = 40 + 24;
 
 // Sliding 5-slot carousel — same mechanics as the photo gallery carousel.
 function CardCarousel({
@@ -106,8 +104,8 @@ function CardCarousel({
   const gapPx = isNarrow ? 12 : CAROUSEL_GAP;
   const cardW = Math.min(CAROUSEL_CARD_W, Math.floor(viewportW * (isNarrow ? 0.66 : 0.88)));
   const step = cardW + gapPx;
-  // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
-  const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
+  // Translate so the center of slot 3 (index 3 of 0..6) lands exactly at viewport center
+  const baseTranslate = viewportW / 2 - 3 * step - cardW / 2;
 
   const go = (dir: 1 | -1) => {
     if (animating) return;
@@ -139,85 +137,65 @@ function CardCarousel({
     }
   };
 
-  // During animation: incoming slot (2 + animDir) is the new center — scale starts immediately
-  const centerSlot = animating ? 2 + animDir : 2;
+  // During animation: incoming slot (3 + animDir) is the new center — scale starts immediately
+  const centerSlot = animating ? 3 + animDir : 3;
 
-  // Side arrows on desktop; on mobile they float over the carousel edges instead
-  const arrowClass =
-    "flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 hidden md:flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors";
   const overlayArrowClass =
-    "md:hidden absolute top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary";
+    "absolute top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors";
 
   return (
     <div
-      className="flex items-center gap-6 mx-auto"
-      style={{ maxWidth: CAROUSEL_CARD_W * 3 + CAROUSEL_GAP * 2 + CAROUSEL_ARROW_INSET * 2 }}
+      ref={viewportRef}
+      className="relative"
+      style={{ overflowX: "clip", touchAction: "pan-y" }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
-      <button onClick={() => go(-1)} className={arrowClass} aria-label="Previous">
+      {/* Overlay arrows — float over the strip so they cost no width */}
+      <button onClick={() => go(-1)} className={overlayArrowClass + " left-1 md:left-6"} aria-label="Previous">
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
-
-      <div
-        ref={viewportRef}
-        className="relative"
-        style={{ flex: 1, minWidth: 0, overflowX: "clip", touchAction: "pan-y" }}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        {/* Mobile overlay arrows — float over the edges so they cost no width */}
-        <button onClick={() => go(-1)} className={overlayArrowClass + " left-1"} aria-label="Previous">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button onClick={() => go(1)} className={overlayArrowClass + " right-1"} aria-label="Next">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-        <div
-          className="flex py-4"
-          style={{
-            gap: gapPx,
-            transform: `translateX(${baseTranslate + offset}px)`,
-            transition: animating ? "transform 450ms cubic-bezier(0.4,0,0.2,1)" : "none",
-          }}
-        >
-          {[-2, -1, 0, 1, 2].map((d, slot) => {
-            const idx = (current + d + count * 5) % count;
-            const isCenter = slot === centerSlot;
-            return (
-              <div
-                // Key by item index so React preserves the DOM element as it moves
-                // between slots; fall back to slot-suffixed keys when items repeat.
-                key={count >= 5 ? idx : `${idx}-${slot}`}
-                className="flex-shrink-0"
-                style={{ width: cardW }}
-              >
-                <div
-                  style={{
-                    transform: `scale(${isCenter ? 1 : 0.88})`,
-                    opacity: isCenter ? 1 : 0.55,
-                    transition:
-                      "transform 450ms cubic-bezier(0.4,0,0.2,1), opacity 450ms cubic-bezier(0.4,0,0.2,1)",
-                    pointerEvents: isCenter ? "auto" : "none",
-                  }}
-                >
-                  {renderCard(idx, isCenter)}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <button onClick={() => go(1)} className={arrowClass} aria-label="Next">
+      <button onClick={() => go(1)} className={overlayArrowClass + " right-1 md:right-6"} aria-label="Next">
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
         </svg>
       </button>
+      <div
+        className="flex py-4"
+        style={{
+          gap: gapPx,
+          transform: `translateX(${baseTranslate + offset}px)`,
+          transition: animating ? "transform 450ms cubic-bezier(0.4,0,0.2,1)" : "none",
+        }}
+      >
+        {[-3, -2, -1, 0, 1, 2, 3].map((d, slot) => {
+          const idx = (((current + d) % count) + count) % count;
+          const isCenter = slot === centerSlot;
+          return (
+            <div
+              // Key by absolute position so React preserves the DOM element
+              // while it slides between slots, even when items repeat.
+              key={current + d}
+              className="flex-shrink-0"
+              style={{ width: cardW }}
+            >
+              <div
+                style={{
+                  transform: `scale(${isCenter ? 1 : 0.88})`,
+                  opacity: isCenter ? 1 : 0.55,
+                  transition:
+                    "transform 450ms cubic-bezier(0.4,0,0.2,1), opacity 450ms cubic-bezier(0.4,0,0.2,1)",
+                  pointerEvents: isCenter ? "auto" : "none",
+                }}
+              >
+                {renderCard(idx, isCenter)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -659,7 +637,7 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
             {t("portraitIntro")}
           </p>
-          <div className="-mx-4 sm:mx-0">
+          <div className="relative left-1/2 -translate-x-1/2 w-screen">
           <CardCarousel
             count={portraitItems.length}
             current={portraitIndex}
@@ -689,7 +667,7 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
             {t("poemAndRoastIntro")}
           </p>
-          <div className="-mx-4 sm:mx-0">
+          <div className="relative left-1/2 -translate-x-1/2 w-screen">
           <CardCarousel
             count={poemItems.length}
             current={poemIndex}

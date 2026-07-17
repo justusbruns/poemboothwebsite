@@ -293,7 +293,7 @@ export default async function LandingPage({ params }: PageProps) {
         <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <ClientLogos logos={clientLogos} />
         <Testimonials />
-        <section id="styles" className="py-16 md:py-24 bg-bg-accent">
+        <section id="styles" className="py-16 md:py-24 bg-bg-accent overflow-x-clip">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <StylesGallery
               styles={publicStyles}
