@@ -659,6 +659,7 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
             {t("portraitIntro")}
           </p>
+          <div className="-mx-4 sm:mx-0">
           <CardCarousel
             count={portraitItems.length}
             current={portraitIndex}
@@ -677,6 +678,7 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
               );
             }}
           />
+          </div>
           {carouselFooter(portraitItems[portraitIndex])}
         </>
       )}
@@ -687,6 +689,7 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
             {t("poemAndRoastIntro")}
           </p>
+          <div className="-mx-4 sm:mx-0">
           <CardCarousel
             count={poemItems.length}
             current={poemIndex}
@@ -706,6 +709,7 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
               return customPanel(t("customCardRoast.title"), t("customCardRoast.description"));
             }}
           />
+          </div>
           {carouselFooter(poemItems[poemIndex])}
         </>
       )}

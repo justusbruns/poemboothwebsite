@@ -117,8 +117,9 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
       </Container>
 
-      {/* Carousel breaks out of Container — never clipped by its max-width */}
-      <div className="mt-10 px-4 sm:px-6">
+      {/* Carousel breaks out of Container — never clipped by its max-width.
+          Full-bleed on mobile: no side padding, cards run edge to edge. */}
+      <div className="mt-10 px-0 sm:px-6">
 
         {/* Flex row: arrow | viewport | arrow */}
         <div
@@ -234,8 +235,8 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
           className="mt-6 mx-auto text-center min-h-[56px]"
           style={{
             maxWidth: CARD_W_MAX * 3 + GAP * 2 + ARROW_INSET * 2,
-            paddingLeft: isNarrow ? 0 : ARROW_INSET,
-            paddingRight: isNarrow ? 0 : ARROW_INSET,
+            paddingLeft: isNarrow ? 16 : ARROW_INSET,
+            paddingRight: isNarrow ? 16 : ARROW_INSET,
           }}
         >
           <p className="text-base font-display text-text-primary">{activeImage?.eventName ?? ""}</p>
