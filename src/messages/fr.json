@@ -98,7 +98,8 @@
       "text": "“Poem Booth a généré plus de 47 000 interactions en seulement huit semaines à City Place. Au-delà des chiffres, ce qui m’a marqué, c’est l’amusement sur le visage des gens lorsqu’ils interagissaient avec l’œuvre. C’est exactement le genre d’expérience réelle et pleine de sens que nous voulons créer pour nos clients.”",
       "author": "Ady Avivi",
       "org": "Weingarten Art Group",
-      "statValue": "47 000+",
+      "statValueUS": "47,000+",
+      "statValueEU": "47 000+",
       "statLabel": "interactions en 8 semaines"
     },
     "summit": {

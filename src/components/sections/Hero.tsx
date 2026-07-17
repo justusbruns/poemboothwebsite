@@ -9,11 +9,10 @@ import { trackLeadIntent } from "@/lib/tracking";
 
 interface HeroProps {
   heroImage?: string;
-  heroBlur?: string;
   bookingUrl?: string;
 }
 
-export default function Hero({ heroImage, heroBlur, bookingUrl }: HeroProps) {
+export default function Hero({ heroImage, bookingUrl }: HeroProps) {
   const t = useTranslations("hero");
   const params = useParams();
   const locale = params.locale as string;
@@ -72,8 +71,6 @@ export default function Hero({ heroImage, heroBlur, bookingUrl }: HeroProps) {
                   className="object-contain"
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  placeholder={heroBlur ? "blur" : "empty"}
-                  blurDataURL={heroBlur}
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">

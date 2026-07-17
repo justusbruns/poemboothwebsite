@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -35,6 +36,8 @@ function Byline({ author, org }: Attribution) {
 
 export default function Testimonials() {
   const t = useTranslations("testimonials");
+  const params = useParams();
+  const isUS = params.region === "us";
 
   return (
     <section className="py-16 md:py-24 bg-bg-primary">
@@ -48,15 +51,17 @@ export default function Testimonials() {
             <p className="mt-4 text-xl md:text-2xl font-display text-text-primary leading-relaxed flex-1">
               {t("featured.text")}
             </p>
-            <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
-              <Byline author={t("featured.author")} org={t("featured.org")} />
-              <div className="text-right">
+            <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="md:order-2 md:text-right">
                 <p className="text-4xl md:text-5xl font-display text-text-primary">
-                  {t("featured.statValue")}
+                  {isUS ? t("featured.statValueUS") : t("featured.statValueEU")}
                 </p>
                 <p className="text-sm text-text-secondary">
                   {t("featured.statLabel")}
                 </p>
+              </div>
+              <div className="md:order-1">
+                <Byline author={t("featured.author")} org={t("featured.org")} />
               </div>
             </div>
           </blockquote>

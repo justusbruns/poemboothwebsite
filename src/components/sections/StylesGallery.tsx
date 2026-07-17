@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Button from "@/components/ui/Button";
@@ -26,7 +26,13 @@ interface StylesGalleryProps {
 
 type Tab = "image" | "poem";
 
-function CustomStyleCard({ label, description, ctaLabel, ctaHref }: { label: string; description: string; ctaLabel: string; ctaHref: string }) {
+type StyleCarouselItem =
+  | { kind: "style"; style: PublicStyle }
+  | { kind: "customPortrait" }
+  | { kind: "customPoem" }
+  | { kind: "customRoast" };
+
+function CustomStyleCard({ label, description }: { label: string; description: string }) {
   return (
     <div className="group flex flex-col">
       <div
@@ -57,15 +63,143 @@ function CustomStyleCard({ label, description, ctaLabel, ctaHref }: { label: str
           </div>
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="px-5 pb-5 flex flex-col flex-1 text-center">
-        <h3 className="text-lg font-display text-text-primary">&nbsp;</h3>
-        <div className="mt-3">
-          <Button href={ctaHref} variant="primary" size="sm">
-            {ctaLabel}
-          </Button>
+const CAROUSEL_CARD_W = 380;
+const CAROUSEL_GAP = 28;
+// Arrow w-10 (40px) + gap-6 (24px)
+const CAROUSEL_ARROW_INSET = 40 + 24;
+
+// Sliding 5-slot carousel — same mechanics as the photo gallery carousel.
+function CardCarousel({
+  count,
+  current,
+  onNavigate,
+  renderCard,
+}: {
+  count: number;
+  current: number;
+  onNavigate: (dir: 1 | -1) => void;
+  renderCard: (index: number, isCenter: boolean) => ReactNode;
+}) {
+  const [offset, setOffset] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const [animDir, setAnimDir] = useState<0 | 1 | -1>(0);
+
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [viewportW, setViewportW] = useState(CAROUSEL_CARD_W * 3 + CAROUSEL_GAP * 2);
+
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const update = () => setViewportW(el.offsetWidth);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const cardW = Math.min(CAROUSEL_CARD_W, Math.floor(viewportW * 0.88));
+  const step = cardW + CAROUSEL_GAP;
+  // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
+  const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
+
+  const go = (dir: 1 | -1) => {
+    if (animating) return;
+    setAnimDir(dir);
+    setAnimating(true);
+    setOffset(-dir * step);
+    setTimeout(() => {
+      onNavigate(dir);
+      setAnimDir(0);
+      setOffset(0);
+      setAnimating(false);
+    }, 450);
+  };
+
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const dx = e.changedTouches[0].clientX - touchStart.current.x;
+    const dy = e.changedTouches[0].clientY - touchStart.current.y;
+    touchStart.current = null;
+    // Horizontal swipe only — leave vertical page scrolling alone
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      go(dx < 0 ? 1 : -1);
+    }
+  };
+
+  // During animation: incoming slot (2 + animDir) is the new center — scale starts immediately
+  const centerSlot = animating ? 2 + animDir : 2;
+
+  const arrowClass =
+    "flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors";
+
+  return (
+    <div
+      className="flex items-center gap-6 mx-auto"
+      style={{ maxWidth: CAROUSEL_CARD_W * 3 + CAROUSEL_GAP * 2 + CAROUSEL_ARROW_INSET * 2 }}
+    >
+      <button onClick={() => go(-1)} className={arrowClass} aria-label="Previous">
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <div
+        ref={viewportRef}
+        style={{ flex: 1, minWidth: 0, overflowX: "clip", touchAction: "pan-y" }}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        <div
+          className="flex py-4"
+          style={{
+            gap: CAROUSEL_GAP,
+            transform: `translateX(${baseTranslate + offset}px)`,
+            transition: animating ? "transform 450ms cubic-bezier(0.4,0,0.2,1)" : "none",
+          }}
+        >
+          {[-2, -1, 0, 1, 2].map((d, slot) => {
+            const idx = (current + d + count * 5) % count;
+            const isCenter = slot === centerSlot;
+            return (
+              <div
+                // Key by item index so React preserves the DOM element as it moves
+                // between slots; fall back to slot-suffixed keys when items repeat.
+                key={count >= 5 ? idx : `${idx}-${slot}`}
+                className="flex-shrink-0"
+                style={{ width: cardW }}
+              >
+                <div
+                  style={{
+                    transform: `scale(${isCenter ? 1 : 0.88})`,
+                    opacity: isCenter ? 1 : 0.55,
+                    transition:
+                      "transform 450ms cubic-bezier(0.4,0,0.2,1), opacity 450ms cubic-bezier(0.4,0,0.2,1)",
+                    pointerEvents: isCenter ? "auto" : "none",
+                  }}
+                >
+                  {renderCard(idx, isCenter)}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
+
+      <button onClick={() => go(1)} className={arrowClass} aria-label="Next">
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
   );
 }
@@ -75,13 +209,9 @@ const ROTATIONS = [-3, 2, -1.5, 3, -2, 1.5, -2.5, 3.5, -1, 2.5];
 
 function PortraitStyleCard({
   style,
-  bookingBaseUrl,
-  bookLabel,
   index,
 }: {
   style: PublicStyle;
-  bookingBaseUrl: string;
-  bookLabel: string;
   index: number;
 }) {
   const [flipped, setFlipped] = useState(false);
@@ -184,19 +314,6 @@ function PortraitStyleCard({
         )}
       </div>
 
-      {/* Info */}
-      <div className="px-5 pb-5 flex flex-col flex-1 text-center">
-        <h3 className="text-lg font-display text-text-primary">{style.name}</h3>
-        <div className="mt-3">
-          <Button
-            href={`${bookingBaseUrl}?boothType=portrait&style=${style.id}`}
-            variant="primary"
-            size="sm"
-          >
-            {bookLabel}
-          </Button>
-        </div>
-      </div>
     </div>
   );
 }
@@ -218,14 +335,10 @@ const POEM_PHOTO_ROTATIONS = [-2.5, 2, -1.5, 3, -2, 2.5, -3, 1.5];
 
 function PoemStyleCard({
   style,
-  bookingBaseUrl,
-  bookLabel,
   index,
   watermarkLogoUrl,
 }: {
   style: PublicStyle;
-  bookingBaseUrl: string;
-  bookLabel: string;
   index: number;
   watermarkLogoUrl?: string;
 }) {
@@ -322,26 +435,6 @@ function PoemStyleCard({
         </div>
       </div>
 
-      {/* Name + book button below (mirrors PortraitStyleCard) */}
-      <div className="px-5 pb-5 flex flex-col flex-1 text-center">
-        <div className="flex items-center justify-center gap-2 flex-wrap">
-          <h3 className="text-lg font-display text-text-primary">{style.name}</h3>
-          {isRoast && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200">
-              Roast
-            </span>
-          )}
-        </div>
-        <div className="mt-3">
-          <Button
-            href={`${bookingBaseUrl}?boothType=${isRoast ? "roast" : "poem"}&style=${style.id}`}
-            variant="primary"
-            size="sm"
-          >
-            {bookLabel}
-          </Button>
-        </div>
-      </div>
     </div>
   );
 }
@@ -355,6 +448,76 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
   const roastStyles = styles.filter((s: PublicStyle) => s.style_type === "poem" && s.tags.includes("roast"));
   // Merged list: poems first, then roasts.
   const poemAndRoastStyles = [...poemOnlyStyles, ...roastStyles];
+
+  // Carousel items: real styles plus the custom-style CTA cards at the end.
+  const portraitItems: StyleCarouselItem[] = [
+    ...imageStyles.map((s) => ({ kind: "style" as const, style: s })),
+    { kind: "customPortrait" as const },
+  ];
+  const poemItems: StyleCarouselItem[] = [
+    ...poemAndRoastStyles.map((s) => ({ kind: "style" as const, style: s })),
+    { kind: "customPoem" as const },
+    { kind: "customRoast" as const },
+  ];
+
+  const [portraitIndex, setPortraitIndex] = useState(0);
+  const [poemIndex, setPoemIndex] = useState(0);
+
+  const mailtoHref = (ns: "customCard" | "customCardPoem" | "customCardRoast") =>
+    `mailto:contact@poembooth.com?subject=${encodeURIComponent(t(`${ns}.emailSubject`))}&body=${encodeURIComponent(t(`${ns}.emailBody`))}`;
+
+  // Title + single CTA for whichever card sits in the center of the carousel.
+  const itemMeta = (item: StyleCarouselItem) => {
+    switch (item.kind) {
+      case "style": {
+        const isRoast = item.style.tags.includes("roast");
+        const boothType =
+          item.style.style_type === "image" ? "portrait" : isRoast ? "roast" : "poem";
+        return {
+          title: item.style.name,
+          isRoast,
+          href: `${bookingBaseUrl}?boothType=${boothType}&style=${item.style.id}`,
+          cta: t("bookThisStyle"),
+        };
+      }
+      case "customPortrait":
+        return { title: t("customCard.title"), isRoast: false, href: mailtoHref("customCard"), cta: t("customCard.cta") };
+      case "customPoem":
+        return { title: t("customCardPoem.title"), isRoast: false, href: mailtoHref("customCardPoem"), cta: t("customCardPoem.cta") };
+      case "customRoast":
+        return { title: t("customCardRoast.title"), isRoast: false, href: mailtoHref("customCardRoast"), cta: t("customCardRoast.cta") };
+    }
+  };
+
+  const carouselFooter = (item: StyleCarouselItem) => {
+    const meta = itemMeta(item);
+    return (
+      <div className="mt-2 text-center">
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <h3 className="text-lg font-display text-text-primary">{meta.title}</h3>
+          {meta.isRoast && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200">
+              Roast
+            </span>
+          )}
+        </div>
+        <div className="mt-3">
+          <Button href={meta.href} variant="primary" size="sm">
+            {meta.cta}
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
+  const customPanel = (title: string, description: string) => (
+    <div className="relative flex items-center justify-center px-4" style={{ height: 380 }}>
+      <div className="w-full max-w-[88%] aspect-square rounded-2xl border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-6 text-center flex flex-col justify-center">
+        <p className="text-xl font-display text-text-primary">{title}</p>
+        <p className="text-sm text-text-secondary mt-2">{description}</p>
+      </div>
+    </div>
+  );
 
   // Preview images for the two visual tiles.
   const portraitPreviewUrl = imageStyles.find((s) => s.example_output_image_url)?.example_output_image_url;
@@ -472,68 +635,60 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
         </button>
       </div>
 
-      {/* Portrait Styles Grid */}
+      {/* Portrait Styles Carousel */}
       {activeTab === "image" && (
         <>
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
             {t("portraitIntro")}
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            {imageStyles.map((style: PublicStyle, i: number) => (
-              <div key={style.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
-                <PortraitStyleCard
-                  style={style}
-                  index={i}
-                  bookingBaseUrl={bookingBaseUrl}
-                  bookLabel={t("bookThisStyle")}
+          <CardCarousel
+            count={portraitItems.length}
+            current={portraitIndex}
+            onNavigate={(dir) =>
+              setPortraitIndex((i) => (i + dir + portraitItems.length) % portraitItems.length)
+            }
+            renderCard={(idx) => {
+              const item = portraitItems[idx];
+              return item.kind === "style" ? (
+                <PortraitStyleCard style={item.style} index={idx} />
+              ) : (
+                <CustomStyleCard
+                  label={t("customCard.title")}
+                  description={t("customCard.description")}
                 />
-              </div>
-            ))}
-            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
-              <CustomStyleCard
-                label={t("customCard.title")}
-                description={t("customCard.description")}
-                ctaLabel={t("customCard.cta")}
-                ctaHref={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("customCard.emailSubject"))}&body=${encodeURIComponent(t("customCard.emailBody"))}`}
-              />
-            </div>
-          </div>
+              );
+            }}
+          />
+          {carouselFooter(portraitItems[portraitIndex])}
         </>
       )}
 
-      {/* Poems & Roasts Grid (combined) */}
+      {/* Poems & Roasts Carousel (combined) */}
       {activeTab === "poem" && (
         <>
           <p className="text-center text-text-secondary mb-8 max-w-xl mx-auto">
             {t("poemAndRoastIntro")}
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            {poemAndRoastStyles.map((style: PublicStyle, i: number) => (
-              <div key={style.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
-                <PoemStyleCard
-                  style={style}
-                  index={i}
-                  watermarkLogoUrl={watermarkLogoUrl}
-                  bookingBaseUrl={bookingBaseUrl}
-                  bookLabel={t("bookThisStyle")}
-                />
-              </div>
-            ))}
-            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center flex flex-col justify-center">
-              <p className="text-xl font-display text-text-primary">{t("customCardPoem.title")}</p>
-              <p className="text-sm text-text-secondary mt-2">{t("customCardPoem.description")}</p>
-              <div className="mt-4">
-                <Button href={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("customCardPoem.emailSubject"))}&body=${encodeURIComponent(t("customCardPoem.emailBody"))}`} variant="primary" size="sm">{t("customCardPoem.cta")}</Button>
-              </div>
-            </div>
-            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] rounded-2xl overflow-hidden border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-8 text-center flex flex-col justify-center">
-              <p className="text-xl font-display text-text-primary">{t("customCardRoast.title")}</p>
-              <p className="text-sm text-text-secondary mt-2">{t("customCardRoast.description")}</p>
-              <div className="mt-4">
-                <Button href={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("customCardRoast.emailSubject"))}&body=${encodeURIComponent(t("customCardRoast.emailBody"))}`} variant="primary" size="sm">{t("customCardRoast.cta")}</Button>
-              </div>
-            </div>
-          </div>
+          <CardCarousel
+            count={poemItems.length}
+            current={poemIndex}
+            onNavigate={(dir) =>
+              setPoemIndex((i) => (i + dir + poemItems.length) % poemItems.length)
+            }
+            renderCard={(idx) => {
+              const item = poemItems[idx];
+              if (item.kind === "style") {
+                return (
+                  <PoemStyleCard style={item.style} index={idx} watermarkLogoUrl={watermarkLogoUrl} />
+                );
+              }
+              if (item.kind === "customPoem") {
+                return customPanel(t("customCardPoem.title"), t("customCardPoem.description"));
+              }
+              return customPanel(t("customCardRoast.title"), t("customCardRoast.description"));
+            }}
+          />
+          {carouselFooter(poemItems[poemIndex])}
         </>
       )}
     </div>

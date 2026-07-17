@@ -197,7 +197,6 @@ export default async function LandingPage({ params }: PageProps) {
   const heroImage = pageData?.hero?.heroImage
     ? urlFor(pageData.hero.heroImage).url()
     : undefined;
-  const heroBlur = pageData?.hero?.heroImage?.asset?.metadata?.lqip;
 
   const clientLogos = pageData?.clientLogos?.map((l: { name: string; logo?: { asset?: { url?: string } } }) => ({
     name: l.name,
@@ -291,7 +290,7 @@ export default async function LandingPage({ params }: PageProps) {
       <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
-        <Hero heroImage={heroImage} heroBlur={heroBlur} bookingUrl={pageData?.siteSettings?.bookingUrl} />
+        <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <ClientLogos logos={clientLogos} />
         <Testimonials />
         <section id="styles" className="py-16 md:py-24 bg-bg-accent">
