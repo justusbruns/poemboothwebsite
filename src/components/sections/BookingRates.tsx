@@ -167,7 +167,6 @@ function StyleFan({ images }: { images: string[] }) {
             fill
             className="object-cover"
             sizes="90px"
-            unoptimized
           />
         </div>
       ))}

@@ -133,7 +133,6 @@ function PortraitStyleCard({
                 height={500}
                 className={`block max-h-[360px] w-auto h-auto transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
                 sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
-                unoptimized
                 priority={index < 3}
                 onLoad={() => setLoaded(true)}
               />
@@ -156,7 +155,6 @@ function PortraitStyleCard({
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
-                unoptimized
               />
             </div>
           )}
@@ -174,7 +172,6 @@ function PortraitStyleCard({
               fill
               className="object-cover"
               sizes="64px"
-              unoptimized
             />
           </div>
         )}
@@ -186,11 +183,6 @@ function PortraitStyleCard({
           </div>
         )}
       </div>
-
-      {/* Preload input image */}
-      {inputUrl && (
-        <link rel="preload" as="image" href={inputUrl} />
-      )}
 
       {/* Info */}
       <div className="px-5 pb-5 flex flex-col flex-1 text-center">
@@ -268,6 +260,7 @@ function PoemStyleCard({
               className="pointer-events-none absolute select-none"
               style={{ bottom: 0, right: 0, width: "45%" }}
             >
+              {/* Logo is an SVG — the image optimizer rejects SVG unless dangerouslyAllowSVG is set */}
               <Image
                 src={effectiveWatermarkUrl}
                 alt=""
@@ -311,7 +304,6 @@ function PoemStyleCard({
                   fill
                   className="object-cover rounded-md"
                   sizes="(max-width: 640px) 40vw, 160px"
-                  unoptimized
                 />
               </div>
             )}
@@ -398,7 +390,6 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 380px"
-                unoptimized
               />
             )}
           </div>
@@ -437,7 +428,6 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
                     fill
                     className="object-cover rounded-md"
                     sizes="(max-width: 768px) 22vw, 160px"
-                    unoptimized
                   />
                 </div>
               )}

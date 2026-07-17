@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import {
   Hero,
   ClientLogos,
+  Testimonials,
   HowItWorks,
   EditionShowcase,
   PhotoGallery,
@@ -196,6 +197,7 @@ export default async function LandingPage({ params }: PageProps) {
   const heroImage = pageData?.hero?.heroImage
     ? urlFor(pageData.hero.heroImage).url()
     : undefined;
+  const heroBlur = pageData?.hero?.heroImage?.asset?.metadata?.lqip;
 
   const clientLogos = pageData?.clientLogos?.map((l: { name: string; logo?: { asset?: { url?: string } } }) => ({
     name: l.name,
@@ -227,13 +229,14 @@ export default async function LandingPage({ params }: PageProps) {
     afterLabel: getLocalizedValue(e.afterLabel, locale),
   }));
 
-  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string }; hotspot?: { x?: number; y?: number } }; caption?: LocalizedField; eventName?: string; contextText?: string }) => {
+  const galleryImages = pageData?.gallery?.map((g: { image?: { asset?: { url?: string; metadata?: { lqip?: string } }; hotspot?: { x?: number; y?: number } }; caption?: LocalizedField; eventName?: string; contextText?: string }) => {
     const hotspot = g.image?.hotspot;
     const objectPosition = hotspot
       ? `${Math.round((hotspot.x ?? 0.5) * 100)}% ${Math.round((hotspot.y ?? 0.5) * 100)}%`
       : undefined;
     return {
       imageUrl: g.image?.asset?.url,
+      lqip: g.image?.asset?.metadata?.lqip,
       caption: getLocalizedValue(g.caption, locale),
       eventName: g.eventName,
       contextText: g.contextText,
@@ -288,9 +291,10 @@ export default async function LandingPage({ params }: PageProps) {
       <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
-        <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
+        <Hero heroImage={heroImage} heroBlur={heroBlur} bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <ClientLogos logos={clientLogos} />
-        <section id="styles" className="py-16 md:py-24 bg-bg-primary">
+        <Testimonials />
+        <section id="styles" className="py-16 md:py-24 bg-bg-accent">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <StylesGallery
               styles={publicStyles}

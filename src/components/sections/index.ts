@@ -1,5 +1,6 @@
 export { default as Hero } from "./Hero";
 export { default as ClientLogos } from "./ClientLogos";
+export { default as Testimonials } from "./Testimonials";
 export { default as HowItWorks } from "./HowItWorks";
 export { default as EditionShowcase } from "./EditionShowcase";
 export { default as PhotoGallery } from "./PhotoGallery";

@@ -8,6 +8,7 @@ import Image from "next/image";
 
 interface GalleryImage {
   imageUrl?: string;
+  lqip?: string;
   caption?: string;
   eventName?: string;
   contextText?: string;
@@ -65,6 +66,23 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
   // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
   const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
 
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const dx = e.changedTouches[0].clientX - touchStart.current.x;
+    const dy = e.changedTouches[0].clientY - touchStart.current.y;
+    touchStart.current = null;
+    // Horizontal swipe only — leave vertical page scrolling alone
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      go(dx < 0 ? 1 : -1);
+    }
+  };
+
   const go = (dir: 1 | -1) => {
     if (animating) return;
     setAnimDir(dir);
@@ -90,7 +108,7 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
   const activeImage = effectiveImages[current];
 
   return (
-    <section id="gallery" className="py-16 md:py-24 bg-bg-primary">
+    <section id="gallery" className="py-16 md:py-24 bg-bg-secondary">
       {/* Heading stays in Container */}
       <Container>
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
@@ -116,7 +134,12 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
           </button>
 
           {/* Viewport — clips overflow, measures own width */}
-          <div ref={viewportRef} style={{ flex: 1, minWidth: 0, overflowX: "clip" }}>
+          <div
+            ref={viewportRef}
+            style={{ flex: 1, minWidth: 0, overflowX: "clip", touchAction: "pan-y" }}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             <div
               className="flex py-8"
               style={{
@@ -152,6 +175,8 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
                               className="object-cover"
                               style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
                               sizes={`${cardW}px`}
+                              placeholder={image.lqip ? "blur" : "empty"}
+                              blurDataURL={image.lqip}
                             />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-bg-secondary to-bg-accent">

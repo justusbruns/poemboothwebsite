@@ -91,6 +91,26 @@
     "title": "Galleria",
     "subtitle": "Guarda il Poem Booth in azione: da matrimoni ed eventi aziendali a festival ed eventi culturali."
   },
+  "testimonials": {
+    "title": "Cosa dicono i clienti",
+    "subtitle": "Dalle istituzioni artistiche ai summit mondiali — Poem Booth conquista ogni pubblico.",
+    "featured": {
+      "text": "“Poem Booth ha generato oltre 47.000 interazioni in sole otto settimane al City Place. Numeri a parte, ciò che mi è rimasto impresso è il divertimento sui volti delle persone mentre interagivano con l’opera. È esattamente il tipo di esperienza reale e significativa che vogliamo creare per i nostri clienti.”",
+      "author": "Ady Avivi",
+      "org": "Weingarten Art Group",
+      "statValue": "47.000+",
+      "statLabel": "interazioni in 8 settimane"
+    },
+    "summit": {
+      "text": "“Il nostro pubblico ha chiaramente adorato l’esperienza.”",
+      "org": "AI for Good Global Summit"
+    },
+    "fontys": {
+      "text": "“Ero davvero entusiasta del vostro Poem Booth.”",
+      "author": "Latoya Dankers",
+      "org": "Fontys"
+    }
+  },
   "practicalities": {
     "title": "Informazioni Pratiche",
     "subtitle": "Tutto ciò che devi sapere sul noleggio e l'installazione del photobooth AI.",
