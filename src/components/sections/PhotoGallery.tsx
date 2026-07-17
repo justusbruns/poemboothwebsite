@@ -66,8 +66,8 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
   const gapPx = isNarrow ? 12 : GAP;
   const cardW = Math.min(CARD_W_MAX, Math.floor(viewportW * (isNarrow ? 0.66 : 0.88)));
   const step = cardW + gapPx;
-  // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
-  const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
+  // Translate so the center of slot 3 (index 3 of 0..6) lands exactly at viewport center
+  const baseTranslate = viewportW / 2 - 3 * step - cardW / 2;
 
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -99,14 +99,20 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
     }, 450);
   };
 
-  // Render 5 slots: -2, -1, 0, +1, +2 relative to current
-  const slots = [-2, -1, 0, 1, 2].map((d) => ({
-    image: effectiveImages[(current + d + total) % total],
-    rotation: ROTATIONS[(current + d + total) % total],
-  }));
+  // Render 7 slots: -3 … +3 relative to current, so the strip reaches the
+  // edges of even very wide windows. Track each card's absolute position so
+  // React preserves the DOM element while it slides between slots.
+  const slots = [-3, -2, -1, 0, 1, 2, 3].map((d) => {
+    const imageIndex = (((current + d) % total) + total) % total;
+    return {
+      image: effectiveImages[imageIndex],
+      rotation: ROTATIONS[imageIndex % ROTATIONS.length],
+      posKey: current + d,
+    };
+  });
 
-  // During animation: incoming slot (2 + animDir) is the new center — scale starts immediately
-  const centerSlot = animating ? 2 + animDir : 2;
+  // During animation: incoming slot (3 + animDir) is the new center — scale starts immediately
+  const centerSlot = animating ? 3 + animDir : 3;
 
   const activeImage = effectiveImages[current];
 
@@ -117,117 +123,83 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
       </Container>
 
-      {/* Carousel breaks out of Container — never clipped by its max-width.
-          Full-bleed on mobile: no side padding, cards run edge to edge. */}
-      <div className="mt-10 px-0 sm:px-6">
-
-        {/* Flex row: arrow | viewport | arrow */}
+      {/* Full-bleed filmstrip — the viewport spans the entire window width on
+          every breakpoint; arrows float over the strip. */}
+      <div className="mt-10">
         <div
-          className="flex items-center gap-6 mx-auto"
-          style={{ maxWidth: CARD_W_MAX * 3 + GAP * 2 + ARROW_INSET * 2 }}
+          ref={viewportRef}
+          className="relative"
+          style={{ overflowX: "clip", touchAction: "pan-y" }}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
-          {/* Arrow left */}
+          {/* Overlay arrows — float over the edges so they cost no width */}
           <button
             onClick={() => go(-1)}
-            className="flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 hidden md:flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
+            className="absolute left-1 md:left-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
             aria-label="Previous"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-
-          {/* Viewport — clips overflow, measures own width */}
-          <div
-            ref={viewportRef}
-            className="relative"
-            style={{ flex: 1, minWidth: 0, overflowX: "clip", touchAction: "pan-y" }}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            {/* Mobile overlay arrows — float over the edges so they cost no width */}
-            <button
-              onClick={() => go(-1)}
-              className="md:hidden absolute left-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary"
-              aria-label="Previous"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={() => go(1)}
-              className="md:hidden absolute right-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary"
-              aria-label="Next"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-            <div
-              className="flex py-8"
-              style={{
-                gap: gapPx,
-                transform: `translateX(${baseTranslate + offset}px)`,
-                transition: animating ? "transform 450ms cubic-bezier(0.4,0,0.2,1)" : "none",
-              }}
-            >
-              {slots.map(({ image, rotation }, slot) => {
-                const isCenter = slot === centerSlot;
-                // Key by image index so React preserves the DOM element as it
-                // moves between slots — prevents a spurious scale transition at
-                // the end of each navigation step.
-                const imageIndex = (current + slot - 2 + total) % total;
-                return (
-                  <div key={imageIndex} className="flex-shrink-0" style={{ width: cardW }}>
-                    {/* Rotation wrapper — no transition, tilt is static per image */}
-                    <div style={{ transform: `rotate(${rotation}deg)` }}>
-                      <div
-                        className="relative rounded-xl overflow-hidden shadow-xl"
-                        style={{
-                          transform: `scale(${isCenter ? 1 : 0.88})`,
-                          opacity: isCenter ? 1 : 0.62,
-                          transition: "transform 450ms cubic-bezier(0.4,0,0.2,1), opacity 450ms cubic-bezier(0.4,0,0.2,1)",
-                        }}
-                      >
-                        <div className="relative bg-bg-secondary" style={{ aspectRatio: "3/3.4" }}>
-                          {image.imageUrl ? (
-                            <Image
-                              src={image.imageUrl}
-                              alt={image.eventName || "Gallery image"}
-                              fill
-                              className="object-cover"
-                              style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
-                              sizes={`${cardW}px`}
-                              placeholder={image.lqip ? "blur" : "empty"}
-                              blurDataURL={image.lqip}
-                            />
-                          ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-bg-secondary to-bg-accent">
-                              <svg className="w-10 h-10 text-text-muted opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                              </svg>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Arrow right */}
           <button
             onClick={() => go(1)}
-            className="flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 hidden md:flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
+            className="absolute right-1 md:right-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
             aria-label="Next"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
+          <div
+            className="flex py-8"
+            style={{
+              gap: gapPx,
+              transform: `translateX(${baseTranslate + offset}px)`,
+              transition: animating ? "transform 450ms cubic-bezier(0.4,0,0.2,1)" : "none",
+            }}
+          >
+            {slots.map(({ image, rotation, posKey }, slot) => {
+              const isCenter = slot === centerSlot;
+              return (
+                <div key={posKey} className="flex-shrink-0" style={{ width: cardW }}>
+                  {/* Rotation wrapper — no transition, tilt is static per image */}
+                  <div style={{ transform: `rotate(${rotation}deg)` }}>
+                    <div
+                      className="relative rounded-xl overflow-hidden shadow-xl"
+                      style={{
+                        transform: `scale(${isCenter ? 1 : 0.88})`,
+                        opacity: isCenter ? 1 : 0.62,
+                        transition: "transform 450ms cubic-bezier(0.4,0,0.2,1), opacity 450ms cubic-bezier(0.4,0,0.2,1)",
+                      }}
+                    >
+                      <div className="relative bg-bg-secondary" style={{ aspectRatio: "3/3.4" }}>
+                        {image.imageUrl ? (
+                          <Image
+                            src={image.imageUrl}
+                            alt={image.eventName || "Gallery image"}
+                            fill
+                            className="object-cover"
+                            style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
+                            sizes={`${cardW}px`}
+                            placeholder={image.lqip ? "blur" : "empty"}
+                            blurDataURL={image.lqip}
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-bg-secondary to-bg-accent">
+                            <svg className="w-10 h-10 text-text-muted opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Text — same max-width, inset by ARROW_INSET to center under the viewport */}

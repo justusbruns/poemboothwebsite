@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -21,15 +22,27 @@ function QuoteMark() {
 interface Attribution {
   author?: string;
   org: string;
+  avatarSrc?: string;
 }
 
-function Byline({ author, org }: Attribution) {
+function Byline({ author, org, avatarSrc }: Attribution) {
   return (
-    <footer className="mt-6">
-      {author && (
-        <p className="font-display text-text-primary">{author}</p>
+    <footer className="mt-6 flex items-center gap-3">
+      {avatarSrc && (
+        <Image
+          src={avatarSrc}
+          alt={author || org}
+          width={48}
+          height={48}
+          className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+        />
       )}
-      <p className="text-sm text-text-secondary">{org}</p>
+      <div>
+        {author && (
+          <p className="font-display text-text-primary">{author}</p>
+        )}
+        <p className="text-sm text-text-secondary">{org}</p>
+      </div>
     </footer>
   );
 }
@@ -61,7 +74,11 @@ export default function Testimonials() {
                 </p>
               </div>
               <div className="md:order-1">
-                <Byline author={t("featured.author")} org={t("featured.org")} />
+                <Byline
+                  author={t("featured.author")}
+                  org={t("featured.org")}
+                  avatarSrc="/images/testimonials/ady-avivi.jpg"
+                />
               </div>
             </div>
           </blockquote>
@@ -81,7 +98,11 @@ export default function Testimonials() {
               <p className="mt-4 text-lg font-display text-text-primary leading-relaxed">
                 {t("fontys.text")}
               </p>
-              <Byline author={t("fontys.author")} org={t("fontys.org")} />
+              <Byline
+                author={t("fontys.author")}
+                org={t("fontys.org")}
+                avatarSrc="/images/testimonials/latoya-dankers.jpg"
+              />
             </blockquote>
           </div>
         </div>
