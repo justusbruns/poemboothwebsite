@@ -36,11 +36,11 @@ function CustomStyleCard({ label, description }: { label: string; description: s
   return (
     <div className="group flex flex-col">
       <div
-        className="relative flex items-center justify-center px-6 cursor-pointer"
+        className="relative flex items-center justify-center px-2 sm:px-6 cursor-pointer"
         style={{ aspectRatio: "1 / 1.15", maxHeight: 380, perspective: "1000px" }}
       >
         <div
-          className="relative w-full max-w-[85%] rounded-lg overflow-hidden shadow-xl"
+          className="relative w-full max-w-[94%] sm:max-w-[85%] rounded-lg overflow-hidden shadow-xl"
           style={{ transform: "rotate(-1.5deg)" }}
         >
           <div className="relative aspect-[4/5] bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 p-[2px] rounded-lg">
@@ -103,8 +103,8 @@ function CardCarousel({
 
   // Narrow screens: smaller card + gap so the neighbouring cards peek in at the edges
   const isNarrow = viewportW < 640;
-  const gapPx = isNarrow ? 16 : CAROUSEL_GAP;
-  const cardW = Math.min(CAROUSEL_CARD_W, Math.floor(viewportW * (isNarrow ? 0.72 : 0.88)));
+  const gapPx = isNarrow ? 12 : CAROUSEL_GAP;
+  const cardW = Math.min(CAROUSEL_CARD_W, Math.floor(viewportW * (isNarrow ? 0.66 : 0.88)));
   const step = cardW + gapPx;
   // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
   const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
@@ -142,9 +142,11 @@ function CardCarousel({
   // During animation: incoming slot (2 + animDir) is the new center — scale starts immediately
   const centerSlot = animating ? 2 + animDir : 2;
 
-  // Arrows are hidden on mobile — swiping plus the peeking side cards take over there
+  // Side arrows on desktop; on mobile they float over the carousel edges instead
   const arrowClass =
     "flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 hidden md:flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors";
+  const overlayArrowClass =
+    "md:hidden absolute top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary";
 
   return (
     <div
@@ -159,10 +161,22 @@ function CardCarousel({
 
       <div
         ref={viewportRef}
+        className="relative"
         style={{ flex: 1, minWidth: 0, overflowX: "clip", touchAction: "pan-y" }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
+        {/* Mobile overlay arrows — float over the edges so they cost no width */}
+        <button onClick={() => go(-1)} className={overlayArrowClass + " left-1"} aria-label="Previous">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button onClick={() => go(1)} className={overlayArrowClass + " right-1"} aria-label="Next">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
         <div
           className="flex py-4"
           style={{
@@ -241,7 +255,7 @@ function PortraitStyleCard({
     <div className="group flex flex-col">
       {/* 3D flip container - fixed height for alignment */}
       <div
-        className="relative flex items-center justify-center px-6 cursor-pointer"
+        className="relative flex items-center justify-center px-2 sm:px-6 cursor-pointer"
         style={{ aspectRatio: "1 / 1.15", maxHeight: 380, perspective: "1000px" }}
         onClick={() => inputUrl && outputUrl && handleFlip()}
       >
@@ -250,7 +264,7 @@ function PortraitStyleCard({
           style={{
             transformStyle: "preserve-3d",
             transform: `rotate(${rotation}deg) rotateY(${flipped ? 180 : 0}deg)`,
-            maxWidth: "85%",
+            maxWidth: undefined,
             maxHeight: "100%",
           }}
         >
@@ -359,11 +373,11 @@ function PoemStyleCard({
     <div className="group flex flex-col">
       {/* Fixed-height stage so all cards align (matches PortraitStyleCard) */}
       <div
-        className="relative flex items-center justify-center px-4"
+        className="relative flex items-center justify-center px-2 sm:px-4"
         style={{ aspectRatio: "1 / 1.15", maxHeight: 380 }}
       >
         <div
-          className="relative w-full max-w-[88%] aspect-square rounded-2xl overflow-hidden shadow-xl"
+          className="relative w-full max-w-[94%] sm:max-w-[88%] aspect-square rounded-2xl overflow-hidden shadow-xl"
           style={{
             backgroundColor: palette.bg,
             color: palette.text,
@@ -515,8 +529,8 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
   };
 
   const customPanel = (title: string, description: string) => (
-    <div className="relative flex items-center justify-center px-4" style={{ height: 380 }}>
-      <div className="w-full max-w-[88%] aspect-square rounded-2xl border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-6 text-center flex flex-col justify-center">
+    <div className="relative flex items-center justify-center px-2 sm:px-4" style={{ height: 380 }}>
+      <div className="w-full max-w-[94%] sm:max-w-[88%] aspect-square rounded-2xl border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-6 text-center flex flex-col justify-center">
         <p className="text-xl font-display text-text-primary">{title}</p>
         <p className="text-sm text-text-secondary mt-2">{description}</p>
       </div>

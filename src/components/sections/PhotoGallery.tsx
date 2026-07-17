@@ -63,8 +63,8 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
   // Responsive card width: full size on wide screens; narrower on mobile with a
   // smaller gap so the neighbouring cards peek in at the edges
   const isNarrow = viewportW < 640;
-  const gapPx = isNarrow ? 16 : GAP;
-  const cardW = Math.min(CARD_W_MAX, Math.floor(viewportW * (isNarrow ? 0.72 : 0.88)));
+  const gapPx = isNarrow ? 12 : GAP;
+  const cardW = Math.min(CARD_W_MAX, Math.floor(viewportW * (isNarrow ? 0.66 : 0.88)));
   const step = cardW + gapPx;
   // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
   const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
@@ -139,10 +139,30 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
           {/* Viewport — clips overflow, measures own width */}
           <div
             ref={viewportRef}
+            className="relative"
             style={{ flex: 1, minWidth: 0, overflowX: "clip", touchAction: "pan-y" }}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
+            {/* Mobile overlay arrows — float over the edges so they cost no width */}
+            <button
+              onClick={() => go(-1)}
+              className="md:hidden absolute left-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary"
+              aria-label="Previous"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={() => go(1)}
+              className="md:hidden absolute right-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/85 shadow-md border border-border flex items-center justify-center text-text-primary"
+              aria-label="Next"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
             <div
               className="flex py-8"
               style={{
