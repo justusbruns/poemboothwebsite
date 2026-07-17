@@ -90,7 +90,10 @@ export default function Testimonials() {
               <p className="mt-4 text-lg font-display text-text-primary leading-relaxed">
                 {t("summit.text")}
               </p>
-              <Byline org={t("summit.org")} />
+              <Byline
+                org={t("summit.org")}
+                avatarSrc="/images/testimonials/ai-for-good.jpg"
+              />
             </blockquote>
 
             <blockquote className="bg-bg-secondary rounded-xl p-8 border border-border-light">
