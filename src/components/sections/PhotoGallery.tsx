@@ -60,9 +60,12 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
     return () => ro.disconnect();
   }, []);
 
-  // Responsive card width: full size on wide screens, fits the viewport on narrow screens
-  const cardW = Math.min(CARD_W_MAX, Math.floor(viewportW * 0.88));
-  const step = cardW + GAP;
+  // Responsive card width: full size on wide screens; narrower on mobile with a
+  // smaller gap so the neighbouring cards peek in at the edges
+  const isNarrow = viewportW < 640;
+  const gapPx = isNarrow ? 16 : GAP;
+  const cardW = Math.min(CARD_W_MAX, Math.floor(viewportW * (isNarrow ? 0.72 : 0.88)));
+  const step = cardW + gapPx;
   // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
   const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
 
@@ -125,7 +128,7 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
           {/* Arrow left */}
           <button
             onClick={() => go(-1)}
-            className="flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
+            className="flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 hidden md:flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
             aria-label="Previous"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -143,7 +146,7 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
             <div
               className="flex py-8"
               style={{
-                gap: GAP,
+                gap: gapPx,
                 transform: `translateX(${baseTranslate + offset}px)`,
                 transition: animating ? "transform 450ms cubic-bezier(0.4,0,0.2,1)" : "none",
               }}
@@ -197,7 +200,7 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
           {/* Arrow right */}
           <button
             onClick={() => go(1)}
-            className="flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
+            className="flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 hidden md:flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors"
             aria-label="Next"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -211,8 +214,8 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
           className="mt-6 mx-auto text-center min-h-[56px]"
           style={{
             maxWidth: CARD_W_MAX * 3 + GAP * 2 + ARROW_INSET * 2,
-            paddingLeft: ARROW_INSET,
-            paddingRight: ARROW_INSET,
+            paddingLeft: isNarrow ? 0 : ARROW_INSET,
+            paddingRight: isNarrow ? 0 : ARROW_INSET,
           }}
         >
           <p className="text-base font-display text-text-primary">{activeImage?.eventName ?? ""}</p>

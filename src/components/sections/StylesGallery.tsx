@@ -37,7 +37,7 @@ function CustomStyleCard({ label, description }: { label: string; description: s
     <div className="group flex flex-col">
       <div
         className="relative flex items-center justify-center px-6 cursor-pointer"
-        style={{ height: 380, perspective: "1000px" }}
+        style={{ aspectRatio: "1 / 1.15", maxHeight: 380, perspective: "1000px" }}
       >
         <div
           className="relative w-full max-w-[85%] rounded-lg overflow-hidden shadow-xl"
@@ -101,8 +101,11 @@ function CardCarousel({
     return () => ro.disconnect();
   }, []);
 
-  const cardW = Math.min(CAROUSEL_CARD_W, Math.floor(viewportW * 0.88));
-  const step = cardW + CAROUSEL_GAP;
+  // Narrow screens: smaller card + gap so the neighbouring cards peek in at the edges
+  const isNarrow = viewportW < 640;
+  const gapPx = isNarrow ? 16 : CAROUSEL_GAP;
+  const cardW = Math.min(CAROUSEL_CARD_W, Math.floor(viewportW * (isNarrow ? 0.72 : 0.88)));
+  const step = cardW + gapPx;
   // Translate so the center of slot 2 (index 2 of 0..4) lands exactly at viewport center
   const baseTranslate = viewportW / 2 - 2 * step - cardW / 2;
 
@@ -139,8 +142,9 @@ function CardCarousel({
   // During animation: incoming slot (2 + animDir) is the new center — scale starts immediately
   const centerSlot = animating ? 2 + animDir : 2;
 
+  // Arrows are hidden on mobile — swiping plus the peeking side cards take over there
   const arrowClass =
-    "flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors";
+    "flex-shrink-0 w-10 h-10 rounded-full border border-text-primary/20 hidden md:flex items-center justify-center text-text-primary hover:border-text-primary/60 transition-colors";
 
   return (
     <div
@@ -162,7 +166,7 @@ function CardCarousel({
         <div
           className="flex py-4"
           style={{
-            gap: CAROUSEL_GAP,
+            gap: gapPx,
             transform: `translateX(${baseTranslate + offset}px)`,
             transition: animating ? "transform 450ms cubic-bezier(0.4,0,0.2,1)" : "none",
           }}
@@ -238,7 +242,7 @@ function PortraitStyleCard({
       {/* 3D flip container - fixed height for alignment */}
       <div
         className="relative flex items-center justify-center px-6 cursor-pointer"
-        style={{ height: 380, perspective: "1000px" }}
+        style={{ aspectRatio: "1 / 1.15", maxHeight: 380, perspective: "1000px" }}
         onClick={() => inputUrl && outputUrl && handleFlip()}
       >
         <div
@@ -269,7 +273,7 @@ function PortraitStyleCard({
             )}
             {/* Loading placeholder */}
             {!loaded && (
-              <div className="bg-bg-secondary rounded-lg animate-pulse" style={{ width: 280, height: 350 }} />
+              <div className="bg-bg-secondary rounded-lg animate-pulse" style={{ width: "100%", maxWidth: 280, aspectRatio: "4 / 5" }} />
             )}
           </div>
 
@@ -356,7 +360,7 @@ function PoemStyleCard({
       {/* Fixed-height stage so all cards align (matches PortraitStyleCard) */}
       <div
         className="relative flex items-center justify-center px-4"
-        style={{ height: 380 }}
+        style={{ aspectRatio: "1 / 1.15", maxHeight: 380 }}
       >
         <div
           className="relative w-full max-w-[88%] aspect-square rounded-2xl overflow-hidden shadow-xl"
