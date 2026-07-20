@@ -267,6 +267,9 @@ function PortraitStyleCard({
                 height={500}
                 className={`block max-h-[360px] w-auto h-auto transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
                 sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
+                // Eager: carousel edge cards sit outside the clipped viewport,
+                // so lazy loading's intersection check never fires for them.
+                loading="eager"
                 priority={index < 3}
                 onLoad={() => setLoaded(true)}
               />
@@ -289,6 +292,7 @@ function PortraitStyleCard({
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
+                loading="eager"
               />
             </div>
           )}
@@ -306,6 +310,7 @@ function PortraitStyleCard({
               fill
               className="object-cover"
               sizes="64px"
+              loading="eager"
             />
           </div>
         )}
@@ -421,6 +426,7 @@ function PoemStyleCard({
                   fill
                   className="object-cover rounded-md"
                   sizes="(max-width: 640px) 40vw, 160px"
+                  loading="eager"
                 />
               </div>
             )}
