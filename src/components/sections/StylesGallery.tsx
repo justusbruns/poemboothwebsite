@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, type ReactNode } from "react";
+import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Button from "@/components/ui/Button";
@@ -215,6 +215,13 @@ function PortraitStyleCard({
   const flipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const t = useTranslations("styles");
 
+  // If the image is already cached, `onLoad` may fire before this handler is
+  // attached (common for edge cards that previously rendered in another slot),
+  // leaving the image stuck at opacity-0. Reconcile against the DOM on mount.
+  const imgRef = useCallback((node: HTMLImageElement | null) => {
+    if (node?.complete) setLoaded(true);
+  }, []);
+
   const outputUrl = style.example_output_image_url;
   const inputUrl = style.example_input_image_url;
   const rotation = ROTATIONS[index % ROTATIONS.length];
@@ -253,6 +260,7 @@ function PortraitStyleCard({
           >
             {outputUrl && (
               <Image
+                ref={imgRef}
                 src={outputUrl}
                 alt={style.name}
                 width={400}
