@@ -75,7 +75,9 @@ export default function Hero({ bookingUrl }: HeroProps) {
                 poster="/images/hero-mobile-poster.webp?v=2"
                 aria-label="Poem Booth in action — a visitor turns their moment into art"
               >
-                <source suppressHydrationWarning src="/videos/hero-mobile.webm?v=3" type="video/webm" />
+                {/* HEVC-with-alpha first for Safari (no VP9-alpha support); WebM for the rest */}
+                <source suppressHydrationWarning src="/videos/hero-mobile.mp4?v=1" type='video/mp4; codecs="hvc1"' />
+                <source suppressHydrationWarning src="/videos/hero-mobile.webm?v=4" type="video/webm" />
               </video>
             </div>
             <div className="hidden md:flex items-center justify-center">
@@ -90,7 +92,9 @@ export default function Hero({ bookingUrl }: HeroProps) {
                 poster="/images/hero-portrait-poster.webp?v=2"
                 aria-label="Poem Booth in action — a visitor turns their moment into art"
               >
-                <source suppressHydrationWarning src="/videos/hero-portrait.webm?v=4" type="video/webm" />
+                {/* HEVC-with-alpha first for Safari (no VP9-alpha support); WebM for the rest */}
+                <source suppressHydrationWarning src="/videos/hero-portrait.mp4?v=1" type='video/mp4; codecs="hvc1"' />
+                <source suppressHydrationWarning src="/videos/hero-portrait.webm?v=5" type="video/webm" />
               </video>
             </div>
           </div>
