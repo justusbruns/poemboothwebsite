@@ -96,9 +96,10 @@ export default function Hero({ bookingUrl }: HeroProps) {
                 poster="/images/hero-mobile-poster.webp?v=2"
                 aria-label="Poem Booth in action — a visitor turns their moment into art"
               >
-                {/* HEVC-with-alpha first for Safari (no VP9-alpha support); WebM for the rest */}
-                <source suppressHydrationWarning src="/videos/hero-mobile.mp4?v=1" type='video/mp4; codecs="hvc1"' />
+                {/* WebM with alpha for Chrome/Firefox; flat H.264 (background baked to
+                    #F7F7F3, matching the section) as the universal Safari fallback */}
                 <source suppressHydrationWarning src="/videos/hero-mobile.webm?v=4" type="video/webm" />
+                <source suppressHydrationWarning src="/videos/hero-mobile.mp4?v=2" type="video/mp4" />
               </video>
             </div>
             <div className="hidden md:flex items-center justify-center">
@@ -115,9 +116,10 @@ export default function Hero({ bookingUrl }: HeroProps) {
                 poster="/images/hero-portrait-poster.webp?v=2"
                 aria-label="Poem Booth in action — a visitor turns their moment into art"
               >
-                {/* HEVC-with-alpha first for Safari (no VP9-alpha support); WebM for the rest */}
-                <source suppressHydrationWarning src="/videos/hero-portrait.mp4?v=1" type='video/mp4; codecs="hvc1"' />
+                {/* WebM with alpha for Chrome/Firefox; flat H.264 (background baked to
+                    #F7F7F3, matching the section) as the universal Safari fallback */}
                 <source suppressHydrationWarning src="/videos/hero-portrait.webm?v=5" type="video/webm" />
+                <source suppressHydrationWarning src="/videos/hero-portrait.mp4?v=2" type="video/mp4" />
               </video>
             </div>
           </div>
