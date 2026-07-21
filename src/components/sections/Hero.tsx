@@ -4,15 +4,13 @@ import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import Image from "next/image";
 import { trackLeadIntent } from "@/lib/tracking";
 
 interface HeroProps {
-  heroImage?: string;
   bookingUrl?: string;
 }
 
-export default function Hero({ heroImage, bookingUrl }: HeroProps) {
+export default function Hero({ bookingUrl }: HeroProps) {
   const t = useTranslations("hero");
   const params = useParams();
   const locale = params.locale as string;
@@ -60,41 +58,41 @@ export default function Hero({ heroImage, bookingUrl }: HeroProps) {
             </div>
           </div>
 
-          {/* Hero Image */}
-          <div className="order-1 md:order-2 relative flex items-center justify-center">
-            <div className="relative w-full h-[40vh] md:h-[55vh] rounded-2xl overflow-hidden">
-              {heroImage ? (
-                <Image
-                  src={heroImage}
-                  alt="Poem Booth - Transform your moment into art"
-                  fill
-                  className="object-contain"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-text-muted">
-                    <svg
-                      className="w-24 h-24 mx-auto mb-4 opacity-50"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <p className="text-sm">Hero Image</p>
-                  </div>
-                </div>
-              )}
+          {/* Hero Video — transparent WebM, floats on the section background.
+              Mobile: full-bleed via negative margins that cancel the Container
+              padding exactly — the video spans edge to edge, nothing clipped.
+              Desktop: the balanced square framing in the right grid column. */}
+          <div className="order-1 md:order-2 relative">
+            <div className="md:hidden -mx-4 sm:-mx-6">
+              {/* Poster is the video's first frame — playback starts invisibly from the still */}
+              <video
+                suppressHydrationWarning
+                className="w-full aspect-[930/996] object-contain"
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster="/images/hero-mobile-poster.webp?v=2"
+                aria-label="Poem Booth in action — a visitor turns their moment into art"
+              >
+                <source suppressHydrationWarning src="/videos/hero-mobile.webm?v=3" type="video/webm" />
+              </video>
             </div>
-            {/* Decorative frame effect */}
-            <div className="absolute -inset-4 border-2 border-border rounded-3xl -z-10 opacity-50" />
+            <div className="hidden md:flex items-center justify-center">
+              {/* Poster is the video's first frame — playback starts invisibly from the still */}
+              <video
+                suppressHydrationWarning
+                className="w-full h-[55vh] object-contain"
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster="/images/hero-portrait-poster.webp?v=2"
+                aria-label="Poem Booth in action — a visitor turns their moment into art"
+              >
+                <source suppressHydrationWarning src="/videos/hero-portrait.webm?v=4" type="video/webm" />
+              </video>
+            </div>
           </div>
         </div>
       </Container>

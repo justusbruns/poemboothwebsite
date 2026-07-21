@@ -194,10 +194,6 @@ export default async function LandingPage({ params }: PageProps) {
     : undefined;
 
   // Transform Sanity data for components
-  const heroImage = pageData?.hero?.heroImage
-    ? urlFor(pageData.hero.heroImage).url()
-    : undefined;
-
   const clientLogos = pageData?.clientLogos?.map((l: { name: string; logo?: { asset?: { url?: string } } }) => ({
     name: l.name,
     logoUrl: l.logo?.asset?.url,
@@ -290,7 +286,7 @@ export default async function LandingPage({ params }: PageProps) {
       <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
-        <Hero heroImage={heroImage} bookingUrl={pageData?.siteSettings?.bookingUrl} />
+        <Hero bookingUrl={pageData?.siteSettings?.bookingUrl} />
         <ClientLogos logos={clientLogos} />
         <Testimonials />
         <section id="styles" className="py-16 md:py-24 bg-bg-accent overflow-x-clip">

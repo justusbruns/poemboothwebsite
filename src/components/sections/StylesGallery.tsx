@@ -278,6 +278,22 @@ function PortraitStyleCard({
             {!loaded && (
               <div className="bg-bg-secondary rounded-lg animate-pulse" style={{ width: "100%", maxWidth: 280, aspectRatio: "4 / 5" }} />
             )}
+            {/* Input thumbnail — anchored to the image's bottom-right corner */}
+            {inputUrl && outputUrl && !flipped && (
+              <div
+                className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-white shadow-lg cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 z-10"
+                onClick={(e) => { e.stopPropagation(); handleFlip(); }}
+              >
+                <Image
+                  src={inputUrl}
+                  alt="See original"
+                  fill
+                  className="object-cover"
+                  sizes="64px"
+                  loading="eager"
+                />
+              </div>
+            )}
           </div>
 
           {/* Back - original input (fill to match front) */}
@@ -297,23 +313,6 @@ function PortraitStyleCard({
             </div>
           )}
         </div>
-
-        {/* Input thumbnail on front side */}
-        {inputUrl && outputUrl && !flipped && (
-          <div
-            className="absolute bottom-12 right-10 w-16 h-16 rounded-lg overflow-hidden border-2 border-white shadow-lg cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 z-10"
-            onClick={(e) => { e.stopPropagation(); handleFlip(); }}
-          >
-            <Image
-              src={inputUrl}
-              alt="See original"
-              fill
-              className="object-cover"
-              sizes="64px"
-              loading="eager"
-            />
-          </div>
-        )}
 
         {/* Back side hint */}
         {inputUrl && outputUrl && flipped && (
