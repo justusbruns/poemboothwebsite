@@ -22,8 +22,9 @@ const placeholderLogos = [
 ];
 
 export default function ClientLogos({ logos = placeholderLogos }: ClientLogosProps) {
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...logos, ...logos];
+  // Four copies so one full set (the -25% loop distance) always exceeds the
+  // viewport — with only two, wide screens showed a gap before the restart
+  const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
 
   return (
     <section className="py-6 bg-bg-secondary overflow-hidden">

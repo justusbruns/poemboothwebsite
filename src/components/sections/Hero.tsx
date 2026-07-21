@@ -10,6 +10,25 @@ interface HeroProps {
   bookingUrl?: string;
 }
 
+// iOS Safari sometimes leaves an autoplay video sitting on its poster
+// (and Low Power Mode blocks autoplay outright). Kick playback explicitly
+// once the video can play; a tap works as the user-gesture fallback.
+function kickstartVideo(el: HTMLVideoElement | null) {
+  if (!el) return;
+  el.muted = true;
+  const tryPlay = () => {
+    const p = el.play();
+    if (p) p.catch(() => {});
+  };
+  if (el.readyState >= 2) tryPlay();
+  else el.addEventListener("canplay", tryPlay, { once: true });
+}
+
+function tapToPlay(e: React.MouseEvent<HTMLVideoElement>) {
+  const p = e.currentTarget.play();
+  if (p) p.catch(() => {});
+}
+
 export default function Hero({ bookingUrl }: HeroProps) {
   const t = useTranslations("hero");
   const params = useParams();
@@ -67,6 +86,8 @@ export default function Hero({ bookingUrl }: HeroProps) {
               {/* Poster is the video's first frame — playback starts invisibly from the still */}
               <video
                 suppressHydrationWarning
+                ref={kickstartVideo}
+                onClick={tapToPlay}
                 className="w-full aspect-[930/996] object-contain"
                 autoPlay
                 muted
@@ -84,6 +105,8 @@ export default function Hero({ bookingUrl }: HeroProps) {
               {/* Poster is the video's first frame — playback starts invisibly from the still */}
               <video
                 suppressHydrationWarning
+                ref={kickstartVideo}
+                onClick={tapToPlay}
                 className="w-full h-[55vh] object-contain"
                 autoPlay
                 muted

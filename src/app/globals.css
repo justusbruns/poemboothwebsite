@@ -133,12 +133,14 @@ html {
     animation-play-state: paused;
   }
 
+  /* Shift exactly one logo set (list is rendered 4x, so -25% = one set) —
+     the loop point is pixel-identical and never shows a gap */
   @keyframes ticker {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-25%);
     }
   }
 
