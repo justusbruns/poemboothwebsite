@@ -88,18 +88,18 @@ export default function Hero({ bookingUrl }: HeroProps) {
                 suppressHydrationWarning
                 ref={kickstartVideo}
                 onClick={tapToPlay}
-                className="w-full aspect-[930/996] object-contain"
+                className="w-[85%] mx-auto aspect-[1040/996] object-contain"
                 autoPlay
                 muted
                 loop
                 playsInline
-                poster="/images/hero-mobile-poster.webp?v=2"
+                poster="/images/hero-mobile-poster.webp?v=3"
                 aria-label="Poem Booth in action — a visitor turns their moment into art"
               >
                 {/* WebM with alpha for Chrome/Firefox; flat H.264 (background baked to
                     #F7F7F3, matching the section) as the universal Safari fallback */}
-                <source suppressHydrationWarning src="/videos/hero-mobile.webm?v=4" type="video/webm" />
-                <source suppressHydrationWarning src="/videos/hero-mobile.mp4?v=2" type="video/mp4" />
+                <source suppressHydrationWarning src="/videos/hero-mobile.webm?v=5" type="video/webm" />
+                <source suppressHydrationWarning src="/videos/hero-mobile.mp4?v=3" type="video/mp4" />
               </video>
             </div>
             <div className="hidden md:flex items-center justify-center">
