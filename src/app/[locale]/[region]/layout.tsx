@@ -20,7 +20,7 @@ export default async function RegionLayout({
 
   return (
     <div data-region={region} className="min-h-screen">
-      <AnalyticsProvider region={region} locale={locale}>
+      <AnalyticsProvider region={region} locale={locale} posthogKey={process.env.POSTHOG_TOKEN}>
         {children}
       </AnalyticsProvider>
     </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { GoogleAnalytics } from "./GoogleAnalytics";
+import { PostHogAnalytics } from "./PostHogAnalytics";
 import { MetaPixel } from "./MetaPixel";
 import { CookieConsent } from "../consent/CookieConsent";
 
@@ -12,12 +13,14 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 interface AnalyticsProviderProps {
   region: string;
   locale: string;
+  posthogKey?: string;
   children: React.ReactNode;
 }
 
 export function AnalyticsProvider({
   region,
   locale,
+  posthogKey,
   children,
 }: AnalyticsProviderProps) {
   const [hasConsent, setHasConsent] = useState<boolean | null>(null);
@@ -56,6 +59,15 @@ export function AnalyticsProvider({
     setShowBanner(false);
   };
 
+  // PostHog runs in every branch: cookieless (memory-only) without consent,
+  // full persistence with consent — visitor counts survive either way.
+  const posthogNode = posthogKey ? (
+    <PostHogAnalytics
+      apiKey={posthogKey}
+      consented={!requiresConsent || hasConsent === true}
+    />
+  ) : null;
+
   // Still loading consent state from localStorage
   if (hasConsent === null) {
     return <>{children}</>;
@@ -67,6 +79,7 @@ export function AnalyticsProvider({
       <>
         {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
         <MetaPixel />
+        {posthogNode}
         {children}
       </>
     );
@@ -78,14 +91,16 @@ export function AnalyticsProvider({
       <>
         {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
         <MetaPixel />
+        {posthogNode}
         {children}
       </>
     );
   }
 
-  // EU region without consent: show banner on first visit, nothing if declined
+  // EU region without consent: cookieless PostHog only; banner on first visit
   return (
     <>
+      {posthogNode}
       {children}
       {showBanner && (
         <CookieConsent
