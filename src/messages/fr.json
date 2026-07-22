@@ -349,6 +349,10 @@
         "a_eu": "Le Poem Booth est disponible dans le monde entier, avec des hubs à Amsterdam et New York. Contactez-nous à <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> pour la disponibilité et les tarifs.",
         "a_us": "Le Poem Booth est disponible dans le monde entier, avec des hubs à New York et Amsterdam. Contactez-nous à <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> pour la disponibilité et les tarifs.",
         "a": "Le Poem Booth est disponible dans le monde entier. Contactez-nous à contact@poembooth.com."
+      },
+      "q6": {
+        "q": "Combien de temps faut-il pour créer un portrait ou un poème ?",
+        "a": "Cela dépend de la vitesse d'Internet sur place. Avec une connexion normale, un portrait prend environ <strong>10 à 40 secondes</strong> et un poème environ <strong>10 à 20 secondes</strong>. Lorsqu'un portrait intègre des éléments supplémentaires — comme des logos à traiter — comptez plutôt vers les 40 secondes de cette fourchette."
       }
     },
     "agencies": {
@@ -456,5 +460,22 @@
       "emailSubject": "Style de roast personnalisé pour mon événement",
       "emailBody": "Bonjour l'équipe Poem Booth,\n\nJe suis intéressé(e) par un style de roast personnalisé pour mon événement.\n\nType d'événement : \nDate prévue : \nPublic / ambiance : \n\nAu plaisir de vous lire !"
     }
+  },
+  "customStyles": {
+    "title": "Votre propre style",
+    "subtitle": "Votre marque, votre thème, votre œuvre. Découvrez l'effet d'un style entièrement personnalisé au sommet AI for Good des Nations Unies.",
+    "photoAlt": "Des visiteurs font la queue devant le Poem Booth lors du AI for Good Global Summit à Genève",
+    "photoCaption": "AI for Good Global Summit · UIT, Nations Unies · Genève",
+    "toggle": {
+      "portraits": "Portraits",
+      "poems": "Poèmes"
+    },
+    "story": "Pour le AI for Good Global Summit — la conférence sur l'IA des Nations Unies, organisée par l'UIT — nous avons conçu un style aquarelle entièrement personnalisé, avec le logo du sponsor intégré à chaque œuvre. Le booth n'a presque jamais été à l'arrêt : près d'une création par minute, pendant tout le congrès.",
+    "statCreationsValue": "2 094",
+    "statCreationsLabel": "créations pendant le sommet",
+    "statPaceValue": "≈1 / min",
+    "statPaceLabel": "portraits & poèmes générés",
+    "cta": "Demander un style personnalisé",
+    "ctaEmailSubject": "Style personnalisé pour mon événement"
   }
 }

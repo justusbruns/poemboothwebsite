@@ -349,6 +349,10 @@
         "a_eu": "De Poem Booth is wereldwijd beschikbaar, met hubs in Amsterdam en New York. Neem contact op via <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> voor beschikbaarheid en prijzen. In de regio Breda kun je de Poem Booth ook huren via onze partner <a href=\"https://lachjeleens.nl\" target=\"_blank\" rel=\"noopener noreferrer\">Lach je Lens</a> voor dezelfde tarieven.",
         "a_us": "De Poem Booth is wereldwijd beschikbaar, met hubs in New York en Amsterdam. Neem contact op via <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> voor beschikbaarheid en prijzen.",
         "a": "De Poem Booth is wereldwijd beschikbaar. Neem contact op via contact@poembooth.com voor beschikbaarheid en prijzen."
+      },
+      "q6": {
+        "q": "Hoe lang duurt het maken van een portret of gedicht?",
+        "a": "Dat hangt af van de internetsnelheid op je locatie. Bij normaal internet duurt een portret ongeveer <strong>10–40 seconden</strong> en een gedicht ongeveer <strong>10–20 seconden</strong>. Leveren we bij portretten extra assets mee — zoals logo's die verwerkt moeten worden — dan zit je eerder tegen de 40 seconden aan dan tegen de 10."
       }
     },
     "agencies": {
@@ -456,5 +460,22 @@
       "emailSubject": "Custom roast stijl voor mijn event",
       "emailBody": "Hoi Poem Booth team,\n\nIk ben geïnteresseerd in een custom roast stijl voor mijn event.\n\nType event: \nVerwachte datum: \nPubliek / sfeer: \n\nGraag hoor ik van jullie!"
     }
+  },
+  "customStyles": {
+    "title": "Jouw eigen stijl",
+    "subtitle": "Jouw merk, jouw thema, jouw kunstwerk. Zie wat een volledig custom stijl deed op de AI for Good Global Summit van de VN.",
+    "photoAlt": "Bezoekers in de rij bij de Poem Booth tijdens de AI for Good Global Summit in Genève",
+    "photoCaption": "AI for Good Global Summit · ITU, Verenigde Naties · Genève",
+    "toggle": {
+      "portraits": "Portretten",
+      "poems": "Gedichten"
+    },
+    "story": "Voor de AI for Good Global Summit — de AI-conferentie van de Verenigde Naties, georganiseerd door ITU — ontwierpen we een volledig custom aquarelstijl met het sponsorlogo verwerkt in elk kunstwerk. De booth stond amper stil: bijna één creatie per minuut, het hele congres lang.",
+    "statCreationsValue": "2.094",
+    "statCreationsLabel": "creaties tijdens de summit",
+    "statPaceValue": "≈1 / min",
+    "statPaceLabel": "portretten & gedichten gegenereerd",
+    "cta": "Vraag naar een custom stijl",
+    "ctaEmailSubject": "Custom stijl voor mijn event"
   }
 }

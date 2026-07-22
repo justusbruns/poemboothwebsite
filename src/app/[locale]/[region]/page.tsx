@@ -17,6 +17,7 @@ import {
 } from "@/components/sections";
 import VouwBanner from "@/components/sections/VouwBanner";
 import StylesGallery from "@/components/sections/StylesGallery";
+import CustomStyleShowcase from "@/components/sections/CustomStyleShowcase";
 import { getHubByRegion } from "@/lib/supabase/server";
 import { REGION_CONFIGS, type Region } from "@/lib/supabase/types";
 import { client } from "../../../../sanity/lib/client";
@@ -257,7 +258,7 @@ export default async function LandingPage({ params }: PageProps) {
   const faqT = await getTranslations({ locale, namespace: "faq" });
   const faqTabs = ["general", "agencies", "private", "boothTypes"] as const;
   const faqKeyCounts: Record<string, string[]> = {
-    general: ["q1", "q2", "q3", "q4", "q5"],
+    general: ["q1", "q2", "q3", "q4", "q5", "q6"],
     agencies: ["q1", "q2", "q3", "q4", "q5"],
     private: ["q1", "q2", "q3", "q4"],
     boothTypes: ["q1", "q2", "q3"],
@@ -298,7 +299,9 @@ export default async function LandingPage({ params }: PageProps) {
             />
           </div>
         </section>
-        <HowItWorks steps={howItWorksSteps} />
+        <CustomStyleShowcase />
+        {/* Hidden for now — the hero video shows how it works */}
+        {/* <HowItWorks steps={howItWorksSteps} /> */}
         {/* <EditionShowcase editions={editions} /> */}
         <PhotoGallery images={galleryImages} />
         <Newsletter />

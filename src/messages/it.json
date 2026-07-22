@@ -349,6 +349,10 @@
         "a_eu": "Il Poem Booth è disponibile in tutto il mondo, con hub ad Amsterdam e New York. Contattaci a <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> per disponibilità e prezzi.",
         "a_us": "Il Poem Booth è disponibile in tutto il mondo, con hub a New York e Amsterdam. Contattaci a <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> per disponibilità e prezzi.",
         "a": "Il Poem Booth è disponibile in tutto il mondo. Contattaci a contact@poembooth.com."
+      },
+      "q6": {
+        "q": "Quanto tempo serve per creare un ritratto o una poesia?",
+        "a": "Dipende dalla velocità di Internet della location. Con una connessione normale, un ritratto richiede circa <strong>10–40 secondi</strong> e una poesia circa <strong>10–20 secondi</strong>. Se un ritratto include asset extra — come loghi da elaborare — i tempi si avvicinano ai 40 secondi di quell'intervallo."
       }
     },
     "agencies": {
@@ -456,5 +460,22 @@
       "emailSubject": "Stile roast personalizzato per il mio evento",
       "emailBody": "Ciao team Poem Booth,\n\nSono interessato/a a uno stile roast personalizzato per il mio evento.\n\nTipo di evento: \nData prevista: \nPubblico / atmosfera: \n\nA presto!"
     }
+  },
+  "customStyles": {
+    "title": "Il tuo stile personalizzato",
+    "subtitle": "Il tuo brand, il tuo tema, la tua opera. Guarda cosa ha fatto uno stile completamente personalizzato all'AI for Good Global Summit dell'ONU.",
+    "photoAlt": "Visitatori in fila al Poem Booth durante l'AI for Good Global Summit di Ginevra",
+    "photoCaption": "AI for Good Global Summit · ITU, Nazioni Unite · Ginevra",
+    "toggle": {
+      "portraits": "Ritratti",
+      "poems": "Poesie"
+    },
+    "story": "Per l'AI for Good Global Summit — la conferenza sull'IA delle Nazioni Unite, organizzata dall'ITU — abbiamo creato uno stile acquerello completamente personalizzato, con il logo dello sponsor integrato in ogni opera. Il booth non si è quasi mai fermato: quasi una creazione al minuto, per tutta la durata del congresso.",
+    "statCreationsValue": "2.094",
+    "statCreationsLabel": "creazioni durante il summit",
+    "statPaceValue": "≈1 / min",
+    "statPaceLabel": "ritratti e poesie generati",
+    "cta": "Chiedi uno stile personalizzato",
+    "ctaEmailSubject": "Stile personalizzato per il mio evento"
   }
 }

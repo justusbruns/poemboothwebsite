@@ -349,6 +349,10 @@
         "a_eu": "The Poem Booth is available worldwide, with hubs in Amsterdam and New York. Contact us at <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> for availability and pricing. In the Breda region, you can also hire the Poem Booth through our partner <a href=\"https://lachjeleens.nl\" target=\"_blank\" rel=\"noopener noreferrer\">Lach je Lens</a> at the same rates.",
         "a_us": "The Poem Booth is available worldwide, with hubs in New York and Amsterdam. Contact us at <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> for availability and pricing.",
         "a": "The Poem Booth is available worldwide. Contact us at contact@poembooth.com for availability and pricing."
+      },
+      "q6": {
+        "q": "How long does it take to create a portrait or poem?",
+        "a": "That depends on the internet speed at your venue. On a normal connection, a portrait takes about <strong>10–40 seconds</strong> and a poem about <strong>10–20 seconds</strong>. When a portrait includes extra assets — such as logos that need to be processed — expect it to land closer to the 40-second end of that range."
       }
     },
     "agencies": {
@@ -456,5 +460,22 @@
       "emailSubject": "Custom roast style for my event",
       "emailBody": "Hi Poem Booth team,\n\nI'm interested in a custom roast style for my event.\n\nEvent type: \nExpected date: \nAudience / vibe: \n\nLooking forward to hearing from you!"
     }
+  },
+  "customStyles": {
+    "title": "Customize your style",
+    "subtitle": "Your brand, your theme, your artwork. See what a fully custom style did at the UN's AI for Good Global Summit.",
+    "photoAlt": "Visitors queueing at the Poem Booth during the AI for Good Global Summit in Geneva",
+    "photoCaption": "AI for Good Global Summit · ITU, United Nations · Geneva",
+    "toggle": {
+      "portraits": "Portraits",
+      "poems": "Poems"
+    },
+    "story": "For the AI for Good Global Summit — the United Nations' AI conference organised by ITU — we designed a fully custom watercolor style with the sponsor's logo woven into every artwork. The booth barely stood still: nearly one creation per minute, all summit long.",
+    "statCreationsValue": "2,094",
+    "statCreationsLabel": "creations during the summit",
+    "statPaceValue": "≈1 / min",
+    "statPaceLabel": "portraits & poems generated",
+    "cta": "Ask about a custom style",
+    "ctaEmailSubject": "Custom style for my event"
   }
 }

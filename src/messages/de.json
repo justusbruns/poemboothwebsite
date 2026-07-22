@@ -349,6 +349,10 @@
         "a_eu": "Die Poem Booth ist weltweit verfügbar, mit Hubs in Amsterdam und New York. Kontaktieren Sie uns unter <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> für Verfügbarkeit und Preise.",
         "a_us": "Die Poem Booth ist weltweit verfügbar, mit Hubs in New York und Amsterdam. Kontaktieren Sie uns unter <a href=\"mailto:contact@poembooth.com\">contact@poembooth.com</a> für Verfügbarkeit und Preise.",
         "a": "Die Poem Booth ist weltweit verfügbar. Kontaktieren Sie uns unter contact@poembooth.com."
+      },
+      "q6": {
+        "q": "Wie lange dauert die Erstellung eines Porträts oder Gedichts?",
+        "a": "Das hängt von der Internetgeschwindigkeit vor Ort ab. Bei normaler Verbindung dauert ein Porträt etwa <strong>10–40 Sekunden</strong>, ein Gedicht etwa <strong>10–20 Sekunden</strong>. Enthält ein Porträt zusätzliche Assets — etwa Logos, die verarbeitet werden müssen — liegt die Dauer eher am oberen Ende der 40 Sekunden."
       }
     },
     "agencies": {
@@ -456,5 +460,22 @@
       "emailSubject": "Custom Roast-Stil für mein Event",
       "emailBody": "Hallo Poem Booth Team,\n\nich interessiere mich für einen individuellen Roast-Stil für mein Event.\n\nEventtyp: \nGeplantes Datum: \nPublikum / Stimmung: \n\nIch freue mich auf Ihre Rückmeldung!"
     }
+  },
+  "customStyles": {
+    "title": "Dein eigener Stil",
+    "subtitle": "Deine Marke, dein Thema, dein Kunstwerk. So wirkte ein komplett individueller Stil beim AI for Good Global Summit der UN.",
+    "photoAlt": "Besucher in der Warteschlange an der Poem Booth während des AI for Good Global Summit in Genf",
+    "photoCaption": "AI for Good Global Summit · ITU, Vereinte Nationen · Genf",
+    "toggle": {
+      "portraits": "Porträts",
+      "poems": "Gedichte"
+    },
+    "story": "Für den AI for Good Global Summit — die KI-Konferenz der Vereinten Nationen, organisiert von der ITU — entwarfen wir einen komplett individuellen Aquarellstil mit dem Sponsorenlogo in jedem Kunstwerk. Die Booth stand kaum still: fast eine Kreation pro Minute, den ganzen Kongress hindurch.",
+    "statCreationsValue": "2.094",
+    "statCreationsLabel": "Kreationen während des Summits",
+    "statPaceValue": "≈1 / Min.",
+    "statPaceLabel": "generierte Porträts & Gedichte",
+    "cta": "Individuellen Stil anfragen",
+    "ctaEmailSubject": "Individueller Stil für mein Event"
   }
 }
