@@ -26,46 +26,7 @@ interface StylesGalleryProps {
 
 type Tab = "image" | "poem";
 
-type StyleCarouselItem =
-  | { kind: "style"; style: PublicStyle }
-  | { kind: "customPortrait" }
-  | { kind: "customPoem" }
-  | { kind: "customRoast" };
-
-function CustomStyleCard({ label, description }: { label: string; description: string }) {
-  return (
-    <div className="group flex flex-col">
-      <div
-        className="relative flex items-center justify-center px-2 sm:px-6 cursor-pointer"
-        style={{ aspectRatio: "1 / 1.15", maxHeight: 380, perspective: "1000px" }}
-      >
-        <div
-          className="relative w-full max-w-[94%] sm:max-w-[85%] rounded-lg overflow-hidden shadow-xl"
-          style={{ transform: "rotate(-1.5deg)" }}
-        >
-          <div className="relative aspect-[4/5] bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 p-[2px] rounded-lg">
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-400/30 via-fuchsia-300/20 to-amber-300/30 animate-pulse rounded-lg" />
-            <div className="relative h-full w-full rounded-[6px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col items-center justify-center text-center px-6 gap-4 overflow-hidden">
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
-              {/* Sparkle dots */}
-              <div className="absolute top-6 left-8 w-1.5 h-1.5 bg-violet-400/60 rounded-full animate-pulse" />
-              <div className="absolute top-12 right-10 w-1 h-1 bg-amber-400/60 rounded-full animate-pulse delay-300" />
-              <div className="absolute bottom-16 left-12 w-1 h-1 bg-fuchsia-400/60 rounded-full animate-pulse delay-500" />
-              <div className="absolute bottom-8 right-8 w-1.5 h-1.5 bg-violet-300/60 rounded-full animate-pulse delay-700" />
-
-              <svg className="w-12 h-12 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
-              </svg>
-              <p className="text-xl font-display text-white">{label}</p>
-              <p className="text-sm text-white/60 leading-relaxed">{description}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+type StyleCarouselItem = { kind: "style"; style: PublicStyle };
 
 const CAROUSEL_CARD_W = 380;
 const CAROUSEL_GAP = 28;
@@ -460,44 +421,24 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
   // Merged list: poems first, then roasts.
   const poemAndRoastStyles = [...poemOnlyStyles, ...roastStyles];
 
-  // Carousel items: real styles plus the custom-style CTA cards at the end.
-  const portraitItems: StyleCarouselItem[] = [
-    ...imageStyles.map((s) => ({ kind: "style" as const, style: s })),
-    { kind: "customPortrait" as const },
-  ];
-  const poemItems: StyleCarouselItem[] = [
-    ...poemAndRoastStyles.map((s) => ({ kind: "style" as const, style: s })),
-    { kind: "customPoem" as const },
-    { kind: "customRoast" as const },
-  ];
+  // Carousel items — custom styles now have their own dedicated section
+  const portraitItems: StyleCarouselItem[] = imageStyles.map((s) => ({ kind: "style" as const, style: s }));
+  const poemItems: StyleCarouselItem[] = poemAndRoastStyles.map((s) => ({ kind: "style" as const, style: s }));
 
   const [portraitIndex, setPortraitIndex] = useState(0);
   const [poemIndex, setPoemIndex] = useState(0);
 
-  const mailtoHref = (ns: "customCard" | "customCardPoem" | "customCardRoast") =>
-    `mailto:contact@poembooth.com?subject=${encodeURIComponent(t(`${ns}.emailSubject`))}&body=${encodeURIComponent(t(`${ns}.emailBody`))}`;
-
   // Title + single CTA for whichever card sits in the center of the carousel.
   const itemMeta = (item: StyleCarouselItem) => {
-    switch (item.kind) {
-      case "style": {
-        const isRoast = item.style.tags.includes("roast");
-        const boothType =
-          item.style.style_type === "image" ? "portrait" : isRoast ? "roast" : "poem";
-        return {
-          title: item.style.name,
-          isRoast,
-          href: `${bookingBaseUrl}?boothType=${boothType}&style=${item.style.id}`,
-          cta: t("bookThisStyle"),
-        };
-      }
-      case "customPortrait":
-        return { title: t("customCard.title"), isRoast: false, href: mailtoHref("customCard"), cta: t("customCard.cta") };
-      case "customPoem":
-        return { title: t("customCardPoem.title"), isRoast: false, href: mailtoHref("customCardPoem"), cta: t("customCardPoem.cta") };
-      case "customRoast":
-        return { title: t("customCardRoast.title"), isRoast: false, href: mailtoHref("customCardRoast"), cta: t("customCardRoast.cta") };
-    }
+    const isRoast = item.style.tags.includes("roast");
+    const boothType =
+      item.style.style_type === "image" ? "portrait" : isRoast ? "roast" : "poem";
+    return {
+      title: item.style.name,
+      isRoast,
+      href: `${bookingBaseUrl}?boothType=${boothType}&style=${item.style.id}`,
+      cta: t("bookThisStyle"),
+    };
   };
 
   const carouselFooter = (item: StyleCarouselItem) => {
@@ -520,15 +461,6 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
       </div>
     );
   };
-
-  const customPanel = (title: string, description: string) => (
-    <div className="relative flex items-center justify-center px-2 sm:px-4" style={{ height: 380 }}>
-      <div className="w-full max-w-[94%] sm:max-w-[88%] aspect-square rounded-2xl border border-border-light bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-amber-400/10 p-6 text-center flex flex-col justify-center">
-        <p className="text-xl font-display text-text-primary">{title}</p>
-        <p className="text-sm text-text-secondary mt-2">{description}</p>
-      </div>
-    </div>
-  );
 
   // Preview images for the two visual tiles.
   const portraitPreviewUrl = imageStyles.find((s) => s.example_output_image_url)?.example_output_image_url;
@@ -659,17 +591,9 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
             onNavigate={(dir) =>
               setPortraitIndex((i) => (i + dir + portraitItems.length) % portraitItems.length)
             }
-            renderCard={(idx) => {
-              const item = portraitItems[idx];
-              return item.kind === "style" ? (
-                <PortraitStyleCard style={item.style} index={idx} />
-              ) : (
-                <CustomStyleCard
-                  label={t("customCard.title")}
-                  description={t("customCard.description")}
-                />
-              );
-            }}
+            renderCard={(idx) => (
+              <PortraitStyleCard style={portraitItems[idx].style} index={idx} />
+            )}
           />
           </div>
           {carouselFooter(portraitItems[portraitIndex])}
@@ -689,18 +613,9 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
             onNavigate={(dir) =>
               setPoemIndex((i) => (i + dir + poemItems.length) % poemItems.length)
             }
-            renderCard={(idx) => {
-              const item = poemItems[idx];
-              if (item.kind === "style") {
-                return (
-                  <PoemStyleCard style={item.style} index={idx} watermarkLogoUrl={watermarkLogoUrl} />
-                );
-              }
-              if (item.kind === "customPoem") {
-                return customPanel(t("customCardPoem.title"), t("customCardPoem.description"));
-              }
-              return customPanel(t("customCardRoast.title"), t("customCardRoast.description"));
-            }}
+            renderCard={(idx) => (
+              <PoemStyleCard style={poemItems[idx].style} index={idx} watermarkLogoUrl={watermarkLogoUrl} />
+            )}
           />
           </div>
           {carouselFooter(poemItems[poemIndex])}
