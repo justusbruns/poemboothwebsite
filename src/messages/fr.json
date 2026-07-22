@@ -416,7 +416,8 @@
     "rates": "Tarifs",
     "faq": "FAQ",
     "styles": "Styles",
-    "bookNow": "Réserver"
+    "bookNow": "Réserver",
+    "payPerPrint": "Pay-per-Print"
   },
   "styles": {
     "metaTitle": "Styles | Poem Booth",
@@ -477,5 +478,18 @@
     "statPaceLabel": "portraits & poèmes générés",
     "cta": "Demander un style personnalisé",
     "ctaEmailSubject": "Style personnalisé pour mon événement"
+  },
+  "payPerPrint": {
+    "eyebrow": "Nouveau · Pay-per-Print",
+    "title": "Un booth qui se rentabilise tout seul",
+    "pitch": "Installez un Poem Booth dans un lieu fréquenté — festival, centre commercial ou site touristique — et laissez les visiteurs s'offrir un souvenir imprimé. L'essai est gratuit ; les visiteurs paient leur impression directement au booth avec Apple Pay, iDEAL ou carte. Aucun personnel nécessaire.",
+    "bullet1": "Les visiteurs paient à l'impression — le booth tourne tout seul",
+    "bullet2": "Conçu pour les festivals, le retail et les lieux touristiques",
+    "bullet3": "Nous fixons le bon prix ensemble — et partageons les revenus",
+    "cta": "Discuter d'un emplacement",
+    "ctaNote": "Nous réfléchissons avec vous au lieu et au prix idéals.",
+    "ctaEmailSubject": "Booth Pay-per-Print sur mon site",
+    "videoAlt": "Démo du parcours pay-per-print du Poem Booth : essai gratuit, scan du QR code et paiement sur téléphone",
+    "blogLink": "D'autres questions ? Lisez l'article complet"
   }
 }

@@ -416,7 +416,8 @@
     "rates": "Rates",
     "faq": "FAQ",
     "styles": "Styles",
-    "bookNow": "Book now"
+    "bookNow": "Book now",
+    "payPerPrint": "Pay-per-Print"
   },
   "styles": {
     "metaTitle": "Styles | Poem Booth",
@@ -477,5 +478,18 @@
     "statPaceLabel": "portraits & poems generated",
     "cta": "Ask about a custom style",
     "ctaEmailSubject": "Custom style for my event"
+  },
+  "payPerPrint": {
+    "eyebrow": "New · Pay-per-Print",
+    "title": "A booth that earns its keep",
+    "pitch": "Put a Poem Booth in a busy spot — a festival, shopping centre or tourist hotspot — and let visitors treat themselves to a printed keepsake. Trying is free; guests pay for their print right at the booth with Apple Pay, iDEAL or card. No staff needed.",
+    "bullet1": "Visitors pay per print — the booth runs itself",
+    "bullet2": "Made for festivals, retail and touristic locations",
+    "bullet3": "We set the right price together — and share the upside",
+    "cta": "Discuss a location",
+    "ctaNote": "We'll think along about the perfect spot and pricing.",
+    "ctaEmailSubject": "Pay-per-Print booth at my location",
+    "videoAlt": "Demo of the Poem Booth pay-per-print flow: try for free, scan the QR code and pay on your phone",
+    "blogLink": "More questions? Read the full article"
   }
 }

@@ -26,9 +26,9 @@ export default function Header({ logo }: HeaderProps) {
 
   const navLinks = [
     { label: t("styles"), href: `${home}#styles` },
-    { label: t("howItWorks"), href: `${home}#how-it-works` },
     { label: t("rates"), href: `${home}#rates` },
     { label: t("faq"), href: `${home}#faq` },
+    { label: t("payPerPrint"), href: `${home}#pay-per-print` },
     { label: "Blog", href: `${home}/blog` },
   ];
 

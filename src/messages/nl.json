@@ -416,7 +416,8 @@
     "rates": "Tarieven",
     "faq": "FAQ",
     "styles": "Stijlen",
-    "bookNow": "Boek nu"
+    "bookNow": "Boek nu",
+    "payPerPrint": "Pay-per-Print"
   },
   "styles": {
     "metaTitle": "Stijlen | Poem Booth",
@@ -477,5 +478,18 @@
     "statPaceLabel": "portretten & gedichten gegenereerd",
     "cta": "Vraag naar een custom stijl",
     "ctaEmailSubject": "Custom stijl voor mijn event"
+  },
+  "payPerPrint": {
+    "eyebrow": "Nieuw · Pay-per-Print",
+    "title": "Een booth die zichzelf terugverdient",
+    "pitch": "Zet een Poem Booth op een drukbezochte plek — een festival, winkelcentrum of toeristische hotspot — en laat bezoekers zichzelf trakteren op een geprint aandenken. Proberen is gratis; gasten betalen hun print direct bij de booth met Apple Pay, iDEAL of kaart. Geen personeel nodig.",
+    "bullet1": "Bezoekers betalen per print — de booth draait zichzelf",
+    "bullet2": "Gemaakt voor festivals, retail en toeristische locaties",
+    "bullet3": "Samen bepalen we de juiste prijs — en delen we de opbrengst",
+    "cta": "Bespreek een locatie",
+    "ctaNote": "We denken mee over de perfecte plek en prijs.",
+    "ctaEmailSubject": "Pay-per-Print booth op mijn locatie",
+    "videoAlt": "Demo van de Poem Booth pay-per-print flow: gratis proberen, QR-code scannen en betalen op je telefoon",
+    "blogLink": "Meer vragen? Lees het volledige artikel"
   }
 }

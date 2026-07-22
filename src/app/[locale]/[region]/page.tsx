@@ -18,6 +18,7 @@ import {
 import VouwBanner from "@/components/sections/VouwBanner";
 import StylesGallery from "@/components/sections/StylesGallery";
 import CustomStyleShowcase from "@/components/sections/CustomStyleShowcase";
+import PayPerPrint from "@/components/sections/PayPerPrint";
 import { getHubByRegion } from "@/lib/supabase/server";
 import { REGION_CONFIGS, type Region } from "@/lib/supabase/types";
 import { client } from "../../../../sanity/lib/client";
@@ -314,6 +315,7 @@ export default async function LandingPage({ params }: PageProps) {
             .slice(0, 5)
             .map((s: { example_output_image_url: string }) => s.example_output_image_url)}
         />
+        <PayPerPrint />
         <FAQ locale={locale} region={region} />
         <LatestBlogPosts posts={pageData?.latestBlogPosts ?? []} />
         <VouwBanner />
