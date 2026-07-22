@@ -5,8 +5,7 @@ import { GoogleAnalytics } from "./GoogleAnalytics";
 import { PostHogAnalytics } from "./PostHogAnalytics";
 import { MetaPixel } from "./MetaPixel";
 import { CookieConsent } from "../consent/CookieConsent";
-
-const CONSENT_KEY = "pb_analytics_consent";
+import { readStoredConsent, storeConsent } from "@/lib/consent";
 const EU_REGIONS = ["nl", "de", "fr", "it", "be", "row"];
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
@@ -28,10 +27,10 @@ export function AnalyticsProvider({
   const requiresConsent = EU_REGIONS.includes(region);
 
   useEffect(() => {
-    const stored = localStorage.getItem(CONSENT_KEY);
-    if (stored === "true") {
+    const stored = readStoredConsent();
+    if (stored === true) {
       setHasConsent(true);
-    } else if (stored === "false") {
+    } else if (stored === false) {
       setHasConsent(false);
       // showBanner stays false — user explicitly declined, don't ask again
     } else {
@@ -48,13 +47,13 @@ export function AnalyticsProvider({
       ad_personalization: "granted",
     });
     window.fbq?.("consent", "grant");
-    localStorage.setItem(CONSENT_KEY, "true");
+    storeConsent(true);
     setHasConsent(true);
     setShowBanner(false);
   };
 
   const handleDeclineConsent = () => {
-    localStorage.setItem(CONSENT_KEY, "false");
+    storeConsent(false);
     setHasConsent(false);
     setShowBanner(false);
   };
