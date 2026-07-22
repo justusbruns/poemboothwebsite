@@ -79,12 +79,12 @@ function CardCarousel({
 }: {
   count: number;
   current: number;
-  onNavigate: (dir: 1 | -1) => void;
+  onNavigate: (delta: number) => void;
   renderCard: (index: number, isCenter: boolean) => ReactNode;
 }) {
   const [offset, setOffset] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const [animDir, setAnimDir] = useState<0 | 1 | -1>(0);
+  const [animDir, setAnimDir] = useState(0);
 
   const viewportRef = useRef<HTMLDivElement>(null);
   const [viewportW, setViewportW] = useState(CAROUSEL_CARD_W * 3 + CAROUSEL_GAP * 2);
@@ -107,13 +107,14 @@ function CardCarousel({
   // Translate so the center of slot 3 (index 3 of 0..6) lands exactly at viewport center
   const baseTranslate = viewportW / 2 - 3 * step - cardW / 2;
 
-  const go = (dir: 1 | -1) => {
-    if (animating) return;
-    setAnimDir(dir);
+  // delta may be ±1 (arrows/swipe) or ±2 (clicking a card further out)
+  const go = (delta: number) => {
+    if (animating || delta === 0) return;
+    setAnimDir(delta);
     setAnimating(true);
-    setOffset(-dir * step);
+    setOffset(-delta * step);
     setTimeout(() => {
-      onNavigate(dir);
+      onNavigate(delta);
       setAnimDir(0);
       setOffset(0);
       setAnimating(false);
@@ -178,8 +179,9 @@ function CardCarousel({
               // Key by absolute position so React preserves the DOM element
               // while it slides between slots, even when items repeat.
               key={current + d}
-              className="flex-shrink-0"
+              className={"flex-shrink-0" + (isCenter ? "" : " cursor-pointer")}
               style={{ width: cardW }}
+              onClick={() => go(d)}
             >
               <div
                 style={{

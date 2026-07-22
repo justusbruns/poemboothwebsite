@@ -44,7 +44,7 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
   const [current, setCurrent] = useState(0);
   const [offset, setOffset] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const [animDir, setAnimDir] = useState<0 | 1 | -1>(0);
+  const [animDir, setAnimDir] = useState(0);
 
   // Measure the actual viewport width so we can center correctly at any screen size
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -86,13 +86,14 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
     }
   };
 
-  const go = (dir: 1 | -1) => {
-    if (animating) return;
-    setAnimDir(dir);
+  // delta may be ±1 (arrows/swipe) or ±2 (clicking a photo further out)
+  const go = (delta: number) => {
+    if (animating || delta === 0) return;
+    setAnimDir(delta);
     setAnimating(true);
-    setOffset(-dir * step);
+    setOffset(-delta * step);
     setTimeout(() => {
-      setCurrent((c) => (c + dir + total) % total);
+      setCurrent((c) => (c + delta + total * 3) % total);
       setAnimDir(0);
       setOffset(0);
       setAnimating(false);
@@ -162,8 +163,14 @@ export default function PhotoGallery({ images = placeholderImages }: PhotoGaller
           >
             {slots.map(({ image, rotation, posKey }, slot) => {
               const isCenter = slot === centerSlot;
+              const d = slot - 3;
               return (
-                <div key={posKey} className="flex-shrink-0" style={{ width: cardW }}>
+                <div
+                  key={posKey}
+                  className={"flex-shrink-0" + (isCenter ? "" : " cursor-pointer")}
+                  style={{ width: cardW }}
+                  onClick={() => go(d)}
+                >
                   {/* Rotation wrapper — no transition, tilt is static per image */}
                   <div style={{ transform: `rotate(${rotation}deg)` }}>
                     <div
