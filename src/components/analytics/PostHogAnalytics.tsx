@@ -8,12 +8,14 @@ interface PostHogAnalyticsProps {
   apiKey: string;
   /** Full tracking (cookies/localStorage) vs. anonymous cookieless counting */
   consented: boolean;
+  /** Override ingest host, e.g. the reverse proxy v.poembooth.com (beats ad blockers) */
+  apiHost?: string;
 }
 
 // EU Cloud — data stays in the EU
-const POSTHOG_HOST = "https://eu.i.posthog.com";
+const DEFAULT_HOST = "https://eu.i.posthog.com";
 
-export function PostHogAnalytics({ apiKey, consented }: PostHogAnalyticsProps) {
+export function PostHogAnalytics({ apiKey, consented, apiHost }: PostHogAnalyticsProps) {
   const pathname = usePathname();
   const initialized = useRef(false);
 
@@ -21,7 +23,10 @@ export function PostHogAnalytics({ apiKey, consented }: PostHogAnalyticsProps) {
     if (!apiKey) return;
     if (!initialized.current) {
       posthog.init(apiKey, {
-        api_host: POSTHOG_HOST,
+        api_host: apiHost || DEFAULT_HOST,
+        // Toolbar/app links keep pointing at PostHog itself, even when
+        // events go through the reverse proxy
+        ui_host: "https://eu.posthog.com",
         // Without consent: memory-only — no cookies, no localStorage. Visits
         // are still counted (each session is an anonymous id that vanishes on
         // page close). With consent: durable id so return visits connect.

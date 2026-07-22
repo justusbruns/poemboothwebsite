@@ -13,6 +13,7 @@ interface AnalyticsProviderProps {
   region: string;
   locale: string;
   posthogKey?: string;
+  posthogHost?: string;
   children: React.ReactNode;
 }
 
@@ -20,6 +21,7 @@ export function AnalyticsProvider({
   region,
   locale,
   posthogKey,
+  posthogHost,
   children,
 }: AnalyticsProviderProps) {
   const [hasConsent, setHasConsent] = useState<boolean | null>(null);
@@ -63,6 +65,7 @@ export function AnalyticsProvider({
   const posthogNode = posthogKey ? (
     <PostHogAnalytics
       apiKey={posthogKey}
+      apiHost={posthogHost}
       consented={!requiresConsent || hasConsent === true}
     />
   ) : null;
