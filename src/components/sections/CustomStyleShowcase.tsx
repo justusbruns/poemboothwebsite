@@ -71,29 +71,29 @@ function CardDeck({
           ...(fit === "height" ? { height: "100%" } : { width: "100%" }),
         }}
       >
-      {stack.map(({ idx, depth }) => {
-        const pose = STACK_POSES[depth];
-        return (
-          <div
-            key={idx}
-            className="absolute inset-0 rounded-xl overflow-hidden bg-white transition-all duration-700 ease-in-out cursor-pointer"
-            style={{
-              transform: `rotate(${pose.rotate}deg) translate(${pose.x}px, ${pose.y}px)`,
-              zIndex: depths - depth,
-              boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
-            }}
-          >
-            <Image
-              src={images[idx]}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 80vw, 320px"
-              loading="eager"
-            />
-          </div>
-        );
-      })}
+        {stack.map(({ idx, depth }) => {
+          const pose = STACK_POSES[depth];
+          return (
+            <div
+              key={idx}
+              className="absolute inset-0 rounded-xl overflow-hidden bg-white transition-all duration-700 ease-in-out cursor-pointer"
+              style={{
+                transform: `rotate(${pose.rotate}deg) translate(${pose.x}px, ${pose.y}px)`,
+                zIndex: depths - depth,
+                boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+              }}
+            >
+              <Image
+                src={images[idx]}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 80vw, 320px"
+                loading="eager"
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -105,7 +105,7 @@ export default function CustomStyleShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
-  // Subtle scroll parallax on the background photo. The wrapper is scaled up
+  // Subtle scroll parallax on the photo band. The wrapper is scaled up
   // slightly so the translate never exposes the edges; disabled when the
   // visitor prefers reduced motion.
   useEffect(() => {
@@ -120,7 +120,7 @@ export default function CustomStyleShowcase() {
       const vh = window.innerHeight;
       // -0.5 .. 0.5 as the section travels through the viewport
       const progress = (r.top + r.height / 2 - vh / 2) / (vh + r.height);
-      bg.style.transform = `translateY(${(-progress * 6).toFixed(2)}%) scale(1.06)`;
+      bg.style.transform = `translateY(${(-progress * 12).toFixed(2)}%) scale(1.12)`;
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
@@ -135,116 +135,127 @@ export default function CustomStyleShowcase() {
     };
   }, []);
 
-  return (
-    <section ref={sectionRef} className="relative overflow-hidden">
-      {/* Event photo as the full section background. On mobile, anchor to the
-          left side of the frame so the Poem Booth itself stays in view. */}
-      <div ref={bgRef} className="hidden lg:block absolute inset-0 will-change-transform" style={{ transform: "scale(1.06)" }}>
-        <Image
-          src="/images/custom-style/event-photo.webp"
-          alt={t("photoAlt")}
-          fill
-          className="object-cover object-[22%_center] lg:object-center"
-          sizes="100vw"
-          quality={90}
-        />
-      </div>
-      {/* Soft scrim for legibility, heavier at the bottom (desktop only) */}
-      <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-black/25 via-black/5 to-black/45" />
+  // Panel content — rendered in the mobile flow and in the desktop overlay
+  const panel = (
+    <>
+      <h2 className="text-3xl md:text-4xl font-display text-text-primary">
+        {t("title")}
+      </h2>
+      <p className="mt-3 text-text-secondary leading-relaxed">
+        {t("subtitle")}
+      </p>
 
-      {/* Mobile: photo as a plain block up top, panel below */}
-      <div className="relative lg:hidden">
-        <Image
-          src="/images/custom-style/event-photo.webp"
-          alt={t("photoAlt")}
-          width={4032}
-          height={3024}
-          className="w-full h-auto"
-          sizes="100vw"
-          quality={90}
-        />
-        <span className="absolute bottom-3 left-3 bg-white/85 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-text-primary shadow">
-          {t("photoCaption")}
-        </span>
+      {/* The card stack — slimmer on desktop so the panel stays compact */}
+      <div className="mt-8 px-6 lg:px-0 lg:max-w-[280px] lg:mx-auto">
+        {mode === "portraits" ? (
+          <CardDeck key="portraits" images={PORTRAITS} aspect="680 / 1024" fit="height" intervalMs={PORTRAIT_INTERVAL_MS} />
+        ) : (
+          <CardDeck key="poems" images={POEMS} aspect="1 / 1" fit="width" intervalMs={POEM_INTERVAL_MS} />
+        )}
       </div>
 
-      <Container className="relative z-10 py-10 lg:py-24">
+      {/* Toggle under the stack */}
+      <div className="mt-10 lg:mt-8 flex justify-center gap-2">
+        {(["portraits", "poems"] as Mode[]).map((m) => (
+          <button
+            key={m}
+            onClick={() => setMode(m)}
+            aria-pressed={mode === m}
+            className={cn(
+              "px-4 py-1.5 rounded-full text-sm transition-colors border",
+              mode === m
+                ? "bg-text-primary text-white border-text-primary"
+                : "border-border text-text-secondary hover:border-text-primary/50"
+            )}
+          >
+            {t(`toggle.${m}`)}
+          </button>
+        ))}
+      </div>
 
-        <div className="grid lg:grid-cols-5 gap-10 items-center">
-          {/* Left 3 cols stay open — that's where the booth and the queue live */}
-          <div className="hidden lg:block lg:col-span-3" />
+      <p className="mt-8 lg:mt-6 text-sm text-text-secondary leading-relaxed">
+        {t("story")}
+      </p>
 
-          {/* Right: frosted panel with everything */}
-          <div className="lg:col-span-2 lg:bg-white/90 lg:backdrop-blur-md lg:rounded-2xl p-0 sm:p-2 lg:p-8 lg:shadow-2xl text-center">
-            <h2 className="text-3xl md:text-4xl font-display text-text-primary">
-              {t("title")}
-            </h2>
-            <p className="mt-3 text-text-secondary leading-relaxed">
-              {t("subtitle")}
-            </p>
-
-            {/* The card stack */}
-            <div className="mt-8 px-6">
-              {mode === "portraits" ? (
-                <CardDeck key="portraits" images={PORTRAITS} aspect="680 / 1024" fit="height" intervalMs={PORTRAIT_INTERVAL_MS} />
-              ) : (
-                <CardDeck key="poems" images={POEMS} aspect="1 / 1" fit="width" intervalMs={POEM_INTERVAL_MS} />
-              )}
-            </div>
-
-            {/* Toggle under the stack */}
-            <div className="mt-10 flex justify-center gap-2">
-              {(["portraits", "poems"] as Mode[]).map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setMode(m)}
-                  aria-pressed={mode === m}
-                  className={cn(
-                    "px-4 py-1.5 rounded-full text-sm transition-colors border",
-                    mode === m
-                      ? "bg-text-primary text-white border-text-primary"
-                      : "border-border text-text-secondary hover:border-text-primary/50"
-                  )}
-                >
-                  {t(`toggle.${m}`)}
-                </button>
-              ))}
-            </div>
-
-            <p className="mt-8 text-sm text-text-secondary leading-relaxed">
-              {t("story")}
-            </p>
-
-            <div className="mt-6 flex gap-8 justify-center">
-              <div>
-                <p className="text-3xl font-display text-text-primary">{t("statCreationsValue")}</p>
-                <p className="text-xs text-text-secondary mt-1">{t("statCreationsLabel")}</p>
-              </div>
-              <div>
-                <p className="text-3xl font-display text-text-primary">{t("statPaceValue")}</p>
-                <p className="text-xs text-text-secondary mt-1">{t("statPaceLabel")}</p>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <Button
-                href={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("ctaEmailSubject"))}`}
-                variant="primary"
-                size="lg"
-              >
-                {t("cta")}
-              </Button>
-            </div>
-          </div>
+      <div className="mt-6 flex gap-8 justify-center">
+        <div>
+          <p className="text-3xl font-display text-text-primary">{t("statCreationsValue")}</p>
+          <p className="text-xs text-text-secondary mt-1">{t("statCreationsLabel")}</p>
         </div>
+        <div>
+          <p className="text-3xl font-display text-text-primary">{t("statPaceValue")}</p>
+          <p className="text-xs text-text-secondary mt-1">{t("statPaceLabel")}</p>
+        </div>
+      </div>
 
-        {/* Caption chip bottom-left over the photo (desktop) */}
-        <div className="hidden lg:block mt-10 lg:mt-6">
-          <span className="inline-block bg-white/85 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs sm:text-sm text-text-primary shadow">
+      <div className="mt-8 lg:mt-6">
+        <Button
+          href={`mailto:contact@poembooth.com?subject=${encodeURIComponent(t("ctaEmailSubject"))}`}
+          variant="primary"
+          size="lg"
+        >
+          {t("cta")}
+        </Button>
+      </div>
+    </>
+  );
+
+  return (
+    <section ref={sectionRef} className="bg-bg-primary">
+      {/* Mobile: photo as a plain block up top, panel below */}
+      <div className="lg:hidden">
+        <div className="relative">
+          <Image
+            src="/images/custom-style/event-photo.webp"
+            alt={t("photoAlt")}
+            width={4032}
+            height={3024}
+            className="w-full h-auto"
+            sizes="100vw"
+            quality={90}
+          />
+          <span className="absolute bottom-3 left-3 bg-white/85 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-text-primary shadow">
             {t("photoCaption")}
           </span>
         </div>
-      </Container>
+        <Container className="pt-10 pb-12 text-center">{panel}</Container>
+      </div>
+
+      {/* Desktop: the photo fills the entire section; the panel floats on the right */}
+      {/* Desktop: the photo fills the section edge to edge; the panel is taller
+          than the section and overlaps into the neighbouring sections above
+          and below (z-20 so it paints over their backgrounds) */}
+      <div className="hidden lg:block relative">
+        <div className="relative h-[680px] overflow-hidden">
+          <div
+            ref={bgRef}
+            className="absolute inset-0 will-change-transform"
+            style={{ transform: "scale(1.12)" }}
+          >
+            <Image
+              src="/images/custom-style/event-photo.webp"
+              alt={t("photoAlt")}
+              fill
+              className="object-cover"
+              style={{ objectPosition: "center 30%" }}
+              sizes="100vw"
+              quality={90}
+            />
+          </div>
+          {/* Light bottom scrim so the caption chip reads */}
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/30 to-transparent" />
+          <span className="absolute bottom-5 left-8 bg-white/85 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm text-text-primary shadow">
+            {t("photoCaption")}
+          </span>
+        </div>
+
+        {/* Panel overlays the band, sticking out into the sections above and below */}
+        <Container className="absolute inset-0 z-20 flex items-center justify-end pointer-events-none">
+          <div className="pointer-events-auto w-full max-w-md bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-2xl text-center">
+            {panel}
+          </div>
+        </Container>
+      </div>
     </section>
   );
 }
