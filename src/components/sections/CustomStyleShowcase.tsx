@@ -201,7 +201,7 @@ export default function CustomStyleShowcase() {
   );
 
   return (
-    <section ref={sectionRef} className="bg-bg-primary">
+    <section id="custom-style" ref={sectionRef} className="bg-bg-primary scroll-mt-20">
       {/* Mobile: photo as a plain block up top, panel below */}
       <div className="lg:hidden">
         <div className="relative">
