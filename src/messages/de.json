@@ -110,7 +110,15 @@
       "text": "“Ich war absolut begeistert von eurem Poem Booth.”",
       "author": "Latoya Dankers",
       "org": "Fontys"
-    }
+    },
+    "channable": {
+      "text1": "“Die Zusammenarbeit mit Poem Booth war eine großartige Erfahrung. Ihre Porträt-Photobooth brachte ein neues Maß an Engagement auf unser Event. Besonders beeindruckt hat uns, wie sie die KI-generierten Fotos perfekt auf unser Event-Branding und -Thema abgestimmt haben. Sie wurde zu einem unvergesslichen interaktiven Element für unser Publikum — Momente, die die Menschen wirklich genossen und teilen wollten.",
+      "text2": "Das Team war kreativ, flexibel und durchweg hochprofessionell. Wir empfehlen sie jedem, der sein Event auf ein neues Niveau heben möchte.”",
+      "author": "Johanna Feimanis",
+      "org": "Senior Event Manager, Channable"
+    },
+    "readMore": "Mehr lesen",
+    "readLess": "Weniger anzeigen"
   },
   "practicalities": {
     "title": "Praktisches",

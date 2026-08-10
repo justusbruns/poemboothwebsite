@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -51,63 +52,91 @@ export default function Testimonials() {
   const t = useTranslations("testimonials");
   const params = useParams();
   const isUS = params.region === "us";
+  const [channableExpanded, setChannableExpanded] = useState(false);
 
   return (
     <section className="py-16 md:py-24 bg-bg-primary">
       <Container>
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {/* Featured quote with engagement stat */}
-          <blockquote className="lg:col-span-2 bg-bg-secondary rounded-xl p-8 md:p-10 border border-border-light flex flex-col">
+        {/* Mobile/tablet: horizontal swipe strip with scroll-snap.
+            Desktop (lg+): four equal cards side by side, bylines pinned bottom. */}
+        <div
+          className="mt-12 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 lg:pb-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:items-start"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {/* Weingarten — with engagement stat */}
+          <blockquote className="min-w-[85%] sm:min-w-[55%] lg:min-w-0 snap-center bg-bg-secondary rounded-xl p-7 border border-border-light flex flex-col">
             <QuoteMark />
-            <p className="mt-4 text-xl md:text-2xl font-display text-text-primary leading-relaxed flex-1">
+            <p className="mt-4 text-base font-display text-text-primary leading-relaxed flex-1">
               {t("featured.text")}
             </p>
-            <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <div className="md:order-2 md:text-right">
-                <p className="text-4xl md:text-5xl font-display text-text-primary">
-                  {isUS ? t("featured.statValueUS") : t("featured.statValueEU")}
-                </p>
-                <p className="text-sm text-text-secondary">
-                  {t("featured.statLabel")}
-                </p>
-              </div>
-              <div className="md:order-1">
-                <Byline
-                  author={t("featured.author")}
-                  org={t("featured.org")}
-                  avatarSrc="/images/testimonials/ady-avivi.jpg"
-                />
-              </div>
-            </div>
+            <p className="mt-6 text-3xl font-display text-text-primary">
+              {isUS ? t("featured.statValueUS") : t("featured.statValueEU")}
+            </p>
+            <p className="text-xs text-text-secondary">{t("featured.statLabel")}</p>
+            <Byline
+              author={t("featured.author")}
+              org={t("featured.org")}
+              avatarSrc="/images/testimonials/ady-avivi.jpg"
+            />
           </blockquote>
 
-          {/* Two shorter quotes */}
-          <div className="grid gap-6 content-start">
-            <blockquote className="bg-bg-secondary rounded-xl p-8 border border-border-light">
-              <QuoteMark />
-              <p className="mt-4 text-lg font-display text-text-primary leading-relaxed">
-                {t("summit.text")}
-              </p>
-              <Byline
-                org={t("summit.org")}
-                avatarSrc="/images/testimonials/ai-for-good.jpg"
-              />
-            </blockquote>
+          {/* AI for Good */}
+          <blockquote className="min-w-[85%] sm:min-w-[55%] lg:min-w-0 snap-center bg-bg-secondary rounded-xl p-7 border border-border-light flex flex-col">
+            <QuoteMark />
+            <p className="mt-4 text-base font-display text-text-primary leading-relaxed flex-1">
+              {t("summit.text")}
+            </p>
+            <Byline
+              org={t("summit.org")}
+              avatarSrc="/images/testimonials/ai-for-good.jpg"
+            />
+          </blockquote>
 
-            <blockquote className="bg-bg-secondary rounded-xl p-8 border border-border-light">
-              <QuoteMark />
-              <p className="mt-4 text-lg font-display text-text-primary leading-relaxed">
-                {t("fontys.text")}
+          {/* Channable */}
+          <blockquote className="min-w-[85%] sm:min-w-[55%] lg:min-w-0 snap-center bg-bg-secondary rounded-xl p-7 border border-border-light flex flex-col">
+            <QuoteMark />
+            <div className="mt-4 flex-1 space-y-3">
+              <p
+                className={
+                  "text-base font-display text-text-primary leading-relaxed" +
+                  (channableExpanded ? "" : " line-clamp-[8]")
+                }
+              >
+                {t("channable.text1")}
               </p>
-              <Byline
-                author={t("fontys.author")}
-                org={t("fontys.org")}
-                avatarSrc="/images/testimonials/latoya-dankers.jpg"
-              />
-            </blockquote>
-          </div>
+              {channableExpanded && (
+                <p className="text-base font-display text-text-primary leading-relaxed">
+                  {t("channable.text2")}
+                </p>
+              )}
+              <button
+                onClick={() => setChannableExpanded((e) => !e)}
+                className="text-sm text-text-secondary underline hover:no-underline"
+              >
+                {channableExpanded ? t("readLess") : t("readMore")}
+              </button>
+            </div>
+            <Byline
+              author={t("channable.author")}
+              org={t("channable.org")}
+              avatarSrc="/images/testimonials/johanna-feimanis.webp"
+            />
+          </blockquote>
+
+          {/* Fontys */}
+          <blockquote className="min-w-[85%] sm:min-w-[55%] lg:min-w-0 snap-center bg-bg-secondary rounded-xl p-7 border border-border-light flex flex-col">
+            <QuoteMark />
+            <p className="mt-4 text-base font-display text-text-primary leading-relaxed flex-1">
+              {t("fontys.text")}
+            </p>
+            <Byline
+              author={t("fontys.author")}
+              org={t("fontys.org")}
+              avatarSrc="/images/testimonials/latoya-dankers.jpg"
+            />
+          </blockquote>
         </div>
       </Container>
     </section>
