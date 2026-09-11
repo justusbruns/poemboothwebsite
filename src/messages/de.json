@@ -35,7 +35,8 @@
     "headline": "Die KI-Photobooth, die Gedichte & Porträts auf Ihrem Event erstellt",
     "subheadline": "Die Poem Booth verwandelt Ihr Foto in Sekunden in ein persönliches Gedicht oder künstlerisches Porträt. Inspiriert von echten Dichtern und Künstlern. Ideal für Firmenveranstaltungen, Feste und kulturelle Einrichtungen.",
     "ctaButton": "Jetzt buchen",
-    "ctaEmail": "Oder E-Mail an"
+    "ctaEmail": "Oder E-Mail an",
+    "holidayBadge": "Neu · Feiertagsstile"
   },
   "howItWorks": {
     "title": "So funktioniert's",
@@ -471,7 +472,7 @@
     }
   },
   "christmas": {
-    "eyebrow": "Limited Edition",
+    "eyebrow": "Limitierte Edition",
     "title": "Die Feiertags-Edition",
     "subtitle": "Festliche Stile, die dein Jahresend-Event zum Leuchten bringen — buch die Poem Booth in einem Feiertagslook, den deine Gäste mit nach Hause nehmen wollen.",
     "bookCta": "Diesen Stil buchen",

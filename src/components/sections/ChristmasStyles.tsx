@@ -146,7 +146,7 @@ export default function ChristmasStyles({ styles, bookingBaseUrl }: ChristmasSty
       id="holiday"
       // Extra bottom room on desktop: the next section's panel overhangs
       // upward, so keep the button well clear of it.
-      className="relative overflow-hidden pt-16 md:pt-24 pb-20 md:pb-28 lg:pb-56 text-white"
+      className="relative overflow-hidden scroll-mt-20 pt-16 md:pt-24 pb-20 md:pb-28 lg:pb-56 text-white"
       style={{
         background:
           "radial-gradient(1200px 600px at 50% -10%, #1b3a5b 0%, #0d1f33 45%, #081422 100%)",

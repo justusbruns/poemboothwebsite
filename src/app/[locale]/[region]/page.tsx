@@ -296,7 +296,7 @@ export default async function LandingPage({ params }: PageProps) {
       <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
-        <Hero bookingUrl={pageData?.siteSettings?.bookingUrl} />
+        <Hero bookingUrl={pageData?.siteSettings?.bookingUrl} hasHolidayStyles={christmasStyles.some((s: { example_output_image_url?: string | null }) => s.example_output_image_url)} />
         <ClientLogos logos={clientLogos} />
         <Testimonials />
         <section id="styles" className="py-16 md:py-24 bg-bg-accent overflow-x-clip">

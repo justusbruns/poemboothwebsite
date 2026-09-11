@@ -8,6 +8,9 @@ import { trackLeadIntent } from "@/lib/tracking";
 
 interface HeroProps {
   bookingUrl?: string;
+  // Shown only while holiday styles are live (driven by the `christmas` tag),
+  // so the hint appears and disappears with the season on its own.
+  hasHolidayStyles?: boolean;
 }
 
 // iOS Safari sometimes leaves an autoplay video sitting on its poster
@@ -29,7 +32,7 @@ function tapToPlay(e: React.MouseEvent<HTMLVideoElement>) {
   if (p) p.catch(() => {});
 }
 
-export default function Hero({ bookingUrl }: HeroProps) {
+export default function Hero({ bookingUrl, hasHolidayStyles }: HeroProps) {
   const t = useTranslations("hero");
   const params = useParams();
   const locale = params.locale as string;
@@ -47,6 +50,16 @@ export default function Hero({ bookingUrl }: HeroProps) {
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
           {/* Text Content */}
           <div className="order-2 md:order-1">
+            {hasHolidayStyles && (
+              <a
+                href="#holiday"
+                className="inline-flex items-center gap-2 rounded-full border border-amber-300/70 bg-amber-50 px-3.5 py-1.5 text-sm text-text-primary mb-4 shadow-sm transition-colors hover:bg-amber-100"
+              >
+                <span aria-hidden>❄️</span>
+                <span className="font-medium">{t("holidayBadge")}</span>
+                <span aria-hidden className="text-text-muted">→</span>
+              </a>
+            )}
             <p className="text-xs md:text-sm font-medium tracking-[0.18em] uppercase text-text-muted mb-3">
               {t("originBadge")}
             </p>
