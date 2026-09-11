@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Button from "@/components/ui/Button";
@@ -31,17 +31,44 @@ type StyleCarouselItem = { kind: "style"; style: PublicStyle };
 const CAROUSEL_CARD_W = 380;
 const CAROUSEL_GAP = 28;
 
-// Sliding 5-slot carousel — same mechanics as the photo gallery carousel.
-function CardCarousel({
+// Optimized image (next/image) that adopts its own natural aspect ratio once
+// loaded, so cards fill their width at the image's true proportions without
+// cropping — same look as the Holiday cards.
+export function StyleImage({ src, alt }: { src: string; alt: string }) {
+  const [ratio, setRatio] = useState("4 / 5");
+  return (
+    <div className="relative w-full" style={{ aspectRatio: ratio }}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 640px) 72vw, (max-width: 1024px) 40vw, 380px"
+        className="object-cover"
+        loading="eager"
+        onLoad={(e) => {
+          const el = e.currentTarget as HTMLImageElement;
+          if (el.naturalWidth && el.naturalHeight)
+            setRatio(`${el.naturalWidth} / ${el.naturalHeight}`);
+        }}
+      />
+    </div>
+  );
+}
+
+// Sliding 7-slot carousel — same mechanics as the photo gallery carousel.
+export function CardCarousel({
   count,
   current,
   onNavigate,
   renderCard,
+  // When false, side cards keep full brightness (only the center scales up)
+  dimSides = true,
 }: {
   count: number;
   current: number;
   onNavigate: (delta: number) => void;
   renderCard: (index: number, isCenter: boolean) => ReactNode;
+  dimSides?: boolean;
 }) {
   const [offset, setOffset] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -125,7 +152,7 @@ function CardCarousel({
         </svg>
       </button>
       <div
-        className="flex py-4"
+        className="flex items-center py-4"
         style={{
           gap: gapPx,
           transform: `translateX(${baseTranslate + offset}px)`,
@@ -147,7 +174,7 @@ function CardCarousel({
               <div
                 style={{
                   transform: `scale(${isCenter ? 1 : 0.88})`,
-                  opacity: isCenter ? 1 : 0.55,
+                  opacity: isCenter || !dimSides ? 1 : 0.55,
                   transition:
                     "transform 450ms cubic-bezier(0.4,0,0.2,1), opacity 450ms cubic-bezier(0.4,0,0.2,1)",
                   pointerEvents: isCenter ? "auto" : "none",
@@ -174,16 +201,8 @@ function PortraitStyleCard({
   index: number;
 }) {
   const [flipped, setFlipped] = useState(false);
-  const [loaded, setLoaded] = useState(false);
   const flipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const t = useTranslations("styles");
-
-  // If the image is already cached, `onLoad` may fire before this handler is
-  // attached (common for edge cards that previously rendered in another slot),
-  // leaving the image stuck at opacity-0. Reconcile against the DOM on mount.
-  const imgRef = useCallback((node: HTMLImageElement | null) => {
-    if (node?.complete) setLoaded(true);
-  }, []);
 
   const outputUrl = style.example_output_image_url;
   const inputUrl = style.example_input_image_url;
@@ -200,91 +219,48 @@ function PortraitStyleCard({
   };
 
   return (
-    <div className="group flex flex-col">
-      {/* 3D flip container - fixed height for alignment */}
+    // Image fills the card width at its native ratio (tall, like the Holiday
+    // cards) and flips in 3D to reveal the original photo.
+    <div className="px-1 sm:px-2" style={{ perspective: "1200px" }}>
       <div
-        className="relative flex items-center justify-center px-2 sm:px-6 cursor-pointer"
-        style={{ aspectRatio: "1 / 1.15", maxHeight: 380, perspective: "1000px" }}
+        className="relative transition-transform duration-700 ease-in-out cursor-pointer"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: `rotate(${rotation}deg) rotateY(${flipped ? 180 : 0}deg)`,
+        }}
         onClick={() => inputUrl && outputUrl && handleFlip()}
       >
+        {/* Front — AI result */}
         <div
-          className="relative transition-transform duration-700 ease-in-out"
-          style={{
-            transformStyle: "preserve-3d",
-            transform: `rotate(${rotation}deg) rotateY(${flipped ? 180 : 0}deg)`,
-            maxWidth: undefined,
-            maxHeight: "100%",
-          }}
+          className="relative rounded-xl overflow-hidden shadow-xl bg-white"
+          style={{ backfaceVisibility: "hidden" }}
         >
-          {/* Front - portrait output */}
-          <div
-            className="relative shadow-xl rounded-lg overflow-hidden"
-            style={{ backfaceVisibility: "hidden" }}
-          >
-            {outputUrl && (
-              <Image
-                ref={imgRef}
-                src={outputUrl}
-                alt={style.name}
-                width={400}
-                height={500}
-                className={`block max-h-[360px] w-auto h-auto transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
-                sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
-                // Eager: carousel edge cards sit outside the clipped viewport,
-                // so lazy loading's intersection check never fires for them.
-                loading="eager"
-                priority={index < 3}
-                onLoad={() => setLoaded(true)}
-              />
-            )}
-            {/* Loading placeholder */}
-            {!loaded && (
-              <div className="bg-bg-secondary rounded-lg animate-pulse" style={{ width: "100%", maxWidth: 280, aspectRatio: "4 / 5" }} />
-            )}
-            {/* Input thumbnail — anchored to the image's bottom-right corner */}
-            {inputUrl && outputUrl && !flipped && (
-              <div
-                className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-white shadow-lg cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 z-10"
-                onClick={(e) => { e.stopPropagation(); handleFlip(); }}
-              >
-                <Image
-                  src={inputUrl}
-                  alt="See original"
-                  fill
-                  className="object-cover"
-                  sizes="64px"
-                  loading="eager"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Back - original input (fill to match front) */}
-          {inputUrl && (
-            <div
-              className="absolute inset-0 shadow-xl rounded-lg overflow-hidden"
-              style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+          {outputUrl && <StyleImage src={outputUrl} alt={style.name} />}
+          {inputUrl && outputUrl && !flipped && (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); handleFlip(); }}
+              aria-label={t("original")}
+              className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden border-2 border-white shadow-lg transition-transform duration-300 hover:scale-110 active:scale-95 z-10"
             >
-              <Image
-                src={inputUrl}
-                alt={`Original for ${style.name}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) 70vw, (max-width: 1024px) 35vw, 280px"
-                loading="eager"
-              />
-            </div>
+              <Image src={inputUrl} alt="" fill sizes="64px" className="object-cover" loading="eager" />
+            </button>
           )}
         </div>
 
-        {/* Back side hint */}
-        {inputUrl && outputUrl && flipped && (
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-xs text-white pointer-events-none z-10">
-            {t("original")}
+        {/* Back — original photo, cover-filling the front's box */}
+        {inputUrl && (
+          <div
+            className="absolute inset-0 rounded-xl overflow-hidden shadow-xl bg-white"
+            style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+          >
+            <Image src={inputUrl} alt={`Original for ${style.name}`} fill sizes="(max-width: 640px) 72vw, 380px" className="object-cover" loading="eager" />
+            <span className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/55 backdrop-blur-sm text-xs text-white">
+              {t("original")}
+            </span>
           </div>
         )}
       </div>
-
     </div>
   );
 }
@@ -327,7 +303,7 @@ function PoemStyleCard({
       {/* Fixed-height stage so all cards align (matches PortraitStyleCard) */}
       <div
         className="relative flex items-center justify-center px-2 sm:px-4"
-        style={{ aspectRatio: "1 / 1.15", maxHeight: 380 }}
+        style={{ aspectRatio: "1 / 1.15", maxHeight: 480 }}
       >
         <div
           className="relative w-full max-w-[94%] sm:max-w-[88%] aspect-square rounded-2xl overflow-hidden shadow-xl"
@@ -588,8 +564,9 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
           <CardCarousel
             count={portraitItems.length}
             current={portraitIndex}
+            dimSides={false}
             onNavigate={(dir) =>
-              setPortraitIndex((i) => (i + dir + portraitItems.length) % portraitItems.length)
+              setPortraitIndex((i) => (i + dir + portraitItems.length * 10) % portraitItems.length)
             }
             renderCard={(idx) => (
               <PortraitStyleCard style={portraitItems[idx].style} index={idx} />
@@ -610,8 +587,9 @@ export default function StylesGallery({ styles, bookingBaseUrl, watermarkLogoUrl
           <CardCarousel
             count={poemItems.length}
             current={poemIndex}
+            dimSides={false}
             onNavigate={(dir) =>
-              setPoemIndex((i) => (i + dir + poemItems.length) % poemItems.length)
+              setPoemIndex((i) => (i + dir + poemItems.length * 10) % poemItems.length)
             }
             renderCard={(idx) => (
               <PoemStyleCard style={poemItems[idx].style} index={idx} watermarkLogoUrl={watermarkLogoUrl} />

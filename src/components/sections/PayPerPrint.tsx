@@ -75,6 +75,7 @@ export default function PayPerPrint() {
           {/* Phone-style demo video of the payment flow */}
           <div className="flex justify-center lg:justify-end">
             <video
+              suppressHydrationWarning
               className="w-full max-w-[300px] sm:max-w-[320px] rounded-3xl shadow-2xl border-4 border-white"
               autoPlay
               muted
@@ -84,7 +85,7 @@ export default function PayPerPrint() {
               poster="/images/pay-per-print-poster.webp"
               aria-label={t("videoAlt")}
             >
-              <source src="/videos/pay-per-print.mp4" type="video/mp4" />
+              <source suppressHydrationWarning src="/videos/pay-per-print.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

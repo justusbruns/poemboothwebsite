@@ -17,6 +17,7 @@ import {
 } from "@/components/sections";
 import VouwBanner from "@/components/sections/VouwBanner";
 import StylesGallery from "@/components/sections/StylesGallery";
+import ChristmasStyles from "@/components/sections/ChristmasStyles";
 import CustomStyleShowcase from "@/components/sections/CustomStyleShowcase";
 import PayPerPrint from "@/components/sections/PayPerPrint";
 import { getHubByRegion } from "@/lib/supabase/server";
@@ -171,6 +172,13 @@ export default async function LandingPage({ params }: PageProps) {
 
   const regionConfig = REGION_CONFIGS[region as Region] || REGION_CONFIGS.nl;
 
+  // Split off the Christmas-tagged styles — they get their own festive section
+  // below and are hidden from the regular Explore-our-styles carousel.
+  const hasChristmasTag = (s: { tags?: string[] }) =>
+    (s.tags ?? []).some((tag) => tag.toLowerCase() === "christmas");
+  const christmasStyles = publicStyles.filter(hasChristmasTag);
+  const regularStyles = publicStyles.filter((s: { tags?: string[] }) => !hasChristmasTag(s));
+
   // Format pricing data for BookingRates component
   const pricing = hubPricingData?.pricing;
   const hubPricing = pricing
@@ -294,12 +302,16 @@ export default async function LandingPage({ params }: PageProps) {
         <section id="styles" className="py-16 md:py-24 bg-bg-accent overflow-x-clip">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <StylesGallery
-              styles={publicStyles}
+              styles={regularStyles}
               bookingBaseUrl={`${bookingBase}/${locale}/booking`}
               watermarkLogoUrl={headerLogo}
             />
           </div>
         </section>
+        <ChristmasStyles
+          styles={christmasStyles}
+          bookingBaseUrl={`${bookingBase}/${locale}/booking`}
+        />
         <CustomStyleShowcase />
         {/* Hidden for now — the hero video shows how it works */}
         {/* <HowItWorks steps={howItWorksSteps} /> */}
@@ -310,10 +322,10 @@ export default async function LandingPage({ params }: PageProps) {
         <BookingRates
           hubPricing={hubPricing}
           bookingUrl={pageData?.siteSettings?.bookingUrl}
-          portraitStyleImages={publicStyles
-            .filter((s: { style_type: string; example_output_image_url: string | null }) => s.style_type === "image" && s.example_output_image_url)
+          portraitStyleImages={regularStyles
+            .filter((s: { style_type?: string; example_output_image_url?: string | null }) => s.style_type === "image" && s.example_output_image_url)
             .slice(0, 5)
-            .map((s: { example_output_image_url: string }) => s.example_output_image_url)}
+            .map((s: { example_output_image_url?: string | null }) => s.example_output_image_url as string)}
         />
         <PayPerPrint />
         <FAQ locale={locale} region={region} />

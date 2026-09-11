@@ -470,6 +470,14 @@
       "emailBody": "Bonjour l'équipe Poem Booth,\n\nJe suis intéressé(e) par un style de roast personnalisé pour mon événement.\n\nType d'événement : \nDate prévue : \nPublic / ambiance : \n\nAu plaisir de vous lire !"
     }
   },
+  "christmas": {
+    "eyebrow": "Édition limitée",
+    "title": "L'Édition des Fêtes",
+    "subtitle": "Des styles festifs pour illuminer votre événement de fin d'année — réservez le Poem Booth dans un look de fêtes que vos invités voudront emporter.",
+    "bookCta": "Réserver ce style",
+    "viewOriginal": "Voir la photo d'origine",
+    "originalBadge": "Original"
+  },
   "customStyles": {
     "title": "Votre propre style",
     "subtitle": "Votre marque, votre thème, votre œuvre. Découvrez l'effet d'un style entièrement personnalisé au sommet AI for Good des Nations Unies.",
