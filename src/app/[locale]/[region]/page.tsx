@@ -296,7 +296,16 @@ export default async function LandingPage({ params }: PageProps) {
       <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
-        <Hero bookingUrl={pageData?.siteSettings?.bookingUrl} hasHolidayStyles={christmasStyles.some((s: { example_output_image_url?: string | null }) => s.example_output_image_url)} />
+        <Hero
+          bookingUrl={pageData?.siteSettings?.bookingUrl}
+          holidayStyles={christmasStyles
+            .filter((s: { example_output_image_url?: string | null }) => s.example_output_image_url)
+            .map((s: { id: string; name: string; example_output_image_url: string }) => ({
+              id: s.id,
+              name: s.name,
+              image: s.example_output_image_url,
+            }))}
+        />
         <ClientLogos logos={clientLogos} />
         <Testimonials />
         <section id="styles" className="py-16 md:py-24 bg-bg-accent overflow-x-clip">

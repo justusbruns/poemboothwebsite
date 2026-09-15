@@ -49,7 +49,7 @@ export default function Header({ logo }: HeaderProps) {
           <div className="flex items-center justify-between">
             <Link href={`/${locale}/${region}`} className="flex items-center">
               {logo ? (
-                <Image src={logo} alt="Poem Booth" width={70} height={28} className="object-contain" />
+                <Image src={logo} alt="Poem Booth" width={70} height={28} className="object-contain" style={{ height: "auto" }} />
               ) : (
                 <span className="text-2xl font-display text-text-primary">Poem Booth</span>
               )}
@@ -70,7 +70,7 @@ export default function Header({ logo }: HeaderProps) {
             <div className="flex items-center">
               <Link href={`/${locale}/${region}`} className="flex items-center">
                 {logo ? (
-                  <Image src={logo} alt="Poem Booth" width={70} height={28} className="object-contain" />
+                  <Image src={logo} alt="Poem Booth" width={70} height={28} className="object-contain" style={{ height: "auto" }} />
                 ) : (
                   <span className="text-2xl font-display text-text-primary">Poem Booth</span>
                 )}
