@@ -2,71 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
-import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { trackLeadIntent } from "@/lib/tracking";
 
-export interface HeroHolidayStyle {
-  id: string;
-  name: string;
-  image: string;
-}
-
 interface HeroProps {
   bookingUrl?: string;
-  // Christmas-tagged styles with a result image. The fan beside the CTA is
-  // shown only while these are live, so it comes and goes with the season.
-  holidayStyles?: HeroHolidayStyle[];
-}
-
-// Resting tilt and hover spread (px) per card, left to right
-const FAN = [
-  { rotate: -14, spread: -20 },
-  { rotate: -5, spread: -10 },
-  { rotate: 5, spread: 0 },
-  { rotate: 14, spread: 6 },
-];
-
-// A bordeaux seasonal button with a fan of holiday-style cards poking out of
-// it, linking down to the Holiday Edition section; the fan spreads on hover.
-function HolidayFan({ styles, badge, label }: { styles: HeroHolidayStyle[]; badge: string; label: string }) {
-  const cards = styles.slice(0, FAN.length);
-  const offset = Math.floor((FAN.length - cards.length) / 2);
-
-  return (
-    <a
-      href="#holiday"
-      className="group relative flex lg:inline-flex lg:self-stretch items-center gap-5 rounded-lg bg-[#7b1e2e] pl-5 pr-6 py-3 text-white shadow-md transition-colors hover:bg-[#8f2537]"
-    >
-      <span className="absolute -top-2.5 right-3 rounded-full bg-amber-300 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#5a1420] shadow-sm">
-        ❄️ {badge}
-      </span>
-      <span className="flex shrink-0 items-center -my-5" aria-hidden>
-        {cards.map((style, i) => {
-          const { rotate, spread } = FAN[i + offset];
-          return (
-            <span
-              key={style.id}
-              className="relative -ml-7 first:ml-0 block w-12 h-[3.75rem] rounded-md bg-[#fdfbf4] p-[3px] shadow-lg ring-1 ring-black/10 transition-transform duration-300 ease-out [transform:translateX(0)_rotate(var(--fan-r))] group-hover:[transform:translateX(var(--fan-x))_translateY(-3px)_rotate(calc(var(--fan-r)*1.5))]"
-              style={{
-                zIndex: i,
-                ["--fan-r" as string]: `${rotate}deg`,
-                ["--fan-x" as string]: `${spread}px`,
-              }}
-            >
-              <span className="relative block h-full w-full overflow-hidden rounded-[3px] bg-white">
-                <Image src={style.image} alt="" fill sizes="56px" className="object-cover" />
-              </span>
-            </span>
-          );
-        })}
-      </span>
-      <span className="text-left text-base font-medium leading-snug">
-        {label}&nbsp;→
-      </span>
-    </a>
-  );
 }
 
 // iOS Safari sometimes leaves an autoplay video sitting on its poster
@@ -88,7 +29,7 @@ function tapToPlay(e: React.MouseEvent<HTMLVideoElement>) {
   if (p) p.catch(() => {});
 }
 
-export default function Hero({ bookingUrl, holidayStyles = [] }: HeroProps) {
+export default function Hero({ bookingUrl }: HeroProps) {
   const t = useTranslations("hero");
   const params = useParams();
   const locale = params.locale as string;
@@ -124,9 +65,6 @@ export default function Hero({ bookingUrl, holidayStyles = [] }: HeroProps) {
               >
                 {t("ctaButton")}
               </Button>
-              {holidayStyles.length > 0 && (
-                <HolidayFan styles={holidayStyles} badge={t("holidayNew")} label={t("holidayFan")} />
-              )}
             </div>
             <p className="text-text-muted text-sm mt-4">
               {t("ctaEmail")}{" "}

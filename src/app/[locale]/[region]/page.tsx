@@ -296,17 +296,11 @@ export default async function LandingPage({ params }: PageProps) {
       <FAQPageJsonLd items={faqItems} />
       <Header logo={headerLogo} />
       <main>
-        <Hero
-          bookingUrl={pageData?.siteSettings?.bookingUrl}
-          holidayStyles={christmasStyles
-            .filter((s: { example_output_image_url?: string | null }) => s.example_output_image_url)
-            .map((s: { id: string; name: string; example_output_image_url: string }) => ({
-              id: s.id,
-              name: s.name,
-              image: s.example_output_image_url,
-            }))}
+        <Hero bookingUrl={pageData?.siteSettings?.bookingUrl} />
+        <ChristmasStyles
+          styles={christmasStyles}
+          bookingBaseUrl={`${bookingBase}/${locale}/booking`}
         />
-        <ClientLogos logos={clientLogos} />
         <Testimonials />
         <section id="styles" className="py-16 md:py-24 bg-bg-accent overflow-x-clip">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -317,10 +311,6 @@ export default async function LandingPage({ params }: PageProps) {
             />
           </div>
         </section>
-        <ChristmasStyles
-          styles={christmasStyles}
-          bookingBaseUrl={`${bookingBase}/${locale}/booking`}
-        />
         <CustomStyleShowcase />
         {/* Hidden for now — the hero video shows how it works */}
         {/* <HowItWorks steps={howItWorksSteps} /> */}
@@ -339,6 +329,7 @@ export default async function LandingPage({ params }: PageProps) {
         <PayPerPrint />
         <FAQ locale={locale} region={region} />
         <LatestBlogPosts posts={pageData?.latestBlogPosts ?? []} />
+        <ClientLogos logos={clientLogos} />
         <VouwBanner />
       </main>
       <Footer footerData={footerData} logo={headerLogo} />
