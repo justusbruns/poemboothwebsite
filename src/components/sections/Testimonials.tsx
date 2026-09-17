@@ -55,7 +55,7 @@ export default function Testimonials() {
   const [channableExpanded, setChannableExpanded] = useState(false);
 
   return (
-    <section className="py-16 md:py-24 bg-bg-primary">
+    <section className="py-16 md:py-24 lg:pt-40 bg-bg-primary">
       <Container>
         <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 

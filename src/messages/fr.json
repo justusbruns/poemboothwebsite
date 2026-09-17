@@ -31,8 +31,7 @@
     }
   },
   "hero": {
-    "originBadge": "Le poem booth original · Amsterdam, 2023",
-    "headline": "Le photobooth IA qui crée poésie & portraits lors de votre événement",
+    "headline": "Le photobooth IA qui crée poésie & portraits",
     "subheadline": "Le Poem Booth transforme votre photo en un poème personnel ou un portrait artistique en quelques secondes. Inspiré par de vrais poètes et artistes. Idéal pour les événements d’entreprise, fêtes et institutions culturelles.",
     "ctaButton": "Réserver",
     "ctaEmail": "Ou envoyez un e-mail à"

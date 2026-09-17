@@ -42,21 +42,18 @@ export default function Hero({ bookingUrl }: HeroProps) {
   const contactEmail = region === "us" ? "jackie@poembooth.com" : "contact@poembooth.com";
 
   return (
-    <section className="pb-6 md:pb-8 bg-bg-secondary md:-mt-20 md:pt-20">
+    <section className="pb-6 md:pb-8 bg-bg-secondary md:-mt-20 md:pt-24">
       <Container>
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
           {/* Text Content */}
           <div className="order-2 md:order-1">
-            <p className="text-xs md:text-sm font-medium tracking-[0.18em] uppercase text-text-muted mb-3">
-              {t("originBadge")}
-            </p>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-display text-text-primary mb-4 leading-tight">
               {t("headline")}
             </h1>
             <p className="text-base md:text-lg text-text-secondary mb-6 max-w-xl">
               {t("subheadline")}
             </p>
-            <div className="flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-6">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
               <Button
                 href={bookingHref}
                 variant="primary"
@@ -65,16 +62,16 @@ export default function Hero({ bookingUrl }: HeroProps) {
               >
                 {t("ctaButton")}
               </Button>
+              <p className="text-text-muted text-sm">
+                {t("ctaEmail")}{" "}
+                <a
+                  href={`mailto:${contactEmail}`}
+                  className="text-text-primary hover:underline"
+                >
+                  {contactEmail}
+                </a>
+              </p>
             </div>
-            <p className="text-text-muted text-sm mt-4">
-              {t("ctaEmail")}{" "}
-              <a
-                href={`mailto:${contactEmail}`}
-                className="text-text-primary hover:underline"
-              >
-                {contactEmail}
-              </a>
-            </p>
           </div>
 
           {/* Hero Video — transparent WebM, floats on the section background.
@@ -108,7 +105,7 @@ export default function Hero({ bookingUrl }: HeroProps) {
                 suppressHydrationWarning
                 ref={kickstartVideo}
                 onClick={tapToPlay}
-                className="w-full h-[55vh] object-contain"
+                className="w-full h-[38vh] object-contain"
                 autoPlay
                 muted
                 loop

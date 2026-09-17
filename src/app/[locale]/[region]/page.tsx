@@ -301,7 +301,6 @@ export default async function LandingPage({ params }: PageProps) {
           styles={christmasStyles}
           bookingBaseUrl={`${bookingBase}/${locale}/booking`}
         />
-        <Testimonials />
         <section id="styles" className="py-16 md:py-24 bg-bg-accent overflow-x-clip">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <StylesGallery
@@ -315,6 +314,7 @@ export default async function LandingPage({ params }: PageProps) {
         {/* Hidden for now — the hero video shows how it works */}
         {/* <HowItWorks steps={howItWorksSteps} /> */}
         {/* <EditionShowcase editions={editions} /> */}
+        <Testimonials />
         <PhotoGallery images={galleryImages} />
         <Newsletter />
         <Practicalities />
