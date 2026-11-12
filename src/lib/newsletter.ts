@@ -38,7 +38,13 @@ function db(): SupabaseClient | null {
   const url = process.env.NEWSLETTER_DB_URL || "https://api.vouw.com";
   const key = process.env.NEWSLETTER_DB_KEY;
   if (!key) return null;
-  _db ??= createClient(url, key, { auth: { persistSession: false } });
+  // Self-hosted Kong only accepts the anon/service key as `apikey`. With a restricted
+  // role JWT in NEWSLETTER_DB_KEY, pass the (public) anon key for the gateway and the
+  // JWT as Authorization, which PostgREST uses to pick the role.
+  const anon = process.env.NEWSLETTER_DB_ANON_KEY;
+  _db ??= anon
+    ? createClient(url, anon, { auth: { persistSession: false }, global: { headers: { Authorization: `Bearer ${key}` } } })
+    : createClient(url, key, { auth: { persistSession: false } });
   return _db;
 }
 
