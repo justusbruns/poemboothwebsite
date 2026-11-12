@@ -506,5 +506,34 @@
     "ctaEmailSubject": "Pay-per-Print Booth an meinem Standort",
     "videoAlt": "Demo des Poem Booth Pay-per-Print-Ablaufs: gratis testen, QR-Code scannen und am Handy bezahlen",
     "blogLink": "Mehr Fragen? Lies den ganzen Artikel"
+  },
+  "newsletterForm": {
+    "organisation": "Organisation (optional)",
+    "checkInbox": "Danke! Falls du noch nicht auf der Liste stehst, haben wir dir gerade eine E-Mail geschickt. Klicke auf den Link darin, um zu bestätigen.",
+    "invalidEmail": "Diese E-Mail-Adresse scheint nicht zu stimmen.",
+    "consentRequired": "Bitte setze das Häkchen, damit wir dir Briefe schicken dürfen.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuche es noch einmal."
+  },
+  "newsletterConfirmed": {
+    "metaTitle": "Du bist dabei | Poem Booth",
+    "ok": {
+      "title": "Du bist dabei.",
+      "body": "Danke für deine Bestätigung. Ein paar Mal im Jahr landet ein Brief von Poem Booth in deinem Postfach: neue Editionen, Stile und Geschichten von den Events, auf denen die Booth steht."
+    },
+    "expired": {
+      "title": "Dieser Link ist abgelaufen.",
+      "body": "Bestätigungslinks sind 7 Tage gültig. Melde dich unten auf einer beliebigen Seite erneut an, dann schicken wir dir einen neuen."
+    },
+    "invalid": {
+      "title": "Dieser Link funktioniert nicht.",
+      "body": "Vielleicht ist er unvollständig oder wurde schon durch einen neueren ersetzt. Melde dich unten auf einer Seite erneut an, dann schicken wir dir einen neuen Link."
+    },
+    "error": {
+      "title": "Bei uns ist etwas schiefgelaufen.",
+      "body": "Bitte versuche den Link in einer Minute noch einmal. Klappt es nicht? Schreib an contact@poembooth.com, dann kümmern wir uns darum."
+    },
+    "home": "Zur Startseite",
+    "styles": "Stile ansehen",
+    "note": "Doch nicht? Jeder Brief hat einen Abmeldelink, ein Klick genügt."
   }
 }

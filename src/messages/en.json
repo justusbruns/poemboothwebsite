@@ -506,5 +506,34 @@
     "ctaEmailSubject": "Pay-per-Print booth at my location",
     "videoAlt": "Demo of the Poem Booth pay-per-print flow: try for free, scan the QR code and pay on your phone",
     "blogLink": "More questions? Read the full article"
+  },
+  "newsletterForm": {
+    "organisation": "Organisation (optional)",
+    "checkInbox": "Thank you! If you're not on the list yet, we've just sent you an email. Click the link in it to confirm.",
+    "invalidEmail": "That email address doesn't look right.",
+    "consentRequired": "Please tick the box so we may send you letters.",
+    "error": "Something went wrong. Please try again."
+  },
+  "newsletterConfirmed": {
+    "metaTitle": "You're on the list | Poem Booth",
+    "ok": {
+      "title": "You're on the list.",
+      "body": "Thank you for confirming. A few times a year a letter from Poem Booth will land in your inbox: new editions, styles and stories from the events we bring the booth to."
+    },
+    "expired": {
+      "title": "This link has expired.",
+      "body": "Confirmation links work for 7 days. Sign up again at the bottom of any page and we'll send you a fresh one."
+    },
+    "invalid": {
+      "title": "This link doesn't work.",
+      "body": "It may be incomplete or already replaced by a newer one. Sign up again at the bottom of any page and we'll send you a fresh link."
+    },
+    "error": {
+      "title": "Something went wrong on our side.",
+      "body": "Please try the link again in a minute. Still stuck? Write to contact@poembooth.com and we'll sort it out."
+    },
+    "home": "Back to home",
+    "styles": "See the styles",
+    "note": "Changed your mind? Every letter has a one-click unsubscribe link."
   }
 }

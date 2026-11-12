@@ -506,5 +506,34 @@
     "ctaEmailSubject": "Booth Pay-per-Print nella mia location",
     "videoAlt": "Demo del flusso pay-per-print del Poem Booth: prova gratuita, scansione del QR e pagamento da telefono",
     "blogLink": "Altre domande? Leggi l'articolo completo"
+  },
+  "newsletterForm": {
+    "organisation": "Organizzazione (facoltativo)",
+    "checkInbox": "Grazie! Se non sei ancora nella lista, ti abbiamo appena inviato un'email. Clicca sul link per confermare.",
+    "invalidEmail": "Questo indirizzo email non sembra corretto.",
+    "consentRequired": "Spunta la casella così possiamo inviarti le nostre lettere.",
+    "error": "Qualcosa è andato storto. Riprova."
+  },
+  "newsletterConfirmed": {
+    "metaTitle": "Sei nella lista | Poem Booth",
+    "ok": {
+      "title": "Sei nella lista.",
+      "body": "Grazie per la conferma. Qualche volta all'anno riceverai una lettera da Poem Booth: nuove edizioni, stili e storie dagli eventi in cui portiamo la booth."
+    },
+    "expired": {
+      "title": "Questo link è scaduto.",
+      "body": "I link di conferma sono validi 7 giorni. Iscriviti di nuovo in fondo a qualsiasi pagina e te ne invieremo uno nuovo."
+    },
+    "invalid": {
+      "title": "Questo link non funziona.",
+      "body": "Potrebbe essere incompleto o già sostituito da uno più recente. Iscriviti di nuovo in fondo a una pagina e ti invieremo un nuovo link."
+    },
+    "error": {
+      "title": "Qualcosa è andato storto da parte nostra.",
+      "body": "Riprova il link tra un minuto. Ancora problemi? Scrivi a contact@poembooth.com e lo risolveremo."
+    },
+    "home": "Torna alla home",
+    "styles": "Scopri gli stili",
+    "note": "Hai cambiato idea? Ogni lettera ha un link per disiscriverti con un clic."
   }
 }

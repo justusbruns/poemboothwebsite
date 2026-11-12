@@ -1,27 +1,35 @@
-import { NextRequest, NextResponse } from "next/server";
+// Newsletter signup → Resend (double opt-in). The API key never reaches the browser.
+// Always answers with the same success payload (no enumeration); only a malformed
+// email or missing consent gets a 400 so the form can show a field error.
+import { startSignup, normEmail, normRegion, overIpLimit, logEvent, clientIp } from "@/lib/newsletter";
+import { normLocale } from "@/lib/newsletter-copy";
 
-export async function POST(req: NextRequest) {
-  const { email } = await req.json();
-  if (!email) return NextResponse.json({ error: "Email required" }, { status: 400 });
+export const dynamic = "force-dynamic";
 
-  const res = await fetch("https://connect.mailerlite.com/api/subscribers", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.MAILERLITE_API_KEY}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({ email, groups: ["184639981417923947"] }),
-  });
+const LOCATIONS = new Set(["footer", "section"]);
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    console.error("MailerLite error:", JSON.stringify(err));
-    return NextResponse.json(
-      { error: (err as { message?: string })?.message || "Subscription failed", details: err },
-      { status: res.status }
-    );
+export async function POST(request: Request) {
+  let body: Record<string, unknown>;
+  try { body = await request.json(); } catch { return Response.json({ error: "bad_request" }, { status: 400 }); }
+  const { email, organisation, consent, website, location, lang, region } = body || {};
+  const ip = clientIp(request);
+  const userAgent = (request.headers.get("user-agent") || "").slice(0, 300);
+  const loc = LOCATIONS.has(location as string) ? (location as string) : "form";
+  const ok = () => Response.json({ ok: true });
+
+  // Honeypot (`website`, visually hidden): pretend success, send nothing.
+  if (website) {
+    await logEvent({ email: String(email || "").slice(0, 254) || "(none)", event: "honeypot", ip, user_agent: userAgent, detail: { location: loc } });
+    return ok();
   }
+  const e = normEmail(email);
+  if (!e) return Response.json({ error: "invalid_email" }, { status: 400 });
+  if (consent !== true) return Response.json({ error: "consent_required" }, { status: 400 });
 
-  return NextResponse.json({ success: true });
+  if (await overIpLimit(ip)) {
+    await logEvent({ email: e, event: "rate_limited", ip, user_agent: userAgent, detail: { location: loc } });
+    return ok();
+  }
+  await startSignup({ email: e, organisation, location: loc, lang: normLocale(lang), region: normRegion(region), ip, userAgent });
+  return ok();
 }

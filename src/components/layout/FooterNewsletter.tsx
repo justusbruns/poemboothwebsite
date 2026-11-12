@@ -5,7 +5,7 @@ import NewsletterForm from "@/components/ui/NewsletterForm";
 export default function FooterNewsletter() {
   return (
     <div className="w-full md:w-80">
-      <NewsletterForm variant="dark" namespace="footer" />
+      <NewsletterForm variant="dark" namespace="footer" location="footer" />
     </div>
   );
 }

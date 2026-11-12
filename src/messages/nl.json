@@ -506,5 +506,34 @@
     "ctaEmailSubject": "Pay-per-Print booth op mijn locatie",
     "videoAlt": "Demo van de Poem Booth pay-per-print flow: gratis proberen, QR-code scannen en betalen op je telefoon",
     "blogLink": "Meer vragen? Lees het volledige artikel"
+  },
+  "newsletterForm": {
+    "organisation": "Organisatie (optioneel)",
+    "checkInbox": "Dank je! Sta je nog niet op de lijst, dan hebben we je net een mail gestuurd. Klik op de link erin om te bevestigen.",
+    "invalidEmail": "Dat e-mailadres lijkt niet te kloppen.",
+    "consentRequired": "Vink het vakje aan, dan mogen we je brieven sturen.",
+    "error": "Er ging iets mis. Probeer het nog eens."
+  },
+  "newsletterConfirmed": {
+    "metaTitle": "Je staat op de lijst | Poem Booth",
+    "ok": {
+      "title": "Je staat op de lijst.",
+      "body": "Dank voor het bevestigen. Een paar keer per jaar ontvang je een brief van Poem Booth: nieuwe edities, stijlen en verhalen van de events waar de booth staat."
+    },
+    "expired": {
+      "title": "Deze link is verlopen.",
+      "body": "Bevestigingslinks werken 7 dagen. Meld je opnieuw aan onderaan een willekeurige pagina, dan sturen we een nieuwe."
+    },
+    "invalid": {
+      "title": "Deze link werkt niet.",
+      "body": "Misschien is hij onvolledig of al vervangen door een nieuwere. Meld je opnieuw aan onderaan een pagina, dan sturen we een nieuwe link."
+    },
+    "error": {
+      "title": "Er ging bij ons iets mis.",
+      "body": "Probeer de link over een minuutje nog eens. Lukt het niet? Mail contact@poembooth.com, dan lossen we het op."
+    },
+    "home": "Terug naar home",
+    "styles": "Bekijk de stijlen",
+    "note": "Toch niet? Elke brief heeft een afmeldlink, één klik is genoeg."
   }
 }

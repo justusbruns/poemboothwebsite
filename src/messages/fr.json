@@ -506,5 +506,34 @@
     "ctaEmailSubject": "Booth Pay-per-Print sur mon site",
     "videoAlt": "Démo du parcours pay-per-print du Poem Booth : essai gratuit, scan du QR code et paiement sur téléphone",
     "blogLink": "D'autres questions ? Lisez l'article complet"
+  },
+  "newsletterForm": {
+    "organisation": "Organisation (facultatif)",
+    "checkInbox": "Merci ! Si vous n'êtes pas encore sur la liste, nous venons de vous envoyer un e-mail. Cliquez sur le lien pour confirmer.",
+    "invalidEmail": "Cette adresse e-mail ne semble pas correcte.",
+    "consentRequired": "Cochez la case pour que nous puissions vous envoyer nos lettres.",
+    "error": "Une erreur s'est produite. Veuillez réessayer."
+  },
+  "newsletterConfirmed": {
+    "metaTitle": "Vous êtes sur la liste | Poem Booth",
+    "ok": {
+      "title": "Vous êtes sur la liste.",
+      "body": "Merci pour votre confirmation. Quelques fois par an, une lettre de Poem Booth arrivera dans votre boîte : nouvelles éditions, styles et histoires des événements où nous installons la cabine."
+    },
+    "expired": {
+      "title": "Ce lien a expiré.",
+      "body": "Les liens de confirmation sont valables 7 jours. Inscrivez-vous à nouveau en bas de n'importe quelle page et nous vous en enverrons un nouveau."
+    },
+    "invalid": {
+      "title": "Ce lien ne fonctionne pas.",
+      "body": "Il est peut-être incomplet ou déjà remplacé par un plus récent. Inscrivez-vous à nouveau en bas d'une page et nous vous enverrons un nouveau lien."
+    },
+    "error": {
+      "title": "Un problème est survenu de notre côté.",
+      "body": "Réessayez le lien dans une minute. Toujours bloqué ? Écrivez à contact@poembooth.com et nous réglerons cela."
+    },
+    "home": "Retour à l'accueil",
+    "styles": "Voir les styles",
+    "note": "Vous avez changé d'avis ? Chaque lettre contient un lien de désinscription en un clic."
   }
 }

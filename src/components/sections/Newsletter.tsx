@@ -17,7 +17,7 @@ export default function Newsletter() {
             subtitle={t("subtitle")}
           />
           <div className="mt-8">
-            <NewsletterForm variant="light" namespace="newsletter" />
+            <NewsletterForm variant="light" namespace="newsletter" location="section" />
           </div>
         </div>
       </Container>
