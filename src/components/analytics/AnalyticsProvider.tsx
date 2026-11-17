@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { GoogleAnalytics } from "./GoogleAnalytics";
 import { PostHogAnalytics } from "./PostHogAnalytics";
 import { MetaPixel } from "./MetaPixel";
+import { AttributionTracker } from "./AttributionTracker";
 import { CookieConsent } from "../consent/CookieConsent";
 import { readStoredConsent, storeConsent } from "@/lib/consent";
 const EU_REGIONS = ["nl", "de", "fr", "it", "be", "row"];
@@ -48,7 +49,6 @@ export function AnalyticsProvider({
       ad_user_data: "granted",
       ad_personalization: "granted",
     });
-    window.fbq?.("consent", "grant");
     storeConsent(true);
     setHasConsent(true);
     setShowBanner(false);
@@ -70,6 +70,23 @@ export function AnalyticsProvider({
     />
   ) : null;
 
+  // Meta Pixel: only with NEXT_PUBLIC_META_PIXEL_ID set (MetaPixel renders
+  // nothing otherwise) and only in the consented/no-consent-needed branches.
+  const metaNode = (
+    <Suspense fallback={null}>
+      <MetaPixel />
+    </Suspense>
+  );
+
+  // Attribution is always captured in memory (for booking-link decoration);
+  // it is only persisted to cookie/localStorage when tracking is allowed.
+  const attributionNode =
+    hasConsent === null ? null : (
+      <Suspense fallback={null}>
+        <AttributionTracker persistAllowed={!requiresConsent || hasConsent === true} />
+      </Suspense>
+    );
+
   // Still loading consent state from localStorage
   if (hasConsent === null) {
     return <>{children}</>;
@@ -80,8 +97,9 @@ export function AnalyticsProvider({
     return (
       <>
         {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
-        <MetaPixel />
+        {metaNode}
         {posthogNode}
+        {attributionNode}
         {children}
       </>
     );
@@ -92,8 +110,9 @@ export function AnalyticsProvider({
     return (
       <>
         {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
-        <MetaPixel />
+        {metaNode}
         {posthogNode}
+        {attributionNode}
         {children}
       </>
     );
@@ -103,6 +122,7 @@ export function AnalyticsProvider({
   return (
     <>
       {posthogNode}
+      {attributionNode}
       {children}
       {showBanner && (
         <CookieConsent

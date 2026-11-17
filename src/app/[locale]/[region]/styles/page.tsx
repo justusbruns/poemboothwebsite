@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/ui/Container";
 import StylesGallery from "@/components/sections/StylesGallery";
+import { MetaViewContent } from "@/components/analytics/MetaViewContent";
 import { client } from "../../../../../sanity/lib/client";
 import { pageDataQuery } from "../../../../../sanity/lib/queries";
 import { urlFor } from "../../../../../sanity/lib/image";
@@ -86,6 +87,11 @@ export default async function StylesPage({ params }: PageProps) {
   return (
     <>
       <Header logo={headerLogo} />
+      <MetaViewContent
+        contentName="styles"
+        contentCategory="poem_booth_styles"
+        contentIds={styles.map((s: { slug?: string; id?: string }) => s.slug || s.id).filter(Boolean).slice(0, 50)}
+      />
       <main className="min-h-screen bg-bg-primary">
         <div className="py-16 md:py-24">
           <Container>
